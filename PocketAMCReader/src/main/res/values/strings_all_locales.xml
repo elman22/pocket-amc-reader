@@ -1,0 +1,39 @@
+<!-- todo: cleanup -->
+<resources>
+	<string name="provider_authority">com.holdingscythe.provider.MovieCatalog</string>
+	<string name="locale_translation_separator">:\u0020</string>
+	
+	<string name="locale_en_independent">English</string>
+	<string name="locale_ru_independent">Russian</string>
+	<string name="locale_de_independent">German</string>
+	<string name="locale_fr_independent">French</string>
+	
+	<string name="locale_en_local">English</string>
+	<string name="locale_ru_local">Русский</string>
+	<string name="locale_de_local">Deutsch</string>
+	<string name="locale_fr_local">Français</string>
+
+	<string name="locale_en_translator">Elman</string>
+	<string name="locale_ru_translator">migver</string>
+	<string name="locale_de_translator">Klaus Oed</string>
+	<string name="locale_fr_translator">Xavier Muller</string>
+	
+	<string name="copyright_year">2014</string>
+	<string name="rating_suffix">/10</string>
+	<string name="rating_suffix_list">*/10</string>
+	<string name="list_seen_true">&#x2713;</string>
+	<string name="list_seen_false">&#x2715;</string>
+    <string name="list_holder_row1">Movie title - This is very long string that must be even longer</string>
+    <string name="list_holder_row2">ID, Year, Length, Rating - This is very long string that must be even
+        longer</string>
+    <string name="list_holder_row3">Genre - This is very long string that must be even longer</string>
+
+    <!-- Placeholders -->
+    <string name="ph_formatted_title">Formatted Movie Title</string>
+    <string name="ph_text_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id pellentesque eros. In
+        cursus ultrices ligula in fermentum. Donec quis sem a diam vestibulum hendrerit. Vestibulum consectetur est
+        massa, vitae ultrices magna molestie ut. Integer in sem aliquet, facilisis nisl volutpat, pulvinar lorem. Ut
+        ultricies faucibus risus, sagittis convallis lorem tincidunt at.</string>
+    <string name="ph_text_short">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
+
+</resources>

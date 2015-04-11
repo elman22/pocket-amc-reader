@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            tools:context=".MovieDetailActivity"
+            android:id="@+id/detailsScrollView"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsWrapper">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_formatted_title"
+            android:id="@+id/FormattedTitle"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_alignParentStart="true"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FormattedTitle"
+            android:id="@+id/basicBoxWrapper"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing">
+
+            <ImageView
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/Picture"
+                android:contentDescription="@string/details_picture_description"
+                android:src="@drawable/movie_thumb_stub"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/details_description_label"
+            android:id="@+id/DescriptionLabel"
+            android:layout_below="@+id/basicBoxWrapper"
+            style="@style/label"/>
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            expandableTextView:maxCollapsedLines="6"
+            expandableTextView:animDuration="300"
+            android:layout_below="@+id/DescriptionLabel"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing">
+
+            <TextView
+                android:id="@+id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ph_text_long"
+                android:textIsSelectable="false"
+                style="@style/basicText"/>
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"
+                style="@style/expandableArrow"
+                android:contentDescription="@string/details_expandable_arrow_description"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/details_filepath_label"
+            android:id="@+id/FilePathLabel"
+            android:layout_below="@+id/Description"
+            style="@style/label"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_short"
+            android:id="@+id/FilePath"
+            android:layout_below="@+id/FilePathLabel"
+            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            style="@style/basicText"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/details_actors_label"
+            android:id="@+id/ActorsLabel"
+            android:layout_below="@+id/FilePath"
+            style="@style/label"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_long"
+            android:id="@+id/Actors"
+            android:layout_below="@+id/ActorsLabel"
+            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/details_comments_label"
+            android:id="@+id/CommentsLabel"
+            android:layout_below="@+id/Actors"
+            style="@style/label"/>
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/Comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            expandableTextView:maxCollapsedLines="6"
+            expandableTextView:animDuration="300"
+            android:layout_below="@+id/CommentsLabel"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing">
+
+            <TextView
+                android:id="@+id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ph_text_long"
+                style="@style/basicText"/>
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"
+                style="@style/expandableArrow"
+                android:contentDescription="@string/details_expandable_arrow_description"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+    </RelativeLayout>
+</ScrollView>

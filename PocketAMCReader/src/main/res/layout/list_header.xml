@@ -1,0 +1,17 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/showing_info_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    style="@android:style/Widget.Holo.ActionBar.Solid">
+
+    <TextView
+        android:id="@+id/nowShowing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:layout_gravity="center_vertical"
+        android:padding="6dip"
+        android:singleLine="true"
+        android:textColor="@color/primary_text_dark_nostates"/>
+</LinearLayout>

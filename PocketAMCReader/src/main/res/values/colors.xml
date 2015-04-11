@@ -1,0 +1,26 @@
+<!-- todo: cleanup -->
+<resources>
+    <!--<color name="color_theme_default_background">#000000</color>-->
+    <!--<color name="color_list_header_background">#444444</color>-->
+	<!--<color name="color_list_header_main">#ffffff</color>-->
+	<!--<color name="color_list_header_secondary">#bdbebd</color>-->
+	<!--<color name="color_list_header_filter_action">#888888</color>-->
+	<!--<color name="color_list_header_filter_pressed">#666666</color>-->
+	<!--<color name="color_detail_label_1">#202020</color>-->
+	<!--<color name="color_detail_label_2">#101010</color>-->
+	<!--<color name="color_item_pressed">#6495ed</color>-->
+	<!--<color name="color_url">#bf9240</color>-->
+	<!--<color name="color_tag_1">#f16065</color>-->
+	<!--<color name="color_tag_2">#fea567</color>-->
+	<!--<color name="color_tag_3">#fef44c</color>-->
+	<!--<color name="color_tag_4">#caec60</color>-->
+	<!--<color name="color_tag_5">#64c781</color>-->
+	<!--<color name="color_tag_6">#60f2f2</color>-->
+	<!--<color name="color_tag_7">#79c7fe</color>-->
+	<!--<color name="color_tag_8">#bba5fe</color>-->
+	<!--<color name="color_tag_9">#fe8fe8</color>-->
+	<!--<color name="color_tag_10">#dd56e8</color>-->
+	<!--<color name="color_tag_11">#cda989</color>-->
+	<!--<color name="color_tag_12">#ffffff</color>-->
+    <color name="primary_text_dark_nostates">#f2f2f2</color>
+</resources>

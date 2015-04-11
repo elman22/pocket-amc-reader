@@ -1,0 +1,36 @@
+<!-- todo: cleanup -->
+<resources>
+    <string-array name="pref_setting_encoding_values">
+        <item>Cp1252</item>
+        <item>Cp1250</item>
+        <item>Cp1251</item>
+        <item>Cp1253</item>
+        <item>Cp1254</item>
+        <item>Cp1255</item>
+        <item>Cp1256</item>
+        <item>Cp1257</item>
+        <item>Cp1258</item>
+    </string-array>
+    <string-array name="pref_setting_default_tab_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="pref_setting_imdb_values">
+        <item>original</item>
+        <item>imdbMobile</item>
+        <item>imdbApp</item>
+    </string-array>
+    <string-array name="pref_setting_plot_basic_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pref_setting_font_size_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+</resources>

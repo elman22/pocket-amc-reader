@@ -1,0 +1,11 @@
+<fragment
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_list"
+    android:name="com.holdingscythe.pocketamcreader.MovieListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    tools:context="com.holdingscythe.pocketamcreader.MovieListActivity"
+    tools:layout="@android:layout/list_content"/>

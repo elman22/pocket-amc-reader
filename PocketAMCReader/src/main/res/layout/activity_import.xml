@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:gravity="center_vertical"
+    android:padding="8dp"
+    >
+
+    <TextView
+        android:id="@+id/progress_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/import_check_file"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:paddingBottom="8dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"/>
+
+</LinearLayout>

@@ -1,0 +1,269 @@
+<!-- todo: cleanup -->
+<resources>
+    <string name="app_name">Pocket AMC Reader</string>
+    <string name="import_in_progress">Importing movies&#x2026;</string>
+    <string name="import_read_file">Reading catalog&#x2026;</string>
+    <string name="pref_category_catalog">Catalog</string>
+    <string name="pref_setting_catalog">Catalog</string>
+    <string name="menu_settings">Settings</string>
+    <string name="pref_setting_catalog_summary">Pick your catalog from SD card</string>
+    <string name="display_minutes_suffix">min.</string>
+    <string name="pref_category_display">Details</string>
+    <string name="pref_setting_encoding">Catalog encoding</string>
+    <string name="pref_setting_encoding_summary">Set correct encoding from your PC</string>
+    <string-array name="pref_setting_encoding_keys">
+        <item>Western European</item>
+        <item>Central European</item>
+        <item>Cyrillic</item>
+        <item>Greek</item>
+        <item>Turkish</item>
+        <item>Hebrew</item>
+        <item>Arabic</item>
+        <item>Baltic</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string name="pref_category_debug">Advanced</string>
+    <string name="pref_setting_force_import">Force re-import</string>
+    <string name="pref_setting_force_import_summary">Force catalog re-import when settings are closed</string>
+    <string name="items_separator_default">, </string>
+    <string name="search_hint">Search movies</string>
+    <string name="app_label">Pocket AMC Reader</string>
+    <string name="search_label">Search result for:</string>
+    <string name="items_separator_details">-</string>
+    <string name="details_director_label">Director</string>
+    <string name="details_producer_label">Producer</string>
+    <string name="number_prefix">#</string>
+    <plurals name="list_showing">
+        <item quantity="one">Displaying %1$d movie</item>
+        <item quantity="other">Displaying %1$d movies</item>
+    </plurals>
+    <plurals name="search_found">
+        <item quantity="one">Found %1$d movie</item>
+        <item quantity="other">Found %1$d movies</item>
+    </plurals>
+    <string name="details_checked_label">Watched</string>
+    <string name="details_boolean_true">Yes</string>
+    <string name="details_boolean_false">No</string>
+    <string name="details_actors_label">Actors</string>
+    <string name="details_medialabel_label">Label</string>
+    <string name="details_mediatype_label">Type</string>
+    <string name="details_source_label">Source</string>
+    <string name="details_borrower_label">Borrower</string>
+    <string name="details_languages_label">Languages</string>
+    <string name="details_subtitles_label">Subtitles</string>
+    <string-array name="pref_setting_default_tab_keys">
+        <item>Basic</item>
+        <item>Pictures</item>
+        <item>Description</item>
+        <item>Other</item>
+    </string-array>
+    <string name="pref_setting_default_tab">Default tab</string>
+    <string name="pref_setting_default_tab_summary">Default tab to be shown in details</string>
+    <string name="menu_search">Search</string>
+    <string name="tab_basic">Basic</string>
+    <string name="tab_picture">Pictures</string>
+    <string name="tab_description">Description</string>
+    <string name="tab_other">Other</string>
+    <string name="details_video_label">Video</string>
+    <string name="display_bitrate_suffix">kbps</string>
+    <string name="details_audio_label">Audio</string>
+    <string name="details_resolution_label">Resolution</string>
+    <string name="details_framerate_label">Framerate</string>
+    <string name="display_framerate_suffix">fps</string>
+    <string name="display_filessizes_suffix">MB</string>
+    <plurals name="details_disks">
+        <item quantity="one">disc/file</item>
+        <item quantity="other">discs/files</item>
+    </plurals>
+    <string name="details_files_label">Files</string>
+    <string name="display_files_separator">on</string>
+    <string name="details_comments_label">Comments</string>
+    <string name="details_url_label">URL</string>
+    <string name="details_date_label">Date added</string>
+    <string name="menu_about">About</string>
+    <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nThis program is
+        free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
+        version.\n\nTranslators\n%4$s</string>
+    <string name="menu_sort_title">Sort</string>
+    <string name="menu_sort_formattedtitle_desc">Title (Z to A)</string>
+    <string name="menu_sort_formattedtitle_asc">Title (A to Z)</string>
+    <string name="menu_sort_number_desc">Number (Most recent)</string>
+    <string name="menu_sort_number_asc">Number (Oldest)</string>
+    <string name="menu_previous_movie">Previous</string>
+    <string name="menu_next_movie">Next</string>
+    <string name="menu_random_movie">Random</string>
+    <plurals name="import_in_progress_suffix">
+        <item quantity="one">movie</item>
+        <item quantity="other">movies</item>
+    </plurals>
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_message">To start using this application you will be redirected to \"%1$s\" where you shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\" to match your PC settings.\n\nThe app will import your movies after leaving \"%1$s\".</string>
+    <string name="welcome_dialog_dismiss">Continue</string>
+    <string name="dialog_positive">OK</string>
+    <string name="dialog_neutral">OK</string>
+    <string name="dialog_negative">Cancel</string>
+    <string name="filter_type_is">is</string>
+    <string name="filter_type_equals">=</string>
+    <plurals name="filter_label">
+        <item quantity="one">Filter:</item>
+        <item quantity="other">Filters:</item>
+    </plurals>
+    <string name="filter_none">none</string>
+    <string name="filter_action">Clear</string>
+    <string name="filter_type_contains">contains</string>
+    <string name="filter_value_enclosing">\'</string>
+    <string name="details_rating_label">Rating</string>
+    <string name="rating_none">-</string>
+    <string name="filter_value_null">null</string>
+    <string name="filter_value_null_operator">is</string>
+    <string name="details_videoformat_label">Video format</string>
+    <string name="details_audioformat_label">Audio format</string>
+    <string name="error_import">There is a problem with import. Usually happens when catalog contains some non
+        standard characters. To fix it, run on your PC Ant Movie Catalog script called RemoveBadChars and try again.
+        If it doesn\'t help, you may try:\n\n- Make sure you have enough free space on your device (not the SD
+        card). Twice the size of XML is required.\n- Try changing \"%1$s\" setting.\n\nIf none of this helps, please,
+        contact the author via web page shown on Google Play.</string>
+    <string name="menu_add_filter">Filter</string>
+    <string name="filter_add_first_step">Select field</string>
+    <string name="details_country_label">Country</string>
+    <string name="details_category_label">Category</string>
+    <string name="filter_type_larger">&gt;</string>
+    <string name="filter_type_smaller">&lt;</string>
+    <string name="filter_type_equals_not">does not equal</string>
+    <string name="filter_type_contains_not">does not contain</string>
+    <string name="filter_type_begins_with">begins with</string>
+    <string name="filter_type_ends_with">ends with</string>
+    <string name="details_formattedtitle_label">Title</string>
+    <string name="details_number_label">Number</string>
+    <string name="details_year_label">Year</string>
+    <string name="details_length_label">Length</string>
+    <string name="details_description_label">Description</string>
+    <string name="details_videobitrate_label">Video bitrate</string>
+    <string name="details_audiobitrate_label">Audio bitrate</string>
+    <string name="details_size_label">Size</string>
+    <string name="details_disks_label">Discs</string>
+    <string name="filter_join_and"><i>and</i></string>
+    <string name="error_import_label">Problem with import</string>
+    <string name="pref_setting_show_thumbs">Show thumbnails</string>
+    <string name="pref_setting_show_thumbs_summary">Show thumbnails in movie list</string>
+    <string name="pref_setting_clear_thumb_cache">Delete cache</string>
+    <string name="pref_setting_clear_thumb_cache_summary">Delete thumbnail cache when settings are closed</string>
+    <string name="import_clear_cache">Deleting thumbnail cache&#x2026;</string>
+    <string name="menu_sort_year_desc">Year (Newest)</string>
+    <string name="menu_sort_year_asc">Year (Oldest)</string>
+    <string name="menu_sort_length_desc">Length (Longest)</string>
+    <string name="menu_sort_length_asc">Length (Shortest)</string>
+    <string name="menu_sort_rating_desc">Rating (Best)</string>
+    <string name="menu_sort_rating_asc">Rating (Worst)</string>
+    <string name="menu_sort_borrower_desc">Borrower (Z to A)</string>
+    <string name="menu_sort_borrower_asc">Borrower (A to Z)</string>
+    <string name="menu_sort_medialabel_desc">Label (Z to A)</string>
+    <string name="menu_sort_medialabel_asc">Label (A to Z)</string>
+    <string name="import_add_indexes">Optimizing performance&#x2026;</string>
+    <string name="filter_type_is_null">is empty</string>
+    <string name="filter_type_is_null_not">is not empty</string>
+    <string name="pref_setting_imdb">Open IMDb links</string>
+    <string name="pref_setting_imdb_summary">Select how to open movies\' IMDb links</string>
+    <string-array name="pref_setting_imdb_keys">
+        <item>In browser as they are</item>
+        <item>In browser redirected to English mobile version</item>
+        <item>In Android IMDb app</item>
+    </string-array>
+    <string name="error_imdb_app_not_found">\"IMDb Movies &amp; TV\" app not found. Do you wish to visit Google Play and install the app?</string>
+    <string name="error_browser_not_found">Please install an Internet browser</string>
+    <string name="dialog_positive_boolean">Yes</string>
+    <string name="dialog_negative_boolean">No</string>
+    <string name="error_market_app_not_found">Google Play app not found</string>
+    <string name="pref_setting_list_no_items">There are no more fields to be added</string>
+    <string name="pref_setting_list_add_title">Select field</string>
+    <string name="pref_setting_list_add_button">Add field</string>
+    <string name="pref_setting_list_save_button">Save</string>
+    <string name="pref_setting_list_saved">Settings saved</string>
+    <string name="pref_category_list">List</string>
+    <string name="pref_setting_list_force_sort_field">Show sorted field</string>
+    <string name="pref_setting_list_force_sort_field_summary">Display sorted field in 3rd line unless already
+        displayed</string>
+    <string name="pref_setting_list_line1">Fields in 1st line</string>
+    <string name="pref_setting_list_line1_summary">Pick fields to be displayed in 1st line</string>
+    <string name="pref_setting_list_line2">Fields in 2nd line</string>
+    <string name="pref_setting_list_line2_summary">Pick fields to be displayed in 2nd line</string>
+    <string name="pref_setting_list_line3">Fields in 3rd line</string>
+    <string name="pref_setting_list_line3_summary">Pick fields to be displayed in 3rd line</string>
+    <string name="pref_setting_list_separator">Fields separator</string>
+    <string name="pref_setting_list_separator_summary">Text separator displayed between fields (comma is used by default)</string>
+    <string name="details_picture_label">Picture</string>
+    <string name="details_originaltitle_label">Original title</string>
+    <string name="details_translatedtitle_label">Translated title</string>
+    <string name="menu_sort_originaltitle_desc">Original title (Z to A)</string>
+    <string name="menu_sort_originaltitle_asc">Original title (A to Z)</string>
+    <string name="menu_sort_translatedtitle_desc">Translated title (Z to A)</string>
+    <string name="menu_sort_translatedtitle_asc">Translated title (A to Z)</string>
+    <string name="pref_setting_show_color_tags">Show color tags</string>
+    <string name="pref_setting_show_color_tags_summary">Change color of movie\'s title according to color tag</string>
+    <string name="menu_sort_color_tag_desc">Color tag (Highest)</string>
+    <string name="menu_sort_color_tag_asc">Color tag (Lowest)</string>
+    <string name="details_colortag_label">Color tag</string>
+    <string name="pref_setting_multivalue">Multi field separator</string>
+    <string name="pref_setting_multivalue_summary">Specify separator you use to separate directors, producers, actors etc. You can use more separators at once</string>
+    <string name="details_img_description">Movie picture</string>
+    <string name="pref_setting_plot_basic">Show summary in basic tab</string>
+    <string name="pref_setting_plot_basic_summary">App tries to extract movie summary from description and display it in basic tab</string>
+    <string-array name="pref_setting_plot_basic_keys">
+        <item>None</item>
+        <item>First lines from description</item>
+        <item>Precise match from description (removes tagline, IMDb trivia, etc.)</item>
+    </string-array>
+    <string name="input_filter_hint">Filter value</string>
+    <string name="pref_category_general">General</string>
+    <string name="pref_setting_font_size">Font size</string>
+    <string name="pref_setting_font_size_summary">Select font size</string>
+    <string-array name="pref_setting_font_size_keys">
+        <item>Normal</item>
+        <item>Large</item>
+        <item>Extra large</item>
+        <item>Tablet</item>
+    </string-array>
+    <!--<string name="explorer_name">File Explorer</string>-->
+    <!--<string name="explorer_path_label">Location:</string>-->
+    <!--<string name="explorer_no_data">No folders or XML catalogs were found at the location</string>-->
+    <!--<string name="explorer_folder_cant_read">Can\'t read folder \"%1$s\"</string>-->
+    <!--<string name="explorer_pick_file">Pick catalog \"%1$s\"?</string>-->
+    <!--<string name="explorer_storage_not_readable">External storage couldn\'t be opened for reading. Please, contact the author via web page shown on Google Play.</string>-->
+    <string name="menu_sort_date_desc">Date added (Most recent)</string>
+    <string name="menu_sort_date_asc">Date added (Oldest)</string>
+    <string name="image_alt_setting_list_delete">Delete</string>
+    <string name="image_alt_setting_list_drag">Drag to reorder</string>
+    <string name="details_writer_label">Writer</string>
+    <string name="details_composer_label">Composer</string>
+    <string name="details_filepath_label">File path</string>
+    <string name="details_userrating_label">My rating</string>
+    <string name="menu_sort_userrating_desc">My rating (Best)</string>
+    <string name="menu_sort_userrating_asc">My rating (Worst)</string>
+    <string name="details_datewatched_label">Date watched</string>
+    <string name="menu_sort_datewatched_desc">Date watched (Most recent)</string>
+    <string name="menu_sort_datewatched_asc">Date watched (Oldest)</string>
+    <string name="details_certification_label">Certification</string>
+    <string name="menu_sort_certification_desc">Certification (Z to A)</string>
+    <string name="menu_sort_certification_asc">Certification (A to Z)</string>
+    <string name="pref_setting_fit_picture">Fit picture</string>
+    <string name="pref_setting_fit_picture_summary">Resize picture to fit on screen</string>
+    <string name="details_etag_label">Tag</string>
+    <string name="details_etitle_label">Title</string>
+    <string name="details_ecategory_label">Category</string>
+    <string name="details_eurl_label">URL</string>
+    <string name="details_edescription_label">Description</string>
+    <string name="details_ecomments_label">Comments</string>
+    <string name="details_ecreated_by_label">Created by</string>
+    <string name="pref_setting_hide_unused_fields_summary">Fields which are empty will be hidden</string>
+    <string name="pref_setting_hide_unused_fields">Hide unused fields</string>
+    <string name="filter_remove">Clear filters</string>
+    <string name="filter_remove_all">All filters</string>
+    <!--Version 2.0-->
+    <string name="import_check_file">Checking for updates&#x2026;</string>
+    <string name="chooser_title">Select XML catalog</string>
+    <string name="details_img_teaser">Teaser</string>
+    <string name="loading">Loading&#x2026;</string>
+    <string name="details_picture_description">Movie poster</string>
+    <string name="details_expandable_arrow_description">&lt;&gt;</string>
+</resources>
