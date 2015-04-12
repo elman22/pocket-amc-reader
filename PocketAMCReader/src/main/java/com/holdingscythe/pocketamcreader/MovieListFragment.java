@@ -552,8 +552,8 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.notifyDataSetChanged();
-            // TODO tu musim nejako vymysliet, co s listom vlavo
-            mCallbacks.onItemSelected("1");
+            // TODO have to do something with the left list
+            mCallbacks.onItemSelected("0");
         }
     }
 

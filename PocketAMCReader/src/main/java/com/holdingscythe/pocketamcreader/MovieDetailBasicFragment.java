@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.holdingscythe.pocketamcreader.catalog.Movie;
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
 
+// TODO: deprecated?
+
 /**
  * PocketAMCReader
  * Created by Elman on 21.10.2014.

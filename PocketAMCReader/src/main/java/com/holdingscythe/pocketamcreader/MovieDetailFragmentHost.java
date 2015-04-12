@@ -13,6 +13,8 @@ import android.widget.ListView;
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
+// todo: cleanup
+
 /**
  * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.
  * Created by Elman on 2. 11. 2014.
@@ -32,7 +34,7 @@ public class MovieDetailFragmentHost extends Fragment {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
 
         ViewPager viewPager = (ViewPager) root.findViewById(R.id.movieDetailViewPager);
-        /** Important: Must use the child FragmentManager or you will see side effects. */
+        // Important: Must use the child FragmentManager or you will see side effects.
         viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
 
         // Set current item based on clicked item
@@ -68,12 +70,6 @@ public class MovieDetailFragmentHost extends Fragment {
             Bundle args = new Bundle();
             args.putString(MovieDetailFragment.ARG_MOVIE_ID, String.valueOf(mMoviesAdapter.getItemId(position)));
             return MovieDetailFragment.newInstance(args);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            // todo upravit alebo vyhodit
-            return "Child Fragment " + position;
         }
 
     }

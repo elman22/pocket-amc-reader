@@ -43,7 +43,7 @@ public final class S {
 
     // Thumbnail settings
 //    public static final double THUMB_AR = 0.71;
-    public static final int THUMB_IN_SAMPLE_SIZE = 2;
+//    public static final int THUMB_IN_SAMPLE_SIZE = 2;
 
 //    public final static int THEME_NORMAL = 0;
 //    public final static int THEME_LARGE = 1;
