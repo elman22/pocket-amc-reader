@@ -22,12 +22,13 @@
             android:id="@+id/FormattedTitle"
             style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:paddingBottom="@dimen/wrapper_bottom_spacing"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/FormattedTitle"
+            android:layout_below="@id/FormattedTitle"
             android:id="@+id/basicBoxWrapper"
             android:paddingBottom="@dimen/wrapper_bottom_spacing">
 
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="@string/details_description_label"
             android:id="@+id/DescriptionLabel"
-            android:layout_below="@+id/basicBoxWrapper"
+            android:layout_below="@id/basicBoxWrapper"
             style="@style/label"/>
 
         <com.ms.square.android.expandabletextview.ExpandableTextView
@@ -58,11 +59,11 @@
             android:orientation="vertical"
             expandableTextView:maxCollapsedLines="6"
             expandableTextView:animDuration="300"
-            android:layout_below="@+id/DescriptionLabel"
+            android:layout_below="@id/DescriptionLabel"
             android:paddingBottom="@dimen/wrapper_bottom_spacing">
 
             <TextView
-                android:id="@+id/expandable_text"
+                android:id="@id/expandable_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ph_text_long"
@@ -85,7 +86,7 @@
             android:layout_height="wrap_content"
             android:text="@string/details_filepath_label"
             android:id="@+id/FilePathLabel"
-            android:layout_below="@+id/Description"
+            android:layout_below="@id/Description"
             style="@style/label"/>
 
         <TextView
@@ -93,7 +94,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ph_text_short"
             android:id="@+id/FilePath"
-            android:layout_below="@+id/FilePathLabel"
+            android:layout_below="@id/FilePathLabel"
             android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
             style="@style/basicText"/>
 
@@ -103,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="@string/details_actors_label"
             android:id="@+id/ActorsLabel"
-            android:layout_below="@+id/FilePath"
+            android:layout_below="@id/FilePath"
             style="@style/label"/>
 
         <TextView
@@ -111,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ph_text_long"
             android:id="@+id/Actors"
-            android:layout_below="@+id/ActorsLabel"
+            android:layout_below="@id/ActorsLabel"
             android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
             style="@style/basicText"/>
 
@@ -120,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/details_comments_label"
             android:id="@+id/CommentsLabel"
-            android:layout_below="@+id/Actors"
+            android:layout_below="@id/Actors"
             style="@style/label"/>
 
         <com.ms.square.android.expandabletextview.ExpandableTextView
@@ -132,11 +133,11 @@
             android:orientation="vertical"
             expandableTextView:maxCollapsedLines="6"
             expandableTextView:animDuration="300"
-            android:layout_below="@+id/CommentsLabel"
+            android:layout_below="@id/CommentsLabel"
             android:paddingBottom="@dimen/wrapper_bottom_spacing">
 
             <TextView
-                android:id="@+id/expandable_text"
+                android:id="@id/expandable_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ph_text_long"
