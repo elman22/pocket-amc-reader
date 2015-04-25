@@ -46,19 +46,20 @@ public class MovieDetailActivity extends FragmentActivity {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
-        // TODO do I need it?
-//        if (savedInstanceState == null) {
-//            // Create the detail fragment and add it to the activity
-//            // using a fragment transaction.
-//            Bundle arguments = new Bundle();
-//            arguments.putString(MovieDetailFragment.ARG_MOVIE_ID,
-//                    getIntent().getStringExtra(MovieDetailFragment.ARG_MOVIE_ID));
-//            MovieDetailFragment fragment = new MovieDetailFragment();
-//            fragment.setArguments(arguments);
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.movie_detail_container, fragment)
-//                    .commit();
-//        }
+        setContentView(R.layout.activity_movie_detail);
+
+        if (savedInstanceState == null) {
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putString(MovieDetailFragment.ARG_MOVIE_ID,
+                    getIntent().getStringExtra(MovieDetailFragment.ARG_MOVIE_ID));
+            MovieDetailFragmentHost fragment = new MovieDetailFragmentHost();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.movie_detail_container, fragment)
+                    .commit();
+        }
     }
 
     @Override

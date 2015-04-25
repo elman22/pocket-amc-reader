@@ -101,7 +101,7 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
-            Intent detailIntent = new Intent(this, MovieDetailFragmentHost.class);
+            Intent detailIntent = new Intent(this, MovieDetailActivity.class);
             detailIntent.putExtra(MovieDetailFragment.ARG_MOVIE_ID, id);
             // todo: really going to send instances this way?
 //            SharedObjects.getInstance().activeCursorAdapter = this.ca;

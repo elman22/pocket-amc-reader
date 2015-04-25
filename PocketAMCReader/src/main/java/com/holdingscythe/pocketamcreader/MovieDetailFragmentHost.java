@@ -29,6 +29,7 @@ public class MovieDetailFragmentHost extends Fragment {
 //    public static MovieDetailFragmentHost newInstance() {
 //        return new MovieDetailFragmentHost();
 //    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
