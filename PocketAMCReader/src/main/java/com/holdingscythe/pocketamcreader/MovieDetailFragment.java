@@ -184,7 +184,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         String val = filter.getHumanValue();
         if (SharedObjects.getInstance().movieListFragment != null && val != null && !val.equals("")) {
             SharedObjects.getInstance().movieListFragment.addExternalFilter(filter);
-            getActivity().finish();
+            if (getActivity() instanceof MovieDetailActivity) {
+                getActivity().finish();
+            }
         }
     }
 

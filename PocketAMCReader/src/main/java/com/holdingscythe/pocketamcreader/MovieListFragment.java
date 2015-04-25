@@ -261,11 +261,8 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
-        // TODO implement my items
-        // TODO handle clicks on headers here
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-//        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
         mCallbacks.onItemSelected(String.valueOf(id));
     }
 
@@ -549,7 +546,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             mMoviesAdapter.stopImageLoader();
             mSearchMenuItem.collapseActionView();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
-            mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
+            mMoviesAdapter.changeCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.notifyDataSetChanged();
             // TODO have to do something with the left list - only do it in twopanelist
