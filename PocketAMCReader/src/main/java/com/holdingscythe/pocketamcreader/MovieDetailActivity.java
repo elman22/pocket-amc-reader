@@ -73,7 +73,7 @@ public class MovieDetailActivity extends FragmentActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, MovieListActivity.class));
+            this.finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
