@@ -67,8 +67,6 @@ public class Movie {
 //        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
 //        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);
 
-        mCursor.moveToFirst();
-
 //        public static final String NUMBER = "Number";
 //        public static final String CHECKED = "Checked";
         fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR);
@@ -197,7 +195,7 @@ public class Movie {
                 try {
                     Bitmap picture = BitmapFactory.decodeFile(picturePath);
                     iv.setImageBitmap(picture);
-//                    iv.setOnClickListener(this);
+                    iv.setOnClickListener(mClickListener);
                 } catch (Exception e) {
                     // file can't be read
                     if (S.ERROR)

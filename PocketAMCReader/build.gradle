@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '22.0.1'
     defaultConfig {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 15
@@ -34,10 +34,13 @@ dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     // The Support Repository (separate from the corresponding library) can be found in the Extras category.
     // compile 'com.android.support:support-v4:18.0.0'
-    compile 'com.android.support:support-v13:20.0.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-v13:22.2.1'
+    // compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':aFileChooser')
-    compile 'com.ms-square:expandableTextView:0.1.3'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
-    //    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.ms-square:expandableTextView:0.1.4'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    // try http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en
+    // compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    // compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.2.2'
+    // compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }

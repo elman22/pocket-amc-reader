@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><!-- todo: cleanup -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.holdingscythe.pocketamcreader">
+<manifest package="com.holdingscythe.pocketamcreader"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:allowBackup="true"
@@ -14,18 +14,18 @@
             android:name="com.holdingscythe.pocketamcreader.ImportActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.holdingscythe.pocketamcreader.MovieListActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
+                <action android:name="android.intent.action.GET_CONTENT"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
+                <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
         </activity>
         <activity
@@ -34,7 +34,7 @@
             android:parentActivityName="com.holdingscythe.pocketamcreader.MovieListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.holdingscythe.pocketamcreader.MovieListActivity" />
+                android:value="com.holdingscythe.pocketamcreader.MovieListActivity"/>
         </activity>
         <activity
             android:name="com.holdingscythe.pocketamcreader.settings.SettingsActivity"
@@ -42,21 +42,30 @@
             android:parentActivityName="com.holdingscythe.pocketamcreader.MovieListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.holdingscythe.pocketamcreader.MovieListActivity" />
+                android:value="com.holdingscythe.pocketamcreader.MovieListActivity"/>
+        </activity>
+        <activity
+            android:name=".PictureViewActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.holdingscythe.pocketamcreader.MovieDetailActivity"
+            android:theme="@style/AppFullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.holdingscythe.pocketamcreader.MovieDetailActivity"/>
         </activity>
         <activity
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
-            android:icon="@drawable/ic_chooser"
             android:enabled="@bool/use_activity"
             android:exported="true"
+            android:icon="@drawable/ic_chooser"
             android:label="@string/choose_file">
             <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
+                <action android:name="android.intent.action.GET_CONTENT"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.OPENABLE"/>
 
-                <data android:mimeType="*/*" />
+                <data android:mimeType="*/*"/>
             </intent-filter>
         </activity>
 

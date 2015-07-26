@@ -120,7 +120,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     /**
@@ -509,6 +509,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      * Updates list header about number of movies displayed
      */
     private void updateHeaderInfo() {
+        mMoviesAdapter.getCount();
         mHeaderListCountView.setText(String.format(getResources().getQuantityString(R.plurals.list_showing,
                 mMoviesAdapter.getCount()), mMoviesAdapter.getCount()));
     }

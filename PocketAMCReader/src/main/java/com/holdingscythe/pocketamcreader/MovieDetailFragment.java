@@ -2,11 +2,11 @@ package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +50,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
      * The fragment argument representing the movie ID that this fragment represents.
      */
     public static final String ARG_MOVIE_ID = "movie_id";
+    public static final String ARG_FULLSCREEN_IMAGE_ID = "position";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -105,6 +106,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             // Fetch movie
             Uri uri = Uri.withAppendedPath(S.CONTENT_URI, "_id/" + getArguments().getString(ARG_MOVIE_ID, "0"));
             Cursor cursor = mMoviesDataProvider.fetchMovie(uri);
+            cursor.moveToFirst();
             mMovie = new Movie(cursor, getView(), this, getActivity());
             mMoviesDataProvider.closeDatabase();
 
@@ -114,6 +116,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 Log.i(S.TAG, "Details display elapsed time: " + (endTime - startTime) + " ms.");
             }
 
+        } else {
+            Log.e(S.TAG, "Movie details called without ARG_MOVIE_ID");
         }
     }
 
@@ -132,6 +136,17 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         switch (view.getId()) {
             case R.id.Actors:
                 chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Picture:
+                try {
+                    Intent i = new Intent(getActivity(), PictureViewActivity.class);
+                    // TODO: not needed
+                    i.putExtra(MovieDetailFragment.ARG_FULLSCREEN_IMAGE_ID, 0);
+                    startActivity(i);
+                } catch (Exception e) {
+                    // TODO: fix exception
+                    e.printStackTrace();
+                }
                 break;
         }
     }
