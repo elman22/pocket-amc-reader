@@ -17,9 +17,6 @@ import java.util.ArrayList;
 
 public class PictureViewActivity extends Activity {
 
-    private TouchImageAdapter adapter;
-    private ViewPager viewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +29,8 @@ public class PictureViewActivity extends Activity {
             filePaths = new ArrayList<String>();
         }
 
-        viewPager = (ViewPager) findViewById(R.id.fullscreen_picture_pager);
-        adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.fullscreen_picture_pager);
+        TouchImageAdapter adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths);
         viewPager.setAdapter(adapter);
     }
 
