@@ -50,7 +50,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
      * The fragment argument representing the movie ID that this fragment represents.
      */
     public static final String ARG_MOVIE_ID = "movie_id";
-    public static final String ARG_FULLSCREEN_IMAGE_ID = "position";
+    public static final String ARG_MOVIE_PICTURES_LIST = "pictures_list";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -139,9 +139,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 break;
             case R.id.Picture:
                 try {
+                    // prepare pictures array
                     Intent i = new Intent(getActivity(), PictureViewActivity.class);
-                    // TODO: not needed
-                    i.putExtra(MovieDetailFragment.ARG_FULLSCREEN_IMAGE_ID, 0);
+                    i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, mMovie.getPicturesList());
                     startActivity(i);
                 } catch (Exception e) {
                     // TODO: fix exception
@@ -151,7 +151,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         }
     }
 
-    /** Prepare select to pick from available values in multivalued field */
+    /**
+     * Prepare select to pick from available values in multivalued field
+     */
     private void chooseMultivaluedFieldValue(final FilterField field, final FilterOperator operator, View v) {
         final String[] availableValues = separateMultivaluedField(v);
 
@@ -177,7 +179,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         }
     }
 
-    /** Split multivalued field into respective values */
+    /**
+     * Split multivalued field into respective values
+     */
     private String[] separateMultivaluedField(View v) {
         ArrayList<String> availableValues = new ArrayList<String>();
         TextView multiField = (TextView) v;
@@ -194,7 +198,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         return availableValues.toArray(new String[availableValues.size()]);
     }
 
-    /** Add filter and return to list activity */
+    /**
+     * Add filter and return to list activity
+     */
     private void filterClick(Filter filter) {
         String val = filter.getHumanValue();
         if (SharedObjects.getInstance().movieListFragment != null && val != null && !val.equals("")) {

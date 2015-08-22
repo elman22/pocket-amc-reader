@@ -18,6 +18,7 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * PocketAMCReader
@@ -219,6 +220,21 @@ public class Movie {
         v = mView.findViewById(mResources.getIdentifier(labelId, "id", mContext.getPackageName()));
         if (v != null)
             v.setVisibility(View.GONE);
+    }
+
+    /*
+     * Return array list with all available pictures for the movie
+     */
+    public ArrayList<String> getPicturesList() {
+        ArrayList<String> pictureList = new ArrayList<String>();
+
+        // get main picture
+        String pictureName = mCursor.getString(mCursor.getColumnIndex(Movies.PICTURE));
+        pictureList.add(mPreferencePicturesDirectory + pictureName);
+
+        // TODO get extras
+
+        return pictureList;
     }
 
 }
