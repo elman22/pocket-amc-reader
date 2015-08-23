@@ -543,15 +543,18 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     protected void refreshList() {
         if (mMoviesDataProvider != null && getListView() != null) {
             // Swap cursor
+            mSearchMenuItem.collapseActionView();
             mMoviesAdapter.unregisterDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.stopImageLoader();
-            mSearchMenuItem.collapseActionView();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
             mMoviesAdapter.changeCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.notifyDataSetChanged();
-            // TODO have to do something with the left list - only do it in twopanelist
-//            mCallbacks.onItemSelected("0");
+
+            // TODO have to do something with the right fragment - only do it in twopanelist
+            if (getActivity().getSupportFragmentManager().findFragmentById(R.id.movie_detail_container) != null) {
+//                mCallbacks.onItemSelected("1");
+            }
         }
     }
 
