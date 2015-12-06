@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
@@ -39,6 +40,13 @@ public class Movie {
     final int STRING_REGULAR = 0;
     final int STRING_EXPANDABLE = 1;
     final int STRING_CLICKABLE = 2;
+
+    // String extensions
+    final int STRING_EXT_NONE = 0;
+    final int STRING_EXT_PREFIX = 1;
+    final int STRING_EXT_SUFFIX = 2;
+    final int STRING_EXT_PREFIX_PADDED = 3;
+    final int STRING_EXT_SUFFIX_PADDED = 4;
 
     public Movie(Cursor cursor, View view, View.OnClickListener clickListener, Activity activity) {
         mCursor = cursor;
@@ -70,7 +78,7 @@ public class Movie {
 
 //        public static final String NUMBER = "Number";
 //        public static final String CHECKED = "Checked";
-        fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR);
+        fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR, STRING_EXT_NONE, 0);
 //        public static final String MEDIA_LABEL = "MediaLabel";
 //        public static final String MEDIA_TYPE = "MediaType";
 //        public static final String SOURCE = "Source";
@@ -82,13 +90,13 @@ public class Movie {
 //        public static final String DIRECTOR = "Director";
 //        public static final String PRODUCER = "Producer";
 //        public static final String COUNTRY = "Country";
-//        public static final String CATEGORY = "Category";
-//        public static final String LENGTH = "Length";
+        fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.LENGTH, STRING_REGULAR, STRING_EXT_SUFFIX_PADDED, R.string.display_minutes_suffix);
 //        public static final String YEAR = "Year";
-        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE);
+        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE, STRING_EXT_NONE, 0);
 //        public static final String URL = "URL";
-        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE);
-        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE);
+        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE, STRING_EXT_NONE, 0);
 //        public static final String VIDEO_FORMAT = "VideoFormat";
 //        public static final String VIDEO_BITRATE = "VideoBitrate";
 //        public static final String AUDIO_FORMAT = "AudioFormat";
@@ -106,7 +114,7 @@ public class Movie {
 //        public static final String WRITER = "Writer";
 //        public static final String COMPOSER = "Composer";
 //        public static final String CERTIFICATION = "Certification";
-        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
+        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR, STRING_EXT_NONE, 0);
 //
 //        // Fields mappings extras
 //        public static final String MOVIES_ID = "Movies_id";
@@ -146,12 +154,33 @@ public class Movie {
     /**
      * Fill string from database into view. String can be clickable visibly or invisibly.
      */
-    private void fillStringIntoView(String columnName, int dateType) {
+    private void fillStringIntoView(String columnName, int dateType, int valueExtensionType, int valueExtensionId) {
         String value = mCursor.getString(mCursor.getColumnIndex(columnName));
 
         if (value == null || value.equals("")) {
             hideEmptyView(columnName);
         } else {
+            // Process string extension
+            switch (valueExtensionType) {
+                case STRING_EXT_NONE:
+                    break;
+                case STRING_EXT_PREFIX:
+                    value = mActivity.getString(valueExtensionId) + value;
+                    break;
+                case STRING_EXT_SUFFIX:
+                    value += mActivity.getString(valueExtensionId);
+                    break;
+                case STRING_EXT_PREFIX_PADDED:
+                    value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
+                            .string_extension_separator) + value;
+                    break;
+                case STRING_EXT_SUFFIX_PADDED:
+                    value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
+                            (valueExtensionId);
+                    break;
+            }
+
+            // Fill strings into views
             switch (dateType) {
                 case STRING_REGULAR:
                     /** Fill regular string from database into view. */

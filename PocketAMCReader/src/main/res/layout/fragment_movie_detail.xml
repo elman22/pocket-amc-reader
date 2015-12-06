@@ -1,155 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            tools:context=".MovieDetailActivity"
-            android:id="@+id/detailsScrollView"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin">
+<ScrollView
+    android:id="@+id/detailsScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MovieDetailActivity">
 
     <RelativeLayout
+        android:id="@+id/detailsWrapper"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsWrapper">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ph_formatted_title"
             android:id="@+id/FormattedTitle"
             style="@android:style/TextAppearance.DeviceDefault.Large"
-            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing"/>
+            android:layout_alignParentStart="true"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing"
+            android:text="@string/ph_formatted_title"/>
 
         <RelativeLayout
+            android:id="@+id/basicBoxWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/FormattedTitle"
-            android:id="@+id/basicBoxWrapper"
             android:paddingBottom="@dimen/wrapper_bottom_spacing">
 
             <ImageView
+                android:id="@+id/Picture"
                 android:layout_width="@android:dimen/thumbnail_width"
                 android:layout_height="wrap_content"
-                android:id="@+id/Picture"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/details_picture_description"
-                android:src="@drawable/movie_thumb_stub"
+                android:paddingRight="16dip"
                 android:scaleType="fitStart"
-                android:adjustViewBounds="true"/>
+                android:src="@drawable/movie_thumb_stub"/>
+
+            <TextView
+                android:id="@+id/Category"
+                style="@style/basicText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/Picture"
+                android:layout_toRightOf="@+id/Picture"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/Length"
+                style="@style/basicText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Category"
+                android:layout_toEndOf="@+id/Picture"
+                android:layout_toRightOf="@+id/Picture"
+                android:text="@string/ph_text_line"
+                />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/DescriptionLabel"
+            style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/details_description_label"
-            android:id="@+id/DescriptionLabel"
             android:layout_below="@id/basicBoxWrapper"
-            style="@style/label"/>
+            android:text="@string/details_description_label"/>
 
         <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/Description"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/Description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            expandableTextView:maxCollapsedLines="6"
-            expandableTextView:animDuration="300"
             android:layout_below="@id/DescriptionLabel"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing"
+            expandableTextView:animDuration="300"
+            expandableTextView:maxCollapsedLines="6">
 
             <TextView
                 android:id="@id/expandable_text"
+                style="@style/basicText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ph_text_long"
-                android:textIsSelectable="false"
-                style="@style/basicText"/>
+                android:textIsSelectable="false"/>
 
             <ImageButton
                 android:id="@id/expand_collapse"
+                style="@style/expandableArrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:background="@android:color/transparent"
-                style="@style/expandableArrow"
                 android:contentDescription="@string/details_expandable_arrow_description"/>
         </com.ms.square.android.expandabletextview.ExpandableTextView>
 
-
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/details_filepath_label"
             android:id="@+id/FilePathLabel"
-            android:layout_below="@id/Description"
-            style="@style/label"/>
-
-        <TextView
+            style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ph_text_short"
+            android:layout_below="@id/Description"
+            android:text="@string/details_filepath_label"/>
+
+        <TextView
             android:id="@+id/FilePath"
+            style="@style/basicText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/FilePathLabel"
             android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
-            style="@style/basicText"/>
+            android:text="@string/ph_text_short"/>
 
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/details_actors_label"
             android:id="@+id/ActorsLabel"
-            android:layout_below="@id/FilePath"
-            style="@style/label"/>
-
-        <TextView
+            style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ph_text_long"
+            android:layout_below="@id/FilePath"
+            android:text="@string/details_actors_label"/>
+
+        <TextView
             android:id="@+id/Actors"
+            style="@style/basicText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/ActorsLabel"
             android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
-            style="@style/basicText"/>
+            android:text="@string/ph_text_long"/>
 
         <TextView
+            android:id="@+id/CommentsLabel"
+            style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/details_comments_label"
-            android:id="@+id/CommentsLabel"
             android:layout_below="@id/Actors"
-            style="@style/label"/>
+            android:text="@string/details_comments_label"/>
 
         <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/Comments"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/Comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            expandableTextView:maxCollapsedLines="6"
-            expandableTextView:animDuration="300"
             android:layout_below="@id/CommentsLabel"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/wrapper_bottom_spacing"
+            expandableTextView:animDuration="300"
+            expandableTextView:maxCollapsedLines="6">
 
             <TextView
                 android:id="@id/expandable_text"
+                style="@style/basicText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ph_text_long"
-                style="@style/basicText"/>
+                android:text="@string/ph_text_long"/>
 
             <ImageButton
                 android:id="@id/expand_collapse"
+                style="@style/expandableArrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:background="@android:color/transparent"
-                style="@style/expandableArrow"
                 android:contentDescription="@string/details_expandable_arrow_description"/>
         </com.ms.square.android.expandabletextview.ExpandableTextView>
 

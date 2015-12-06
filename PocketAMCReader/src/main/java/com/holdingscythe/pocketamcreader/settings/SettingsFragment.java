@@ -26,6 +26,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String KEY_PREF_CATALOG_LOCATION = "settingCatalogLocation";
     public static final String KEY_PREF_CATALOG_ENCODING = "settingCatalogEncoding";
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
+    public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
 
     private static final int REQUEST_CODE = 2753; // onActivityResult request code
     private static SharedPreferences mPrefs;
@@ -54,6 +55,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
         updateSummary(mPrefs, KEY_PREF_CATALOG_ENCODING);
         updateSummary(mPrefs, KEY_PREF_LIST_SEPARATOR);
+        updateSummary(mPrefs, KEY_PREF_DETAIL_SEPARATOR);
     }
 
     @Override
@@ -164,6 +166,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             pref.setSummary(sharedPreferences.getString(key, getString(R.string.pref_setting_list_separator_summary)));
         }
 
+        if (key.equals(KEY_PREF_DETAIL_SEPARATOR)) {
+            pref.setSummary(sharedPreferences.getString(key, getString(R.string.pref_setting_multivalue_summary)));
+        }
+
         // Setup the initial values
 //        mSettingDefaultTab
 //                .setSummary(mSettingDefaultTab.getValue() == null ? getString(R.string.pref_setting_default_tab_summary)
@@ -175,9 +181,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 //                        : mSettingPlotInBasic.getEntry());
 //        mSettingFontSize.setSummary(mSettingFontSize.getValue() == null ? getString(R.string.pref_setting_font_size_summary)
 //                : mSettingFontSize.getEntry());
-//        mSettingMultifieldSeparator
-//                .setSummary(mSettingMultifieldSeparator.getText() == null ? getString(R.string.pref_setting_multivalue_summary)
-//                        : mSettingMultifieldSeparator.getText());
 
     }
 }

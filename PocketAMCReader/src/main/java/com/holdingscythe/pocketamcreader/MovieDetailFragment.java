@@ -137,6 +137,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.Actors:
                 chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, Movies.FILTER_OPERATOR_CONTAINS, view);
                 break;
+            case R.id.Category:
+                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
             case R.id.Picture:
                 try {
                     // prepare pictures array

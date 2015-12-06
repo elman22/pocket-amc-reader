@@ -27,6 +27,7 @@
     <string name="list_holder_row2">ID, Year, Length, Rating - This is very long string that must be even
         longer</string>
     <string name="list_holder_row3">Genre - This is very long string that must be even longer</string>
+	<string name="string_extension_separator">\u0020</string>
 
     <!-- Placeholders -->
     <string name="ph_formatted_title">Formatted Movie Title</string>
@@ -35,5 +36,6 @@
         massa, vitae ultrices magna molestie ut. Integer in sem aliquet, facilisis nisl volutpat, pulvinar lorem. Ut
         ultricies faucibus risus, sagittis convallis lorem tincidunt at.</string>
     <string name="ph_text_short">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
+	<string name="ph_text_line">Consectetur elit</string>
 
 </resources>
