@@ -120,13 +120,29 @@
             android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
             android:text="@string/ph_text_short"/>
 
+        <TextView
+            android:id="@+id/DirectorLabel"
+            style="@style/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/FilePath"
+            android:text="@string/details_director_label"/>
+
+        <TextView
+            android:id="@+id/Director"
+            style="@style/basicText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DirectorLabel"
+            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            android:text="@string/ph_text_line"/>
 
         <TextView
             android:id="@+id/ActorsLabel"
             style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/FilePath"
+            android:layout_below="@id/Director"
             android:text="@string/details_actors_label"/>
 
         <TextView

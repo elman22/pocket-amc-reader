@@ -140,6 +140,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.Category:
                 chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, Movies.FILTER_OPERATOR_CONTAINS, view);
                 break;
+            case R.id.Director:
+                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
             case R.id.Picture:
                 try {
                     // prepare pictures array
@@ -210,6 +213,10 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             SharedObjects.getInstance().movieListFragment.addExternalFilter(filter);
             if (getActivity() instanceof MovieDetailActivity) {
                 getActivity().finish();
+            } else {
+//                getActivity().finish();
+//                Intent listIntent = new Intent(getActivity(), MovieListActivity.class);
+//                startActivity(listIntent);
             }
         }
     }

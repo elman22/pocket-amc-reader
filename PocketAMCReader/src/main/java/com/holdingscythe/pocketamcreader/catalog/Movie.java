@@ -87,7 +87,7 @@ public class Movie {
 //        public static final String RATING = "Rating";
 //        public static final String ORIGINAL_TITLE = "OriginalTitle";
 //        public static final String TRANSLATED_TITLE = "TranslatedTitle";
-//        public static final String DIRECTOR = "Director";
+        fillStringIntoView(Movies.DIRECTOR, STRING_CLICKABLE, STRING_EXT_NONE, 0);
 //        public static final String PRODUCER = "Producer";
 //        public static final String COUNTRY = "Country";
         fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE, STRING_EXT_NONE, 0);
