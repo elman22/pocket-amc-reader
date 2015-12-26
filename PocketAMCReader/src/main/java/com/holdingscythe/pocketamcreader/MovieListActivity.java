@@ -1,6 +1,7 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,10 +11,13 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
+import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 // TODO: cleanup
 
@@ -60,6 +64,13 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
+        // Set default font
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath(S.DEFAULT_FONT)
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
         if (findViewById(R.id.movie_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts (res/values-large and
             // res/values-sw600dp). If this view is present, then the activity should be in two-pane mode.
@@ -78,6 +89,14 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
         ImageLoader.getInstance().init(config);
 
         // TODO: If exposing deep links into your app, handle intents here.
+    }
+
+    /**
+     * Wrap the Activity Context for Calligraphy
+     */
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     /**

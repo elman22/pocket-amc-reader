@@ -33,14 +33,21 @@ android {
 dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     // The Support Repository (separate from the corresponding library) can be found in the Extras category.
-    // compile 'com.android.support:support-v4:18.0.0'
     compile 'com.android.support:support-v13:23.1.1'
     // compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    // https://github.com/iPaulPro/aFileChooser
     compile project(':aFileChooser')
+    // https://github.com/Manabu-GT/ExpandableTextView
     compile 'com.ms-square:expandableTextView:0.1.4'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    // https://github.com/nostra13/Android-Universal-Image-Loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    // https://github.com/chrisjenx/Calligraphy
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+
     // try http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en
     // compile 'com.github.chrisbanes.photoview:library:1.2.4'
     // compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.2.2'
     // compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+
 }

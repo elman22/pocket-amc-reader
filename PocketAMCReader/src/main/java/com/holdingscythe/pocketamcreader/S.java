@@ -26,6 +26,7 @@ public final class S {
     public static final String AUTHORITY = "com.holdingscythe.provider.MovieCatalog";
     public static final String TAG = "PocketAMCReader";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/movies");
+    public static final String DEFAULT_FONT = "fonts/RobotoCondensed-Regular.ttf";
 
     // MIME types used for searching movies or looking up a single movie
     public static final String MOVIES_MIME_TYPE =

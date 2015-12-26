@@ -1,18 +1,12 @@
 package com.holdingscythe.pocketamcreader;
 
-import android.app.ActionBar;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.holdingscythe.pocketamcreader.catalog.Movie;
-import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 // TODO: cleanup
 
@@ -32,7 +26,6 @@ public class MovieDetailActivity extends FragmentActivity {
 //    private int mCurrentColor = 0xFFcaec60;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +41,13 @@ public class MovieDetailActivity extends FragmentActivity {
         //
         setContentView(R.layout.activity_movie_detail);
 
+        // Set default font
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath(S.DEFAULT_FONT)
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -60,6 +60,14 @@ public class MovieDetailActivity extends FragmentActivity {
                     .add(R.id.movie_detail_container, fragment)
                     .commit();
         }
+    }
+
+    /**
+     * Wrap the Activity Context for Calligraphy
+     */
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

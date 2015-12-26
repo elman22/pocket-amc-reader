@@ -1,6 +1,7 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * This Activity displays the screen's UI and starts a single TaskFragment that
@@ -48,6 +52,13 @@ public class ImportActivity extends FragmentActivity implements ImportFragment.T
         SharedObjects.getInstance().preferences =
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        // Set default font
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath(S.DEFAULT_FONT)
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
         // Initialize views
         mTextView = (TextView) findViewById(R.id.progress_status);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_horizontal);
@@ -79,6 +90,14 @@ public class ImportActivity extends FragmentActivity implements ImportFragment.T
 
     @Override
     public void onPreExecute() {
+    }
+
+    /**
+     * Wrap the Activity Context for Calligraphy
+     */
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
