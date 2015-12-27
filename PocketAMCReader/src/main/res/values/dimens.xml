@@ -3,10 +3,16 @@
     <dimen name="activity_horizontal_margin">16dip</dimen>
     <dimen name="activity_vertical_margin">16dip</dimen>
     <!-- Elements spacing -->
-    <dimen name="wrapper_bottom_spacing">16dip</dimen>
+    <dimen name="wrapper_spacing_block">16dip</dimen>
+    <dimen name="wrapper_spacing_title">8dip</dimen>
     <!-- List view -->
     <dimen name="list_outer_height">70dip</dimen>
     <dimen name="list_item_height">64dip</dimen>
     <dimen name="list_margin_horizontal">6dip</dimen>
     <dimen name="list_margin_vertical">3dip</dimen>
+    <!-- Details -->
+    <dimen name="detail_hero_img_height">192dip</dimen>
+    <dimen name="detail_basic_height">48dip</dimen>
+    <dimen name="detail_basic_spacing">3dip</dimen>
+    <dimen name="detail_arrow_spacing">4dip</dimen>
 </resources>

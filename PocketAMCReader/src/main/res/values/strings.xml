@@ -266,4 +266,5 @@
     <string name="loading">Loading&#x2026;</string>
     <string name="details_picture_description">Movie poster</string>
     <string name="details_expandable_arrow_description">&lt;&gt;</string>
+    <string name="details_datewatched_label_short">On</string>
 </resources>

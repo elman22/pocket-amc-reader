@@ -20,6 +20,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * PocketAMCReader
@@ -40,6 +41,9 @@ public class Movie {
     final int STRING_REGULAR = 0;
     final int STRING_EXPANDABLE = 1;
     final int STRING_CLICKABLE = 2;
+    final int BOOLEAN_REGULAR = 3;
+    final int BOOLEAN_CLICKABLE = 4;
+    final int DATE_REGULAR = 5;
 
     // String extensions
     final int STRING_EXT_NONE = 0;
@@ -76,27 +80,27 @@ public class Movie {
 //        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
 //        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);
 
-//        public static final String NUMBER = "Number";
-//        public static final String CHECKED = "Checked";
-        fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.NUMBER, STRING_REGULAR, STRING_EXT_PREFIX, R.string.number_prefix);
+        fillStringIntoView(Movies.CHECKED, BOOLEAN_CLICKABLE);
+        fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR);
 //        public static final String MEDIA_LABEL = "MediaLabel";
 //        public static final String MEDIA_TYPE = "MediaType";
 //        public static final String SOURCE = "Source";
 //        public static final String DATE = "Date";
 //        public static final String BORROWER = "Borrower";
-//        public static final String RATING = "Rating";
+        fillStringIntoView(Movies.RATING, STRING_REGULAR, STRING_EXT_PREFIX, R.string.rating_star);
 //        public static final String ORIGINAL_TITLE = "OriginalTitle";
 //        public static final String TRANSLATED_TITLE = "TranslatedTitle";
-        fillStringIntoView(Movies.DIRECTOR, STRING_CLICKABLE, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.DIRECTOR, STRING_CLICKABLE);
 //        public static final String PRODUCER = "Producer";
 //        public static final String COUNTRY = "Country";
-        fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE, STRING_EXT_NONE, 0);
-        fillStringIntoView(Movies.LENGTH, STRING_REGULAR, STRING_EXT_SUFFIX_PADDED, R.string.display_minutes_suffix);
-//        public static final String YEAR = "Year";
-        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE);
+        fillStringIntoView(Movies.LENGTH, STRING_REGULAR);
+        fillStringIntoView(Movies.YEAR, STRING_REGULAR);
+        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE);
 //        public static final String URL = "URL";
-        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE, STRING_EXT_NONE, 0);
-        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE);
+        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE);
 //        public static final String VIDEO_FORMAT = "VideoFormat";
 //        public static final String VIDEO_BITRATE = "VideoBitrate";
 //        public static final String AUDIO_FORMAT = "AudioFormat";
@@ -109,12 +113,12 @@ public class Movie {
 //        public static final String DISKS = "Disks";
         fillPictureIntoView(Movies.PICTURE);
 //        public static final String COLOR_TAG = "ColorTag";
-//        public static final String DATE_WATCHED = "DateWatched";
+        fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
 //        public static final String USER_RATING = "UserRating";
 //        public static final String WRITER = "Writer";
 //        public static final String COMPOSER = "Composer";
-//        public static final String CERTIFICATION = "Certification";
-        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR, STRING_EXT_NONE, 0);
+        fillStringIntoView(Movies.CERTIFICATION, STRING_CLICKABLE);
+        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
 //
 //        // Fields mappings extras
 //        public static final String MOVIES_ID = "Movies_id";
@@ -149,6 +153,13 @@ public class Movie {
 ////        ImageView mPictureTeaser = (ImageView) rootView.f findViewById()
 
 
+    }
+
+    /**
+     * Fill string from database into view. String can be clickable visibly or invisibly.
+     */
+    private void fillStringIntoView(String columnName, int dateType) {
+        fillStringIntoView(columnName, dateType, STRING_EXT_NONE, 0);
     }
 
     /**
@@ -200,6 +211,34 @@ public class Movie {
                             mContext.getPackageName()));
                     ctv.setText(Utils.markClickableText(value));
                     ctv.setOnClickListener(mClickListener);
+                    break;
+                case BOOLEAN_REGULAR:
+                    TextView btv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                            mContext.getPackageName()));
+                    if (value.equals("True"))
+                        btv.setText(mActivity.getString(R.string.details_boolean_true));
+                    else
+                        btv.setText(mActivity.getString(R.string.details_boolean_false));
+                    break;
+                case BOOLEAN_CLICKABLE:
+                    TextView bctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                            mContext.getPackageName()));
+                    if (value.equals("True"))
+                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
+                    else
+                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
+                    bctv.setOnClickListener(mClickListener);
+                    break;
+                case DATE_REGULAR:
+                    TextView dtv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                            mContext.getPackageName()));
+                    try {
+                        Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
+                        value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                    } catch (Exception e) {
+                        // don't do anything, keep date as is
+                    }
+                    dtv.setText(value);
                     break;
             }
         }

@@ -143,6 +143,14 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.Director:
                 chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_CONTAINS, view);
                 break;
+            case R.id.Checked:
+                filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
+                break;
+            case R.id.Certification:
+                filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
             case R.id.Picture:
                 try {
                     // prepare pictures array
@@ -214,6 +222,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             if (getActivity() instanceof MovieDetailActivity) {
                 getActivity().finish();
             } else {
+                // TODO: is this necessary?
 //                getActivity().finish();
 //                Intent listIntent = new Intent(getActivity(), MovieListActivity.class);
 //                startActivity(listIntent);

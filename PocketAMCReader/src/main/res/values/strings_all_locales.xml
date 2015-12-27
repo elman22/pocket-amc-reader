@@ -18,7 +18,8 @@
 	<string name="locale_de_translator">Klaus Oed</string>
 	<string name="locale_fr_translator">Xavier Muller</string>
 	
-	<string name="copyright_year">2014</string>
+	<string name="copyright_year">2016</string>
+    <string name="rating_star">&#x2605;</string>
 	<string name="rating_suffix">/10</string>
 	<string name="rating_suffix_list">*/10</string>
 	<string name="list_seen_true">&#x2713;</string>
@@ -37,5 +38,6 @@
         ultricies faucibus risus, sagittis convallis lorem tincidunt at.</string>
     <string name="ph_text_short">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
 	<string name="ph_text_line">Consectetur elit</string>
+	<string name="ph_text_data">Lorem</string>
 
 </resources>

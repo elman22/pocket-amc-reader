@@ -6,9 +6,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip"
+    android:paddingTop="0dip"
     tools:context=".MovieDetailActivity">
 
     <RelativeLayout
@@ -16,61 +16,208 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/Picture"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/detail_hero_img_height"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/details_picture_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/movie_thumb_stub"
+            />
+
+        <TableLayout
+            android:id="@+id/titleBoxTable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/Picture"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/detail_title_background"
+            android:paddingBottom="@dimen/wrapper_spacing_title"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            >
+
+            <TableRow
+                android:id="@+id/titleBoxTableRow"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Number"
+                    style="@style/regularText.Basic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_data"/>
+
+                <TextView
+                    android:id="@+id/CertificationLabel"
+                    style="@style/basicExtra.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_certification_label"/>
+
+                <TextView
+                    android:id="@+id/Certification"
+                    style="@style/regularText.Basic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_data"/>
+
+                <TextView
+                    android:id="@+id/CheckedLabel"
+                    style="@style/basicExtra.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_checked_label"/>
+
+                <TextView
+                    android:id="@+id/Checked"
+                    style="@style/regularText.Basic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_data"/>
+
+                <TextView
+                    android:id="@+id/DateWatchedLabel"
+                    style="@style/basicExtra.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_datewatched_label_short"/>
+
+                <TextView
+                    android:id="@+id/DateWatched"
+                    style="@style/regularText.Basic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_data"/>
+
+            </TableRow>
+
+        </TableLayout>
+
         <TextView
             android:id="@+id/FormattedTitle"
             style="@android:style/TextAppearance.DeviceDefault.Large"
-            android:layout_width="match_parent"
+            fontPath="fonts/RobotoCondensed-Bold.ttf"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/titleBoxTable"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing"
-            android:text="@string/ph_formatted_title"/>
+            android:background="@color/detail_title_background"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/wrapper_spacing_title"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="@string/ph_text_short"
+            tools:ignore="MissingPrefix"/>
 
-        <RelativeLayout
-            android:id="@+id/basicBoxWrapper"
+        <TableLayout
+            android:id="@+id/basicBoxTable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleBoxTable"
+            android:paddingBottom="@dimen/wrapper_spacing_block">
+
+            <TableRow
+                android:id="@+id/basicBoxTableRow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_basic_bg1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/Year"
+                        style="@style/basicValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/ph_text_data"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_basic_bg2"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/Length"
+                        style="@style/basicValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/ph_text_data"/>
+
+                    <TextView
+                        android:id="@+id/LengthSuffix"
+                        style="@style/basicExtra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/display_minutes_suffix"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_basic_bg3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/Rating"
+                        style="@style/basicValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/ph_text_data"/>
+
+                    <TextView
+                        android:id="@+id/RatingSuffix"
+                        style="@style/basicExtra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rating_suffix"/>
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/Category"
+            style="@style/regularText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/FormattedTitle"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing">
-
-            <ImageView
-                android:id="@+id/Picture"
-                android:layout_width="@android:dimen/thumbnail_width"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/details_picture_description"
-                android:paddingRight="16dip"
-                android:scaleType="fitStart"
-                android:src="@drawable/movie_thumb_stub"/>
-
-            <TextView
-                android:id="@+id/Category"
-                style="@style/basicText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/Picture"
-                android:layout_toRightOf="@+id/Picture"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/Length"
-                style="@style/basicText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Category"
-                android:layout_toEndOf="@+id/Picture"
-                android:layout_toRightOf="@+id/Picture"
-                android:text="@string/ph_text_line"
-                />
-        </RelativeLayout>
+            android:layout_below="@id/basicBoxTable"
+            android:text="@string/ph_text_line"/>
 
         <TextView
             android:id="@+id/DescriptionLabel"
             style="@style/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/basicBoxWrapper"
+            android:layout_below="@id/Category"
             android:text="@string/details_description_label"/>
 
         <com.ms.square.android.expandabletextview.ExpandableTextView
@@ -81,13 +228,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/DescriptionLabel"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing"
+            android:paddingBottom="@dimen/wrapper_spacing_block"
             expandableTextView:animDuration="300"
             expandableTextView:maxCollapsedLines="6">
 
             <TextView
                 android:id="@id/expandable_text"
-                style="@style/basicText"
+                style="@style/regularText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ph_text_long"
@@ -113,11 +260,11 @@
 
         <TextView
             android:id="@+id/FilePath"
-            style="@style/basicText"
+            style="@style/regularText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/FilePathLabel"
-            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            android:layout_marginBottom="@dimen/wrapper_spacing_block"
             android:text="@string/ph_text_short"/>
 
         <TextView
@@ -130,11 +277,11 @@
 
         <TextView
             android:id="@+id/Director"
-            style="@style/basicText"
+            style="@style/regularText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/DirectorLabel"
-            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            android:layout_marginBottom="@dimen/wrapper_spacing_block"
             android:text="@string/ph_text_line"/>
 
         <TextView
@@ -147,11 +294,11 @@
 
         <TextView
             android:id="@+id/Actors"
-            style="@style/basicText"
+            style="@style/regularText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ActorsLabel"
-            android:layout_marginBottom="@dimen/wrapper_bottom_spacing"
+            android:layout_marginBottom="@dimen/wrapper_spacing_block"
             android:text="@string/ph_text_long"/>
 
         <TextView
@@ -170,13 +317,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/CommentsLabel"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/wrapper_bottom_spacing"
+            android:paddingBottom="@dimen/wrapper_spacing_block"
             expandableTextView:animDuration="300"
             expandableTextView:maxCollapsedLines="6">
 
             <TextView
                 android:id="@id/expandable_text"
-                style="@style/basicText"
+                style="@style/regularText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ph_text_long"/>
