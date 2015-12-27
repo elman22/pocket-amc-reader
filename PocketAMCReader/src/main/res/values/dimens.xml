@@ -4,4 +4,9 @@
     <dimen name="activity_vertical_margin">16dip</dimen>
     <!-- Elements spacing -->
     <dimen name="wrapper_bottom_spacing">16dip</dimen>
+    <!-- List view -->
+    <dimen name="list_outer_height">70dip</dimen>
+    <dimen name="list_item_height">64dip</dimen>
+    <dimen name="list_margin_horizontal">6dip</dimen>
+    <dimen name="list_margin_vertical">3dip</dimen>
 </resources>

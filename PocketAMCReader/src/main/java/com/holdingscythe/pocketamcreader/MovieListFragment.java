@@ -171,6 +171,10 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mFilters = new Filters(getActivity());
         mMoviesDataProvider.setFilters(mFilters);
 
+        // Remove divider
+        getListView().setDivider(null);
+        getListView().setDividerHeight(0);
+
         // Add counter header
         View headerView = getActivity().getLayoutInflater().inflate(R.layout.list_header, null);
         mHeaderListCountView = (TextView) headerView.findViewById(R.id.nowShowing);
