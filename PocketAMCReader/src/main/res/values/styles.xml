@@ -6,13 +6,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="basicValue">
+    <style name="BasicValue">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:layout_marginTop">@dimen/detail_basic_spacing</item>
         <item name="android:layout_marginBottom">@dimen/detail_basic_spacing</item>
     </style>
 
-    <style name="basicExtra">
+    <style name="BasicExtra">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:layout_marginLeft">@dimen/detail_basic_spacing</item>
@@ -20,32 +20,35 @@
         <item name="android:layout_marginBottom">@dimen/detail_basic_spacing</item>
     </style>
 
-    <style name="basicExtra.Label">
+    <style name="BasicExtra.Label">
         <item name="android:layout_marginLeft">0dip</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:layout_marginRight">@dimen/detail_basic_spacing</item>
     </style>
 
-    <style name="label">
+    <style name="Label">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">@dimen/detail_basic_spacing</item>
     </style>
 
-    <style name="regularText">
+    <style name="RegularText">
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 
-    <style name="regularText.Basic">
+    <style name="RegularText.Basic">
         <item name="android:layout_marginLeft">0dip</item>
         <item name="android:layout_marginRight">@dimen/wrapper_spacing_block</item>
         <item name="android:layout_marginTop">@dimen/detail_basic_spacing</item>
         <item name="android:layout_marginBottom">@dimen/detail_basic_spacing</item>
     </style>
 
-    <style name="expandableArrow">
+    <style name="RegularText.Basic.Suffix">
+        <item name="android:layout_marginRight">0dip</item>
+    </style>
+
+    <style name="ExpandableArrow">
         <item name="android:layout_marginLeft">@dimen/detail_arrow_spacing</item>
-        <item name="android:layout_marginRight">@dimen/detail_arrow_spacing</item>
     </style>
 
 </resources>

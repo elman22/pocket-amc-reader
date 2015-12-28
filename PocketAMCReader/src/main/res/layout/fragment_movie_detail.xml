@@ -23,8 +23,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/details_picture_description"
             android:scaleType="centerCrop"
-            android:src="@drawable/movie_thumb_stub"
-            />
+            android:src="@drawable/movie_thumb_stub"/>
 
         <TableLayout
             android:id="@+id/titleBoxTable"
@@ -36,8 +35,7 @@
             android:background="@color/detail_title_background"
             android:paddingBottom="@dimen/wrapper_spacing_title"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            >
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <TableRow
                 android:id="@+id/titleBoxTableRow"
@@ -46,52 +44,66 @@
 
                 <TextView
                     android:id="@+id/Number"
-                    style="@style/regularText.Basic"
+                    style="@style/RegularText.Basic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ph_text_data"/>
+                    android:text="@string/ph_number_long"/>
 
                 <TextView
                     android:id="@+id/CertificationLabel"
-                    style="@style/basicExtra.Label"
+                    style="@style/BasicExtra.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/details_certification_label"/>
+                    android:text="@string/details_certification_label_short"/>
 
                 <TextView
                     android:id="@+id/Certification"
-                    style="@style/regularText.Basic"
+                    style="@style/RegularText.Basic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ph_text_data"/>
 
                 <TextView
                     android:id="@+id/CheckedLabel"
-                    style="@style/basicExtra.Label"
+                    style="@style/BasicExtra.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/details_checked_label"/>
 
                 <TextView
                     android:id="@+id/Checked"
-                    style="@style/regularText.Basic"
+                    style="@style/RegularText.Basic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ph_text_data"/>
+                    android:text="@string/ph_boolean"/>
 
-                <TextView
-                    android:id="@+id/DateWatchedLabel"
-                    style="@style/basicExtra.Label"
+                <LinearLayout
+                    android:id="@+id/UserRatingLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/details_datewatched_label_short"/>
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/DateWatched"
-                    style="@style/regularText.Basic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ph_text_data"/>
+                    <TextView
+                        style="@style/RegularText.Basic.Suffix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/userrating_star"/>
+
+                    <TextView
+                        android:id="@+id/UserRating"
+                        style="@style/RegularText.Basic.Suffix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ph_number"/>
+
+                    <TextView
+                        android:id="@+id/UserRatingSuffix"
+                        style="@style/BasicExtra.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rating_suffix"/>
+
+                </LinearLayout>
 
             </TableRow>
 
@@ -139,12 +151,12 @@
 
                     <TextView
                         android:id="@+id/Year"
-                        style="@style/basicValue"
-                        android:layout_width="match_parent"
+                        style="@style/BasicValue"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/ph_text_data"/>
+                        android:text="@string/ph_number_long"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,16 +169,16 @@
 
                     <TextView
                         android:id="@+id/Length"
-                        style="@style/basicValue"
+                        style="@style/BasicValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/ph_text_data"/>
+                        android:text="@string/ph_number_long"/>
 
                     <TextView
                         android:id="@+id/LengthSuffix"
-                        style="@style/basicExtra"
+                        style="@style/BasicExtra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -179,20 +191,30 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/color_basic_bg3"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <TextView
-                        android:id="@+id/Rating"
-                        style="@style/basicValue"
+                        android:id="@+id/RatingLabel"
+                        style="@style/BasicValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/ph_text_data"/>
+                        android:text="@string/rating_star"/>
+
+                    <TextView
+                        android:id="@+id/Rating"
+                        style="@style/BasicValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="right"
+                        android:text="@string/ph_number"/>
 
                     <TextView
                         android:id="@+id/RatingSuffix"
-                        style="@style/basicExtra"
+                        style="@style/BasicExtra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -204,139 +226,214 @@
 
         </TableLayout>
 
-        <TextView
-            android:id="@+id/Category"
-            style="@style/regularText"
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/basicBoxTable"
-            android:text="@string/ph_text_line"/>
-
-        <TextView
-            android:id="@+id/DescriptionLabel"
-            style="@style/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Category"
-            android:text="@string/details_description_label"/>
-
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            android:id="@+id/Description"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/DescriptionLabel"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/wrapper_spacing_block"
-            expandableTextView:animDuration="300"
-            expandableTextView:maxCollapsedLines="6">
+            android:layout_below="@+id/basicBoxTable"
+            android:columnCount="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:id="@id/expandable_text"
-                style="@style/regularText"
+                android:id="@+id/Category"
+                style="@style/RegularText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView
+                android:id="@+id/Description"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ph_text_long"
-                android:textIsSelectable="false"/>
+                android:clipChildren="false"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wrapper_spacing_block"
+                expandableTextView:animDuration="300"
+                expandableTextView:maxCollapsedLines="5">
 
-            <ImageButton
-                android:id="@id/expand_collapse"
-                style="@style/expandableArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/details_expandable_arrow_description"/>
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
+                <TextView
+                    android:id="@id/expandable_text"
+                    style="@style/RegularText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_long"/>
 
-        <TextView
-            android:id="@+id/FilePathLabel"
-            style="@style/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Description"
-            android:text="@string/details_filepath_label"/>
-
-        <TextView
-            android:id="@+id/FilePath"
-            style="@style/regularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/FilePathLabel"
-            android:layout_marginBottom="@dimen/wrapper_spacing_block"
-            android:text="@string/ph_text_short"/>
-
-        <TextView
-            android:id="@+id/DirectorLabel"
-            style="@style/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/FilePath"
-            android:text="@string/details_director_label"/>
-
-        <TextView
-            android:id="@+id/Director"
-            style="@style/regularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/DirectorLabel"
-            android:layout_marginBottom="@dimen/wrapper_spacing_block"
-            android:text="@string/ph_text_line"/>
-
-        <TextView
-            android:id="@+id/ActorsLabel"
-            style="@style/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Director"
-            android:text="@string/details_actors_label"/>
-
-        <TextView
-            android:id="@+id/Actors"
-            style="@style/regularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ActorsLabel"
-            android:layout_marginBottom="@dimen/wrapper_spacing_block"
-            android:text="@string/ph_text_long"/>
-
-        <TextView
-            android:id="@+id/CommentsLabel"
-            style="@style/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Actors"
-            android:text="@string/details_comments_label"/>
-
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            android:id="@+id/Comments"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/CommentsLabel"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/wrapper_spacing_block"
-            expandableTextView:animDuration="300"
-            expandableTextView:maxCollapsedLines="6">
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    style="@style/ExpandableArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginTop="@dimen/arrow_pull"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/details_expandable_arrow_description"/>
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
 
             <TextView
-                android:id="@id/expandable_text"
-                style="@style/regularText"
+                android:id="@+id/DirectorLabel"
+                style="@style/Label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/details_director_label"/>
+
+            <TextView
+                android:id="@+id/Director"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/ActorsLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_actors_label"/>
+
+            <TextView
+                android:id="@+id/Actors"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
                 android:text="@string/ph_text_long"/>
 
-            <ImageButton
-                android:id="@id/expand_collapse"
-                style="@style/expandableArrow"
+            <TextView
+                android:id="@+id/ProducerLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_producer_label"/>
+
+            <TextView
+                android:id="@+id/Producer"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/WriterLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_writer_label"/>
+
+            <TextView
+                android:id="@+id/Writer"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/ComposerLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_composer_label"/>
+
+            <TextView
+                android:id="@+id/Composer"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/CountryLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_country_label"/>
+
+            <TextView
+                android:id="@+id/Country"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_line"/>
+
+            <TextView
+                android:id="@+id/CommentsLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_comments_label"/>
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView
+                android:id="@+id/Comments"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wrapper_spacing_block"
+                expandableTextView:animDuration="300"
+                expandableTextView:maxCollapsedLines="5">
+
+                <TextView
+                    android:id="@id/expandable_text"
+                    style="@style/RegularText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_text_long"/>
+
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    style="@style/ExpandableArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginTop="@dimen/arrow_pull"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/details_expandable_arrow_description"/>
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+            <TextView
+                android:id="@+id/DateWatchedLabel"
+                style="@style/BasicExtra.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/details_expandable_arrow_description"/>
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
+                android:layout_below="@id/basicBoxTable"
+                android:text="@string/details_datewatched_label_short"/>
+
+            <TextView
+                android:id="@+id/DateWatched"
+                style="@style/RegularText.Basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/DateWatchedLabel"
+                android:text="@string/ph_text_data"/>
+
+            <TextView
+                android:id="@+id/FilePathLabel"
+                style="@style/Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Description"
+                android:text="@string/details_filepath_label"/>
+
+            <TextView
+                android:id="@+id/FilePath"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/FilePathLabel"
+                android:layout_marginBottom="@dimen/wrapper_spacing_block"
+                android:text="@string/ph_text_short"/>
+
+        </GridLayout>
 
     </RelativeLayout>
 </ScrollView>

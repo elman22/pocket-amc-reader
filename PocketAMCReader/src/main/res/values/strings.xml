@@ -114,7 +114,7 @@
     <string name="filter_type_contains">contains</string>
     <string name="filter_value_enclosing">\'</string>
     <string name="details_rating_label">Rating</string>
-    <string name="rating_none">-</string>
+    <string name="rating_none">&#x002d;</string>
     <string name="filter_value_null">null</string>
     <string name="filter_value_null_operator">is</string>
     <string name="details_videoformat_label">Video format</string>
@@ -267,4 +267,8 @@
     <string name="details_picture_description">Movie poster</string>
     <string name="details_expandable_arrow_description">&lt;&gt;</string>
     <string name="details_datewatched_label_short">On</string>
+    <string name="details_certification_label_short">Cert.</string>
+    <string name="year_none">\?</string>
+    <string name="length_none">\?</string>
+
 </resources>

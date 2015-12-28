@@ -134,23 +134,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.Actors:
-                chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, Movies.FILTER_OPERATOR_CONTAINS, view);
-                break;
-            case R.id.Category:
-                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, Movies.FILTER_OPERATOR_CONTAINS, view);
-                break;
-            case R.id.Director:
-                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_CONTAINS, view);
-                break;
-            case R.id.Checked:
-                filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
-                break;
-            case R.id.Certification:
-                filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-                break;
             case R.id.Picture:
                 try {
                     // prepare pictures array
@@ -162,6 +145,79 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     e.printStackTrace();
                 }
                 break;
+
+            case R.id.Certification:
+                filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Checked:
+                filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
+                break;
+            case R.id.UserRating:
+                filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+
+            case R.id.Year:
+                filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Length:
+                filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Rating:
+                filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+
+            case R.id.Category:
+                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Director:
+                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Actors:
+                chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Producer:
+                chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Writer:
+                chooseMultivaluedFieldValue(Movies.FILTER_WRITER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Composer:
+                chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Country:
+                chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+
+
+//        public static final String MEDIA_LABEL = "MediaLabel";
+//        public static final String MEDIA_TYPE = "MediaType";
+//        public static final String SOURCE = "Source";
+//        public static final String DATE = "Date";
+//            fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
+//        public static final String BORROWER = "Borrower";
+//        public static final String ORIGINAL_TITLE = "OriginalTitle";
+//        public static final String TRANSLATED_TITLE = "TranslatedTitle";
+//        public static final String URL = "URL";
+
+//            fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
+//        public static final String VIDEO_FORMAT = "VideoFormat";
+//        public static final String VIDEO_BITRATE = "VideoBitrate";
+//        public static final String AUDIO_FORMAT = "AudioFormat";
+//        public static final String AUDIO_BITRATE = "AudioBitrate";
+//        public static final String RESOLUTION = "Resolution";
+//        public static final String FRAMERATE = "Framerate";
+//        public static final String LANGUAGES = "Languages";
+//        public static final String SUBTITLES = "Subtitles";
+//        public static final String SIZE = "Size";
+//        public static final String DISKS = "Disks";
+
+//        public static final String COLOR_TAG = "ColorTag";
         }
     }
 

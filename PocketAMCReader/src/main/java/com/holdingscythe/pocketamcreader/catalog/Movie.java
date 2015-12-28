@@ -80,27 +80,41 @@ public class Movie {
 //        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
 //        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);
 
-        fillStringIntoView(Movies.NUMBER, STRING_REGULAR, STRING_EXT_PREFIX, R.string.number_prefix);
-        fillStringIntoView(Movies.CHECKED, BOOLEAN_CLICKABLE);
+        // Display data
+        fillPictureIntoView(Movies.PICTURE);
+
         fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR);
+        fillStringIntoView(Movies.NUMBER, STRING_REGULAR, STRING_EXT_PREFIX, R.string.number_prefix);
+        fillStringIntoView(Movies.CERTIFICATION, STRING_CLICKABLE);
+        fillStringIntoView(Movies.CHECKED, BOOLEAN_CLICKABLE);
+        fillStringIntoView(Movies.USER_RATING, STRING_CLICKABLE);
+
+        fillStringIntoView(Movies.YEAR, STRING_CLICKABLE, R.string.year_none);
+        fillStringIntoView(Movies.LENGTH, STRING_CLICKABLE, R.string.length_none);
+        fillStringIntoView(Movies.RATING, STRING_CLICKABLE, R.string.rating_none);
+
+        fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE);
+        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE);
+        fillStringIntoView(Movies.DIRECTOR, STRING_CLICKABLE);
+        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE);
+        fillStringIntoView(Movies.PRODUCER, STRING_CLICKABLE);
+        fillStringIntoView(Movies.WRITER, STRING_CLICKABLE);
+        fillStringIntoView(Movies.COMPOSER, STRING_CLICKABLE);
+        fillStringIntoView(Movies.COUNTRY, STRING_CLICKABLE);
+
+        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE);
+
 //        public static final String MEDIA_LABEL = "MediaLabel";
 //        public static final String MEDIA_TYPE = "MediaType";
 //        public static final String SOURCE = "Source";
 //        public static final String DATE = "Date";
+        fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
 //        public static final String BORROWER = "Borrower";
-        fillStringIntoView(Movies.RATING, STRING_REGULAR, STRING_EXT_PREFIX, R.string.rating_star);
 //        public static final String ORIGINAL_TITLE = "OriginalTitle";
 //        public static final String TRANSLATED_TITLE = "TranslatedTitle";
-        fillStringIntoView(Movies.DIRECTOR, STRING_CLICKABLE);
-//        public static final String PRODUCER = "Producer";
-//        public static final String COUNTRY = "Country";
-        fillStringIntoView(Movies.CATEGORY, STRING_CLICKABLE);
-        fillStringIntoView(Movies.LENGTH, STRING_REGULAR);
-        fillStringIntoView(Movies.YEAR, STRING_REGULAR);
-        fillStringIntoView(Movies.ACTORS, STRING_CLICKABLE);
 //        public static final String URL = "URL";
-        fillStringIntoView(Movies.DESCRIPTION, STRING_EXPANDABLE);
-        fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE);
+
+        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
 //        public static final String VIDEO_FORMAT = "VideoFormat";
 //        public static final String VIDEO_BITRATE = "VideoBitrate";
 //        public static final String AUDIO_FORMAT = "AudioFormat";
@@ -111,14 +125,8 @@ public class Movie {
 //        public static final String SUBTITLES = "Subtitles";
 //        public static final String SIZE = "Size";
 //        public static final String DISKS = "Disks";
-        fillPictureIntoView(Movies.PICTURE);
+
 //        public static final String COLOR_TAG = "ColorTag";
-        fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
-//        public static final String USER_RATING = "UserRating";
-//        public static final String WRITER = "Writer";
-//        public static final String COMPOSER = "Composer";
-        fillStringIntoView(Movies.CERTIFICATION, STRING_CLICKABLE);
-        fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
 //
 //        // Fields mappings extras
 //        public static final String MOVIES_ID = "Movies_id";
@@ -147,100 +155,120 @@ public class Movie {
 //            }
 //        }
 
-
-        ////        String catalogPicture = mCursor.getString(mCursor.getColumnIndex(Movies.PICTURE));
-////        ImageView mPictureThumb = (ImageView) this.vt.findCachedViewById(R.id.detail_Picture_thumb);
-////        ImageView mPictureTeaser = (ImageView) rootView.f findViewById()
-
-
     }
 
     /**
      * Fill string from database into view. String can be clickable visibly or invisibly.
+     * Params: column name, data type
      */
-    private void fillStringIntoView(String columnName, int dateType) {
-        fillStringIntoView(columnName, dateType, STRING_EXT_NONE, 0);
+    private void fillStringIntoView(String columnName, int dataType) {
+        fillStringIntoView(columnName, dataType, STRING_EXT_NONE, 0, 0);
     }
 
     /**
      * Fill string from database into view. String can be clickable visibly or invisibly.
+     * Params: column name, data type, default value id
      */
-    private void fillStringIntoView(String columnName, int dateType, int valueExtensionType, int valueExtensionId) {
+    private void fillStringIntoView(String columnName, int dataType, int defaultValueId) {
+        fillStringIntoView(columnName, dataType, STRING_EXT_NONE, 0, defaultValueId);
+    }
+
+    /**
+     * Fill string from database into view. String can be clickable visibly or invisibly.
+     * Params: column name, data type, extension type, extension value id
+     */
+    private void fillStringIntoView(String columnName, int dataType, int valueExtensionType, int valueExtensionId) {
+        fillStringIntoView(columnName, dataType, valueExtensionType, valueExtensionId, 0);
+    }
+
+    /**
+     * Fill string from database into view. String can be clickable visibly or invisibly.
+     * Params: column name, data type, extension type, extension value id,  default value id
+     */
+    private void fillStringIntoView(String columnName, int dataType, int valueExtensionType, int valueExtensionId,
+                                    int defaultValueId) {
         String value = mCursor.getString(mCursor.getColumnIndex(columnName));
 
+        // If field has no value, either hide it or present default value
         if (value == null || value.equals("")) {
-            hideEmptyView(columnName);
-        } else {
-            // Process string extension
-            switch (valueExtensionType) {
-                case STRING_EXT_NONE:
-                    break;
-                case STRING_EXT_PREFIX:
-                    value = mActivity.getString(valueExtensionId) + value;
-                    break;
-                case STRING_EXT_SUFFIX:
-                    value += mActivity.getString(valueExtensionId);
-                    break;
-                case STRING_EXT_PREFIX_PADDED:
-                    value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
-                            .string_extension_separator) + value;
-                    break;
-                case STRING_EXT_SUFFIX_PADDED:
-                    value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
-                            (valueExtensionId);
-                    break;
+            if (defaultValueId == 0) {
+                hideEmptyView(columnName);
+                return;
+            } else {
+                value = mActivity.getString(defaultValueId);
+                dataType = STRING_REGULAR;
             }
+        }
 
-            // Fill strings into views
-            switch (dateType) {
-                case STRING_REGULAR:
-                    /** Fill regular string from database into view. */
-                    TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                            mContext.getPackageName()));
-                    tv.setText(value);
-                    break;
-                case STRING_EXPANDABLE:
-                    /** Fill expandable string from database into view. */
-                    ExpandableTextView etv = (ExpandableTextView) mView.findViewById(mResources.getIdentifier
-                            (columnName, "id", mContext.getPackageName()));
-                    etv.setText(value);
-                    break;
-                case STRING_CLICKABLE:
-                    /** Fill clickable string from database into view. */
-                    TextView ctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                            mContext.getPackageName()));
-                    ctv.setText(Utils.markClickableText(value));
-                    ctv.setOnClickListener(mClickListener);
-                    break;
-                case BOOLEAN_REGULAR:
-                    TextView btv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                            mContext.getPackageName()));
-                    if (value.equals("True"))
-                        btv.setText(mActivity.getString(R.string.details_boolean_true));
-                    else
-                        btv.setText(mActivity.getString(R.string.details_boolean_false));
-                    break;
-                case BOOLEAN_CLICKABLE:
-                    TextView bctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                            mContext.getPackageName()));
-                    if (value.equals("True"))
-                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
-                    else
-                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
-                    bctv.setOnClickListener(mClickListener);
-                    break;
-                case DATE_REGULAR:
-                    TextView dtv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                            mContext.getPackageName()));
-                    try {
-                        Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
-                        value = SharedObjects.getInstance().dateFormat.format(parsedDate);
-                    } catch (Exception e) {
-                        // don't do anything, keep date as is
-                    }
-                    dtv.setText(value);
-                    break;
-            }
+        // Process string extension
+        switch (valueExtensionType) {
+            case STRING_EXT_NONE:
+                break;
+            case STRING_EXT_PREFIX:
+                value = mActivity.getString(valueExtensionId) + value;
+                break;
+            case STRING_EXT_SUFFIX:
+                value += mActivity.getString(valueExtensionId);
+                break;
+            case STRING_EXT_PREFIX_PADDED:
+                value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
+                        .string_extension_separator) + value;
+                break;
+            case STRING_EXT_SUFFIX_PADDED:
+                value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
+                        (valueExtensionId);
+                break;
+        }
+
+        // Fill strings into views
+        switch (dataType) {
+            case STRING_REGULAR:
+                /** Fill regular string from database into view. */
+                TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                        mContext.getPackageName()));
+                tv.setText(value);
+                break;
+            case STRING_EXPANDABLE:
+                /** Fill expandable string from database into view. */
+                ExpandableTextView etv = (ExpandableTextView) mView.findViewById(mResources.getIdentifier
+                        (columnName, "id", mContext.getPackageName()));
+                etv.setText(value);
+                break;
+            case STRING_CLICKABLE:
+                /** Fill clickable string from database into view. */
+                TextView ctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                        mContext.getPackageName()));
+                ctv.setText(Utils.markClickableText(value));
+                ctv.setOnClickListener(mClickListener);
+                break;
+            case BOOLEAN_REGULAR:
+                TextView btv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                        mContext.getPackageName()));
+                if (value.equals("True"))
+                    btv.setText(mActivity.getString(R.string.details_boolean_true));
+                else
+                    btv.setText(mActivity.getString(R.string.details_boolean_false));
+                break;
+            case BOOLEAN_CLICKABLE:
+                TextView bctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                        mContext.getPackageName()));
+                if (value.equals("True"))
+                    bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
+                else
+                    bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
+                bctv.setOnClickListener(mClickListener);
+                break;
+            case DATE_REGULAR:
+                TextView dtv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                        mContext.getPackageName()));
+                try {
+                    Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
+                    value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                } catch (Exception e) {
+                    // don't do anything, keep date as is
+                }
+                dtv.setText(value);
+                break;
         }
     }
 

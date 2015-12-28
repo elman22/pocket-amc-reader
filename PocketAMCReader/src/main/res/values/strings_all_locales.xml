@@ -20,6 +20,7 @@
 	
 	<string name="copyright_year">2016</string>
     <string name="rating_star">&#x2605;</string>
+    <string name="userrating_star">&#x2606;</string>
 	<string name="rating_suffix">/10</string>
 	<string name="rating_suffix_list">*/10</string>
 	<string name="list_seen_true">&#x2713;</string>
@@ -39,5 +40,8 @@
     <string name="ph_text_short">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
 	<string name="ph_text_line">Consectetur elit</string>
 	<string name="ph_text_data">Lorem</string>
+	<string name="ph_number">#</string>
+	<string name="ph_number_long">####</string>
+    <string name="ph_boolean">\?\?\?</string>
 
 </resources>
