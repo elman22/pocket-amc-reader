@@ -28,8 +28,19 @@
 
     <style name="Label">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">@dimen/detail_basic_spacing</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Label.Table">
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">top</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
     </style>
 
     <style name="RegularText">
@@ -45,6 +56,18 @@
 
     <style name="RegularText.Basic.Suffix">
         <item name="android:layout_marginRight">0dip</item>
+    </style>
+
+    <style name="SectionTitle">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/color_basic_bg1</item>
+        <item name="android:layout_marginBottom">@dimen/wrapper_spacing_block</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/detail_basic_spacing</item>
+        <item name="android:paddingBottom">@dimen/detail_basic_spacing</item>
     </style>
 
     <style name="ExpandableArrow">

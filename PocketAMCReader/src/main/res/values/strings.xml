@@ -270,5 +270,7 @@
     <string name="details_certification_label_short">Cert.</string>
     <string name="year_none">\?</string>
     <string name="length_none">\?</string>
+    <string name="details_section_media">Media details</string>
+    <string name="details_section_technical">Technical details</string>
 
 </resources>

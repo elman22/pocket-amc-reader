@@ -46,11 +46,13 @@ public class Movie {
     final int DATE_REGULAR = 5;
 
     // String extensions
-    final int STRING_EXT_NONE = 0;
-    final int STRING_EXT_PREFIX = 1;
-    final int STRING_EXT_SUFFIX = 2;
-    final int STRING_EXT_PREFIX_PADDED = 3;
-    final int STRING_EXT_SUFFIX_PADDED = 4;
+    final int EXT_STRING_NONE = 0;
+    final int EXT_STRING_PREFIX = 1;
+    final int EXT_STRING_SUFFIX = 2;
+    final int EXT_STRING_PREFIX_PADDED = 3;
+    final int EXT_STRING_SUFFIX_PADDED = 4;
+    final int EXT_PLURALS_PREFIX_PADDED = 5;
+    final int EXT_PLURALS_SUFFIX_PADDED = 6;
 
     public Movie(Cursor cursor, View view, View.OnClickListener clickListener, Activity activity) {
         mCursor = cursor;
@@ -84,7 +86,7 @@ public class Movie {
         fillPictureIntoView(Movies.PICTURE);
 
         fillStringIntoView(Movies.FORMATTED_TITLE, STRING_REGULAR);
-        fillStringIntoView(Movies.NUMBER, STRING_REGULAR, STRING_EXT_PREFIX, R.string.number_prefix);
+        fillStringIntoView(Movies.NUMBER, STRING_REGULAR, EXT_STRING_PREFIX, R.string.number_prefix);
         fillStringIntoView(Movies.CERTIFICATION, STRING_CLICKABLE);
         fillStringIntoView(Movies.CHECKED, BOOLEAN_CLICKABLE);
         fillStringIntoView(Movies.USER_RATING, STRING_CLICKABLE);
@@ -101,30 +103,31 @@ public class Movie {
         fillStringIntoView(Movies.WRITER, STRING_CLICKABLE);
         fillStringIntoView(Movies.COMPOSER, STRING_CLICKABLE);
         fillStringIntoView(Movies.COUNTRY, STRING_CLICKABLE);
-
         fillStringIntoView(Movies.COMMENTS, STRING_EXPANDABLE);
+        fillStringIntoView(Movies.URL, STRING_REGULAR);
 
-//        public static final String MEDIA_LABEL = "MediaLabel";
-//        public static final String MEDIA_TYPE = "MediaType";
-//        public static final String SOURCE = "Source";
-//        public static final String DATE = "Date";
+        fillStringIntoView(Movies.MEDIA_LABEL, STRING_CLICKABLE);
+        fillStringIntoView(Movies.MEDIA_TYPE, STRING_CLICKABLE);
+        fillStringIntoView(Movies.SOURCE, STRING_CLICKABLE);
+        fillStringIntoView(Movies.DATE, DATE_REGULAR);
         fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
-//        public static final String BORROWER = "Borrower";
-//        public static final String ORIGINAL_TITLE = "OriginalTitle";
-//        public static final String TRANSLATED_TITLE = "TranslatedTitle";
-//        public static final String URL = "URL";
+        fillStringIntoView(Movies.BORROWER, STRING_CLICKABLE);
+        fillStringIntoView(Movies.ORIGINAL_TITLE, STRING_REGULAR);
+        fillStringIntoView(Movies.TRANSLATED_TITLE, STRING_REGULAR);
 
         fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
-//        public static final String VIDEO_FORMAT = "VideoFormat";
-//        public static final String VIDEO_BITRATE = "VideoBitrate";
-//        public static final String AUDIO_FORMAT = "AudioFormat";
-//        public static final String AUDIO_BITRATE = "AudioBitrate";
-//        public static final String RESOLUTION = "Resolution";
-//        public static final String FRAMERATE = "Framerate";
-//        public static final String LANGUAGES = "Languages";
-//        public static final String SUBTITLES = "Subtitles";
-//        public static final String SIZE = "Size";
-//        public static final String DISKS = "Disks";
+        fillStringIntoView(Movies.LANGUAGES, STRING_CLICKABLE);
+        fillStringIntoView(Movies.SUBTITLES, STRING_CLICKABLE);
+        fillStringIntoView(Movies.VIDEO_FORMAT, STRING_CLICKABLE);
+        fillStringIntoView(Movies.VIDEO_BITRATE, STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string
+                .display_bitrate_suffix);
+        fillStringIntoView(Movies.AUDIO_FORMAT, STRING_CLICKABLE);
+        fillStringIntoView(Movies.AUDIO_BITRATE, STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string
+                .display_bitrate_suffix);
+        fillStringIntoView(Movies.RESOLUTION, STRING_CLICKABLE);
+        fillStringIntoView(Movies.FRAMERATE, STRING_CLICKABLE);
+        fillStringIntoView(Movies.SIZE, STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string.display_filessizes_suffix);
+        fillStringIntoView(Movies.DISKS, STRING_REGULAR, EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
 
 //        public static final String COLOR_TAG = "ColorTag";
 //
@@ -162,7 +165,7 @@ public class Movie {
      * Params: column name, data type
      */
     private void fillStringIntoView(String columnName, int dataType) {
-        fillStringIntoView(columnName, dataType, STRING_EXT_NONE, 0, 0);
+        fillStringIntoView(columnName, dataType, EXT_STRING_NONE, 0, 0);
     }
 
     /**
@@ -170,7 +173,7 @@ public class Movie {
      * Params: column name, data type, default value id
      */
     private void fillStringIntoView(String columnName, int dataType, int defaultValueId) {
-        fillStringIntoView(columnName, dataType, STRING_EXT_NONE, 0, defaultValueId);
+        fillStringIntoView(columnName, dataType, EXT_STRING_NONE, 0, defaultValueId);
     }
 
     /**
@@ -202,21 +205,29 @@ public class Movie {
 
         // Process string extension
         switch (valueExtensionType) {
-            case STRING_EXT_NONE:
+            case EXT_STRING_NONE:
                 break;
-            case STRING_EXT_PREFIX:
+            case EXT_STRING_PREFIX:
                 value = mActivity.getString(valueExtensionId) + value;
                 break;
-            case STRING_EXT_SUFFIX:
+            case EXT_STRING_SUFFIX:
                 value += mActivity.getString(valueExtensionId);
                 break;
-            case STRING_EXT_PREFIX_PADDED:
+            case EXT_STRING_PREFIX_PADDED:
                 value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
                         .string_extension_separator) + value;
                 break;
-            case STRING_EXT_SUFFIX_PADDED:
+            case EXT_STRING_SUFFIX_PADDED:
                 value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
                         (valueExtensionId);
+                break;
+            case EXT_PLURALS_PREFIX_PADDED:
+                value = mActivity.getResources().getQuantityString(valueExtensionId, Integer.valueOf(value)) +
+                        mActivity.getString(R.string.string_extension_separator) + value;
+                break;
+            case EXT_PLURALS_SUFFIX_PADDED:
+                value += mActivity.getString(R.string.string_extension_separator) + mActivity.getResources()
+                        .getQuantityString(valueExtensionId, Integer.valueOf(value));
                 break;
         }
 

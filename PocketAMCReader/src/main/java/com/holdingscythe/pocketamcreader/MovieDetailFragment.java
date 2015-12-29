@@ -194,30 +194,45 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, Movies.FILTER_OPERATOR_CONTAINS, view);
                 break;
 
+            case R.id.MediaLabel:
+                filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.MediaType:
+                filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Source:
+                filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Borrower:
+                filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
 
-//        public static final String MEDIA_LABEL = "MediaLabel";
-//        public static final String MEDIA_TYPE = "MediaType";
-//        public static final String SOURCE = "Source";
-//        public static final String DATE = "Date";
-//            fillStringIntoView(Movies.DATE_WATCHED, DATE_REGULAR);
-//        public static final String BORROWER = "Borrower";
-//        public static final String ORIGINAL_TITLE = "OriginalTitle";
-//        public static final String TRANSLATED_TITLE = "TranslatedTitle";
-//        public static final String URL = "URL";
-
-//            fillStringIntoView(Movies.FILE_PATH, STRING_REGULAR);
-//        public static final String VIDEO_FORMAT = "VideoFormat";
-//        public static final String VIDEO_BITRATE = "VideoBitrate";
-//        public static final String AUDIO_FORMAT = "AudioFormat";
-//        public static final String AUDIO_BITRATE = "AudioBitrate";
-//        public static final String RESOLUTION = "Resolution";
-//        public static final String FRAMERATE = "Framerate";
-//        public static final String LANGUAGES = "Languages";
-//        public static final String SUBTITLES = "Subtitles";
-//        public static final String SIZE = "Size";
-//        public static final String DISKS = "Disks";
-
-//        public static final String COLOR_TAG = "ColorTag";
+            case R.id.Languages:
+                chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.Subtitles:
+                chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, Movies.FILTER_OPERATOR_CONTAINS, view);
+                break;
+            case R.id.VideoFormat:
+                filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.AudioFormat:
+                filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Resolution:
+                filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
+            case R.id.Framerate:
+                filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
+                        ((TextView) view).getText().toString()));
+                break;
         }
     }
 
