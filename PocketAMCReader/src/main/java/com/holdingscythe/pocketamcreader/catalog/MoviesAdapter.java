@@ -64,7 +64,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         TextView FormattedTitle_text = (TextView) v.findViewById(R.id.movieTitle);
         TextView movieShortDescription_text = (TextView) v.findViewById(R.id.movieShortDescription);
         TextView movieShortDescription2_text = (TextView) v.findViewById(R.id.movieShortDescription2);
-        TextView movieColorTag = (TextView) v.findViewById(R.id.movieColorTag);
+        TextView movieColorTag = (TextView) v.findViewById(R.id.ListColorTag);
         ImageView moviePictureView = (ImageView) v.findViewById(R.id.imageCover);
         if (!mShowThumbs) {
             moviePictureView.setVisibility(View.GONE);
@@ -166,46 +166,52 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         int background;
         switch (Integer.valueOf(currentColor)) {
             case 1:
-                background = R.drawable.color_tag_1;
+                background = R.color.color_tag_1;
                 break;
             case 2:
-                background = R.drawable.color_tag_2;
+                background = R.color.color_tag_2;
                 break;
             case 3:
-                background = R.drawable.color_tag_3;
+                background = R.color.color_tag_3;
                 break;
             case 4:
-                background = R.drawable.color_tag_4;
+                background = R.color.color_tag_4;
                 break;
             case 5:
-                background = R.drawable.color_tag_5;
+                background = R.color.color_tag_5;
                 break;
             case 6:
-                background = R.drawable.color_tag_6;
+                background = R.color.color_tag_6;
                 break;
             case 7:
-                background = R.drawable.color_tag_7;
+                background = R.color.color_tag_7;
                 break;
             case 8:
-                background = R.drawable.color_tag_8;
+                background = R.color.color_tag_8;
                 break;
             case 9:
-                background = R.drawable.color_tag_9;
+                background = R.color.color_tag_9;
                 break;
             case 10:
-                background = R.drawable.color_tag_10;
+                background = R.color.color_tag_10;
                 break;
             case 11:
-                background = R.drawable.color_tag_11;
+                background = R.color.color_tag_11;
                 break;
             case 12:
-                background = R.drawable.color_tag_12;
+                background = R.color.color_tag_12;
                 break;
             default:
-                background = R.drawable.color_tag_0;
+                background = R.color.color_tag_0;
         }
 
-        holder.movieColorTag.setBackgroundResource(background);
+        // If no color is assigned, hide view
+        if (Integer.valueOf(currentColor) == 0) {
+            holder.movieColorTag.setVisibility(View.GONE);
+        } else {
+            holder.movieColorTag.setVisibility(View.VISIBLE);
+            holder.movieColorTag.setBackgroundResource(background);
+        }
         //</editor-fold>
     }
 

@@ -51,19 +51,11 @@ public final class S {
 //    public final static int THEME_X_LARGE = 2;
 //    public final static int THEME_XX_LARGE = 3;
 
-//    public final static int SWIPE_NO = 0;
-//    public final static int SWIPE_FROM_RIGHT = 1;
-//    public final static int SWIPE_FROM_LEFT = 2;
-
-//    public final static int VALUE_NO_CLICK = 0;
-//    public final static int VALUE_HIDDEN_CLICK = 1;
-//    public final static int VALUE_VISIBLE_CLICK = 2;
-
     // SettingsActivity requesting restart
     public static final Map<String, Integer> SETTINGS_REQUESTING_RESTART;
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<String, Integer>();
+        Map<String, Integer> tmpMap = new HashMap<>();
         tmpMap.put("settingCatalogLocation", 1);
         tmpMap.put("settingCatalogEncoding", 1);
 //        tmpMap.put("settingForceImport", 1);
@@ -77,7 +69,7 @@ public final class S {
     public static final Map<String, Integer> SETTINGS_REQUESTING_REFRESH;
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<String, Integer>();
+        Map<String, Integer> tmpMap = new HashMap<>();
 //        tmpMap.put("settingMoviesListLine1", 1);
 //        tmpMap.put("settingMoviesListLine2", 1);
 //        tmpMap.put("settingMoviesListLine3", 1);
@@ -88,25 +80,24 @@ public final class S {
     }
 
     // Color tags
-//    public static final Map<String, Integer> COLOR_TAGS;
-    // TODO: update colors to darker ones
+    public static final Map<String, Integer> COLOR_TAGS;
 
-//    static {
-//        Map<String, Integer> tmpMap = new HashMap<String, Integer>();
-//        tmpMap.put("0", android.R.color.primary_text_light);
-//        tmpMap.put("1", R.color.color_tag_1);
-//        tmpMap.put("2", R.color.color_tag_2);
-//        tmpMap.put("3", R.color.color_tag_3);
-//        tmpMap.put("4", R.color.color_tag_4);
-//        tmpMap.put("5", R.color.color_tag_5);
-//        tmpMap.put("6", R.color.color_tag_6);
-//        tmpMap.put("7", R.color.color_tag_7);
-//        tmpMap.put("8", R.color.color_tag_8);
-//        tmpMap.put("9", R.color.color_tag_9);
-//        tmpMap.put("10", R.color.color_tag_10);
-//        tmpMap.put("11", R.color.color_tag_11);
-//        tmpMap.put("12", R.color.color_tag_12);
-//        COLOR_TAGS = Collections.unmodifiableMap(tmpMap);
-//    }
+    static {
+        Map<String, Integer> tmpMap = new HashMap<>();
+        tmpMap.put("0", android.R.color.transparent);
+        tmpMap.put("1", R.color.color_tag_1);
+        tmpMap.put("2", R.color.color_tag_2);
+        tmpMap.put("3", R.color.color_tag_3);
+        tmpMap.put("4", R.color.color_tag_4);
+        tmpMap.put("5", R.color.color_tag_5);
+        tmpMap.put("6", R.color.color_tag_6);
+        tmpMap.put("7", R.color.color_tag_7);
+        tmpMap.put("8", R.color.color_tag_8);
+        tmpMap.put("9", R.color.color_tag_9);
+        tmpMap.put("10", R.color.color_tag_10);
+        tmpMap.put("11", R.color.color_tag_11);
+        tmpMap.put("12", R.color.color_tag_12);
+        COLOR_TAGS = Collections.unmodifiableMap(tmpMap);
+    }
 
 }

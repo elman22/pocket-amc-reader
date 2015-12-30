@@ -128,6 +128,14 @@
             android:text="@string/ph_text_short"
             tools:ignore="MissingPrefix"/>
 
+        <TextView
+            android:id="@+id/ColorTag"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/colortag_height"
+            android:layout_above="@id/FormattedTitle"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"/>
+
         <TableLayout
             android:id="@+id/basicBoxTable"
             android:layout_width="fill_parent"

@@ -15,6 +15,8 @@
     <dimen name="detail_basic_height">48dip</dimen>
     <dimen name="detail_basic_spacing">3dip</dimen>
     <dimen name="detail_arrow_spacing">4dip</dimen>
+    <!-- ColorTag -->
+    <dimen name="colortag_height">2dip</dimen>
     <!-- Expandable text view -->
     <dimen name="arrow_pull">-16dip</dimen>
 </resources>

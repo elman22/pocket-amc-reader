@@ -129,8 +129,8 @@ public class Movie {
         fillStringIntoView(Movies.SIZE, STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string.display_filessizes_suffix);
         fillStringIntoView(Movies.DISKS, STRING_REGULAR, EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
 
-//        public static final String COLOR_TAG = "ColorTag";
-//
+        fillColorIntoView(Movies.COLOR_TAG);
+
 //        // Fields mappings extras
 //        public static final String MOVIES_ID = "Movies_id";
 //        public static final String E_CHECKED = "EChecked";
@@ -142,21 +142,6 @@ public class Movie {
 //        public static final String E_COMMENTS = "EComments";
 //        public static final String E_CREATED_BY = "ECreatedBy";
 //        public static final String E_PICTURE = "EPicture";
-
-//        /** Fill views: Basic */
-//        // Title + Repaint according to color tag
-//        TextView mFormattedTitle = fillStringValueIntoView(new int[] { R.id.detail_FormattedTitle },
-//                R.id.detail_FormattedTitle, Movies.FormattedTitle, Movies.VALUE_NO_CLICK);
-//        if (this.settingShowColorTags && mFormattedTitle != null) {
-//            String currentColor = c.getString(c.getColumnIndex(Movies.ColorTag));
-//            if (currentColor != null && Movies.ColorTags.containsKey(currentColor)) {
-//                if (Movies.LOG_ENABLED)
-//                    Log.d(Movies.TAG, "Setting color to: " + currentColor);
-//                mFormattedTitle.setTextColor(getBaseContext().getResources().getColor(Movies.ColorTags.get(currentColor)));
-//            } else {
-//                mFormattedTitle.setTextColor(getBaseContext().getResources().getColor(Movies.ColorTags.get("0")));
-//            }
-//        }
 
     }
 
@@ -312,6 +297,22 @@ public class Movie {
             }
         } else {
             // TODO: Set view.GONE
+        }
+    }
+
+    /**
+     * Fill view with selected color.
+     */
+    private void fillColorIntoView(String columnName) {
+        TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
+                mContext.getPackageName()));
+        String currentColor = mCursor.getString(mCursor.getColumnIndex(columnName));
+        if (currentColor != null && S.COLOR_TAGS.containsKey(currentColor)) {
+            if (S.DEBUG)
+                Log.d(S.TAG, "Setting color to: " + currentColor);
+            tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get(currentColor)));
+        } else {
+            tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get("0")));
         }
     }
 
