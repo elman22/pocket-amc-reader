@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -143,14 +144,22 @@ public class MoviesAdapter extends SimpleCursorAdapter {
 
         // Display image with Image Loader
         if (mShowThumbs) {
-            // Make full path
+            // Make full path or keep null if picture is not present
             String movieCatalogPicture = c.getString(c.getColumnIndex(Movies.PICTURE));
-            if (movieCatalogPicture != null && !movieCatalogPicture.equals("")) {
-                movieCatalogPicture = "file://" + mPicturesFolder + movieCatalogPicture;
-            }
 
-            if (S.VERBOSE)
-                Log.v(S.TAG, "Requesting picture: " + movieCatalogPicture);
+            if (movieCatalogPicture != null && !movieCatalogPicture.equals("")) {
+                if (new File(mPicturesFolder + movieCatalogPicture).isFile()) {
+                    movieCatalogPicture = "file://" + mPicturesFolder + movieCatalogPicture;
+
+                    if (S.VERBOSE)
+                        Log.v(S.TAG, "Requesting picture: " + movieCatalogPicture);
+                } else {
+                    if (S.VERBOSE)
+                        Log.v(S.TAG, "Missing picture: " + mPicturesFolder + movieCatalogPicture);
+
+                    movieCatalogPicture = null;
+                }
+            }
 
             mImageLoader.displayImage(movieCatalogPicture, holder.moviePictureView, mImageOptions);
         }
