@@ -33,8 +33,6 @@ public class Movie {
     private Activity mActivity;
     private Resources mResources;
     private Context mContext;
-
-    private SharedPreferences mPreferences;
     private String mPreferencePicturesDirectory;
 
     // Logical data types
@@ -72,7 +70,7 @@ public class Movie {
         }
 
         // Read preferences
-        mPreferences = SharedObjects.getInstance().preferences;
+        SharedPreferences mPreferences = SharedObjects.getInstance().preferences;
         mPreferencePicturesDirectory = mPreferences.getString("settingPicturesFolder", "/");
 //        this.settingIMDb = this.preferences.getString("settingIMDb", "original");
 //        this.settingDefaultTab = Integer.valueOf(this.preferences.getString("settingDefaultTab", "0"));
@@ -334,13 +332,11 @@ public class Movie {
      * Return array list with all available pictures for the movie
      */
     public ArrayList<String> getPicturesList() {
-        ArrayList<String> pictureList = new ArrayList<String>();
+        ArrayList<String> pictureList = new ArrayList<>();
 
         // get main picture
         String pictureName = mCursor.getString(mCursor.getColumnIndex(Movies.PICTURE));
         pictureList.add(mPreferencePicturesDirectory + pictureName);
-
-        // TODO get extras
 
         return pictureList;
     }

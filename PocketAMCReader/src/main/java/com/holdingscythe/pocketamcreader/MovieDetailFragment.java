@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.holdingscythe.pocketamcreader.catalog.Extras;
 import com.holdingscythe.pocketamcreader.catalog.Movie;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
@@ -38,6 +39,7 @@ import java.util.regex.Pattern;
  */
 public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
+    private Extras mExtras;
     private MoviesDataProvider mMoviesDataProvider;
     private Filters mFilters;
 
@@ -108,7 +110,17 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             Cursor cursor = mMoviesDataProvider.fetchMovie(uri);
             cursor.moveToFirst();
             mMovie = new Movie(cursor, getView(), this, getActivity());
-            mMoviesDataProvider.closeDatabase();
+
+            // Fetch extras
+            Cursor cursorExtras = mMoviesDataProvider.fetchMovieExtras(Uri.withAppendedPath(uri, "extras"));
+            cursorExtras.moveToFirst();
+            mExtras = new Extras(cursorExtras);
+            cursorExtras.close();
+
+            // Close cursors and database
+            // TODO: find better place to close cursors and database
+//            cursor.close();
+//            mMoviesDataProvider.closeDatabase();
 
             // Benchmark end
             if (S.INFO) {
@@ -138,7 +150,10 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 try {
                     // prepare pictures array
                     Intent i = new Intent(getActivity(), PictureViewActivity.class);
-                    i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, mMovie.getPicturesList());
+                    ArrayList<String> al= new ArrayList<>();
+                    al.addAll(mMovie.getPicturesList());
+                    al.addAll(mExtras.getPicturesList());
+                    i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, al);
                     startActivity(i);
                 } catch (Exception e) {
                     // TODO: fix exception
@@ -303,11 +318,4 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
 //    detailIntent.setData(data);
 
-    private void loadMovie(String id) {
-
-    }
-
-    protected void showBasic() {
-
-    }
 }
