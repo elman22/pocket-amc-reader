@@ -53,6 +53,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
      */
     public static final String ARG_MOVIE_ID = "movie_id";
     public static final String ARG_MOVIE_PICTURES_LIST = "pictures_list";
+    public static final String ARG_MOVIE_TITLE = "movie_title";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -153,6 +154,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     al.addAll(mMovie.getPicturesList());
                     al.addAll(mExtras.getPicturesList());
                     i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, al);
+                    i.putExtra(MovieDetailFragment.ARG_MOVIE_TITLE, mMovie.getTitle());
                     startActivity(i);
                 } catch (Exception e) {
                     // TODO: fix exception

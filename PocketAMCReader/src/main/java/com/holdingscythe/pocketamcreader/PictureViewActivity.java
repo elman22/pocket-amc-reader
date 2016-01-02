@@ -24,14 +24,20 @@ public class PictureViewActivity extends Activity {
 
         Intent i = getIntent();
         ArrayList<String> filePaths = i.getStringArrayListExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST);
+        String title = i.getStringExtra(MovieDetailFragment.ARG_MOVIE_TITLE);
 
+        // if there is no file in file paths, create empty arrayList
         if (filePaths == null) {
-            filePaths = new ArrayList<String>();
+            filePaths = new ArrayList<>();
         }
 
+        // create viewpager
         ViewPager viewPager = (ViewPager) findViewById(R.id.fullscreen_picture_pager);
         TouchImageAdapter adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths);
         viewPager.setAdapter(adapter);
+
+        // change title of the activity
+        setTitle(title);
     }
 
 }

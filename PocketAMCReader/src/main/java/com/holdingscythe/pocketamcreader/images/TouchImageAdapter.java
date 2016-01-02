@@ -1,6 +1,7 @@
 package com.holdingscythe.pocketamcreader.images;
 
 /**
+ * Display title image + extras for a movie
  * Created by Elman on 26. 7. 2015.
  */
 
@@ -9,11 +10,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.R;
 
@@ -23,7 +24,6 @@ public class TouchImageAdapter extends PagerAdapter {
 
     private Activity mActivity;
     private ArrayList<String> mImagePaths;
-    private LayoutInflater inflater;
 
     // constructor
     public TouchImageAdapter(Activity activity, ArrayList<String> imagePaths) {
@@ -38,40 +38,40 @@ public class TouchImageAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((RelativeLayout) object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         TouchImageView imgDisplay;
-//        Button btnClose;
+        TextView pictureCount;
 
-        inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.fullscreen_image, container, false);
 
         imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.picture_display);
-//        btnClose = (Button) viewLayout.findViewById(R.id.btnClose);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = BitmapFactory.decodeFile(mImagePaths.get(position), options);
         imgDisplay.setImageBitmap(bitmap);
 
-        // close button click event
-//        btnClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mActivity.finish();
-//            }
-//        });
+        // display image counter, but only if at least one extra exists
+        pictureCount = (TextView) viewLayout.findViewById(R.id.picture_counter);
+        if (getCount() > 1) {
+            pictureCount.setText(String.format(mActivity.getString(R.string.picture_counter),
+                    position + 1, getCount()));
+        } else {
+            pictureCount.setText(null);
+        }
 
-        ((ViewPager) container).addView(viewLayout);
+        container.addView(viewLayout);
 
         return viewLayout;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager) container).removeView((RelativeLayout) object);
+        container.removeView((RelativeLayout) object);
     }
 }

@@ -10,4 +10,9 @@
         android:background="@android:color/black"
         android:scaleType="fitCenter"/>
 
+    <TextView
+        android:id="@+id/picture_counter"
+        style="@style/PictureCounter"
+        android:text="@string/ph_number"/>
+
 </RelativeLayout>

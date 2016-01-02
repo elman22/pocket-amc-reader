@@ -127,7 +127,8 @@ public class Movie {
         fillPictureIntoView(Movies.PICTURE, mMovie.getPicture());
 
         fillStringIntoView(Movies.FORMATTED_TITLE, mMovie.getFormattedTitle(), STRING_REGULAR);
-        fillStringIntoView(Movies.NUMBER, mMovie.getNumber(), STRING_REGULAR, EXT_STRING_PREFIX, R.string.number_prefix);
+        fillStringIntoView(Movies.NUMBER, mMovie.getNumber(), STRING_REGULAR, EXT_STRING_PREFIX,
+                R.string.number_prefix);
         fillStringIntoView(Movies.CERTIFICATION, mMovie.getCertification(), STRING_CLICKABLE);
         fillStringIntoView(Movies.CHECKED, mMovie.getChecked(), BOOLEAN_CLICKABLE);
         fillStringIntoView(Movies.USER_RATING, mMovie.getUserRating(), STRING_CLICKABLE);
@@ -160,15 +161,17 @@ public class Movie {
         fillStringIntoView(Movies.LANGUAGES, mMovie.getLanguages(), STRING_CLICKABLE);
         fillStringIntoView(Movies.SUBTITLES, mMovie.getSubtitles(), STRING_CLICKABLE);
         fillStringIntoView(Movies.VIDEO_FORMAT, mMovie.getVideoFormat(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.VIDEO_BITRATE, mMovie.getVideoBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string
-                .display_bitrate_suffix);
+        fillStringIntoView(Movies.VIDEO_BITRATE, mMovie.getVideoBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
+                R.string.display_bitrate_suffix);
         fillStringIntoView(Movies.AUDIO_FORMAT, mMovie.getAudioFormat(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.AUDIO_BITRATE, mMovie.getAudioBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string
-                .display_bitrate_suffix);
+        fillStringIntoView(Movies.AUDIO_BITRATE, mMovie.getAudioBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
+                R.string.display_bitrate_suffix);
         fillStringIntoView(Movies.RESOLUTION, mMovie.getResolution(), STRING_CLICKABLE);
         fillStringIntoView(Movies.FRAMERATE, mMovie.getFramerate(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.SIZE, mMovie.getSize(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED, R.string.display_filessizes_suffix);
-        fillStringIntoView(Movies.DISKS, mMovie.getDisks(), STRING_REGULAR, EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
+        fillStringIntoView(Movies.SIZE, mMovie.getSize(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
+                R.string.display_filessizes_suffix);
+        fillStringIntoView(Movies.DISKS, mMovie.getDisks(), STRING_REGULAR, EXT_PLURALS_SUFFIX_PADDED,
+                R.plurals.details_disks);
 
         fillColorIntoView(Movies.COLOR_TAG, mMovie.getColorTag());
     }
@@ -363,6 +366,13 @@ public class Movie {
         ArrayList<String> pictureList = new ArrayList<>();
         pictureList.add(mPreferencePicturesDirectory + mMovie.getPicture());
         return pictureList;
+    }
+
+    /*
+    * Return title of the movie
+    */
+    public String getTitle() {
+        return mMovie.getFormattedTitle();
     }
 
 }
