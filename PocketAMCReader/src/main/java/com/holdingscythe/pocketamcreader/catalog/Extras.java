@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.S;
-import com.holdingscythe.pocketamcreader.model.Extra;
+import com.holdingscythe.pocketamcreader.model.ExtraModel;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Elman on 30. 12. 2015.
  */
 public class Extras {
-    private ArrayList<Extra> mExtras;
+    private ArrayList<ExtraModel> mExtras;
 
     public Extras(Cursor cursor) {
         mExtras = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Extras {
                         continue;
                     }
 
-                    mExtras.add(new Extra(
+                    mExtras.add(new ExtraModel(
                             preferencePicturesDirectory + cursor.getString(cursor.getColumnIndex(Movies.E_PICTURE)),
                             cursor.getString(cursor.getColumnIndex(Movies.E_CHECKED)).equals("True"),
                             cursor.getString(cursor.getColumnIndex(Movies.E_TAG)),
@@ -67,7 +67,7 @@ public class Extras {
         ArrayList<String> pictureList = new ArrayList<>();
 
         // get all extra images
-        for (Extra extra : mExtras) {
+        for (ExtraModel extra : mExtras) {
             pictureList.add(extra.getEPicture());
         }
 

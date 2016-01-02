@@ -110,6 +110,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             Cursor cursor = mMoviesDataProvider.fetchMovie(uri);
             cursor.moveToFirst();
             mMovie = new Movie(cursor, getView(), this, getActivity());
+            cursor.close();
 
             // Fetch extras
             Cursor cursorExtras = mMoviesDataProvider.fetchMovieExtras(Uri.withAppendedPath(uri, "extras"));
@@ -117,10 +118,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             mExtras = new Extras(cursorExtras);
             cursorExtras.close();
 
-            // Close cursors and database
-            // TODO: find better place to close cursors and database
-//            cursor.close();
-//            mMoviesDataProvider.closeDatabase();
+            // Close database
+            mMoviesDataProvider.closeDatabase();
 
             // Benchmark end
             if (S.INFO) {
@@ -150,7 +149,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 try {
                     // prepare pictures array
                     Intent i = new Intent(getActivity(), PictureViewActivity.class);
-                    ArrayList<String> al= new ArrayList<>();
+                    ArrayList<String> al = new ArrayList<>();
                     al.addAll(mMovie.getPicturesList());
                     al.addAll(mExtras.getPicturesList());
                     i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, al);

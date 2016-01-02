@@ -1,6 +1,11 @@
 package com.holdingscythe.pocketamcreader.model;
 
-public class Extra {
+/**
+ * Data Model for Extra
+ * Created by Elman on 30. 12. 2015.
+ */
+
+public class ExtraModel {
     private String EPicture;
     private boolean EChecked;
     private String ETag;
@@ -22,8 +27,8 @@ public class Extra {
      * @param EComments
      * @param ECreatedBy
      */
-    public Extra(String EPicture, boolean EChecked, String ETag, String ETitle, String ECategory, String EURL,
-                 String EDescription, String EComments, String ECreatedBy) {
+    public ExtraModel(String EPicture, boolean EChecked, String ETag, String ETitle, String ECategory, String EURL,
+                      String EDescription, String EComments, String ECreatedBy) {
         this.EPicture = EPicture;
         this.EChecked = EChecked;
         this.ETag = ETag;
@@ -35,7 +40,7 @@ public class Extra {
         this.ECreatedBy = ECreatedBy;
     }
 
-    public Extra(String EPicture) {
+    public ExtraModel(String EPicture) {
         this.EPicture = EPicture;
     }
 
