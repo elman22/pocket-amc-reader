@@ -1,17 +1,17 @@
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/showing_info_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    style="@android:style/Widget.Holo.ActionBar.Solid">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/nowShowing"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
         android:layout_gravity="center_vertical"
+        android:background="@color/color_basic_bg1"
         android:padding="6dip"
         android:singleLine="true"
+        android:text="@string/loading"
         android:textColor="@color/primary_text_dark_nostates"/>
 </LinearLayout>

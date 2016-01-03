@@ -44,6 +44,8 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     // https://github.com/chrisjenx/Calligraphy
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    // https://github.com/ksoichiro/Android-ObservableScrollView
+    //compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
 
     // try http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en
     // compile 'com.github.chrisbanes.photoview:library:1.2.4'

@@ -13,7 +13,8 @@
     <RelativeLayout
         android:id="@+id/detailsWrapper"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/app_bg">
 
         <ImageView
             android:id="@+id/Picture"
@@ -612,7 +613,6 @@
                 style="@style/RegularText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
                 android:paddingBottom="@dimen/wrapper_spacing_block"
                 android:text="@string/ph_text_short"/>
 

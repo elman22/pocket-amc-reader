@@ -1,9 +1,9 @@
 <!--TODO: clean up-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:id="@+id/filter_info_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    style="@android:style/Widget.Holo.ActionBar.Solid">
+    android:layout_height="wrap_content">
     <!--<TextView-->
     <!--android:id="@+id/filter_label"-->
     <!--style="?headerTextSecondaryLabel" />-->
@@ -15,9 +15,10 @@
         android:id="@+id/filter_detail"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
+        android:background="@color/color_basic_bg2"
         android:padding="6dip"
-        android:textColor="@color/primary_text_dark_nostates" />
+        android:text="@string/loading"
+        android:textColor="@color/primary_text_dark_nostates"/>
     <!--android:layout_toRightOf="@id/filter_label"-->
     <!--android:layout_toLeftOf="@id/filter_detail_action"-->
     <!--android:layout_alignBaseline="@id/filter_label"-->
