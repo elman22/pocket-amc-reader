@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!-- todo: cleanup -->
-<manifest package="com.holdingscythe.pocketamcreader"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="com.holdingscythe.pocketamcreader"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -11,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.holdingscythe.pocketamcreader.ImportActivity"
+            android:name=".ImportActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.holdingscythe.pocketamcreader.MovieListActivity"
+            android:name=".MovieListActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT"/>
@@ -29,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.holdingscythe.pocketamcreader.MovieDetailActivity"
+            android:name=".MovieDetailActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.holdingscythe.pocketamcreader.MovieListActivity">
             <meta-data
@@ -37,7 +38,7 @@
                 android:value="com.holdingscythe.pocketamcreader.MovieListActivity"/>
         </activity>
         <activity
-            android:name="com.holdingscythe.pocketamcreader.settings.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.holdingscythe.pocketamcreader.MovieListActivity">
             <meta-data
@@ -48,7 +49,7 @@
             android:name=".PictureViewActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.holdingscythe.pocketamcreader.MovieDetailActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.holdingscythe.pocketamcreader.MovieDetailActivity"/>
