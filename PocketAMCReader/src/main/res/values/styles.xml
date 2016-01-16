@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="android:Theme.Holo">
-        <item name="android:windowActionBarOverlay">false</item>
         <item name="android:actionBarStyle">@style/action_bar_theme</item>
         <item name="android:actionMenuTextColor">@color/color_action_text</item>
     </style>
@@ -12,6 +11,17 @@
         <item name="android:background">@color/color_action_bar_bg</item>
     </style>
 
+    <!-- Theme for details view -->
+    <style name="AppTheme.SemiActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/action_bar_theme_semi_transparent</item>
+    </style>
+
+    <style name="action_bar_theme_semi_transparent" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/detail_action_bar_background</item>
+    </style>
+
+    <!-- Specific styles -->
     <style name="BasicValue">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:layout_marginTop">@dimen/detail_basic_spacing</item>

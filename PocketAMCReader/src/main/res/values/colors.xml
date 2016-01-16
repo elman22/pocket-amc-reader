@@ -3,6 +3,7 @@
 <resources>
     <color name="app_bg">#000</color>
     <color name="color_action_bar_bg">#0D47A1</color>
+    <color name="color_action_bar_semi_end_bg">#330D47A1</color>
     <color name="color_action_text">#fff</color>
     <color name="color_basic_bg1">#1565C0</color>
     <color name="color_basic_bg2">#1976D2</color>
