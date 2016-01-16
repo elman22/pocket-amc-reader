@@ -2,11 +2,11 @@
 <!-- https://www.google.com/design/spec/style/color.html#color-color-palette -->
 <resources>
     <color name="app_bg">#000</color>
-    <color name="color_action_bar_bg">#1b5e20</color>
+    <color name="color_action_bar_bg">#0D47A1</color>
     <color name="color_action_text">#fff</color>
-    <color name="color_basic_bg1">#2e7d32</color>
-    <color name="color_basic_bg2">#388e3c</color>
-    <color name="color_basic_bg3">#43a047</color>
+    <color name="color_basic_bg1">#1565C0</color>
+    <color name="color_basic_bg2">#1976D2</color>
+    <color name="color_basic_bg3">#1E88E5</color>
     <color name="detail_title_background">#BB000000</color>
     <!--<color name="color_theme_default_background">#000000</color>-->
     <!--<color name="color_list_header_background">#444444</color>-->
