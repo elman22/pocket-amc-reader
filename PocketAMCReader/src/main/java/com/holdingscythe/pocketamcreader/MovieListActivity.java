@@ -159,7 +159,7 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.app_name));
                 builder.setMessage(String.format(getString(R.string.about), getString(R.string.app_name), versionName,
-                        getString(R.string.copyright_year), t_ru + "\n" + t_de + "\n" + t_fr));
+                        getString(R.string.copyright_year), t_ru + "\n" + t_de + "\n" + t_fr, getString(R.string.used_libraries)));
                 builder.setNeutralButton(getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {

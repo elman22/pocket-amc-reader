@@ -451,6 +451,9 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
 //            SharedObjects.getInstance().restartAppRequested = true;
 //        }
 
+        if (SharedObjects.getInstance().preferences == null)
+            SharedObjects.getInstance().restartAppRequested = true;
+
         if (SharedObjects.getInstance().restartAppRequested) {
             if (S.INFO)
                 Log.i(S.TAG, "App restarting...");

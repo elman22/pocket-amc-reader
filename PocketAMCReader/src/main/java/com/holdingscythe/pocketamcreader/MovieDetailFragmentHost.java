@@ -75,4 +75,14 @@ public class MovieDetailFragmentHost extends Fragment {
 
     }
 
+    /**
+     * Called when the activity is resumed.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SharedObjects.getInstance().listMovieAdapter == null)
+            getActivity().finish();
+    }
+
 }
