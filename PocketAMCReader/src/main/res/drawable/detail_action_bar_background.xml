@@ -4,7 +4,7 @@
     <gradient
         android:angle="0"
         android:centerColor="@color/color_action_bar_semi_end_bg"
-        android:centerX="10%"
+        android:centerX="15%"
         android:endColor="@color/color_action_bar_semi_end_bg"
         android:startColor="@color/color_action_bar_semi_start_bg"
         android:type="linear"/>

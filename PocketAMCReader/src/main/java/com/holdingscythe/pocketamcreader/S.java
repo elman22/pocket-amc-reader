@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public final class S {
     // RELEASE: change to 6
-    public static final int LOGLEVEL = 2;
+    public static final int LOGLEVEL = 6;
 
     public static final boolean STRICT = LOGLEVEL == 1;
     public static final boolean VERBOSE = LOGLEVEL <= 2;

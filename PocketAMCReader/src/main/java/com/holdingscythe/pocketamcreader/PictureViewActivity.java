@@ -24,7 +24,7 @@ public class PictureViewActivity extends Activity {
 
         Intent i = getIntent();
         ArrayList<String> filePaths = i.getStringArrayListExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST);
-        String title = i.getStringExtra(MovieDetailFragment.ARG_MOVIE_TITLE);
+        // String title = i.getStringExtra(MovieDetailFragment.ARG_MOVIE_TITLE);
 
         // if there is no file in file paths, create empty arrayList
         if (filePaths == null) {
@@ -37,7 +37,7 @@ public class PictureViewActivity extends Activity {
         viewPager.setAdapter(adapter);
 
         // change title of the activity
-        setTitle(title);
+        // setTitle(title);
     }
 
 }
