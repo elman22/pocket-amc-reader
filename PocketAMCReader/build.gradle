@@ -7,8 +7,8 @@ android {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 80
-        versionName "2.0"
+        versionCode 81
+        versionName "2.0a2"
     }
     buildTypes {
         release {
@@ -34,7 +34,6 @@ dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     // The Support Repository (separate from the corresponding library) can be found in the Extras category.
     compile 'com.android.support:support-v13:23.1.1'
-    // compile fileTree(include: ['*.jar'], dir: 'libs')
 
     // https://github.com/iPaulPro/aFileChooser
     compile project(':aFileChooser')
@@ -45,11 +44,7 @@ dependencies {
     // https://github.com/chrisjenx/Calligraphy
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     // https://github.com/ksoichiro/Android-ObservableScrollView
-    //compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-
-    // try http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en
-    // compile 'com.github.chrisbanes.photoview:library:1.2.4'
-    // compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.2.2'
-    // compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
-
+    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    // https://github.com/JakeWharton/NineOldAndroids
+    compile 'com.nineoldandroids:library:2.4.0'
 }
