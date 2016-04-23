@@ -46,11 +46,15 @@ public class MovieDetailFragmentHost extends Fragment {
         }
 
         @Override
-        public Fragment getItem(int position) {
-            mMoviesAdapter.getCursor().move(position);
-            mListView.setSelection(position);
-            mListView.setSelected(true);
-            mListView.smoothScrollToPosition(position);
+        public Fragment getItem(final int position) {
+//            mListView.setSelection(position);
+//            mListView.setSelected(true);
+            mListView.post(new Runnable() {
+                @Override
+                public void run() {
+                    mListView.smoothScrollToPositionFromTop(position, 2);
+                }
+            });
 
             Bundle args = new Bundle();
             args.putString(MovieDetailFragment.ARG_MOVIE_ID, String.valueOf(mMoviesAdapter.getItemId(position)));
