@@ -14,7 +14,7 @@ import java.io.InputStream;
  */
 public class ProgressFilterInputStream extends FilterInputStream {
 
-    private int mBytesRead = 0;
+    private long mBytesRead = 0;
     private ImportFragment.CatalogImportTask mCatalogImportTask;
 
     public ProgressFilterInputStream(InputStream in, ImportFragment.CatalogImportTask cit) {

@@ -14,7 +14,6 @@ import com.holdingscythe.pocketamcreader.catalog.MoviesSAXHandler;
 import com.holdingscythe.pocketamcreader.utils.FileEncoder;
 import com.holdingscythe.pocketamcreader.utils.ProgressFilterInputStream;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
-import com.holdingscythe.pocketamcreader.utils.Utils;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -123,7 +122,7 @@ public class ImportFragment extends Fragment {
      * updates and results back to the Activity.
      */
     public class CatalogImportTask extends AsyncTask<Void, Integer, Void> {
-        protected Integer bytesToBeImported = 2 ^ 31;
+        protected long bytesToBeImported;
 
         public CatalogImportTask() {
         }
@@ -195,7 +194,7 @@ public class ImportFragment extends Fragment {
                     if (convertedCatalog == null)
                         throw new Exception();
                     sourceCatalog = new File(convertedCatalog);
-                    bytesToBeImported = Utils.safeLongToInt(sourceCatalog.length());
+                    bytesToBeImported = sourceCatalog.length();
                     sourceCatalogStream = new ProgressFilterInputStream(new FileInputStream(sourceCatalog), this);
                     isImportFileConverted = true;
                 } catch (FileNotFoundException e) {
@@ -301,8 +300,12 @@ public class ImportFragment extends Fragment {
         }
 
         /* Publish state from external sources e.g. from {@link ProgressFilterInputStream} */
-        public void publishExternalProgress(Integer state) {
-            publishProgress((state * 100) / bytesToBeImported);
+        public void publishExternalProgress(long state) {
+            if (S.VERBOSE)
+                Log.v(S.TAG, "Publishing state: " + String.valueOf((int) ((float) state / bytesToBeImported * 100)) +
+                        " %");
+
+            publishProgress((int) ((float) state / bytesToBeImported * 100));
         }
 
         @Override

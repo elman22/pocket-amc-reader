@@ -54,9 +54,9 @@ public class ImportActivity extends FragmentActivity implements ImportFragment.T
 
         // Set default font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath(S.DEFAULT_FONT)
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
+                .setDefaultFontPath(S.DEFAULT_FONT)
+                .setFontAttrId(R.attr.fontPath)
+                .build()
         );
 
         // Initialize views
