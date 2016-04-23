@@ -445,11 +445,9 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     public void onResume() {
         super.onResume();
 
-        // TODO check if necessary
-        // Restart if cursor adapter is not available
-//        if (this.ca == null && this.lv != null) {
-//            SharedObjects.getInstance().restartAppRequested = true;
-//        }
+        // Restart if adapter is not available
+        if (mMoviesAdapter == null && getListView() != null)
+            SharedObjects.getInstance().restartAppRequested = true;
 
         if (SharedObjects.getInstance().preferences == null)
             SharedObjects.getInstance().restartAppRequested = true;
