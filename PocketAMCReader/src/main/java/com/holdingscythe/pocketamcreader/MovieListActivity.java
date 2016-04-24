@@ -66,15 +66,15 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
 
         // Set default font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath(S.DEFAULT_FONT)
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
+                .setDefaultFontPath(S.DEFAULT_FONT)
+                .setFontAttrId(R.attr.fontPath)
+                .build()
         );
 
         if (findViewById(R.id.movie_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts (res/values-large and
             // res/values-sw600dp). If this view is present, then the activity should be in two-pane mode.
-            mTwoPane = true;
+            mTwoPane = SharedObjects.getInstance().twoPane = true;
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
@@ -110,13 +110,14 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(MovieDetailFragment.ARG_MOVIE_ID, id);
+            if (!id.equals("")) {
+                arguments.putString(MovieDetailFragment.ARG_MOVIE_ID, id);
+            }
             MovieDetailFragmentHost fragment = new MovieDetailFragmentHost();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.movie_detail_container, fragment)
                     .commit();
-
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.

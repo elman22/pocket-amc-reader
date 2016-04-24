@@ -8,7 +8,6 @@ import android.widget.ListView;
 import com.holdingscythe.pocketamcreader.MovieListFragment;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
-import com.holdingscythe.pocketamcreader.filters.Filters;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,16 +33,16 @@ public class SharedObjects {
     public DateFormat dateFormat = DateFormat.getDateInstance();
 
     // References between intents
+    public boolean twoPane = false;
     public MoviesAdapter listMovieAdapter;
     public ListView moviesListView;
     public MovieListFragment movieListFragment;
-//	public CursorAdapter activeCursorAdapter;
+    //	public CursorAdapter activeCursorAdapter;
 //	public MoviesListActivity activeMoviesListActivity;
 //	public Filters activeFilters;
-	public boolean moviesListActivityRefreshRequested = false;
-	public boolean restartAppRequested = false;
+    public boolean moviesListActivityRefreshRequested = false;
+    public boolean restartAppRequested = false;
 //	public Extra[] extras;
-
 
     protected SharedObjects() {
         // Exists only to defeat instantiation.

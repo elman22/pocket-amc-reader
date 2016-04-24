@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class MovieDetailFragmentHost extends Fragment {
             mListView.post(new Runnable() {
                 @Override
                 public void run() {
-                    mListView.smoothScrollToPositionFromTop(position, 2);
+                    mListView.smoothScrollToPosition(position);
                 }
             });
 

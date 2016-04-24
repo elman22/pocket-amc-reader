@@ -85,7 +85,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         public void onChanged() {
             updateHeaderInfo();
             updateHeaderFilterInfo();
-            getListView().setSelection(0);
+            resetDetailPager();
         }
     }
 
@@ -223,7 +223,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         SharedObjects.getInstance().moviesListView = getListView();
         SharedObjects.getInstance().movieListFragment = this;
 
-        // Show welcome screen if zero movies displayed
+        // Show welcome screen if zero movies are displayed
         if (mMoviesAdapter.getCount() == 0 && mFilters.getCount() == 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(getString(R.string.welcome_title));
@@ -239,6 +239,8 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
+
+        resetDetailPager();
     }
 
     @Override
@@ -555,11 +557,16 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             mMoviesAdapter.changeCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.notifyDataSetChanged();
+        }
+    }
 
-            // TODO have to do something with the right fragment - only do it in twopanelist
-            if (getActivity().getSupportFragmentManager().findFragmentById(R.id.movie_detail_container) != null) {
-//                mCallbacks.onItemSelected("1");
-            }
+    /**
+     * Display first movie in details pager to if two pane display
+     */
+    private void resetDetailPager() {
+        if (SharedObjects.getInstance().twoPane && mMoviesAdapter.getCount() > 0) {
+            mMoviesAdapter.getCursor().moveToFirst();
+            mCallbacks.onItemSelected("");
         }
     }
 
