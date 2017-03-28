@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -13,7 +14,9 @@ import android.util.Log;
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
-import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.nononsenseapps.filepicker.FilePickerActivity;
+
+import java.io.File;
 
 // todo: clean up
 
@@ -28,7 +31,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
     public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
 
-    private static final int REQUEST_CODE = 2753; // onActivityResult request code
+
+    private static final int FILE_CODE = 9510; // onActivityResult request code
     private static SharedPreferences mPrefs;
 
     @Override
@@ -94,12 +98,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         String key = preference.getKey();
 
         if (key.equals(KEY_PREF_CATALOG_LOCATION)) {
-            // Use the GET_CONTENT intent from the utility class
-            Intent getContentIntent = FileUtils.createGetContentIntent();
-            // Create the chooser Intent
-            Intent intent = Intent.createChooser(getContentIntent, getString(R.string.chooser_title));
-            startActivityForResult(intent, REQUEST_CODE);
-            return true;
+            Intent i = new Intent(getActivity().getBaseContext(), FilePickerActivity.class);
+
+            i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+            i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
+            i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
+            i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+
+            startActivityForResult(i, FILE_CODE);
         }
 
         // todo add activities
@@ -123,27 +129,25 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    // Get the URI of the selected file
-                    final Uri uri = data.getData();
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
+            if (!intent.getBooleanExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false)) {
+                // The URI will now be something like content://PACKAGE-NAME/root/path/to/file
+                Uri uri = intent.getData();
+                // A utility method is provided to transform the URI to a File object
+                File file = com.nononsenseapps.filepicker.Utils.getFileForUri(uri);
 
-                    if (S.INFO)
-                        Log.i(S.TAG, "XML path Uri (" + uri.toString() + ")");
+                if (S.INFO)
+                    Log.i(S.TAG, "XML path Uri (" + file.toString() + ")");
 
-                    try {
-                        // Get the file path from the URI
-                        final String path = FileUtils.getPath(getActivity().getBaseContext(), uri);
-                        SharedPreferences.Editor editor = mPrefs.edit();
-                        editor.putString("settingCatalogLocation", path);
-                        editor.apply();
-                        updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
-                    } catch (Exception e) {
-                        if (S.ERROR)
-                            Log.e(S.TAG, "File select error " + e.getLocalizedMessage());
-                    }
+                try {
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putString("settingCatalogLocation", file.toString());
+                    editor.apply();
+                    updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
+                } catch (Exception e) {
+                    if (S.ERROR)
+                        Log.e(S.TAG, "File select error " + e.getLocalizedMessage());
                 }
             }
         }

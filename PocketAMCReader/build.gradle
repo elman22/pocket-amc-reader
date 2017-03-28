@@ -1,22 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.holdingscythe.pocketamcreader"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 16
+        targetSdkVersion 25
         versionCode 81
         versionName "2.0-alpha3"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
             jniDebuggable false
             zipAlignEnabled true
+            renderscriptDebuggable false
         }
         debug {
             debuggable true
@@ -24,27 +25,26 @@ android {
             renderscriptDebuggable true
             minifyEnabled false
             versionNameSuffix '.debug'
+            zipAlignEnabled true
         }
     }
     signingConfigs {
     }
 }
 
-dependencies {
-    // You must install or update the Support Repository through the SDK manager to use this dependency.
-    // The Support Repository (separate from the corresponding library) can be found in the Extras category.
-    compile 'com.android.support:support-v13:23.1.1'
+repositories {
+    jcenter()
+}
 
-    // https://github.com/iPaulPro/aFileChooser
-    compile project(':aFileChooser')
+dependencies {
+    // https://github.com/spacecowboy/NoNonsense-FilePicker
+    compile 'com.nononsenseapps:filepicker:4.0.0'
     // https://github.com/Manabu-GT/ExpandableTextView
     compile 'com.ms-square:expandableTextView:0.1.4'
     // https://github.com/nostra13/Android-Universal-Image-Loader
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     // https://github.com/chrisjenx/Calligraphy
-    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     // https://github.com/ksoichiro/Android-ObservableScrollView
     compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    // https://github.com/JakeWharton/NineOldAndroids
-    compile 'com.nineoldandroids:library:2.4.0'
 }

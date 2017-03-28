@@ -40,12 +40,12 @@ public class ImportFragment extends Fragment {
      * Callback interface through which the fragment can report the task's
      * progress and results back to the Activity.
      */
-    static interface TaskCallbacks {
-        public void onPreExecute();
+    interface TaskCallbacks {
+        void onPreExecute();
 
-        public void onProgressUpdate(int percent);
+        void onProgressUpdate(int percent);
 
-        public void onPostExecute();
+        void onPostExecute();
     }
 
     /**
