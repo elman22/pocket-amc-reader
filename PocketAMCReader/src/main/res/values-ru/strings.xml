@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- todo: cleanup -->
+<resources>
+    <string name="app_name">Pocket AMC Reader</string>
+    <string name="import_in_progress">Импортировано</string>
+    <string name="import_read_file">Чтение каталога&#x2026;</string>
+    <string name="pref_category_catalog">Каталог</string>
+    <string name="pref_setting_catalog">Каталог</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="pref_setting_catalog_summary">Путь к каталогу и файлу XML  (например / SDCard / ant.xml)</string>
+    <string name="display_minutes_suffix">мин.</string>
+    <string name="pref_category_display">Подробности</string>
+    <string name="pref_setting_encoding">Кодировка каталога</string>
+    <string name="pref_setting_encoding_summary">Установите правильную кодировку с ПК</string>
+    <string-array name="pref_setting_encoding_keys">
+        <item>Western European</item>
+        <item>Central European</item>
+        <item>Cyrillic</item>
+        <item>Greek</item>
+        <item>Turkish</item>
+        <item>Hebrew</item>
+        <item>Arabic</item>
+        <item>Baltic</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string name="pref_category_debug">Расширенный</string>
+    <string name="pref_setting_force_import">Реимпорт каталога</string>
+    <string name="pref_setting_force_import_summary">Реимпорт каталога при закрытии настроек</string>
+    <string name="items_separator_default">,</string>
+    <string name="search_hint">Поиск фильма</string>
+    <string name="app_label">Pocket AMC Reader</string>
+    <string name="search_label">Результаты поиска для:</string>
+    <string name="items_separator_details">-</string>
+    <string name="details_director_label">Режиссер:</string>
+    <string name="details_producer_label">Продюсер:</string>
+    <string name="number_prefix">#</string>
+    <plurals name="list_showing">
+        <item quantity="one">Показан %1$d фильм</item>
+        <item quantity="other">Показано %1$d фильмов</item>
+    </plurals>
+    <plurals name="search_found">
+        <item quantity="one">Найден %1$d фильм</item>
+        <item quantity="other">Найдено %1$d фильмов</item>
+    </plurals>
+    <string name="details_checked_label">Просмотрено:</string>
+    <string name="details_boolean_true">Да</string>
+    <string name="details_boolean_false">Нет</string>
+    <string name="details_actors_label">Актеры:</string>
+    <string name="details_medialabel_label">Метка носителя:</string>
+    <string name="details_mediatype_label">Тип носителя:</string>
+    <string name="details_source_label">Источник:</string>
+    <string name="details_borrower_label">Должник:</string>
+    <string name="details_languages_label">Язык:</string>
+    <string name="details_subtitles_label">Субтитры:</string>
+    <string-array name="pref_setting_default_tab_keys">
+        <item>Основное</item>
+        <item>Изображение</item>
+        <item>Описание</item>
+        <item>Разное</item>
+    </string-array>
+    <string name="pref_setting_default_tab">Вкладка по умолчанию</string>
+    <string name="pref_setting_default_tab_summary">Вкладка по умолчанию</string>
+    <string name="menu_search">Поиск</string>
+    <string name="tab_basic">Основное</string>
+    <string name="tab_picture">Изображение</string>
+    <string name="tab_description">Описание</string>
+    <string name="tab_other">Разное</string>
+    <string name="details_video_label">Видео:</string>
+    <string name="display_bitrate_suffix">kbps</string>
+    <string name="details_audio_label">Аудио:</string>
+    <string name="details_resolution_label">Разрешение:</string>
+    <string name="details_framerate_label">Частота кадров:</string>
+    <string name="display_framerate_suffix">fps</string>
+    <string name="display_filessizes_suffix">MB</string>
+    <plurals name="details_disks">
+        <item quantity="one">диск/файл</item>
+        <item quantity="other">диски/файлы</item>
+    </plurals>
+    <string name="details_files_label">Файлы:</string>
+    <string name="display_files_separator">на</string>
+    <string name="details_comments_label">Комментарии:</string>
+    <string name="details_url_label">URL:</string>
+    <string name="details_date_label">Добавлен:</string>
+    <string name="menu_about">О программе</string>
+    <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nЭта программа является свободным программным обеспечением, вы можете распространять и / или модифицировать его на условиях GNU General Public License, опубликованной Free Software Foundation; либо версии 2 Лицензии, либо (по вашему выбору) любой более поздней версии.\n\nПереводчики\n%4$s</string>
+    <string name="menu_sort_title">Сортировать</string>
+    <string name="menu_sort_formattedtitle_desc">Оригинальное название по убыванию</string>
+    <string name="menu_sort_formattedtitle_asc">Оригинальное название по возрастанию</string>
+    <string name="menu_sort_number_desc">Номер по возрастанию</string>
+    <string name="menu_sort_number_asc">Номер по убыванию</string>
+    <string name="menu_previous_movie">Предыдущий</string>
+    <string name="menu_next_movie">Следующий</string>
+    <string name="menu_random_movie">Случайный</string>
+    <plurals name="import_in_progress_suffix">
+        <item quantity="one">фильм</item>
+        <item quantity="other">фильмы</item>
+    </plurals>
+    <string name="welcome_title">Добро пожаловать</string>
+    <string name="welcome_message">Перед началом использования программы, вы будете перенаправлены в \"Настройки\". Где:\n\n- в \"Каталоге\" yкажите путь к XML файлу базы фильмов AMC.\n- в \"Кодировке каталога\" измените кодировку в соответствии с настройками ПК.\п\nЗатем приложение импортирует ваши фильмы</string>
+    <string name="welcome_dialog_dismiss">Продолжить</string>
+    <string name="dialog_positive">Да</string>
+    <string name="dialog_neutral">Да</string>
+    <string name="dialog_negative">Отменить</string>
+    <string name="filter_type_is">Полное соответствие</string>
+    <string name="filter_type_equals">=</string>
+    <plurals name="filter_label">
+        <item quantity="one">Фильтр:</item>
+        <item quantity="other">Фильтры:</item>
+    </plurals>
+    <string name="filter_none">нет</string>
+    <string name="filter_action">Очистить</string>
+    <string name="filter_type_contains">содержит</string>
+    <string name="filter_value_enclosing">\'</string>
+    <string name="details_rating_label">Рейтинг:</string>
+    <string name="rating_none">-</string>
+    <string name="filter_value_null">null</string>
+    <string name="filter_value_null_operator">Полное соответствие</string>
+    <string name="details_videoformat_label">Видео формат:</string>
+    <string name="details_audioformat_label">Аудио формат:</string>
+    <string name="error_import">Ошибка при импорте каталога. Обычно это происходит при наличии нестандартных символов в каталоге. Чтобы исправить это: запустите скрипт RemoveBadChars в Ant Movie Catalog  на вашем ПК и повторите попытку. Если это не помогло: \n \n-Убедитесь, что у вас достаточно свободного места на вашем устройстве (не на карте памяти SD). Требуется двойной размер файла каталога XML. \n-попробуйте изменить \"%1$s\" настройки. \n\nЕсли ничего из этого не помогает, пожалуйста, свяжитесь с автором через веб-страницу, указанную на Google Play.</string>
+    <string name="menu_add_filter">Добавить фильтр</string>
+    <string name="filter_add_first_step">Выберите поле</string>
+    <string name="details_country_label">Страна:</string>
+    <string name="details_category_label">Категория:</string>
+    <string name="filter_type_larger">&gt;</string>
+    <string name="filter_type_smaller">&lt;</string>
+    <string name="filter_type_equals_not">не равны</string>
+    <string name="filter_type_contains_not">не содержит</string>
+    <string name="filter_type_begins_with">начинается с</string>
+    <string name="filter_type_ends_with">заканчивается</string>
+    <string name="details_formattedtitle_label">Название:</string>
+    <string name="details_number_label">Номер:</string>
+    <string name="details_year_label">Год:</string>
+    <string name="details_length_label">Продолжительность:</string>
+    <string name="details_description_label">Описание:</string>
+    <string name="details_videobitrate_label">Видео битрейт:</string>
+    <string name="details_audiobitrate_label">Аудио битрейт:</string>
+    <string name="details_size_label">Размер:</string>
+    <string name="details_disks_label">Кол-во дисков:</string>
+    <string name="filter_join_and">&lt;</string>
+    <string name="error_import_label">Ошибка!</string>
+    <string name="pref_setting_show_thumbs">Показывать эскизы</string>
+    <string name="pref_setting_show_thumbs_summary">Показывать эскизы в списке фильмов</string>
+    <string name="pref_setting_clear_thumb_cache">Очистить кэш</string>
+    <string name="pref_setting_clear_thumb_cache_summary">Очистить кэш эскизов при запуске</string>
+    <string name="import_clear_cache">Удаляется кэш эскизов&#x2026;</string>
+    <string name="menu_sort_year_desc">Год (сначала новые)</string>
+    <string name="menu_sort_year_asc">Год (сначала старые)</string>
+    <string name="menu_sort_length_desc">Продолжительность (сначала длинные)</string>
+    <string name="menu_sort_length_asc">Продолжительность (сначала короткие)</string>
+    <string name="menu_sort_rating_desc">Рейтинг (сначала лучшие)</string>
+    <string name="menu_sort_rating_asc">Рейтинг (сначала худшие)</string>
+    <string name="menu_sort_borrower_desc">Должники по убыванию</string>
+    <string name="menu_sort_borrower_asc">Должники по возрастанию</string>
+    <string name="menu_sort_medialabel_desc">Метка носителя по убыванию</string>
+    <string name="menu_sort_medialabel_asc">Метка носителя по возрастанию</string>
+    <string name="import_add_indexes">Оптимизация&#x2026;</string>
+    <string name="filter_type_is_null">нет</string>
+    <string name="filter_type_is_null_not">есть</string>
+    <string name="pref_setting_imdb">Открыть ссылку IMDb</string>
+    <string name="pref_setting_imdb_summary">Выбрать как открывать ссылку IMDb</string>
+    <string-array name="pref_setting_imdb_keys">
+        <item>В браузере</item>
+        <item>В браузере. Перенаправляется на английскую мобильную версию</item>
+        <item>В приложении Android IMDb</item>
+    </string-array>
+    <string name="error_imdb_app_not_found">Программа \"IMDb Movies &amp; TV\" не найдена. Хотите ли Вы перейти на Google Play и установить \"IMDb Movies &amp; TV\"?</string>
+    <string name="error_browser_not_found">Установите интернет браузер</string>
+    <string name="dialog_positive_boolean">Да</string>
+    <string name="dialog_negative_boolean">Нет</string>
+    <string name="error_market_app_not_found">Программа Google Play не найдена</string>
+    <string name="pref_setting_list_no_items">Большее количество полей не может быть добавлено</string>
+    <string name="pref_setting_list_add_title">Выберите поле</string>
+    <string name="pref_setting_list_add_button">Добавить поле</string>
+    <string name="pref_setting_list_save_button">Сохранить настройки</string>
+    <string name="pref_setting_list_saved">Настройки сохранены</string>
+    <string name="pref_category_list">Список</string>
+    <string name="pref_setting_list_force_sort_field">Показать отсортированные поля</string>
+    <string name="pref_setting_list_force_sort_field_summary">Всегда показывать отсортированные поля в третьей линии, если она отображается</string>
+    <string name="pref_setting_list_line1">Поля первой линии</string>
+    <string name="pref_setting_list_line1_summary">Выберите поля, которые будут отображаться в первой линии</string>
+    <string name="pref_setting_list_line2">Поля второй линии</string>
+    <string name="pref_setting_list_line2_summary">Выберите поля, которые будут отображаться во второй линии</string>
+    <string name="pref_setting_list_line3">Поля третьей линии</string>
+    <string name="pref_setting_list_line3_summary">Выберите поля, которые будут отображаться в третьей линии</string>
+    <string name="pref_setting_list_separator">Разделитель полей</string>
+    <string name="pref_setting_list_separator_summary">Текст разделителя полей (запятая используется по умолчанию)</string>
+    <string name="details_picture_label">Изображение:</string>
+    <string name="details_originaltitle_label">Оригинальное название:</string>
+    <string name="details_translatedtitle_label">Переведенное название:</string>
+    <string name="menu_sort_originaltitle_desc">Оригинальное название по убыванию</string>
+    <string name="menu_sort_originaltitle_asc">Оригинальное название по возрастанию</string>
+    <string name="menu_sort_translatedtitle_desc">Переведенное название по убыванию</string>
+    <string name="menu_sort_translatedtitle_asc">Переведенное название по возрастанию</string>
+    <string name="pref_setting_show_color_tags">Показать цветные метки в списке фильмов</string>
+    <string name="pref_setting_show_color_tags_summary">Измененить цвет названия фильма по цвету метки</string>
+    <string name="menu_sort_color_tag_desc">Цветная метка по убыванию</string>
+    <string name="menu_sort_color_tag_asc">Цветная метка по возрастанию</string>
+    <string name="details_colortag_label">Цветная метка:</string>
+</resources>

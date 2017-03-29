@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- todo: cleanup -->
 <resources>
     <string name="app_name">Pocket AMC Reader</string>
@@ -98,7 +99,9 @@
         <item quantity="other">movies</item>
     </plurals>
     <string name="welcome_title">Welcome</string>
-    <string name="welcome_message">To start using this application you will be redirected to \"%1$s\" where you shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\" to match your PC settings.\n\nThe app will import your movies after leaving \"%1$s\".</string>
+    <string name="welcome_message">To start using this application you will be redirected to \"%1$s\" where you
+        shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\" to match your PC settings.\n\nThe
+        app will import your movies after leaving \"%1$s\".</string>
     <string name="welcome_dialog_dismiss">Continue</string>
     <string name="dialog_positive">OK</string>
     <string name="dialog_neutral">OK</string>
@@ -170,7 +173,8 @@
         <item>In browser redirected to English mobile version</item>
         <item>In Android IMDb app</item>
     </string-array>
-    <string name="error_imdb_app_not_found">\"IMDb Movies &amp; TV\" app not found. Do you wish to visit Google Play and install the app?</string>
+    <string name="error_imdb_app_not_found">\"IMDb Movies &amp; TV\" app not found. Do you wish to visit Google Play
+        and install the app?</string>
     <string name="error_browser_not_found">Please install an Internet browser</string>
     <string name="dialog_positive_boolean">Yes</string>
     <string name="dialog_negative_boolean">No</string>
@@ -191,7 +195,8 @@
     <string name="pref_setting_list_line3">Fields in 3rd line</string>
     <string name="pref_setting_list_line3_summary">Pick fields to be displayed in 3rd line</string>
     <string name="pref_setting_list_separator">Fields separator</string>
-    <string name="pref_setting_list_separator_summary">Text separator displayed between fields (comma is used by default)</string>
+    <string name="pref_setting_list_separator_summary">Text separator displayed between fields (comma is used by
+        default)</string>
     <string name="details_picture_label">Picture</string>
     <string name="details_originaltitle_label">Original title</string>
     <string name="details_translatedtitle_label">Translated title</string>
@@ -205,10 +210,12 @@
     <string name="menu_sort_color_tag_asc">Color tag (Lowest)</string>
     <string name="details_colortag_label">Color tag</string>
     <string name="pref_setting_multivalue">Multi field separator</string>
-    <string name="pref_setting_multivalue_summary">Specify separator you use to separate directors, producers, actors etc. You can use more separators at once</string>
+    <string name="pref_setting_multivalue_summary">Specify separator you use to separate directors, producers, actors
+        etc. You can use more separators at once</string>
     <string name="details_img_description">Movie picture</string>
     <string name="pref_setting_plot_basic">Show summary in basic tab</string>
-    <string name="pref_setting_plot_basic_summary">App tries to extract movie summary from description and display it in basic tab</string>
+    <string name="pref_setting_plot_basic_summary">App tries to extract movie summary from description and display it
+        in basic tab</string>
     <string-array name="pref_setting_plot_basic_keys">
         <item>None</item>
         <item>First lines from description</item>
