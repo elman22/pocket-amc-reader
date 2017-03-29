@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/list_margin_horizontal"
     android:paddingRight="@dimen/list_margin_horizontal"
     android:paddingTop="@dimen/list_margin_vertical"
-    tools:context=".MoviesListActivity">
+    tools:context=".MovieListActivity">
 
     <ImageView
         android:id="@+id/imageCover"
@@ -17,6 +17,7 @@
         android:layout_height="@dimen/list_item_height"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginEnd="@dimen/list_margin_horizontal"
         android:layout_marginRight="@dimen/list_margin_horizontal"
         android:background="@android:color/black"
         android:contentDescription="@string/details_img_description"
@@ -28,39 +29,45 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/colortag_height"
         android:layout_above="@id/FormattedTitle"
+        android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
-        android:background="@android:color/transparent"
         android:orientation="vertical"/>
 
     <TextView
         android:id="@+id/movieTitle"
-        style="@android:style/TextAppearance.Holo.Medium"
+        style="@style/ListTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ListColorTag"
+        android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="@string/list_holder_row1"/>
+        android:maxLines="1"
+        android:text="@string/list_holder_row1"
+        android:textColor="@android:color/primary_text_dark"/>
 
     <TextView
         android:id="@+id/movieShortDescription"
+        style="@style/ListText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/movieTitle"
+        android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="@string/list_holder_row2"/>
 
     <TextView
         android:id="@+id/movieShortDescription2"
+        style="@style/ListText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/movieShortDescription"
         android:layout_marginBottom="2dip"
+        android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="@string/list_holder_row3"/>
 </RelativeLayout>

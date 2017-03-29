@@ -11,6 +11,15 @@
         <item name="android:background">@color/color_action_bar_bg</item>
     </style>
 
+    <!-- Theme for list view -->
+    <style name="ListText">
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="ListTextTitle" parent="ListText">
+        <item name="android:textAppearance">@android:style/TextAppearance.Holo.Medium</item>
+    </style>
+
     <!-- Theme for details view -->
     <style name="AppTheme.SemiActionBar">
         <item name="android:windowActionBarOverlay">true</item>
@@ -95,7 +104,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_alignParentTop">true</item>
-        <item name="android:textSize">9dp</item>
+        <item name="android:textSize">9sp</item>
     </style>
 
     <!-- TODO: Finish styling -->
