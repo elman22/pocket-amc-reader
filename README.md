@@ -4,8 +4,8 @@ Version 2.0.alpha (documentation is for older version 1.9.1)
 This application will allow you to read catalogs created by Ant Movie Catalog on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
 
 For more info check out:
-http://forum.antp.be/phpbb2/viewtopic.php?t=4717
-http://www.antp.be/software/moviecatalog
+http://forum.antp.be/phpbb2/viewtopic.php?t=4717  
+http://www.antp.be/software/moviecatalog  
 https://github.com/elman22/pocket-amc-reader
 
 For Windows Mobile version visit:
@@ -32,54 +32,54 @@ If you keep your database in AMC format, you will have to export it to XML to be
 ## Settings explained
 
 #### CATALOG
-**Catalog**
-Pick your catalog from file browser. It might take a lot of time to display available catalogs in folders with plenty of files.
-**Catalog encoding**
+**Catalog**  
+Pick your catalog from file browser. It might take a lot of time to display available catalogs in folders with plenty of files.  
+**Catalog encoding**  
 Select encoding on your PC to ensure correct import of special characters.
 
 #### GENERAL
-**Font size**
-You can change size of default font. Increasing font also increases thumbnail size, so I recommend deleting thumbnail cache as well.
-**Show color tags**
+**Font size**  
+You can change size of default font. Increasing font also increases thumbnail size, so I recommend deleting thumbnail cache as well.  
+**Show color tags**  
 Color of the movie's title will be changed to assigned tag's color.
 
 #### LIST
-**Fields in 1st line**
-You can choose fields to be displayed in first line in movie list.
-**Fields in 2nd line**
-You can choose fields to be displayed in second line in movie list.
-**Fields in 3rd line**
-You can choose fields to be displayed in third line in movie list.
-**Fields separator**
-If you select two or more fields in any of the lines, values will be separated by text entered here.
-**Show sorted field**
-If you sort your list by field which is not displayed, it will be shown in third line.
-**Show thumbnails**
+**Fields in 1st line**  
+You can choose fields to be displayed in first line in movie list.  
+**Fields in 2nd line**  
+You can choose fields to be displayed in second line in movie list.  
+**Fields in 3rd line**  
+You can choose fields to be displayed in third line in movie list.  
+**Fields separator**  
+If you select two or more fields in any of the lines, values will be separated by text entered here.  
+**Show sorted field**  
+If you sort your list by field which is not displayed, it will be shown in third line.  
+**Show thumbnails**  
 Show thumbnails for movies in all lists.
 
 #### DETAILS
-**Default tab**
-Default tab to be displayed when movie detail is opened.
-**Show summary in basic tab**
-*None* - No summary is displayed in basic tab
-*First lines from description* - First 4 lines from description are displayed in basic tab for quick view of the plot.
-*Precise match from description* - If you use description field also for taglines, IMDb trivia or such extended information, this option will try to remove it and display plot only. Might not work as expected in some situations.
-**Multi field separator**
-Define separators in multi value fields (such as Country, Category, Actors, Producer, ...) to be able to filter exact values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).
-**Hide unused fields**
-Fields which have no value (e.g. empty fields) will not be displayed.
-**Open IMDb links**
-If you have IMDb links in your database then you can choose how to open them on your Android.
-*As is* - Links are opened in your browser as they are saved.
-*Redirect to English mobile version*
-All saved links pointing to IMDb will be rewritten to IMDb's mobile version, e.g. www.imdb.com will become m.imdb.com. All language mutations will be redirected to English version as it is the only one with mobile version. Legacy links (e.g. imdb.com/Title?0265086) will not be rewritten.
-*In Android Application*
+**Default tab**  
+Default tab to be displayed when movie detail is opened.  
+**Show summary in basic tab**  
+*None* - No summary is displayed in basic tab  
+*First lines from description* - First 4 lines from description are displayed in basic tab for quick view of the plot.  
+*Precise match from description* - If you use description field also for taglines, IMDb trivia or such extended information, this option will try to remove it and display plot only. Might not work as expected in some situations.  
+**Multi field separator**  
+Define separators in multi value fields (such as Country, Category, Actors, Producer, ...) to be able to filter exact values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).  
+**Hide unused fields**  
+Fields which have no value (e.g. empty fields) will not be displayed.  
+**Open IMDb links**  
+If you have IMDb links in your database then you can choose how to open them on your Android.  
+*As is* - Links are opened in your browser as they are saved.  
+*Redirect to English mobile version*  
+All saved links pointing to IMDb will be rewritten to IMDb's mobile version, e.g. www.imdb.com will become m.imdb.com. All language mutations will be redirected to English version as it is the only one with mobile version. Legacy links (e.g. imdb.com/Title?0265086) will not be rewritten.  
+*In Android Application*  
 If you have installed official IMDb application from Android Market, Pocket AMC Reader will use it to show additional info.
 
 #### ADVANCED
-**Force re-import**
-Re-import catalog when settings are closed.
-**Delete cache**
+**Force re-import**  
+Re-import catalog when settings are closed.  
+**Delete cache**  
 Delete thumbnail cache when settings are closed. Cache is located at `/sdcard/Android/data/com.holdingscythe.pocketamcreader/thumbs/`. It's recommended to use this option if changing font size. Cache will be automatically deleted when application is uninstalled if using Android 2.2 or higher. Otherwise delete it manually.
 
 ## Known bugs
