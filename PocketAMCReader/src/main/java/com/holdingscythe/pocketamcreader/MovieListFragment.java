@@ -1,5 +1,6 @@
 package com.holdingscythe.pocketamcreader;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -162,6 +163,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -479,14 +481,16 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      */
     @Override
     public void onDestroy() {
-//        if (ca != null && ca.getCursor() != null)
-//            ca.getCursor().close();
-//        if (lv != null)
-//            lv.setAdapter(null);
-//        if (dp != null) {
-//            dp.stopPictureLoaderThread();
-//            dp.closeDatabase();
-//        }
+        if (mMoviesAdapter != null && mMoviesAdapter.getCursor() != null) {
+            mMoviesAdapter.stopImageLoader();
+            mMoviesAdapter.getCursor().close();
+        }
+        if (getListView() != null) {
+            getListView().setAdapter(null);
+        }
+        if (mMoviesDataProvider != null)
+            mMoviesDataProvider.closeDatabase();
+
         super.onDestroy();
     }
 

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
 
+import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -90,4 +92,13 @@ public class MovieDetailActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Called when the activity is resumed.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SharedObjects.getInstance().listMovieAdapter == null)
+            this.finish();
+    }
 }

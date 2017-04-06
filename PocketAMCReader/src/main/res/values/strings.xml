@@ -99,9 +99,9 @@
         <item quantity="other">movies</item>
     </plurals>
     <string name="welcome_title">Welcome</string>
-    <string name="welcome_message">To start using this application you will be redirected to \"%1$s\" where you
-        shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\" to match your PC settings.\n\nThe
-        app will import your movies after leaving \"%1$s\".</string>
+    <string name="welcome_message">To start using this application you will be redirected to "%1$s" where you
+        shall:\n\n- Pick your XML catalog in "%2$s" setting,\n- Change "%3$s" to match your PC settings.\n\nThe
+        app will import your movies after leaving "%1$s".</string>
     <string name="welcome_dialog_dismiss">Continue</string>
     <string name="dialog_positive">OK</string>
     <string name="dialog_neutral">OK</string>

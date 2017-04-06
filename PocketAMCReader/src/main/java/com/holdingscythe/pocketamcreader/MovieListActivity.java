@@ -1,5 +1,6 @@
 package com.holdingscythe.pocketamcreader;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -130,6 +131,7 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
     /**
      * Catch menu clicked actions
      */
+    @SuppressLint("StringFormatMatches")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Filters and Sorting are handled in MovieListFragment
