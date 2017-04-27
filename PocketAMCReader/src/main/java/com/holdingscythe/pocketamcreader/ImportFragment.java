@@ -149,13 +149,13 @@ public class ImportFragment extends Fragment {
             long fileSizeToBeImported = 0;
             String settingPicturesFolder = "";
 
-            /** Read settings for import */
+            // Read settings for import
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
             String settingCatalogLocation = preferences.getString("settingCatalogLocation", "");
             String settingCatalogEncoding = preferences.getString("settingCatalogEncoding", "Cp1252");
             long settingLastImportedSize = preferences.getLong("settingLastImportedSize", 0);
 
-            /** Get partial wake lock */
+            // Get partial wake lock
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.TAG);
             wakeLock.acquire();
@@ -163,7 +163,7 @@ public class ImportFragment extends Fragment {
             if (S.DEBUG)
                 Log.d(S.TAG, "Wake Lock acquired.");
 
-            /** Open file for size check */
+            // Open file for size check
             try {
                 // Fix for Windows backslashes
                 settingCatalogLocation = settingCatalogLocation.replace("\\", "/");
@@ -184,7 +184,7 @@ public class ImportFragment extends Fragment {
                     Log.w(S.TAG, "Error processing catalog for conversion.");
             }
 
-            /** Convert file to UTF-8 */
+            // Convert file to UTF-8
             if (isImportFileReady) {
                 publishProgress(S.IMPORT_CONVERSION_START);
 
@@ -214,24 +214,24 @@ public class ImportFragment extends Fragment {
                 }
             }
 
-            /** Import data */
+            // Import data
             if (isImportFileConverted) {
                 publishProgress(S.IMPORT_LOADING_START);
 
                 try {
-                    /* Get a SAXParser from the SAXParserFactory. */
+                    // Get a SAXParser from the SAXParserFactory.
                     SAXParserFactory sFactory = SAXParserFactory.newInstance();
                     SAXParser sParser = sFactory.newSAXParser();
 
-				    /* Get the XMLReader of the SAXParser we created. */
+				    // Get the XMLReader of the SAXParser we created.
                     XMLReader sReader = sParser.getXMLReader();
 
-				    /* Create a new ContentHandler and apply it to the XML-Reader */
+				    // Create a new ContentHandler and apply it to the XML-Reader
                     MoviesSAXHandler sHandler = new MoviesSAXHandler(moviesDataProvider);
                     sReader.setContentHandler(sHandler);
                     sReader.setErrorHandler(sHandler);
 
-				    /* Parse the XML-data from our URL. */
+				    // Parse the XML-data from our URL.
                     InputSource sInput = new InputSource(sourceCatalogStream);
                     sInput.setEncoding("UTF-8");
 
@@ -240,13 +240,13 @@ public class ImportFragment extends Fragment {
                         Log.d(S.TAG, "Import start time: " + startTime);
                     }
 
-				    /* Drop indexes for faster import */
+				    // Drop indexes for faster import
                     moviesDataProvider.dropIndexes();
 
-				    /* Do actual import */
+				    // Do actual import
                     sReader.parse(sInput);
 
-				    /* Recreate indexes */
+				    // Recreate indexes
                     publishProgress(S.IMPORT_INDEXING_START);
                     moviesDataProvider.createIndexes();
 
@@ -274,7 +274,7 @@ public class ImportFragment extends Fragment {
                     publishProgress(S.IMPORT_ERROR_LOADING);
                 }
 
-			    /* Update preferences for imported data */
+			    // Update preferences for imported data
                 if (isImportFileFinished) {
                     try {
                         SharedPreferences.Editor editor = preferences.edit();
@@ -289,7 +289,7 @@ public class ImportFragment extends Fragment {
                 }
             }
 
-            /** Do some cleaning */
+            // Do some cleaning
             wakeLock.release();
             if (S.DEBUG)
                 Log.d(S.TAG, "Wake Lock released.");
