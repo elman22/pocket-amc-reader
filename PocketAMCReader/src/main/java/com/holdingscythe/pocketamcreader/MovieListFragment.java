@@ -222,7 +222,6 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
 
         // Store references
         SharedObjects.getInstance().listMovieAdapter = mMoviesAdapter;
-        SharedObjects.getInstance().moviesListView = getListView();
         SharedObjects.getInstance().movieListFragment = this;
 
         // Show welcome screen if zero movies are displayed
@@ -485,9 +484,14 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.getCursor().close();
         }
-        if (getListView() != null) {
+
+        try {
             getListView().setAdapter(null);
+        } catch (Exception e) {
+            if (S.ERROR)
+                Log.e(S.TAG, "Content view not yet created");
         }
+
         if (mMoviesDataProvider != null)
             mMoviesDataProvider.closeDatabase();
 

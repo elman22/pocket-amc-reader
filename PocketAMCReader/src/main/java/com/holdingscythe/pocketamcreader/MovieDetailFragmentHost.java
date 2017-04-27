@@ -35,15 +35,27 @@ public class MovieDetailFragmentHost extends Fragment {
         private MoviesAdapter mMoviesAdapter;
         private ListView mListView;
 
-        public MovieDetailAdapter(FragmentManager fm) {
+        public MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
             super(fm);
             mMoviesAdapter = SharedObjects.getInstance().listMovieAdapter;
-            mListView = SharedObjects.getInstance().moviesListView;
+            mListView = SharedObjects.getInstance().movieListFragment.getListView();
+
+            if (mMoviesAdapter == null || mListView == null) {
+                throw new NullPointerException();
+            }
+
         }
 
         @Override
         public int getCount() {
-            return mMoviesAdapter.getCount();
+            try {
+                return mMoviesAdapter.getCount();
+            } catch (NullPointerException e) {
+                if (S.DEBUG)
+                    Log.i(S.TAG, "MovieDetailAdapter is null");
+
+                return 0;
+            }
         }
 
         @Override
@@ -70,7 +82,11 @@ public class MovieDetailFragmentHost extends Fragment {
 
         ViewPager viewPager = (ViewPager) root.findViewById(R.id.movieDetailViewPager);
         // Important: Must use the child FragmentManager or you will see side effects.
-        viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
+        try {
+            viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
+        } catch (NullPointerException e) {
+            getActivity().finish();
+        }
 
         // Set current item based on clicked item
         if (getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {

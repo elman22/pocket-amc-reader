@@ -35,7 +35,6 @@ public class SharedObjects {
     // References between intents
     public boolean twoPane = false;
     public MoviesAdapter listMovieAdapter;
-    public ListView moviesListView;
     public MovieListFragment movieListFragment;
     //	public CursorAdapter activeCursorAdapter;
 //	public MoviesListActivity activeMoviesListActivity;
