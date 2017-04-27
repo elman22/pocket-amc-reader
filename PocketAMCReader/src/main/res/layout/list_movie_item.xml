@@ -43,8 +43,7 @@
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
         android:maxLines="1"
-        android:text="@string/list_holder_row1"
-        android:textColor="@android:color/primary_text_dark"/>
+        android:text="@string/list_holder_row1"/>
 
     <TextView
         android:id="@+id/movieShortDescription"

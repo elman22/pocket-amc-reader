@@ -13,11 +13,11 @@
 
     <!-- Theme for list view -->
     <style name="ListText">
-        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:textColor">@color/list_text</item>
     </style>
 
     <style name="ListTextTitle" parent="ListText">
-        <item name="android:textAppearance">@android:style/TextAppearance.Holo.Medium</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
     </style>
 
     <!-- Theme for details view -->
