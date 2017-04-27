@@ -212,6 +212,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         // Set list view parameters
         getListView().setFastScrollEnabled(true);
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        getListView().setDrawSelectorOnTop(true);
 
         // Set list adapter
         setListAdapter(mMoviesAdapter);
