@@ -245,7 +245,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
                         .showImageOnLoading(R.drawable.movie_thumb_stub)
                         .showImageForEmptyUri(R.drawable.movie_thumb_stub)
                         .cacheInMemory(true)
-                        .cacheOnDisk(true)
+                        .cacheOnDisk(false)
                         .build();
             }
         }
