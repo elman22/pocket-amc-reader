@@ -250,19 +250,19 @@ public class Movie {
         // Fill strings into views
         switch (dataType) {
             case STRING_REGULAR:
-                /** Fill regular string from database into view. */
+                // Fill regular string from database into view.
                 TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
                         mContext.getPackageName()));
                 tv.setText(value);
                 break;
             case STRING_EXPANDABLE:
-                /** Fill expandable string from database into view. */
+                // Fill expandable string from database into view.
                 ExpandableTextView etv = (ExpandableTextView) mView.findViewById(mResources.getIdentifier
                         (columnName, "id", mContext.getPackageName()));
                 etv.setText(value);
                 break;
             case STRING_CLICKABLE:
-                /** Fill clickable string from database into view. */
+                // Fill clickable string from database into view.
                 TextView ctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
                         mContext.getPackageName()));
                 ctv.setText(Utils.markClickableText(value));

@@ -1,20 +1,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:gravity="center_vertical"
-    android:padding="8dp"
-    >
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/progress_status"
+        style="@android:style/TextAppearance.Holo.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/import_check_file"
-        style="@android:style/TextAppearance.Holo.Medium"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp"
+        android:text="@string/import_check_file"/>
 
     <ProgressBar
         android:id="@+id/progress_horizontal"

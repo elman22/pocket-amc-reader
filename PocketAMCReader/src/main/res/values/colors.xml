@@ -6,9 +6,9 @@
     <color name="color_action_bar_semi_start_bg">#B000</color>
     <color name="color_action_bar_semi_end_bg">#0000</color>
     <color name="color_action_text">#fff</color>
-    <color name="color_basic_bg1">#1565C0</color>
-    <color name="color_basic_bg2">#1976D2</color>
-    <color name="color_basic_bg3">#1E88E5</color>
+    <color name="color_basic_bg1">#1565c0</color>
+    <color name="color_basic_bg2">#1976d2</color>
+    <color name="color_basic_bg3">#1e88e5</color>
     <color name="detail_title_background">#BB000000</color>
     <!--<color name="color_theme_default_background">#000000</color>-->
     <!--<color name="color_list_header_background">#444444</color>-->
