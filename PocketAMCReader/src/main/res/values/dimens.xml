@@ -19,4 +19,8 @@
     <dimen name="colortag_height">2dip</dimen>
     <!-- Expandable text view -->
     <dimen name="arrow_pull">-16dip</dimen>
+    <!-- Cards -->
+    <dimen name="card_corner_radius">4dip</dimen>
+    <dimen name="card_padding">12dip</dimen>
+    <dimen name="card_margin_top">9dip</dimen>
 </resources>

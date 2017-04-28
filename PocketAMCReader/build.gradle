@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '25.0.3'
     defaultConfig {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 81
-        versionName "2.0-alpha3"
+        versionCode 82
+        versionName "2.0-alpha4"
     }
     buildTypes {
         release {
@@ -16,16 +16,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
             jniDebuggable false
-            zipAlignEnabled true
             renderscriptDebuggable false
+            zipAlignEnabled true
+            versionNameSuffix '.production'
         }
         debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             jniDebuggable true
             renderscriptDebuggable true
-            minifyEnabled false
-            versionNameSuffix '.debug'
             zipAlignEnabled true
+            versionNameSuffix '.debug'
         }
     }
     signingConfigs {
@@ -37,8 +39,13 @@ repositories {
 }
 
 dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Android support
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
     // https://github.com/spacecowboy/NoNonsense-FilePicker
-    compile 'com.nononsenseapps:filepicker:4.0.0'
+    compile 'com.nononsenseapps:filepicker:4.1.0'
     // https://github.com/Manabu-GT/ExpandableTextView
     compile 'com.ms-square:expandableTextView:0.1.4'
     // https://github.com/nostra13/Android-Universal-Image-Loader
@@ -47,4 +54,6 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     // https://github.com/ksoichiro/Android-ObservableScrollView
     compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    // https://github.com/woxblom/DragListView
+    compile 'com.github.woxthebox:draglistview:1.4.3'
 }

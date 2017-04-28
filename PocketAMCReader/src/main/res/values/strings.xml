@@ -279,5 +279,14 @@
     <string name="length_none">\?</string>
     <string name="details_section_media">Media details</string>
     <string name="details_section_technical">Technical details</string>
-
+    <string name="pref_setting_list_lines">Fields shown in list</string>
+    <string name="pref_setting_list_lines_summary">Pick and order fields to be displayed in movie list</string>
+    <string name="list_holder_row1">Add some fields (e.g. Title)</string>
+    <string name="list_holder_row2">Add some fields (e.g. Number, Year, Length, Rating)</string>
+    <string name="list_holder_row3">Add some fields (e.g. Category)</string>
+    <string name="settings_cards_column1_title">Line 1 (e.g. Title)</string>
+    <string name="settings_cards_column2_title">Line 2 (e.g. Number, Year, Length, Rating)</string>
+    <string name="settings_cards_column3_title">Line 3 (e.g. Category)</string>
+    <string name="settings_cards_column4_title">Available fields</string>
+    <string name="card_click_hint">Hold and drag to rearrange</string>
 </resources>

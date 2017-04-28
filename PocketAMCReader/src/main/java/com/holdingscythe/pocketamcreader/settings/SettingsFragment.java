@@ -30,7 +30,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String KEY_PREF_CATALOG_ENCODING = "settingCatalogEncoding";
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
     public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
-
+    public static final String KEY_PREF_LIST_FIELDS = "settingMoviesListLines";
 
     private static final int FILE_CODE = 9510; // onActivityResult request code
     private static SharedPreferences mPrefs;
@@ -47,14 +47,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         mPrefs.registerOnSharedPreferenceChangeListener(this);
 
         // Attach onClick listeners
-        Preference pref1 = findPreference(KEY_PREF_CATALOG_LOCATION);
-        pref1.setOnPreferenceClickListener(this);
-//        Preference line1Pref = getPreferenceScreen().findPreference("settingMoviesListLine1");
-//        line1Pref.setOnPreferenceClickListener(this);
-//        Preference line2Pref = getPreferenceScreen().findPreference("settingMoviesListLine2");
-//        line2Pref.setOnPreferenceClickListener(this);
-//        Preference line3Pref = getPreferenceScreen().findPreference("settingMoviesListLine3");
-//        line3Pref.setOnPreferenceClickListener(this);
+        Preference locationPref = findPreference(KEY_PREF_CATALOG_LOCATION);
+        locationPref.setOnPreferenceClickListener(this);
+        Preference linesPref = getPreferenceScreen().findPreference(KEY_PREF_LIST_FIELDS);
+        linesPref.setOnPreferenceClickListener(this);
+    }
+
+    // TODO cleanup
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
         updateSummary(mPrefs, KEY_PREF_CATALOG_ENCODING);
@@ -106,25 +108,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
 
             startActivityForResult(i, FILE_CODE);
+            return true;
         }
 
-        // todo add activities
-//        if (preference.getKey().equals("settingMoviesListLine1")) {
-//            Intent settingData = new Intent(this, SettingsListActivity.class);
-//            settingData.putExtra("LINE", 1);
-//            startActivity(settingData);
-//            return true;
-//        } else if (preference.getKey().equals("settingMoviesListLine2")) {
-//            Intent settingData = new Intent(this, SettingsListActivity.class);
-//            settingData.putExtra("LINE", 2);
-//            startActivity(settingData);
-//            return true;
-//        } else if (preference.getKey().equals("settingMoviesListLine3")) {
-//            Intent settingData = new Intent(this, SettingsListActivity.class);
-//            settingData.putExtra("LINE", 3);
-//            startActivity(settingData);
-//            return true;
-//        }
+        if (key.equals(KEY_PREF_LIST_FIELDS)) {
+            Intent i = new Intent(getActivity().getBaseContext(), SettingsListFieldsActivity.class);
+
+            startActivity(i);
+            return true;
+        }
+
         return false;
     }
 
@@ -175,16 +168,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         }
 
         // Setup the initial values
-//        mSettingDefaultTab
-//                .setSummary(mSettingDefaultTab.getValue() == null ? getString(R.string.pref_setting_default_tab_summary)
-//                        : mSettingDefaultTab.getEntry());
 //        mSettingIMDb.setSummary(mSettingIMDb.getValue() == null ? getString(R.string.pref_setting_imdb_summary) : mSettingIMDb
 //                .getEntry());
-//        mSettingPlotInBasic
-//                .setSummary(mSettingPlotInBasic.getValue() == null ? getString(R.string.pref_setting_plot_basic_summary)
-//                        : mSettingPlotInBasic.getEntry());
-//        mSettingFontSize.setSummary(mSettingFontSize.getValue() == null ? getString(R.string.pref_setting_font_size_summary)
-//                : mSettingFontSize.getEntry());
 
     }
 }

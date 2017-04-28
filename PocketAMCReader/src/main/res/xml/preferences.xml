@@ -32,21 +32,11 @@
     <PreferenceCategory
         android:orderingFromXml="true"
         android:title="@string/pref_category_list">
-        <!--<Preference-->
-        <!--android:title="@string/pref_setting_list_line1"-->
-        <!--android:summary="@string/pref_setting_list_line1_summary"-->
-        <!--android:key="settingMoviesListLine1">-->
-        <!--</Preference>-->
-        <!--<Preference-->
-        <!--android:title="@string/pref_setting_list_line2"-->
-        <!--android:summary="@string/pref_setting_list_line2_summary"-->
-        <!--android:key="settingMoviesListLine2">-->
-        <!--</Preference>-->
-        <!--<Preference-->
-        <!--android:title="@string/pref_setting_list_line3"-->
-        <!--android:summary="@string/pref_setting_list_line3_summary"-->
-        <!--android:key="settingMoviesListLine3">-->
-        <!--</Preference>-->
+        <Preference
+        android:title="@string/pref_setting_list_lines"
+        android:summary="@string/pref_setting_list_lines_summary"
+        android:key="settingMoviesListLines">
+        </Preference>
         <EditTextPreference
             android:key="settingMoviesListSeparator"
             android:title="@string/pref_setting_list_separator"/>

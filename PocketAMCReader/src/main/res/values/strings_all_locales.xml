@@ -2,12 +2,12 @@
 <resources>
 	<string name="provider_authority">com.holdingscythe.provider.MovieCatalog</string>
 	<string name="locale_translation_separator">:\u0020</string>
-	
+
 	<string name="locale_en_independent">English</string>
 	<string name="locale_ru_independent">Russian</string>
 	<string name="locale_de_independent">German</string>
 	<string name="locale_fr_independent">French</string>
-	
+
 	<string name="locale_en_local">English</string>
 	<string name="locale_ru_local">Русский</string>
 	<string name="locale_de_local">Deutsch</string>
@@ -17,7 +17,7 @@
 	<string name="locale_ru_translator">migver</string>
 	<string name="locale_de_translator">Klaus Oed</string>
 	<string name="locale_fr_translator">Xavier Muller</string>
-	
+
 	<string name="copyright_year">2017</string>
     <string name="rating_star">&#x2605;</string>
     <string name="userrating_star">&#x2606;</string>
@@ -25,10 +25,6 @@
 	<string name="rating_suffix_list">*/10</string>
 	<string name="list_seen_true">&#x2713;</string>
 	<string name="list_seen_false">&#x2715;</string>
-    <string name="list_holder_row1">Movie title - This is very long string that must be even longer</string>
-    <string name="list_holder_row2">ID, Year, Length, Rating - This is very long string that must be even
-        longer</string>
-    <string name="list_holder_row3">Genre - This is very long string that must be even longer</string>
 	<string name="string_extension_separator">\u0020</string>
 	<string name="picture_counter">%1$d\u2215%2$d</string>
 	<string name="used_libraries">NoNonsense-FilePicker: spacecowboy\nExpandableTextView: Manabu
@@ -46,5 +42,5 @@
 	<string name="ph_number">#</string>
 	<string name="ph_number_long">####</string>
     <string name="ph_boolean">\?\?\?</string>
-
+    <string name="ph_card_header">Card title</string>
 </resources>

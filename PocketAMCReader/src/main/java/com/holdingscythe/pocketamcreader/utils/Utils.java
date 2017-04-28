@@ -5,6 +5,8 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
 
+import java.util.ArrayList;
+
 // TODO: cleanup
 
 public class Utils {
@@ -24,6 +26,14 @@ public class Utils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Join string in array list into one string with separator
+     */
+    public static String arrayToString(ArrayList<String> arrayList, String separator) {
+        String[] parsedArrayList = new String[arrayList.size()];
+        return arrayToString(arrayList.toArray(parsedArrayList), separator);
     }
 
     /**
