@@ -559,7 +559,8 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     protected void refreshList() {
         if (mMoviesDataProvider != null && getListView() != null) {
             // Swap cursor
-            mSearchMenuItem.collapseActionView();
+            if (mSearchMenuItem != null)
+                mSearchMenuItem.collapseActionView();
             mMoviesAdapter.unregisterDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
