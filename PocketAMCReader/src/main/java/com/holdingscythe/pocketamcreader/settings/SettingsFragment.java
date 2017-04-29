@@ -1,3 +1,8 @@
+/**
+ * Pocket AMC Reader
+ * Created by Elman on 5.7.2014.
+ */
+
 package com.holdingscythe.pocketamcreader.settings;
 
 import android.app.Activity;
@@ -17,13 +22,9 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
-// todo: clean up
-
-/**
- * Pocket AMC Reader
- * Created by Elman on 5.7.2014.
- */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences
         .OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
     public static final String KEY_PREF_CATALOG_LOCATION = "settingCatalogLocation";
@@ -34,10 +35,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     private static final int FILE_CODE = 9510; // onActivityResult request code
     private static SharedPreferences mPrefs;
+    private Map<String, String> defaultTexts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
@@ -51,13 +58,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         locationPref.setOnPreferenceClickListener(this);
         Preference linesPref = getPreferenceScreen().findPreference(KEY_PREF_LIST_FIELDS);
         linesPref.setOnPreferenceClickListener(this);
-    }
 
-    // TODO cleanup
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        // Prefetch default text hints
+        defaultTexts = new HashMap<>();
+        defaultTexts.put(KEY_PREF_CATALOG_LOCATION, getString(R.string.pref_setting_catalog_summary));
+        defaultTexts.put(KEY_PREF_CATALOG_ENCODING, getString(R.string.pref_setting_encoding_summary));
+        defaultTexts.put(KEY_PREF_LIST_SEPARATOR, getString(R.string.pref_setting_list_separator_summary));
+        defaultTexts.put(KEY_PREF_DETAIL_SEPARATOR, getString(R.string.pref_setting_multivalue_summary));
 
+        // Update current values
         updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
         updateSummary(mPrefs, KEY_PREF_CATALOG_ENCODING);
         updateSummary(mPrefs, KEY_PREF_LIST_SEPARATOR);
@@ -148,28 +157,23 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     private void updateSummary(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
+        String defaultText = defaultTexts.get(key);
 
         if (key.equals(KEY_PREF_CATALOG_LOCATION)) {
-            pref.setSummary(sharedPreferences.getString(key, getString(R.string.pref_setting_catalog_summary)));
+            pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
 
         if (key.equals(KEY_PREF_CATALOG_ENCODING)) {
             ListPreference listPref = (ListPreference) pref;
-            pref.setSummary(listPref.getValue() == null ? getString(R.string.pref_setting_encoding_summary)
-                    : listPref.getEntry());
+            pref.setSummary(listPref.getValue() == null ? defaultText : listPref.getEntry());
         }
 
         if (key.equals(KEY_PREF_LIST_SEPARATOR)) {
-            pref.setSummary(sharedPreferences.getString(key, getString(R.string.pref_setting_list_separator_summary)));
+            pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
 
         if (key.equals(KEY_PREF_DETAIL_SEPARATOR)) {
-            pref.setSummary(sharedPreferences.getString(key, getString(R.string.pref_setting_multivalue_summary)));
+            pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
-
-        // Setup the initial values
-//        mSettingIMDb.setSummary(mSettingIMDb.getValue() == null ? getString(R.string.pref_setting_imdb_summary) : mSettingIMDb
-//                .getEntry());
-
     }
 }
