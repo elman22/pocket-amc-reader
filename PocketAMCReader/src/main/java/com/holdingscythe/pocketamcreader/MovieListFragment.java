@@ -36,8 +36,6 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-// TODO: cleanup
-
 /**
  * A list fragment representing a list of Movies. This fragment
  * also supports tablet devices by allowing list items to be given an
@@ -68,6 +66,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     private MoviesAdapter mMoviesAdapter;
     private Filters mFilters;
     private TextView mHeaderListCountView;
+    private TextView mFilterHeaderLabelText;
     private TextView mFilterHeaderText;
     private CursorAdapterObserver mCursorAdapterObserver;
     private MenuItem mSearchMenuItem;
@@ -185,11 +184,9 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
 
         // Add filter header
         View headerViewFilter = getActivity().getLayoutInflater().inflate(R.layout.list_header_filter, null);
-//            this.filterHeaderLabelText = (TextView) headerViewFilter.findViewById(R.id.filter_label);
+        mFilterHeaderLabelText = (TextView) headerViewFilter.findViewById(R.id.filter_label);
         mFilterHeaderText = (TextView) headerViewFilter.findViewById(R.id.filter_detail);
-//            this.filterHeaderActionText = (TextView) headerViewFilter.findViewById(R.id.filter_detail_action);
         headerViewFilter.setOnClickListener(this);
-//            headerViewFilter.setOnTouchListener(this);
         getListView().addHeaderView(headerViewFilter, null, false);
 
         // Attach adapter to list
@@ -431,14 +428,10 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
                 // Click on filters info
                 removeFilters(v);
                 break;
-//            case R.id.search_info_layout:
-            // Click on search info
-//                this.refreshList();
-//                break;
-//            case R.id.showing_info_layout:
-            // Click on now showing info
-//                this.refreshList();
-//                break;
+            case R.id.showing_info_layout:
+                // Click on now showing info
+                removeFilters(v);
+                break;
         }
     }
 
@@ -541,9 +534,8 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      * Function to refresh main list header view
      */
     private void updateHeaderFilterInfo() {
-//        this.filterHeaderLabelText.setText(getResources().getQuantityString(R.plurals.filter_label, this.filters.getCount()));
+        mFilterHeaderLabelText.setText(getResources().getQuantityString(R.plurals.filter_label, mFilters.getCount()));
         mFilterHeaderText.setText(mFilters.getFiltersHumanInfo());
-//        this.filterHeaderActionText.setText(this.filters.getCount() > 0 ? getString(R.string.filter_action) : null);
     }
 
     /**
@@ -730,18 +722,12 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      * If there is only one filter - clear it, if there is more, user chooses
      */
     private void removeFilters(View v) {
-        if (mFilters.getCount() == 0) {
-            // if there is no filter, revert color and do nothing
-//            v.setBackgroundResource(R.color.color_list_header_background);
-        } else if (mFilters.getCount() == 1) {
-            // if there is one filter, remove and refresh
+        if (mFilters.getCount() == 1) {
+            // if there is only one filter, remove and refresh
             mFilters.removeAllFilters();
             refreshList();
-//            v.setBackgroundResource(R.color.color_list_header_background);
-        } else {
-            // if there is more filter, let user decide
-//            v.setBackgroundResource(R.color.color_list_header_background);
-
+        } else if (mFilters.getCount() > 1) {
+            // if there are more filters, let user decide
             // prepare array of all filters
             ArrayList<String> filtersList = new ArrayList<String>();
             filtersList.add(getString(R.string.filter_remove_all));
