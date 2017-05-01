@@ -449,13 +449,19 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     public void onResume() {
         super.onResume();
 
+        // Restart if activity is not available
+        if (!isAdded())
+            SharedObjects.getInstance().restartAppRequested = true;
+
         // Restart if adapter is not available
         if (mMoviesAdapter == null && getListView() != null)
             SharedObjects.getInstance().restartAppRequested = true;
 
+        // Restart if preferences are not available
         if (SharedObjects.getInstance().preferences == null)
             SharedObjects.getInstance().restartAppRequested = true;
 
+        // Restart
         if (SharedObjects.getInstance().restartAppRequested) {
             if (S.INFO)
                 Log.i(S.TAG, "App restarting...");
@@ -468,6 +474,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             startActivity(importIntent);
 
         } else if (SharedObjects.getInstance().moviesListActivityRefreshRequested) {
+            // Refresh list
             if (S.INFO)
                 Log.i(S.TAG, "List refreshing...");
 
