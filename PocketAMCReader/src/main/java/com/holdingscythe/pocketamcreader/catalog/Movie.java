@@ -146,7 +146,7 @@ public class Movie {
         fillStringIntoView(Movies.COMPOSER, mMovie.getComposer(), STRING_CLICKABLE);
         fillStringIntoView(Movies.COUNTRY, mMovie.getCountry(), STRING_CLICKABLE);
         fillStringIntoView(Movies.COMMENTS, mMovie.getComments(), STRING_EXPANDABLE);
-        fillStringIntoView(Movies.URL, mMovie.getURL(), STRING_REGULAR);
+        fillStringIntoView(Movies.URL, mMovie.getURL(), STRING_CLICKABLE);
 
         fillStringIntoView(Movies.MEDIA_LABEL, mMovie.getMediaLabel(), STRING_CLICKABLE);
         fillStringIntoView(Movies.MEDIA_TYPE, mMovie.getMediaType(), STRING_CLICKABLE);

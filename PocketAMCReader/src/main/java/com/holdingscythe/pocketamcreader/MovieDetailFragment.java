@@ -1,6 +1,7 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -248,6 +250,33 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.Framerate:
                 filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
+                break;
+
+            case R.id.URL:
+                // If link points to IMDb, open IMDb app if available
+                String url = ((TextView) view).getText().toString();
+                Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,7})/?");
+                Matcher m = regExpImdb.matcher(url);
+
+                if (m.find()) {
+                    // prepare uri
+                    Uri uri = Uri.parse("imdb:///title/tt" + String.format(Locale.US, "%07d", Integer.parseInt(m
+                            .group(2))) + "/");
+
+                    // open intent
+                    try {
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(uri);
+                        startActivity(i);
+                    } catch (ActivityNotFoundException e) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(browserIntent);
+                    }
+                } else {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(browserIntent);
+                }
+
                 break;
         }
     }
