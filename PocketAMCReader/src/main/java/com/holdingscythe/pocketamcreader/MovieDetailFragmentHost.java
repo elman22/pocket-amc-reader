@@ -81,16 +81,17 @@ public class MovieDetailFragmentHost extends Fragment {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
 
         ViewPager viewPager = (ViewPager) root.findViewById(R.id.movieDetailViewPager);
-        // Important: Must use the child FragmentManager or you will see side effects.
         try {
+            // Important: Must use the child FragmentManager or you will see side effects.
             viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
+
+            // Set current item based on clicked item
+            if (getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
+                viewPager.setCurrentItem(SharedObjects.getInstance().listMovieAdapter.getCursor().getPosition());
+            }
+
         } catch (NullPointerException e) {
             getActivity().finish();
-        }
-
-        // Set current item based on clicked item
-        if (getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
-            viewPager.setCurrentItem(SharedObjects.getInstance().listMovieAdapter.getCursor().getPosition());
         }
 
         return root;
