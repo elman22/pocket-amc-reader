@@ -8,6 +8,7 @@
     <!-- List view -->
     <dimen name="list_outer_height">70dip</dimen>
     <dimen name="list_item_height">64dip</dimen>
+    <dimen name="list_item_width">48dip</dimen>
     <dimen name="list_margin_horizontal">6dip</dimen>
     <dimen name="list_margin_vertical">3dip</dimen>
     <!-- Details -->
