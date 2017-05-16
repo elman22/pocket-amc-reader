@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,6 +84,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         mFilters = new Filters(getActivity());
 
         // Read preferences
+        if (SharedObjects.getInstance().preferences == null) {
+            // Prepare Shared Objects
+            SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
+                    (getActivity().getApplicationContext());
+        }
+
         mPreferences = SharedObjects.getInstance().preferences;
 //        this.settingIMDb = this.preferences.getString("settingIMDb", "original");
 //        this.settingDefaultTab = Integer.valueOf(this.preferences.getString("settingDefaultTab", "0"));

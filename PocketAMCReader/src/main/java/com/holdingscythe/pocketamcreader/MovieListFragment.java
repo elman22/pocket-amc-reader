@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -557,9 +558,15 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      */
     protected void refreshList() {
         if (mMoviesDataProvider != null && getListView() != null) {
+            if (SharedObjects.getInstance().preferences == null) {
+                SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
+                        (getActivity().getApplicationContext());
+            }
+
             // Swap cursor
             if (mSearchMenuItem != null)
                 mSearchMenuItem.collapseActionView();
+
             mMoviesAdapter.unregisterDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
