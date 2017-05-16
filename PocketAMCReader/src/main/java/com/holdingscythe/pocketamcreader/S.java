@@ -70,9 +70,9 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-//        tmpMap.put("settingMoviesListLine1", 1);
-//        tmpMap.put("settingMoviesListLine2", 1);
-//        tmpMap.put("settingMoviesListLine3", 1);
+        tmpMap.put("settingMoviesListLine1", 1);
+        tmpMap.put("settingMoviesListLine2", 1);
+        tmpMap.put("settingMoviesListLine3", 1);
         tmpMap.put("settingListForceSortField", 1);
         tmpMap.put("settingMoviesListSeparator", 1);
 //        tmpMap.put("settingShowColorTags", 1);

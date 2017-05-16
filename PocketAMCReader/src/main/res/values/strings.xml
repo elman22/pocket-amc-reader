@@ -284,9 +284,9 @@
     <string name="list_holder_row1">Add some fields (e.g. Title)</string>
     <string name="list_holder_row2">Add some fields (e.g. Number, Year, Length, Rating)</string>
     <string name="list_holder_row3">Add some fields (e.g. Category)</string>
-    <string name="settings_cards_column1_title">Line 1 (e.g. Title)</string>
-    <string name="settings_cards_column2_title">Line 2 (e.g. Number, Year, Length, Rating)</string>
-    <string name="settings_cards_column3_title">Line 3 (e.g. Category)</string>
+    <string name="settings_cards_column1_title">Line 1</string>
+    <string name="settings_cards_column2_title">Line 2</string>
+    <string name="settings_cards_column3_title">Line 3</string>
     <string name="settings_cards_column4_title">Available fields</string>
     <string name="card_click_hint">Hold and drag to rearrange</string>
 </resources>

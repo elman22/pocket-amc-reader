@@ -155,7 +155,6 @@ public class SettingsListFieldsFragment extends Fragment {
 
         editor.apply();
 
-        SharedObjects.getInstance().moviesListActivityRefreshRequested = true;
         Toast.makeText(getContext(), getString(R.string.pref_setting_list_saved), Toast.LENGTH_SHORT).show();
 
         if (S.INFO)
