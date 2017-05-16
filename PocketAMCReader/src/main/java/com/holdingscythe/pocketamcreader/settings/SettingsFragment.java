@@ -109,7 +109,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         String key = preference.getKey();
 
         if (key.equals(KEY_PREF_CATALOG_LOCATION)) {
-            Intent i = new Intent(getActivity().getBaseContext(), FilePickerActivity.class);
+            Intent i = new Intent(getActivity().getBaseContext(), SettingsFilePickerActivity.class);
 
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);

@@ -47,6 +47,15 @@
                 android:value="com.holdingscythe.pocketamcreader.MovieListActivity"/>
         </activity>
         <activity
+            android:name=".settings.SettingsFilePickerActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.holdingscythe.pocketamcreader.settings.SettingsActivity"
+            android:theme="@style/FilePickerTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.holdingscythe.pocketamcreader.settings.SettingsActivity"/>
+        </activity>
+        <activity
             android:name=".settings.SettingsListFieldsActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.holdingscythe.pocketamcreader.settings.SettingsActivity">
@@ -62,11 +71,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.holdingscythe.pocketamcreader.MovieDetailActivity"/>
-        </activity>
-        <activity
-            android:name="com.nononsenseapps.filepicker.FilePickerActivity"
-            android:label="@string/app_name"
-            android:theme="@style/FilePickerTheme">
         </activity>
 
         <provider
