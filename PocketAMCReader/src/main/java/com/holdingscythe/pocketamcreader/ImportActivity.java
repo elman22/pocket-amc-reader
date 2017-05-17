@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * This Activity displays the screen's UI and starts a single TaskFragment that
  * will retain itself when configuration changes occur.
  */
-public class ImportActivity extends FragmentActivity implements ImportFragment.TaskCallbacks {
+public class ImportActivity extends AppCompatActivity implements ImportFragment.TaskCallbacks {
     private static final String KEY_CURRENT_LABEL = "current_label";
     private static final String KEY_CURRENT_PROGRESS = "current_progress";
     private ProgressBar mProgressBar;
@@ -58,6 +59,9 @@ public class ImportActivity extends FragmentActivity implements ImportFragment.T
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         // Initialize views
         mTextView = (TextView) findViewById(R.id.progress_status);

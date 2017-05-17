@@ -2,7 +2,7 @@
 <!-- https://www.google.com/design/spec/style/color.html#color-color-palette -->
 <resources>
     <color name="app_bg">#000</color>
-    <color name="color_action_bar_bg">#0D47A1</color>
+    <color name="color_action_bar_bg">#0d47a1</color>
     <color name="color_action_bar_semi_start_bg">#B000</color>
     <color name="color_action_bar_semi_end_bg">#0000</color>
     <color name="color_action_text">#fff</color>
