@@ -13,10 +13,12 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -66,6 +68,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     private MoviesDataProvider mMoviesDataProvider;
     private MoviesAdapter mMoviesAdapter;
     private Filters mFilters;
+    private ListView mListView;
     private TextView mHeaderListCountView;
     private TextView mFilterHeaderLabelText;
     private TextView mFilterHeaderText;
@@ -154,6 +157,13 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
+
+        return view;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -173,22 +183,25 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mFilters = new Filters(getActivity());
         mMoviesDataProvider.setFilters(mFilters);
 
+        // Prepare list view
+        mListView = (ListView) getView().findViewById(R.id.movie_list);
+
         // Remove divider
-        getListView().setDivider(null);
-        getListView().setDividerHeight(0);
+        mListView.setDivider(null);
+        mListView.setDividerHeight(0);
 
         // Add counter header
         View headerView = getActivity().getLayoutInflater().inflate(R.layout.list_header, null);
         mHeaderListCountView = (TextView) headerView.findViewById(R.id.nowShowing);
         headerView.setOnClickListener(this);
-        getListView().addHeaderView(headerView, null, false);
+        mListView.addHeaderView(headerView, null, false);
 
         // Add filter header
         View headerViewFilter = getActivity().getLayoutInflater().inflate(R.layout.list_header_filter, null);
         mFilterHeaderLabelText = (TextView) headerViewFilter.findViewById(R.id.filter_label);
         mFilterHeaderText = (TextView) headerViewFilter.findViewById(R.id.filter_detail);
         headerViewFilter.setOnClickListener(this);
-        getListView().addHeaderView(headerViewFilter, null, false);
+        mListView.addHeaderView(headerViewFilter, null, false);
 
         // Attach adapter to list
         mMoviesAdapter = new MoviesAdapter(
@@ -208,9 +221,9 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
 
         // Set list view parameters
-        getListView().setFastScrollEnabled(true);
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        getListView().setDrawSelectorOnTop(true);
+        mListView.setFastScrollEnabled(true);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        mListView.setDrawSelectorOnTop(true);
 
         // Set list adapter
         setListAdapter(mMoviesAdapter);
@@ -448,7 +461,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
             SharedObjects.getInstance().restartAppRequested = true;
 
         // Restart if adapter is not available
-        if (mMoviesAdapter == null && getListView() != null)
+        if (mMoviesAdapter == null && mListView != null)
             SharedObjects.getInstance().restartAppRequested = true;
 
         // Restart if preferences are not available
@@ -488,7 +501,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         }
 
         try {
-            getListView().setAdapter(null);
+            mListView.setAdapter(null);
         } catch (Exception e) {
             if (S.ERROR)
                 Log.e(S.TAG, "Content view not yet created");
@@ -507,16 +520,16 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
-        getListView().setChoiceMode(activateOnItemClick
+        mListView.setChoiceMode(activateOnItemClick
                 ? ListView.CHOICE_MODE_SINGLE
                 : ListView.CHOICE_MODE_NONE);
     }
 
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
-            getListView().setItemChecked(mActivatedPosition, false);
+            mListView.setItemChecked(mActivatedPosition, false);
         } else {
-            getListView().setItemChecked(position, true);
+            mListView.setItemChecked(position, true);
         }
 
         mActivatedPosition = position;
@@ -543,7 +556,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      * Set default order to preferences and sort list
      */
     protected void setSortOrder(int menuId, String order) {
-        if (mMoviesDataProvider != null && getListView() != null) {
+        if (mMoviesDataProvider != null && mListView != null) {
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
             editor.putInt("settingMovieListOrderId", menuId);
             editor.putString("settingMovieListOrder", order);
@@ -557,7 +570,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
      * Refresh list view
      */
     protected void refreshList() {
-        if (mMoviesDataProvider != null && getListView() != null) {
+        if (mMoviesDataProvider != null && mListView != null) {
             if (SharedObjects.getInstance().preferences == null) {
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
                         (getActivity().getApplicationContext());

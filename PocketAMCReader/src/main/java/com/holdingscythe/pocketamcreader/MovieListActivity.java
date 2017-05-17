@@ -72,6 +72,15 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
                 .build()
         );
 
+        if (savedInstanceState == null) {
+            // Create the list fragment and add it to the activity
+            // using a fragment transaction.
+            MovieListFragment fragment = new MovieListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.movie_list_container, fragment)
+                    .commit();
+        }
+
         if (findViewById(R.id.movie_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts (res/values-large and
             // res/values-sw600dp). If this view is present, then the activity should be in two-pane mode.
