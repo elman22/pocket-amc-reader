@@ -7,7 +7,8 @@ package com.holdingscythe.pocketamcreader.settings;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
@@ -15,7 +16,7 @@ import com.holdingscythe.pocketamcreader.S;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class SettingsListFieldsActivity extends FragmentActivity {
+public class SettingsListFieldsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,10 @@ public class SettingsListFieldsActivity extends FragmentActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.list_fields_wrapper, new SettingsListFieldsFragment())
                 .commit();
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**
