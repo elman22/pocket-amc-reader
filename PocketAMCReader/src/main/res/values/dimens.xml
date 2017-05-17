@@ -13,6 +13,7 @@
     <dimen name="list_margin_vertical">3dip</dimen>
     <!-- Details -->
     <dimen name="detail_hero_img_height">240dip</dimen>
+    <dimen name="detail_hero_img_land_width">180dip</dimen>
     <dimen name="detail_basic_height">48dip</dimen>
     <dimen name="detail_basic_spacing">3dip</dimen>
     <dimen name="detail_arrow_spacing">4dip</dimen>
