@@ -277,7 +277,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginTop="@dimen/arrow_pull"
+                    android:layout_marginTop="@dimen/arrow_pull_vertical"
+                    android:layout_marginRight="@dimen/arrow_pull_horizontal"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/details_expandable_arrow_description"/>
             </com.ms.square.android.expandabletextview.ExpandableTextView>
@@ -390,7 +391,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginTop="@dimen/arrow_pull"
+                    android:layout_marginTop="@dimen/arrow_pull_vertical"
+                    android:layout_marginRight="@dimen/arrow_pull_horizontal"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/details_expandable_arrow_description"/>
             </com.ms.square.android.expandabletextview.ExpandableTextView>
