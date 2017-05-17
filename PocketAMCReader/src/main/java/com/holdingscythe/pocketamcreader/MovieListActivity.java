@@ -8,7 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -38,7 +39,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * {@link MovieListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class MovieListActivity extends FragmentActivity implements MovieListFragment.Callbacks {
+public class MovieListActivity extends AppCompatActivity implements MovieListFragment.Callbacks {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
@@ -71,6 +72,9 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.quick_return_toolbar);
+        setSupportActionBar(mToolbar);
 
         if (savedInstanceState == null) {
             // Create the list fragment and add it to the activity

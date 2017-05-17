@@ -38,7 +38,8 @@ public class MovieDetailFragmentHost extends Fragment {
         public MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
             super(fm);
             mMoviesAdapter = SharedObjects.getInstance().listMovieAdapter;
-            mListView = SharedObjects.getInstance().movieListFragment.getListView();
+            mListView = (ListView) SharedObjects.getInstance().movieListFragment.getView().findViewById(R.id
+                    .movie_list);
 
             if (mMoviesAdapter == null || mListView == null) {
                 throw new NullPointerException();

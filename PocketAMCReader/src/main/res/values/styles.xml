@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme -->
-    <style name="AppTheme" parent="android:Theme.Holo">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:actionBarStyle">@style/action_bar_theme</item>
         <item name="android:actionMenuTextColor">@color/color_action_text</item>
     </style>

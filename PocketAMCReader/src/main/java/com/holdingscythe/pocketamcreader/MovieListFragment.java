@@ -8,9 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ListFragment;
+import android.support.v7.widget.SearchView;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.catalog.Movies;
@@ -47,7 +50,7 @@ import java.util.Calendar;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class MovieListFragment extends ListFragment implements View.OnClickListener {
+public class MovieListFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     /**
      * The serialization (saved instance state) Bundle key representing the activated item position. Only used on
@@ -88,7 +91,6 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         @Override
         public void onChanged() {
             updateHeaderInfo();
-            updateHeaderFilterInfo();
             resetDetailPager();
         }
     }
@@ -158,9 +160,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_movie_list, container, false);
     }
 
     @Override
@@ -191,17 +191,15 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mListView.setDividerHeight(0);
 
         // Add counter header
-        View headerView = getActivity().getLayoutInflater().inflate(R.layout.list_header, null);
-        mHeaderListCountView = (TextView) headerView.findViewById(R.id.nowShowing);
+        mHeaderListCountView = (TextView) getActivity().findViewById(R.id.nowShowing);
+        LinearLayout headerView = (LinearLayout) getActivity().findViewById(R.id.showing_info_layout);
         headerView.setOnClickListener(this);
-        mListView.addHeaderView(headerView, null, false);
 
         // Add filter header
-        View headerViewFilter = getActivity().getLayoutInflater().inflate(R.layout.list_header_filter, null);
-        mFilterHeaderLabelText = (TextView) headerViewFilter.findViewById(R.id.filter_label);
-        mFilterHeaderText = (TextView) headerViewFilter.findViewById(R.id.filter_detail);
+        mFilterHeaderLabelText = (TextView) getActivity().findViewById(R.id.filter_label);
+        mFilterHeaderText = (TextView) getActivity().findViewById(R.id.filter_detail);
+        RelativeLayout headerViewFilter = (RelativeLayout) getActivity().findViewById(R.id.filter_info_layout);
         headerViewFilter.setOnClickListener(this);
-        mListView.addHeaderView(headerViewFilter, null, false);
 
         // Attach adapter to list
         mMoviesAdapter = new MoviesAdapter(
@@ -225,12 +223,22 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mListView.setDrawSelectorOnTop(true);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mListView.setNestedScrollingEnabled(true);
+        }
+
         // Set list adapter
-        setListAdapter(mMoviesAdapter);
+        mListView.setAdapter(mMoviesAdapter);
+
+        // Open movie detail when clicked on item
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mCallbacks.onItemSelected(String.valueOf(id));
+            }
+        });
 
         // Update list header views info
         updateHeaderInfo();
-        updateHeaderFilterInfo();
 
         // Store references
         SharedObjects.getInstance().listMovieAdapter = mMoviesAdapter;
@@ -277,15 +285,6 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
     }
 
     @Override
-    public void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
-
-        // Notify the active callbacks interface (the activity, if the
-        // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(String.valueOf(id));
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mActivatedPosition != ListView.INVALID_POSITION) {
@@ -318,16 +317,15 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mSearchMenuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
 
-        // Do actions when text in search widget changes
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextChange(String newText) {
-                mMoviesAdapter.getFilter().filter(newText);
+            public boolean onQueryTextSubmit(String query) {
                 return true;
             }
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextChange(String newText) {
+                mMoviesAdapter.getFilter().filter(newText);
                 return true;
             }
         });
@@ -542,12 +540,7 @@ public class MovieListFragment extends ListFragment implements View.OnClickListe
         mMoviesAdapter.getCount();
         mHeaderListCountView.setText(String.format(getResources().getQuantityString(R.plurals.list_showing,
                 mMoviesAdapter.getCount()), mMoviesAdapter.getCount()));
-    }
 
-    /**
-     * Function to refresh main list header view
-     */
-    private void updateHeaderFilterInfo() {
         mFilterHeaderLabelText.setText(getResources().getQuantityString(R.plurals.filter_label, mFilters.getCount()));
         mFilterHeaderText.setText(mFilters.getFiltersHumanInfo());
     }
