@@ -89,7 +89,7 @@ public class MovieListActivity extends FragmentActivity implements MovieListFrag
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
             ((MovieListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.movie_list))
+                    .findFragmentById(R.id.movie_list_container))
                     .setActivateOnItemClick(true);
         }
 
