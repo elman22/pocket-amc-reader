@@ -178,6 +178,13 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Read preferences
+        if (SharedObjects.getInstance().preferences == null) {
+            // Prepare Shared Objects
+            SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
+                    (getActivity().getApplicationContext());
+        }
+
         // Setup database and filters
         mMoviesDataProvider = new MoviesDataProvider(getActivity());
         mFilters = new Filters(getActivity());
