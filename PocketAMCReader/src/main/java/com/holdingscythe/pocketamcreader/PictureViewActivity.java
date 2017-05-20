@@ -10,9 +10,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 
 import com.holdingscythe.pocketamcreader.images.TouchImageAdapter;
+import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,15 @@ public class PictureViewActivity extends Activity {
                 .build()
         );
 
+        // Read preferences
+        if (SharedObjects.getInstance().preferences == null) {
+            // Prepare Shared Objects
+            SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
+                    (getApplicationContext());
+        }
+        boolean settingFitPicture = SharedObjects.getInstance().preferences.getBoolean("settingFitPicture", true);
+
+        // Read picture list
         Intent i = getIntent();
         ArrayList<String> filePaths = i.getStringArrayListExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST);
         // String title = i.getStringExtra(MovieDetailFragment.ARG_MOVIE_TITLE);
@@ -44,7 +55,7 @@ public class PictureViewActivity extends Activity {
 
         // create viewpager
         ViewPager viewPager = (ViewPager) findViewById(R.id.fullscreen_picture_pager);
-        TouchImageAdapter adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths);
+        TouchImageAdapter adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths, settingFitPicture);
         viewPager.setAdapter(adapter);
 
         // change title of the activity

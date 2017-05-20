@@ -1,4 +1,3 @@
-<!-- todo: cleanup -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:orderingFromXml="true"
@@ -14,28 +13,13 @@
             android:summary="@string/pref_setting_encoding_summary"
             android:title="@string/pref_setting_encoding"/>
     </PreferenceCategory>
-    <!--<PreferenceCategory-->
-    <!--android:orderingFromXml="true"-->
-    <!--android:title="@string/pref_category_general">-->
-    <!--<ListPreference-->
-    <!--android:title="@string/pref_setting_font_size"-->
-    <!--android:key="settingFontSize"-->
-    <!--android:entryValues="@array/pref_setting_font_size_values"-->
-    <!--android:entries="@array/pref_setting_font_size_keys"-->
-    <!--android:defaultValue="0"/>-->
-    <!--<CheckBoxPreference-->
-    <!--android:title="@string/pref_setting_show_color_tags"-->
-    <!--android:summary="@string/pref_setting_show_color_tags_summary"-->
-    <!--android:key="settingShowColorTags"-->
-    <!--android:defaultValue="true"/>-->
-    <!--</PreferenceCategory>-->
     <PreferenceCategory
         android:orderingFromXml="true"
         android:title="@string/pref_category_list">
         <Preference
-        android:title="@string/pref_setting_list_lines"
-        android:summary="@string/pref_setting_list_lines_summary"
-        android:key="settingMoviesListLines">
+            android:key="settingMoviesListLines"
+            android:summary="@string/pref_setting_list_lines_summary"
+            android:title="@string/pref_setting_list_lines">
         </Preference>
         <EditTextPreference
             android:key="settingMoviesListSeparator"
@@ -54,45 +38,13 @@
     <PreferenceCategory
         android:orderingFromXml="true"
         android:title="@string/pref_category_display">
-        <!--<ListPreference-->
-        <!--android:entryValues="@array/pref_setting_default_tab_values"-->
-        <!--android:entries="@array/pref_setting_default_tab_keys"-->
-        <!--android:key="settingDefaultTab"-->
-        <!--android:title="@string/pref_setting_default_tab"/>-->
-        <!--<ListPreference-->
-        <!--android:entryValues="@array/pref_setting_plot_basic_values"-->
-        <!--android:entries="@array/pref_setting_plot_basic_keys"-->
-        <!--android:key="settingPlotInBasic"-->
-        <!--android:title="@string/pref_setting_plot_basic"/>-->
         <EditTextPreference
             android:key="settingMultivalueSeparator"
             android:title="@string/pref_setting_multivalue"/>
-        <!--<CheckBoxPreference-->
-        <!--android:key="settingFitPicture"-->
-        <!--android:summary="@string/pref_setting_fit_picture_summary"-->
-        <!--android:title="@string/pref_setting_fit_picture"-->
-        <!--android:defaultValue="true"></CheckBoxPreference>-->
-        <!--<CheckBoxPreference-->
-        <!--android:key="hideUnusedFields"-->
-        <!--android:summary="@string/pref_setting_hide_unused_fields_summary"-->
-        <!--android:title="@string/pref_setting_hide_unused_fields"-->
-        <!--android:defaultValue="false"/>-->
-        <!--<ListPreference-->
-        <!--android:entryValues="@array/pref_setting_imdb_values"-->
-        <!--android:entries="@array/pref_setting_imdb_keys"-->
-        <!--android:key="settingIMDb"-->
-        <!--android:title="@string/pref_setting_imdb"/>-->
-        <!--</PreferenceCategory>-->
-        <!--<PreferenceCategory-->
-        <!--android:orderingFromXml="true"-->
-        <!--android:title="@string/pref_category_debug">-->
-        <!--<CheckBoxPreference-->
-        <!--android:key="settingForceImport"-->
-        <!--android:summary="@string/pref_setting_force_import_summary"-->
-        <!--android:title="@string/pref_setting_force_import"/>-->
-        <!--<CheckBoxPreference-->
-        <!--android:key="settingClearThumbCache"-->
-        <!--android:summary="@string/pref_setting_clear_thumb_cache_summary"-->
-        <!--android:title="@string/pref_setting_clear_thumb_cache"/>-->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="settingFitPicture"
+            android:summary="@string/pref_setting_fit_picture_summary"
+            android:title="@string/pref_setting_fit_picture"/>
     </PreferenceCategory>
 </PreferenceScreen>

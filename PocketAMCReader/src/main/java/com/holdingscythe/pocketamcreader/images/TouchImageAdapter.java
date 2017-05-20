@@ -24,11 +24,13 @@ public class TouchImageAdapter extends PagerAdapter {
 
     private Activity mActivity;
     private ArrayList<String> mImagePaths;
+    private TouchImageView.ScaleType mScaleType;
 
     // constructor
-    public TouchImageAdapter(Activity activity, ArrayList<String> imagePaths) {
+    public TouchImageAdapter(Activity activity, ArrayList<String> imagePaths, Boolean settingFitPicture) {
         this.mActivity = activity;
         this.mImagePaths = imagePaths;
+        this.mScaleType = (settingFitPicture) ? TouchImageView.ScaleType.FIT_CENTER : TouchImageView.ScaleType.CENTER;
     }
 
     @Override
@@ -50,6 +52,10 @@ public class TouchImageAdapter extends PagerAdapter {
         View viewLayout = inflater.inflate(R.layout.fullscreen_image, container, false);
 
         imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.picture_display);
+
+        // set scale according to preferences
+        if (mScaleType == TouchImageView.ScaleType.CENTER)
+            imgDisplay.setScaleType(TouchImageView.ScaleType.CENTER);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
