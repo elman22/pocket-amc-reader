@@ -6,12 +6,12 @@ package com.holdingscythe.pocketamcreader;
  * http://www.androidhive.info/2013/09/android-fullscreen-image-slider-with-swipe-and-pinch-zoom-gestures/
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import com.holdingscythe.pocketamcreader.images.TouchImageAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class PictureViewActivity extends Activity {
+public class PictureViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

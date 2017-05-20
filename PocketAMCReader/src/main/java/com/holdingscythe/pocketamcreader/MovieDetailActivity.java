@@ -2,7 +2,7 @@ package com.holdingscythe.pocketamcreader;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
@@ -21,7 +21,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link MovieDetailFragment}.
  */
-public class MovieDetailActivity extends FragmentActivity {
+public class MovieDetailActivity extends AppCompatActivity {
 //    private final Handler handler = new Handler();
 //    private PagerSlidingTabStrip mTabs;
 //    private Drawable mOldBackground = null;
@@ -45,9 +45,9 @@ public class MovieDetailActivity extends FragmentActivity {
 
         // Set default font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath(S.DEFAULT_FONT)
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
+                .setDefaultFontPath(S.DEFAULT_FONT)
+                .setFontAttrId(R.attr.fontPath)
+                .build()
         );
 
         if (savedInstanceState == null) {
