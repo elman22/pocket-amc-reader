@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("../pocket-amc-reader-resources/keystores/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
@@ -10,6 +14,14 @@ android {
         versionCode 83
         versionName "2.0-beta1"
     }
+    signingConfigs {
+        production {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
@@ -18,7 +30,8 @@ android {
             jniDebuggable false
             renderscriptDebuggable false
             zipAlignEnabled true
-            versionNameSuffix '.production'
+            versionNameSuffix '.signed'
+            signingConfig signingConfigs.production
         }
         debug {
             minifyEnabled false
@@ -27,10 +40,17 @@ android {
             jniDebuggable true
             renderscriptDebuggable true
             zipAlignEnabled true
-            versionNameSuffix '.debug'
         }
     }
-    signingConfigs {
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+        }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -39,7 +59,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     // Android support
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
