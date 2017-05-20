@@ -18,16 +18,7 @@
 
     <style name="ListTextTitle" parent="ListText">
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
-    </style>
-
-    <!-- Theme for details view -->
-    <style name="AppTheme.SemiActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:actionBarStyle">@style/action_bar_theme_semi_transparent</item>
-    </style>
-
-    <style name="action_bar_theme_semi_transparent" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">@drawable/detail_action_bar_background</item>
+        <item name="android:textColor">@color/primary_text_dark_nostates</item>
     </style>
 
     <!-- Specific styles -->
