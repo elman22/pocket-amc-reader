@@ -299,7 +299,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/color_basic_bg1"
+                    android:background="?attr/color_basic_bg1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -316,7 +316,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/color_basic_bg2"
+                    android:background="?attr/color_basic_bg2"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -343,7 +343,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/color_basic_bg3"
+                    android:background="?attr/color_basic_bg3"
                     android:orientation="horizontal"
                     android:weightSum="2">
 

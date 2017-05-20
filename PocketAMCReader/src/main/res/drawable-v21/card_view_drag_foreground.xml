@@ -8,7 +8,7 @@
     <shape>
         <stroke
             android:width="2dp"
-            android:color="@color/color_basic_bg2"/>
+            android:color="?attr/color_basic_bg2"/>
         <corners android:radius="3dp"/>
     </shape>
 </inset>

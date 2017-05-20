@@ -3,7 +3,7 @@
     <item android:state_pressed="true">
         <inset android:insetBottom="4dp" android:insetLeft="3dp" android:insetRight="3dp" android:insetTop="4dp">
             <shape>
-                <stroke android:width="2dp" android:color="@color/color_action_bar_bg"/>
+                <stroke android:width="2dp" android:color="?attr/color_action_bar_bg"/>
                 <corners android:radius="3dp"/>
             </shape>
         </inset>

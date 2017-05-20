@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_action_bar_bg">
+        android:background="?attr/color_action_bar_bg">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/quick_return_toolbar"
@@ -26,7 +26,7 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_basic_bg1">
+                android:background="?attr/color_basic_bg1">
 
                 <TextView
                     android:id="@+id/nowShowing"
@@ -46,7 +46,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/showing_info_layout"
-                android:background="@color/color_basic_bg2">
+                android:background="?attr/color_basic_bg2">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

@@ -1,25 +1,20 @@
-<!-- todo: cleanup -->
 <!-- https://www.google.com/design/spec/style/color.html#color-color-palette -->
 <resources>
+    <!-- Universal colors -->
     <color name="app_bg">#000</color>
-    <color name="color_action_bar_bg">#0d47a1</color>
+    <color name="detail_title_background">#BB000000</color>
     <color name="color_action_bar_semi_start_bg">#B000</color>
     <color name="color_action_bar_semi_end_bg">#0000</color>
+    <color name="primary_text_dark_nostates">#f2f2f2</color>
     <color name="color_action_text">#fff</color>
-    <color name="color_basic_bg1">#1565c0</color>
-    <color name="color_basic_bg2">#1976d2</color>
-    <color name="color_basic_bg3">#1e88e5</color>
-    <color name="detail_title_background">#BB000000</color>
-    <!--<color name="color_theme_default_background">#000000</color>-->
-    <!--<color name="color_list_header_background">#444444</color>-->
-    <!--<color name="color_list_header_main">#ffffff</color>-->
-    <!--<color name="color_list_header_secondary">#bdbebd</color>-->
-    <!--<color name="color_list_header_filter_action">#888888</color>-->
-    <!--<color name="color_list_header_filter_pressed">#666666</color>-->
-    <!--<color name="color_detail_label_1">#202020</color>-->
-    <!--<color name="color_detail_label_2">#101010</color>-->
-    <!--<color name="color_item_pressed">#6495ed</color>-->
-    <!--<color name="color_url">#bf9240</color>-->
+
+    <!-- Themed colors -->
+    <color name="blue.color_action_bar_bg">#0d47a1</color>
+    <color name="blue.color_basic_bg1">#1565c0</color>
+    <color name="blue.color_basic_bg2">#1976d2</color>
+    <color name="blue.color_basic_bg3">#1e88e5</color>
+
+    <!-- Color tags -->
     <color name="color_tag_0">@android:color/transparent</color>
     <color name="color_tag_1">#f16065</color>
     <color name="color_tag_2">#fea567</color>
@@ -33,5 +28,4 @@
     <color name="color_tag_10">#dd56e8</color>
     <color name="color_tag_11">#cda989</color>
     <color name="color_tag_12">#ffffff</color>
-    <color name="primary_text_dark_nostates">#f2f2f2</color>
 </resources>
