@@ -399,6 +399,8 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/wrapper_spacing_block"
                 expandableTextView:animDuration="300"
+                expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
+                expandableTextView:expandDrawable="@drawable/ic_expand_shape"
                 expandableTextView:maxCollapsedLines="5">
 
                 <TextView
@@ -414,8 +416,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginTop="@dimen/arrow_pull_vertical"
                     android:layout_marginRight="@dimen/arrow_pull_horizontal"
+                    android:layout_marginTop="@dimen/arrow_pull_vertical"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/details_expandable_arrow_description"/>
             </com.ms.square.android.expandabletextview.ExpandableTextView>
@@ -513,6 +515,8 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/wrapper_spacing_block"
                 expandableTextView:animDuration="300"
+                expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
+                expandableTextView:expandDrawable="@drawable/ic_expand_shape"
                 expandableTextView:maxCollapsedLines="5">
 
                 <TextView
@@ -528,8 +532,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginTop="@dimen/arrow_pull_vertical"
                     android:layout_marginRight="@dimen/arrow_pull_horizontal"
+                    android:layout_marginTop="@dimen/arrow_pull_vertical"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/details_expandable_arrow_description"/>
             </com.ms.square.android.expandabletextview.ExpandableTextView>

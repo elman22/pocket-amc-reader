@@ -20,8 +20,12 @@
     <!-- ColorTag -->
     <dimen name="colortag_height">2dip</dimen>
     <!-- Expandable text view -->
-    <dimen name="arrow_pull_vertical">-16dip</dimen>
+    <dimen name="arrow_pull_vertical">-20dip</dimen>
     <dimen name="arrow_pull_horizontal">0dip</dimen>
+    <dimen name="arrow_margin_top">4dip</dimen>
+    <dimen name="arrow_margin_bottom">3dip</dimen>
+    <dimen name="arrow_margin_left">20dip</dimen>
+    <dimen name="arrow_margin_right">0dip</dimen>
     <!-- Cards -->
     <dimen name="card_corner_radius">4dip</dimen>
     <dimen name="card_padding">12dip</dimen>
