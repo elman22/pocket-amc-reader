@@ -26,7 +26,6 @@
     <string name="pref_category_debug">Расширенный</string>
     <string name="pref_setting_force_import">Реимпорт каталога</string>
     <string name="pref_setting_force_import_summary">Реимпорт каталога при закрытии настроек</string>
-    <string name="items_separator_default">,</string>
     <string name="search_hint">Поиск фильма</string>
     <string name="app_label">Pocket AMC Reader</string>
     <string name="search_label">Результаты поиска для:</string>

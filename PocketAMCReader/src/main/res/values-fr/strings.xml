@@ -26,7 +26,6 @@
     <string name="pref_category_debug">Avancé</string>
     <string name="pref_setting_force_import">Réimport forcé</string>
     <string name="pref_setting_force_import_summary">Force la réimportation du catalogue à la fermeture du menu Options</string>
-    <string name="items_separator_default">,</string>
     <string name="search_hint">Recherche de films</string>
     <string name="app_label">Pocket AMC Reader</string>
     <string name="search_label">Texte à chercher:</string>

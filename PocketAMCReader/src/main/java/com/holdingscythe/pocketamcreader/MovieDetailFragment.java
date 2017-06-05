@@ -94,7 +94,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 //        this.settingIMDb = this.preferences.getString("settingIMDb", "original");
 //        this.settingDefaultTab = Integer.valueOf(this.preferences.getString("settingDefaultTab", "0"));
 //        this.settingShowColorTags = this.preferences.getBoolean("settingShowColorTags", true);
-        mSettingMultivaluedSeparator = mPreferences.getString("settingMultivalueSeparator", ",");
+        mSettingMultivaluedSeparator = mPreferences.getString("settingMultivalueSeparator", ",/");
 //        this.settingPlotInBasic = Integer.valueOf(this.preferences.getString("settingPlotInBasic", "1"));
 //        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
 //        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);

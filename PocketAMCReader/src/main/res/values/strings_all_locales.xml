@@ -38,6 +38,7 @@
     <string name="filter_value_enclosing" translatable="false">\'</string>
     <string name="filter_value_null" translatable="false">null</string>
     <string name="filter_value_null_operator" translatable="false">is</string>
+    <string name="items_separator_default" translatable="false">,\u0020</string>
 
     <!-- Placeholders -->
     <string name="ph_formatted_title" translatable="false">Formatted Movie Title</string>

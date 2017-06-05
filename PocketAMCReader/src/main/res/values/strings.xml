@@ -26,7 +26,6 @@
     <string name="pref_category_debug">Advanced</string>
     <string name="pref_setting_force_import">Force re-import</string>
     <string name="pref_setting_force_import_summary">Force catalog re-import when settings are closed</string>
-    <string name="items_separator_default">, </string>
     <string name="search_hint">Search movies</string>
     <string name="app_label">Pocket AMC Reader</string>
     <string name="search_label">Search result for:</string>
