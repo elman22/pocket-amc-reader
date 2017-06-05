@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
 
-def keystorePropertiesFile = rootProject.file("../pocket-amc-reader-resources/keystores/keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
@@ -14,14 +10,6 @@ android {
         versionCode 83
         versionName "2.0-beta1"
     }
-    signingConfigs {
-        production {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-        }
-    }
     buildTypes {
         release {
             minifyEnabled true
@@ -30,8 +18,6 @@ android {
             jniDebuggable false
             renderscriptDebuggable false
             zipAlignEnabled true
-            versionNameSuffix '.signed'
-            signingConfig signingConfigs.production
         }
         debug {
             minifyEnabled false
@@ -51,6 +37,29 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+}
+
+if (project.hasProperty("signingProperties") && new File(project.property("signingProperties")).exists()) {
+
+    Properties keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(rootProject.file(project.property("signingProperties"))))
+
+    android {
+        signingConfigs {
+            production {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+        buildTypes {
+            release {
+                versionNameSuffix '.signed'
+                signingConfig signingConfigs.production
+            }
+        }
     }
 }
 
