@@ -110,11 +110,7 @@
     <string name="filter_none">aucun</string>
     <string name="filter_action">Annuler</string>
     <string name="filter_type_contains">contient</string>
-    <string name="filter_value_enclosing">\'</string>
     <string name="details_rating_label">Note:</string>
-    <string name="rating_none">-</string>
-    <string name="filter_value_null">vide</string>
-    <string name="filter_value_null_operator">est</string>
     <string name="details_videoformat_label">Format Video:</string>
     <string name="details_audioformat_label">Format Audio:</string>
     <string name="error_import">Erreur lors de l\'importation de votre catalogue. C\'est causé généralement par la présence de caractères non reconnus dans le catalogue. Pour nettoyer votre catalogue, lancez Ant Movie Catalog sur votre PC et avec (Maj+F6) exécutez le script appelé RemoveBadChars puis ré-importez ce catalogue corrigé. Si ça ne suffit pas, vous pouvez essayer:\n\n- Assurez-vous quevous avez assez d\'espace libre sur votre appareil (hors carte SD). Vous avez besoin de deux fois la taille du fichier XML.\n- Essayez de modifier l\'option \"%1$s\".\n\nEn cas d\'échec, veuillez contacter l\'auteur via la page web indiquée sur Google Play.</string>
@@ -217,12 +213,6 @@
         <item>Très grande</item>
         <item>Tablet</item>
     </string-array>
-    <string name="explorer_name">Explorateur</string>
-    <string name="explorer_path_label">Emplacement:</string>
-    <string name="explorer_no_data">Catalogue XML introuvable</string>
-    <string name="explorer_folder_cant_read">Dossier \"%1$s\" illisible</string>
-    <string name="explorer_pick_file">Choisir le catalogue \"%1$s\"?</string>
-    <string name="explorer_storage_not_readable">La mémoire de stockage externe n\'a pas pu être lue. Pour résoudre le problème veuillez contacter l\'auteur via la page web indiquée sur Google Play.</string>
     <string name="menu_sort_date_desc">Date d\'ajoût (Récente)</string>
     <string name="menu_sort_date_asc">Date d\'ajoût (Ancienne)</string>
 </resources>

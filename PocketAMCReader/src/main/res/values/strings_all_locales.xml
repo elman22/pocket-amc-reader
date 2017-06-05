@@ -1,46 +1,55 @@
 <resources>
-    <string name="provider_authority">com.holdingscythe.provider.MovieCatalog</string>
-    <string name="locale_translation_separator">:\u0020</string>
+    <string name="provider_authority" translatable="false">com.holdingscythe.provider.MovieCatalog</string>
+    <string name="locale_translation_separator" translatable="false">:\u0020</string>
 
-    <string name="locale_en_independent">English</string>
-    <string name="locale_ru_independent">Russian</string>
-    <string name="locale_de_independent">German</string>
-    <string name="locale_fr_independent">French</string>
+    <string name="locale_en_independent" translatable="false">English</string>
+    <string name="locale_ru_independent" translatable="false">Russian</string>
+    <string name="locale_de_independent" translatable="false">German</string>
+    <string name="locale_fr_independent" translatable="false">French</string>
 
-    <string name="locale_en_local">English</string>
-    <string name="locale_ru_local">Русский</string>
-    <string name="locale_de_local">Deutsch</string>
-    <string name="locale_fr_local">Français</string>
+    <string name="locale_en_local" translatable="false">English</string>
+    <string name="locale_ru_local" translatable="false">Русский</string>
+    <string name="locale_de_local" translatable="false">Deutsch</string>
+    <string name="locale_fr_local" translatable="false">Français</string>
 
-    <string name="locale_en_translator">Elman</string>
-    <string name="locale_ru_translator">migver</string>
-    <string name="locale_de_translator">Klaus Oed</string>
-    <string name="locale_fr_translator">Xavier Muller</string>
+    <string name="locale_en_translator" translatable="false">Elman</string>
+    <string name="locale_ru_translator" translatable="false">migver</string>
+    <string name="locale_de_translator" translatable="false">Klaus Oed</string>
+    <string name="locale_fr_translator" translatable="false">Xavier Muller</string>
 
-    <string name="copyright_year">2017</string>
-    <string name="rating_star">&#x2605;</string>
-    <string name="userrating_star">&#x2606;</string>
-    <string name="rating_suffix">/10</string>
-    <string name="rating_suffix_list">*/10</string>
-    <string name="list_seen_true">&#x2713;</string>
-    <string name="list_seen_false">&#x2715;</string>
-    <string name="string_extension_separator">\u0020</string>
-    <string name="picture_counter">%1$d\u2215%2$d</string>
-    <string name="used_libraries">NoNonsense-FilePicker: Jonas Kalderstam\nExpandableTextView: Manabu
-        Shimobe\nAndroid-Universal-Image-Loader: Sergey Tarasevich\nCalligraphy: Christopher
+    <string name="copyright_year" translatable="false">2017</string>
+    <string name="rating_star" translatable="false">&#x2605;</string>
+    <string name="userrating_star" translatable="false">&#x2606;</string>
+    <string name="rating_suffix" translatable="false">/10</string>
+    <string name="rating_suffix_list" translatable="false">*/10</string>
+    <string name="list_seen_true" translatable="false">&#x2713;</string>
+    <string name="list_seen_false" translatable="false">&#x2715;</string>
+    <string name="string_extension_separator" translatable="false">\u0020</string>
+    <string name="picture_counter" translatable="false">%1$d\u2215%2$d</string>
+    <string name="used_libraries" translatable="false">NoNonsense-FilePicker: Jonas Kalderstam\nExpandableTextView:
+        Manabu Shimobe\nAndroid-Universal-Image-Loader: Sergey Tarasevich\nCalligraphy: Christopher
 		Jenkins\nAndroid-ObservableScrollView: Soichiro Kashima\nDragListView: Magnus Woxblom</string>
 
+    <!--Version 2.0-->
+    <string name="year_none" translatable="false">\?</string>
+    <string name="length_none" translatable="false">\?</string>
+    <string name="details_expandable_arrow_description" translatable="false">&lt;&gt;</string>
+    <string name="rating_none" translatable="false">&#x002d;</string>
+    <string name="filter_value_enclosing" translatable="false">\'</string>
+    <string name="filter_value_null" translatable="false">null</string>
+    <string name="filter_value_null_operator" translatable="false">is</string>
+
     <!-- Placeholders -->
-    <string name="ph_formatted_title">Formatted Movie Title</string>
-    <string name="ph_text_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id pellentesque eros. In
+    <string name="ph_formatted_title" translatable="false">Formatted Movie Title</string>
+    <string name="ph_text_long" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id pellentesque eros. In
         cursus ultrices ligula in fermentum. Donec quis sem a diam vestibulum hendrerit. Vestibulum consectetur est
         massa, vitae ultrices magna molestie ut. Integer in sem aliquet, facilisis nisl volutpat, pulvinar lorem. Ut
         ultricies faucibus risus, sagittis convallis lorem tincidunt at.</string>
-    <string name="ph_text_short">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
-    <string name="ph_text_line">Consectetur elit</string>
-    <string name="ph_text_data">Lorem</string>
-    <string name="ph_number">#</string>
-    <string name="ph_number_long">####</string>
-    <string name="ph_boolean">\?\?\?</string>
-    <string name="ph_card_header">Card title</string>
+    <string name="ph_text_short" translatable="false">Proin vel iaculis velit. Donec laoreet sit amet leo eu sagittis.</string>
+    <string name="ph_text_line" translatable="false">Consectetur elit</string>
+    <string name="ph_text_data" translatable="false">Lorem</string>
+    <string name="ph_number" translatable="false">#</string>
+    <string name="ph_number_long" translatable="false">####</string>
+    <string name="ph_boolean" translatable="false">\?\?\?</string>
+    <string name="ph_card_header" translatable="false">Card title</string>
 </resources>

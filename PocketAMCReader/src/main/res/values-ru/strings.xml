@@ -110,11 +110,7 @@
     <string name="filter_none">нет</string>
     <string name="filter_action">Очистить</string>
     <string name="filter_type_contains">содержит</string>
-    <string name="filter_value_enclosing">\'</string>
     <string name="details_rating_label">Рейтинг:</string>
-    <string name="rating_none">-</string>
-    <string name="filter_value_null">null</string>
-    <string name="filter_value_null_operator">Полное соответствие</string>
     <string name="details_videoformat_label">Видео формат:</string>
     <string name="details_audioformat_label">Аудио формат:</string>
     <string name="error_import">Ошибка при импорте каталога. Обычно это происходит при наличии нестандартных символов в каталоге. Чтобы исправить это: запустите скрипт RemoveBadChars в Ant Movie Catalog  на вашем ПК и повторите попытку. Если это не помогло: \n \n-Убедитесь, что у вас достаточно свободного места на вашем устройстве (не на карте памяти SD). Требуется двойной размер файла каталога XML. \n-попробуйте изменить \"%1$s\" настройки. \n\nЕсли ничего из этого не помогает, пожалуйста, свяжитесь с автором через веб-страницу, указанную на Google Play.</string>
@@ -137,7 +133,7 @@
     <string name="details_audiobitrate_label">Аудио битрейт:</string>
     <string name="details_size_label">Размер:</string>
     <string name="details_disks_label">Кол-во дисков:</string>
-    <string name="filter_join_and">&lt;</string>
+    <string name="filter_join_and"><i>и</i></string>
     <string name="error_import_label">Ошибка!</string>
     <string name="pref_setting_show_thumbs">Показывать эскизы</string>
     <string name="pref_setting_show_thumbs_summary">Показывать эскизы в списке фильмов</string>

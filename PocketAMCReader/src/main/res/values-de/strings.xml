@@ -110,11 +110,7 @@
     <string name="filter_none">kein</string>
     <string name="filter_action">Löschen</string>
     <string name="filter_type_contains">enthält</string>
-    <string name="filter_value_enclosing">\'</string>
     <string name="details_rating_label">Bewertung:</string>
-    <string name="rating_none">-</string>
-    <string name="filter_value_null">null</string>
-    <string name="filter_value_null_operator">ist</string>
     <string name="details_videoformat_label">Videoformat:</string>
     <string name="details_audioformat_label">Audioformat:</string>
     <string name="error_import">Fehler beim Katalogimport. Normalerweise bedeutet das Probleme mit den Standardbuchstaben im Katalaog. Um den Fehler zu beheben, starten Sie das Ant Movie Catalog Skript RemoveBadChars auf Ihrem PC und versuchen Sie es erneut. Wenn das nicht hilft, können Sie folgendes probieren:\n\n- Stellen Sie sicher, dass Sie auf Ihrem Gerät genug Speicher zur Verfügung haben (nicht auf der SD Karte). Die doppelte Größe der XML Datei wird benötigt.\n- Versuchen Sie die Änderung der Einstellung von \"%1$s\".\n\nWenn dies alles nichts hilft, dann kontaktieren Sie bitte den Autor über das Web, gemäß der Angaben in Google Play.</string>
@@ -217,9 +213,4 @@
         <item>Extra groß</item>
         <item>Tablet</item>
     </string-array>
-    <string name="explorer_name">Dateimanager</string>
-    <string name="explorer_path_label">Ort:</string>
-    <string name="explorer_no_data">Keine Ordner oder XML Kataloge wurden am angegebenen Ort gefunden</string>
-    <string name="explorer_folder_cant_read">Kann Ordner \"%1$s\" nicht lesen</string>
-    <string name="explorer_pick_file">Katalog \"%1$s\" einlesen?</string>
 </resources>
