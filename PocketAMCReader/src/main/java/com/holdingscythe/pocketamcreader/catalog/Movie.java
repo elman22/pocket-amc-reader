@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +37,7 @@ public class Movie {
     private Resources mResources;
     private Context mContext;
     private String mPreferencePicturesDirectory;
+    private ArrayList<ImageView> mPictureViews;
 
     // Logical data types
     final int STRING_REGULAR = 0;
@@ -59,6 +62,7 @@ public class Movie {
         mActivity = activity;
         mResources = activity.getResources();
         mContext = activity.getBaseContext();
+        mPictureViews = new ArrayList<>();
 
         // Verify that cursor exists
         if (cursor == null || cursor.getCount() == 0) {
@@ -319,6 +323,10 @@ public class Movie {
                     Bitmap picture = BitmapFactory.decodeFile(picturePath);
                     iv.setImageBitmap(picture);
                     iv.setOnClickListener(mClickListener);
+
+                    // Save reference for cleanup
+                    mPictureViews.add(iv);
+
                 } catch (Exception e) {
                     // file can't be read
                     if (S.ERROR)
@@ -373,6 +381,20 @@ public class Movie {
     */
     public String getTitle() {
         return mMovie.getFormattedTitle();
+    }
+
+    /*
+    * Unbind data
+    */
+    public void unbindData() {
+        for (ImageView view : mPictureViews) {
+            Drawable drawable = view.getDrawable();
+            if (drawable instanceof BitmapDrawable) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                bitmap.recycle();
+            }
+        }
     }
 
 }

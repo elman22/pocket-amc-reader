@@ -153,6 +153,13 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     }
 
     @Override
+    public void onDestroyView() {
+        mMovie.unbindData();
+
+        super.onDestroyView();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.Picture:
