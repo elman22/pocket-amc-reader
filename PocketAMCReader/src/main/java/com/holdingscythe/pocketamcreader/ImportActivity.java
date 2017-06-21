@@ -122,8 +122,8 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.error_import_label));
-                builder.setMessage(String.format(getString(R.string.error_import),
-                        getString(R.string.pref_setting_encoding)));
+                builder.setMessage(String.format(getString(R.string.error_import2), getString(R.string
+                        .pref_setting_remove_bad_chars), getString(R.string.pref_setting_encoding)));
                 builder.setNeutralButton(getString(R.string.dialog_positive),
                         new DialogInterface.OnClickListener() {
                             @Override

@@ -77,6 +77,18 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         updateSummary(sharedPreferences, key);
 
+        // Schedule app import. Have to set size to 0, otherwise import wouldn't start
+        if (S.SETTINGS_REQUESTING_IMPORT.containsKey(key)) {
+            SharedObjects.getInstance().restartAppRequested = true;
+
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putLong("settingLastImportedSize", 0);
+            editor.apply();
+
+            if (S.INFO)
+                Log.i(S.TAG, "Re-import forced (" + key + ")");
+        }
+
         // Schedule app restart
         if (S.SETTINGS_REQUESTING_RESTART.containsKey(key)) {
             SharedObjects.getInstance().restartAppRequested = true;
@@ -91,16 +103,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
             if (S.INFO)
                 Log.i(S.TAG, "Refresh requested (" + key + ")");
-        }
-
-        // If encoding changed, force re-import. Have to set size to 0, otherwise import wouldn't start
-        if (key.equals(KEY_PREF_CATALOG_ENCODING)) {
-            SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putLong("settingLastImportedSize", 0);
-            editor.apply();
-
-            if (S.INFO)
-                Log.i(S.TAG, "Re-import forced (" + key + ")");
         }
     }
 

@@ -51,13 +51,22 @@ public final class S {
 //    public final static int THEME_X_LARGE = 2;
 //    public final static int THEME_XX_LARGE = 3;
 
-    // SettingsActivity requesting restart
-    public static final Map<String, Integer> SETTINGS_REQUESTING_RESTART;
+    // SettingsActivity requesting import
+    public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
         tmpMap.put("settingCatalogLocation", 1);
         tmpMap.put("settingCatalogEncoding", 1);
+        tmpMap.put("settingRemoveBadChars", 1);
+        SETTINGS_REQUESTING_IMPORT = Collections.unmodifiableMap(tmpMap);
+    }
+
+    // SettingsActivity requesting restart
+    public static final Map<String, Integer> SETTINGS_REQUESTING_RESTART;
+
+    static {
+        Map<String, Integer> tmpMap = new HashMap<>();
 //        tmpMap.put("settingForceImport", 1);
 //        tmpMap.put("settingFontSize", 1);
 //        tmpMap.put("settingClearThumbCache", 1);

@@ -153,6 +153,7 @@ public class ImportFragment extends Fragment {
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
             String settingCatalogLocation = preferences.getString("settingCatalogLocation", "");
             String settingCatalogEncoding = preferences.getString("settingCatalogEncoding", "Cp1252");
+            Boolean settingRemoveBadChars = preferences.getBoolean("settingRemoveBadChars", false);
             long settingLastImportedSize = preferences.getLong("settingLastImportedSize", 0);
 
             // Get partial wake lock
@@ -190,7 +191,7 @@ public class ImportFragment extends Fragment {
 
                 try {
                     String convertedCatalog = FileEncoder.encodeToUtf(mContext, settingCatalogLocation,
-                            S.CATALOG_TMP_FILENAME, settingCatalogEncoding);
+                            S.CATALOG_TMP_FILENAME, settingCatalogEncoding, settingRemoveBadChars);
                     if (convertedCatalog == null)
                         throw new Exception();
                     sourceCatalog = new File(convertedCatalog);

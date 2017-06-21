@@ -12,6 +12,11 @@
             android:key="settingCatalogEncoding"
             android:summary="@string/pref_setting_encoding_summary"
             android:title="@string/pref_setting_encoding"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="settingRemoveBadChars"
+            android:summary="@string/pref_setting_remove_bad_chars_summary"
+            android:title="@string/pref_setting_remove_bad_chars"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:orderingFromXml="true"

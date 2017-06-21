@@ -18,7 +18,8 @@ public class FileEncoder {
      * Encodings
      * http://download.oracle.com/javase/1.3/docs/guide/intl/encoding.doc.html
      */
-    public static String encodeToUtf(Context context, String pInputFilePath, String pOutputFileName, String encoding) {
+    public static String encodeToUtf(Context context, String pInputFilePath, String pOutputFileName, String encoding,
+                                     Boolean removeBadChars) {
 
         int bufferSize = 131072;
 
@@ -42,6 +43,10 @@ public class FileEncoder {
                 }
 
                 String asString = new String(contents, encoding);
+                if (removeBadChars) {
+                    // Based on http://mickaelvanneufville.online.fr/AMCU/scripts/RemoveBadChars.ifs
+                    asString = asString.replaceAll("[\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]", "");
+                }
                 byte[] newBytes = asString.getBytes("UTF8");
                 fos.write(newBytes);
 
