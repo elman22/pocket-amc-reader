@@ -23,7 +23,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/details_picture_description"
             android:scaleType="centerCrop"
-            android:src="@drawable/movie_thumb_stub"/>
+            android:src="@drawable/movie_detail_stub"/>
 
         <TableLayout
             android:id="@+id/titleBoxTable"
