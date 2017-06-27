@@ -1,3 +1,21 @@
+/*
+    This file is part of Pocket AMC Reader.
+    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+
+    Pocket AMC Reader is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pocket AMC Reader is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.holdingscythe.pocketamcreader;
 
 import android.app.Activity;
@@ -224,15 +242,15 @@ public class ImportFragment extends Fragment {
                     SAXParserFactory sFactory = SAXParserFactory.newInstance();
                     SAXParser sParser = sFactory.newSAXParser();
 
-				    // Get the XMLReader of the SAXParser we created.
+                    // Get the XMLReader of the SAXParser we created.
                     XMLReader sReader = sParser.getXMLReader();
 
-				    // Create a new ContentHandler and apply it to the XML-Reader
+                    // Create a new ContentHandler and apply it to the XML-Reader
                     MoviesSAXHandler sHandler = new MoviesSAXHandler(moviesDataProvider);
                     sReader.setContentHandler(sHandler);
                     sReader.setErrorHandler(sHandler);
 
-				    // Parse the XML-data from our URL.
+                    // Parse the XML-data from our URL.
                     InputSource sInput = new InputSource(sourceCatalogStream);
                     sInput.setEncoding("UTF-8");
 
@@ -241,13 +259,13 @@ public class ImportFragment extends Fragment {
                         Log.d(S.TAG, "Import start time: " + startTime);
                     }
 
-				    // Drop indexes for faster import
+                    // Drop indexes for faster import
                     moviesDataProvider.dropIndexes();
 
-				    // Do actual import
+                    // Do actual import
                     sReader.parse(sInput);
 
-				    // Recreate indexes
+                    // Recreate indexes
                     publishProgress(S.IMPORT_INDEXING_START);
                     moviesDataProvider.createIndexes();
 
@@ -275,7 +293,7 @@ public class ImportFragment extends Fragment {
                     publishProgress(S.IMPORT_ERROR_LOADING);
                 }
 
-			    // Update preferences for imported data
+                // Update preferences for imported data
                 if (isImportFileFinished) {
                     try {
                         SharedPreferences.Editor editor = preferences.edit();

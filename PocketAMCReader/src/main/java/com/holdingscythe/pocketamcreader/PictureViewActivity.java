@@ -1,10 +1,22 @@
-package com.holdingscythe.pocketamcreader;
+/*
+    This file is part of Pocket AMC Reader.
+    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
 
-/**
- * Created by Elman on 26. 7. 2015.
- * Implementation based on
- * http://www.androidhive.info/2013/09/android-fullscreen-image-slider-with-swipe-and-pinch-zoom-gestures/
+    Pocket AMC Reader is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pocket AMC Reader is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package com.holdingscythe.pocketamcreader;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +33,11 @@ import java.util.ArrayList;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+/**
+ * Created by Elman on 26. 7. 2015.
+ * Implementation based on
+ * http://www.androidhive.info/2013/09/android-fullscreen-image-slider-with-swipe-and-pinch-zoom-gestures/
+ */
 public class PictureViewActivity extends AppCompatActivity {
 
     @Override

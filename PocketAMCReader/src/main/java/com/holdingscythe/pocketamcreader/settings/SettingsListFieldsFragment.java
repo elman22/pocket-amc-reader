@@ -1,8 +1,20 @@
-/**
- * Created by elman on 27.4.2017.
- * <p>
- * Derived from Magnus Woxblom
- * https://github.com/woxblom/DragListView
+/*
+    This file is part of Pocket AMC Reader.
+    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2017 Magnus Woxblom
+
+    Pocket AMC Reader is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pocket AMC Reader is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.holdingscythe.pocketamcreader.settings;
@@ -35,6 +47,12 @@ import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Created by elman on 27.4.2017.
+ * <p>
+ * Derived from Magnus Woxblom
+ * https://github.com/woxblom/DragListView
+ */
 public class SettingsListFieldsFragment extends Fragment {
 
     private BoardView mBoardView;
@@ -128,7 +146,7 @@ public class SettingsListFieldsFragment extends Fragment {
         };
         int currentColumn = 0;
 
-        for (ArrayList<SettingsListField> mItemArray: columns) {
+        for (ArrayList<SettingsListField> mItemArray : columns) {
             final SettingsListFieldsAdapter listAdapter = new SettingsListFieldsAdapter(mItemArray, R.layout.settings_list_item, R.id.item_layout, true);
             final View header = View.inflate(getActivity(), R.layout.settings_list_header, null);
             ((TextView) header.findViewById(R.id.card_column_header_text)).setText(columnNames[currentColumn++]);
@@ -146,7 +164,7 @@ public class SettingsListFieldsFragment extends Fragment {
             ArrayList<String> prefsArrayList = new ArrayList<>();
 
             for (Object field : adapter.getItemList()) {
-                SettingsListField fld = (SettingsListField)field;
+                SettingsListField fld = (SettingsListField) field;
                 prefsArrayList.add(fld.getDatabaseField());
             }
 
