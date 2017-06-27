@@ -32,8 +32,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: cleanup
-
 /**
  * A fragment representing a single Movie detail screen.
  * This fragment is either contained in a {@link MovieListActivity}
@@ -91,13 +89,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         }
 
         mPreferences = SharedObjects.getInstance().preferences;
-//        this.settingIMDb = this.preferences.getString("settingIMDb", "original");
-//        this.settingDefaultTab = Integer.valueOf(this.preferences.getString("settingDefaultTab", "0"));
-//        this.settingShowColorTags = this.preferences.getBoolean("settingShowColorTags", true);
         mSettingMultivaluedSeparator = mPreferences.getString("settingMultivalueSeparator", ",/");
-//        this.settingPlotInBasic = Integer.valueOf(this.preferences.getString("settingPlotInBasic", "1"));
-//        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
-//        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);
 
         if (getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
@@ -146,8 +138,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
-
-//        rootView.findViewById(R.id.detail_image_teaser).set;
 
         return rootView;
     }
@@ -351,15 +341,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             SharedObjects.getInstance().movieListFragment.addExternalFilter(filter);
             if (getActivity() instanceof MovieDetailActivity) {
                 getActivity().finish();
-            } else {
-                // TODO: is this necessary?
-//                getActivity().finish();
-//                Intent listIntent = new Intent(getActivity(), MovieListActivity.class);
-//                startActivity(listIntent);
             }
         }
     }
-
-//    detailIntent.setData(data);
 
 }

@@ -11,8 +11,6 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-// TODO: cleanup
-
 public class Filters {
     private ArrayList<Filter> mFilters = new ArrayList<Filter>();
     private Context mContext;
@@ -201,8 +199,7 @@ public class Filters {
      * Get names for all filter for wizard
      */
     public String getFilterFieldHumanName(int resId) {
-        String str = mContext.getString(resId);
-        return (str == null) ? "" : str;
+        return mContext.getString(resId);
     }
 
 }

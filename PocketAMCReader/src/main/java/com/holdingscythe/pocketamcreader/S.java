@@ -7,8 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-// todo: cleanup
-
 /**
  * Convenience definitions
  */
@@ -42,15 +40,6 @@ public final class S {
     public static final int IMPORT_ERROR_CONVERSION = -10;
     public static final int IMPORT_ERROR_LOADING = -11;
 
-    // Thumbnail settings
-//    public static final double THUMB_AR = 0.71;
-//    public static final int THUMB_IN_SAMPLE_SIZE = 2;
-
-//    public final static int THEME_NORMAL = 0;
-//    public final static int THEME_LARGE = 1;
-//    public final static int THEME_X_LARGE = 2;
-//    public final static int THEME_XX_LARGE = 3;
-
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;
 
@@ -67,9 +56,6 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-//        tmpMap.put("settingForceImport", 1);
-//        tmpMap.put("settingFontSize", 1);
-//        tmpMap.put("settingClearThumbCache", 1);
         tmpMap.put("settingShowThumbs", 1);
         SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
     }
@@ -84,7 +70,6 @@ public final class S {
         tmpMap.put("settingMoviesListLine3", 1);
         tmpMap.put("settingListForceSortField", 1);
         tmpMap.put("settingMoviesListSeparator", 1);
-//        tmpMap.put("settingShowColorTags", 1);
         SETTINGS_REQUESTING_REFRESH = Collections.unmodifiableMap(tmpMap);
     }
 

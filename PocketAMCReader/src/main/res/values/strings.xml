@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- todo: cleanup -->
 <resources>
     <string name="app_name">Pocket AMC Reader</string>
     <string name="import_in_progress">Importing movies&#x2026;</string>
@@ -226,12 +225,6 @@
         <item>Extra large</item>
         <item>Tablet</item>
     </string-array>
-    <!--<string name="explorer_name">File Explorer</string>-->
-    <!--<string name="explorer_path_label">Location:</string>-->
-    <!--<string name="explorer_no_data">No folders or XML catalogs were found at the location</string>-->
-    <!--<string name="explorer_folder_cant_read">Can\'t read folder \"%1$s\"</string>-->
-    <!--<string name="explorer_pick_file">Pick catalog \"%1$s\"?</string>-->
-    <!--<string name="explorer_storage_not_readable">External storage couldn\'t be opened for reading. Please, contact the author via web page shown on Google Play.</string>-->
     <string name="menu_sort_date_desc">Date added (Most recent)</string>
     <string name="menu_sort_date_asc">Date added (Oldest)</string>
     <string name="image_alt_setting_list_delete">Delete</string>

@@ -26,8 +26,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-// TODO: cleanup
-
 public class MoviesDataProvider extends ContentProvider implements FilterQueryProvider {
     private static final String DATABASE_NAME = "PocketAMCReader.db";
     private static final int DATABASE_VERSION = 8;
@@ -58,7 +56,6 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     private SQLiteDatabase db;
     private SQLiteStatement insertStatement;
     private SQLiteStatement insertExtraStatement;
-    //	private MoviesAdapter moviesSource;
     private MoviesOpenHelper openHelper;
     private SharedPreferences preferences;
     private Filters filters;

@@ -1,4 +1,3 @@
-<!-- todo: cleanup -->
 <resources>
     <!--
     Layout alias to replace the single-pane version of the layout with a
@@ -7,5 +6,6 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
+    <!-- TODO: enable two pane activity -->
     <!--<item type="layout" name="activity_movie_list">@layout/activity_movie_twopane</item>-->
 </resources>

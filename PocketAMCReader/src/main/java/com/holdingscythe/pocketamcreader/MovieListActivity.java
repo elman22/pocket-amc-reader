@@ -21,8 +21,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-// TODO: cleanup
-
 /**
  * An activity representing a list of Movies. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -77,8 +75,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
         setSupportActionBar(mToolbar);
 
         if (savedInstanceState == null) {
-            // Create the list fragment and add it to the activity
-            // using a fragment transaction.
+            // Create the list fragment and add it to the activity using a fragment transaction.
             MovieListFragment fragment = new MovieListFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.movie_list_container, fragment)
@@ -90,8 +87,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
             // res/values-sw600dp). If this view is present, then the activity should be in two-pane mode.
             mTwoPane = SharedObjects.getInstance().twoPane = true;
 
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
+            // In two-pane mode, list items should be given the 'activated' state when touched.
             ((MovieListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.movie_list_container))
                     .setActivateOnItemClick(true);
@@ -102,7 +98,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                 .build();
         ImageLoader.getInstance().init(config);
 
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**
@@ -120,9 +115,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
     @Override
     public void onItemSelected(String id) {
         if (mTwoPane) {
-            // In two-pane mode, show the detail view in this activity by
-            // adding or replacing the detail fragment using a
-            // fragment transaction.
+            // In two-pane mode, show the detail view in this activity by adding or replacing the detail fragment
+            // using a fragment transaction.
             Bundle arguments = new Bundle();
             if (!id.equals("")) {
                 arguments.putString(MovieDetailFragment.ARG_MOVIE_ID, id);
@@ -133,8 +127,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                     .replace(R.id.movie_detail_container, fragment)
                     .commit();
         } else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
+            // In single-pane mode, simply start the detail activity for the selected item ID.
             Intent detailIntent = new Intent(this, MovieDetailActivity.class);
             detailIntent.putExtra(MovieDetailFragment.ARG_MOVIE_ID, id);
             startActivity(detailIntent);

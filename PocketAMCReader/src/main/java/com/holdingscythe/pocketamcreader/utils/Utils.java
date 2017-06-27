@@ -7,8 +7,6 @@ import android.text.style.UnderlineSpan;
 
 import java.util.ArrayList;
 
-// TODO: cleanup
-
 public class Utils {
 
     /**
@@ -93,7 +91,7 @@ public class Utils {
     /**
      * Set the theme of the activity, according to the configuration
      */
-    // TODO validate usage
+    // TODO: validate usage for themes
     public static void onActivityCreateSetTheme(Activity activity, int theme) {
 //        switch (theme) {
 //            case Movies.THEME_NORMAL:

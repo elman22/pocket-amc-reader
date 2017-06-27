@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- todo: cleanup -->
 <resources>
     <string name="app_name">Pocket AMC Reader</string>
     <string name="import_in_progress">Импортировано</string>

@@ -14,22 +14,11 @@ import android.widget.ListView;
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
-// todo: cleanup
-
 /**
  * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.
  * Created by Elman on 2. 11. 2014.
  */
 public class MovieDetailFragmentHost extends Fragment {
-
-    /**
-     * The fragment argument representing the list ID that this fragment represents.
-     */
-//    public static final String ARG_LIST_ID = "list_id";
-//    public static final String TAG = MovieDetailFragmentHost.class.getName();
-//    public static MovieDetailFragmentHost newInstance() {
-//        return new MovieDetailFragmentHost();
-//    }
 
     public static class MovieDetailAdapter extends FragmentPagerAdapter {
         private MoviesAdapter mMoviesAdapter;

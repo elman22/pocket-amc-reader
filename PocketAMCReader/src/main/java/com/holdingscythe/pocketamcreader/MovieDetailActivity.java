@@ -10,8 +10,6 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-// TODO: cleanup
-
 /**
  * An activity representing a single Movie detail screen. This
  * activity is only used on handset devices. On tablet-size devices,
@@ -22,11 +20,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * more than a {@link MovieDetailFragment}.
  */
 public class MovieDetailActivity extends AppCompatActivity {
-//    private final Handler handler = new Handler();
-//    private PagerSlidingTabStrip mTabs;
-//    private Drawable mOldBackground = null;
-//    private int mCurrentColor = 0xFFcaec60;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +44,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         );
 
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
+            // Create the detail fragment and add it to the activity using a fragment transaction.
             Bundle arguments = new Bundle();
             arguments.putString(MovieDetailFragment.ARG_MOVIE_ID,
                     getIntent().getStringExtra(MovieDetailFragment.ARG_MOVIE_ID));
