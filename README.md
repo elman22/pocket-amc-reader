@@ -8,6 +8,10 @@ http://forum.antp.be/phpbb2/viewtopic.php?t=4717
 http://www.antp.be/software/moviecatalog  
 https://github.com/elman22/pocket-amc-reader
 
+## Screenshots
+[![pocket-amc-reader-v2-screen1.png](https://s20.postimg.org/p24fops4d/pocket-amc-reader-v2-screen1.png)](https://postimg.org/image/udjc9fe6x/)
+[![pocket-amc-reader-v2-screen2.png](https://s20.postimg.org/vh3gldyu5/pocket-amc-reader-v2-screen2.png)](https://postimg.org/image/nocstesux/)
+
 ## Requirements
 - Android 4.1 or later
 - AMC database saved as XML
