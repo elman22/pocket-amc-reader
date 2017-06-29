@@ -222,6 +222,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Pocket AMC Reader for Android (c) 2010-2017 Holding Scythe.
+Pocket AMC Reader for Android (c) 2010-2017 Holding Scythe.  
 Ant Movie Catalog was created by Antoine Potten and Mickaël Vanneufville.
 
