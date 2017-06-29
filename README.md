@@ -1,24 +1,21 @@
 # Pocket AMC Reader
-Version 2.0.beta (documentation is for older version 1.9.1)
+Version 2.0
 
-This application will allow you to read catalogs created by Ant Movie Catalog on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
+This application will allow you to read catalogs created by [Ant Movie Catalog](http://www.antp.be/software/moviecatalog) on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
 
 For more info check out:
 http://forum.antp.be/phpbb2/viewtopic.php?t=4717  
 http://www.antp.be/software/moviecatalog  
 https://github.com/elman22/pocket-amc-reader
 
-For Windows Mobile version visit:
-http://forum.antp.be/phpbb2/viewtopic.php?t=4548
-
 ## Requirements
-- Android 1.6 or higher (Android 2.2 or higher is recommended)
+- Android 4.1 or later
 - AMC database saved as XML
-- AMC database saved with relative links to pictures (not necessary, but otherwise you won't see pictures)
-- Application needs approximately twice as much disk space as is the size of XML file + additional space for thumbnails if used
+- AMC database saved with relative links to pictures (if you want to see pictures)
+- Application needs approximately twice as much disk space as is the size of XML file
 
 ## Installation
-Install the application via Google Play or download from https://github.com/elman22/pocket-amc-reader/releases.
+Install the application via [Google Play](https://play.google.com/store/apps/details?id=com.holdingscythe.pocketamcreader) or download from [GitHub]( https://github.com/elman22/pocket-amc-reader/releases).
 
 ## Converting AMC to XML
 If you keep your database in AMC format, you will have to export it to XML to be able to use this application. You can easily do that in 5 steps:
@@ -33,63 +30,48 @@ If you keep your database in AMC format, you will have to export it to XML to be
 
 #### CATALOG
 **Catalog**  
-Pick your catalog from file browser. It might take a lot of time to display available catalogs in folders with plenty of files.  
+Pick your catalog from file browser. It might take some time to display available catalogs in folders with thousands of files.  
 **Catalog encoding**  
-Select encoding on your PC to ensure correct import of special characters.
-
-#### GENERAL
-**Font size**  
-You can change size of default font. Increasing font also increases thumbnail size, so I recommend deleting thumbnail cache as well.  
-**Show color tags**  
-Color of the movie's title will be changed to assigned tag's color.
+Select encoding on your PC to ensure correct import of special characters.  
+**Remove bad characters**  
+If import crashes leaving you with only some movies imported, check this option to fix it. It has the same functionality as AMC script [RemoveBadChars](http://forum.antp.be/phpbb2/viewtopic.php?p=33221#33221) by soulsnake.
 
 #### LIST
-**Fields in 1st line**  
-You can choose fields to be displayed in first line in movie list.  
-**Fields in 2nd line**  
-You can choose fields to be displayed in second line in movie list.  
-**Fields in 3rd line**  
-You can choose fields to be displayed in third line in movie list.  
+**Fields shown in list**  
+You can choose fields to be displayed in movie list.  
 **Fields separator**  
 If you select two or more fields in any of the lines, values will be separated by text entered here.  
 **Show sorted field**  
 If you sort your list by field which is not displayed, it will be shown in third line.  
 **Show thumbnails**  
-Show thumbnails for movies in all lists.
+Show thumbnails in movie list.
 
 #### DETAILS
-**Default tab**  
-Default tab to be displayed when movie detail is opened.  
-**Show summary in basic tab**  
-*None* - No summary is displayed in basic tab  
-*First lines from description* - First 4 lines from description are displayed in basic tab for quick view of the plot.  
-*Precise match from description* - If you use description field also for taglines, IMDb trivia or such extended information, this option will try to remove it and display plot only. Might not work as expected in some situations.  
 **Multi field separator**  
-Define separators in multi value fields (such as Country, Category, Actors, Producer, ...) to be able to filter exact values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).  
-**Hide unused fields**  
-Fields which have no value (e.g. empty fields) will not be displayed.  
-**Open IMDb links**  
-If you have IMDb links in your database then you can choose how to open them on your Android.  
-*As is* - Links are opened in your browser as they are saved.  
-*Redirect to English mobile version*  
-All saved links pointing to IMDb will be rewritten to IMDb's mobile version, e.g. www.imdb.com will become m.imdb.com. All language mutations will be redirected to English version as it is the only one with mobile version. Legacy links (e.g. imdb.com/Title?0265086) will not be rewritten.  
-*In Android Application*  
-If you have installed official IMDb application from Android Market, Pocket AMC Reader will use it to show additional info.
-
-#### ADVANCED
-**Force re-import**  
-Re-import catalog when settings are closed.  
-**Delete cache**  
-Delete thumbnail cache when settings are closed. Cache is located at `/sdcard/Android/data/com.holdingscythe.pocketamcreader/thumbs/`. It's recommended to use this option if changing font size. Cache will be automatically deleted when application is uninstalled if using Android 2.2 or higher. Otherwise delete it manually.
+Define your separators in multi value fields (such as Country, Category, Actors, Producer ...). This allows you to filter specific values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).  
+**Fit picture**  
+Show pictures in details either resized to full screen or with their original size.
 
 ## Known bugs
-- https://github.com/elman22/pocket-amc-reader/issues
-- Tabs images are optimized for Android 2.0 and will not look good on Android 1.6
-- Import crashes with some non standard characters. I'm not sure I can fix it since AMC doesn't produce well formed XML. To get around this, read http://forum.antp.be/phpbb2/viewtopic.php?p=33221#33221
-- Swiping in movie details doesn't work if performed on empty space below content (this feature is deprecated on Android 4.0 and higher)
-- Performance with very large databases (XML is larger than 20 MB) is degraded, even leading to App Not Responding problem. This might be issue with Android itself, so I might not be able to fix. Please use filtering first
+See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any new bugs.
 
 ## History
+#### 29.06.2017 Version 2.0
+- ADDED Complete rewrite and redesign of the app
+- ADDED Android Material design
+- ADDED Redesigned details page
+- ADDED Swiping left and right in movie details now switches movies
+- ADDED New file picker works on Android 5+ with SD card
+- ADDED Quick return header in movie list
+- ADDED Full screen image viewer with zooming
+- ADDED Integrated RemoveBadChars script into import
+- ADDED Faster file import with updated progress bar
+- ADDED Landscape layout for movie details
+- ADDED Easier arrangement of fields in list
+- ADDED Default handling of IMDb links with IMDb app
+- ADDED Automatic support for picture extras
+- ADDED New default font
+
 #### 28.09.2013 Version 1.9.1
 - FIXED FC on opening details on Android 2 and 3
 
@@ -229,6 +211,14 @@ Delete thumbnail cache when settings are closed. Cache is located at `/sdcard/An
 #### 04.11.2010 Version 1.0
 - Initial release
 
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+## License
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Pocket AMC Reader for Android (c) 2010-2017 Holding Scythe.
+Ant Movie Catalog was created by Antoine Potten and Mickaël Vanneufville.
+
