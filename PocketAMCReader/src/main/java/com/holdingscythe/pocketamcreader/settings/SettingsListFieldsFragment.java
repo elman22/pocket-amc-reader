@@ -84,6 +84,10 @@ public class SettingsListFieldsFragment extends Fragment {
             public void onItemDragEnded(int fromColumn, int fromRow, int toColumn, int toRow) {
                 saveSettings();
             }
+
+            @Override
+            public void onItemChangedPosition(int oldColumn, int oldRow, int newColumn, int newRow) {
+            }
         });
         return view;
     }
