@@ -3,6 +3,7 @@
 <!--
 This file is part of Pocket AMC Reader.
 Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright 2014 Magnus Woxblom
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,9 +26,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     android:insetRight="20dp"
     android:insetTop="30dp">
     <shape>
-        <stroke
-            android:width="2dp"
-            android:color="?attr/color_basic_bg2"/>
         <corners android:radius="3dp"/>
     </shape>
 </inset>
