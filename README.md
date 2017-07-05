@@ -59,6 +59,10 @@ Show pictures in details either resized to full screen or with their original si
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
+#### 05.07.2017 Version 2.0.1
+- FIXED FC on Android 4.4 with list fields configuration
+- FIXED FC when changing sorting on fields that are not displayed by default
+
 #### 29.06.2017 Version 2.0
 - ADDED Complete rewrite and redesign of the app
 - ADDED Android Material design
