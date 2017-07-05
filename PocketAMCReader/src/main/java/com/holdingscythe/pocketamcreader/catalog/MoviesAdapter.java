@@ -46,7 +46,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
     private int mLayout;
     private Boolean mShowThumbs;
     private String mPicturesFolder;
-    private String mSortOrder;
+    private String mSortedField;
     private String[] mListFieldsLine1;
     private String[] mListFieldsLine2;
     private String[] mListFieldsLine3;
@@ -110,33 +110,32 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         if (S.VERBOSE)
             Log.v(S.TAG, "Using view: " + v.getTag().toString());
 
-        String sortedField = Movies.SettingsSortFieldsMap.get(this.mSortOrder);
         Boolean sortedFieldDisplayed = false;
 
         ArrayList<String> line1 = new ArrayList<String>();
         ArrayList<String> line2 = new ArrayList<String>();
         ArrayList<String> line3 = new ArrayList<String>();
 
-        if (!mListFieldsLine1[0].equals("")) {
+        if (!mListFieldsLine1[0].isEmpty()) {
             for (String field : mListFieldsLine1) {
                 line1.add(getDBValue(field, context, c));
-                if (field.equals(sortedField))
+                if (field.equals(mSortedField))
                     sortedFieldDisplayed = true;
             }
         }
 
-        if (!mListFieldsLine2[0].equals("")) {
+        if (!mListFieldsLine2[0].isEmpty()) {
             for (String field : mListFieldsLine2) {
                 line2.add(getDBValue(field, context, c));
-                if (field.equals(sortedField))
+                if (field.equals(mSortedField))
                     sortedFieldDisplayed = true;
             }
         }
 
-        if (!mListFieldsLine3[0].equals("")) {
+        if (!mListFieldsLine3[0].isEmpty()) {
             for (String field : mListFieldsLine3) {
                 line3.add(getDBValue(field, context, c));
-                if (field.equals(sortedField))
+                if (field.equals(mSortedField))
                     sortedFieldDisplayed = true;
             }
         }
@@ -152,8 +151,8 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         }
 
         if (holder.movieShortDescription2_text != null) {
-            if (this.mSettingListForceSortField && !sortedFieldDisplayed) {
-                holder.movieShortDescription2_text.setText(getDBValue(sortedField, context, c));
+            if (mSettingListForceSortField && !sortedFieldDisplayed) {
+                holder.movieShortDescription2_text.setText(getDBValue(mSortedField, context, c));
             } else if (line3.size() > 0) {
                 holder.movieShortDescription2_text.setText(Utils.arrayToString(line3.toArray(new String[line3.size()]),
                         mSettingMoviesListSeparator));
@@ -247,7 +246,8 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         mShowThumbs = preferences.getBoolean("settingShowThumbs", true);
         mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
-        mSortOrder = preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
+        String sortOrder = preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
+        mSortedField = Movies.SettingsSortFieldsMap.get(sortOrder);
         mListFieldsLine1 = preferences.getString("settingMoviesListLine1", Movies.defaultListFieldsLine1).split(",");
         mListFieldsLine2 = preferences.getString("settingMoviesListLine2", Movies.defaultListFieldsLine2).split(",");
         mListFieldsLine3 = preferences.getString("settingMoviesListLine3", Movies.defaultListFieldsLine3).split(",");
@@ -272,30 +272,37 @@ public class MoviesAdapter extends SimpleCursorAdapter {
     private String getDBValue(String fld, Context context, Cursor c) {
         String value = c.getString(c.getColumnIndex(fld));
 
-        if (fld.equals(Movies.NUMBER)) {
-            if (value != null)
-                value = context.getString(R.string.number_prefix) + value;
-        } else if (fld.equals(Movies.LENGTH)) {
-            if (value != null && value.length() > 0)
-                value += " " + context.getString(R.string.display_minutes_suffix);
-        } else if (fld.equals(Movies.RATING) || fld.equals(Movies.USER_RATING)) {
-            if (value != null && value.length() > 0) {
-                value += context.getString(R.string.rating_suffix_list);
-            }
-        } else if (fld.equals(Movies.CHECKED)) {
-            if (value != null && value.equals("True"))
-                value = context.getString(R.string.list_seen_true);
-            else
-                value = context.getString(R.string.list_seen_false);
-        } else if (fld.equals(Movies.DATE) || fld.equals(Movies.DATE_WATCHED)) {
-            if (value != null) {
-                try {
-                    Date date = SharedObjects.getInstance().dateAddedFormat.parse(value);
-                    value = SharedObjects.getInstance().dateFormat.format(date);
-                } catch (Exception e) {
-                    // don't do anything, keep date as is
+        switch (fld) {
+            case Movies.NUMBER:
+                if (value != null)
+                    value = context.getString(R.string.number_prefix) + value;
+                break;
+            case Movies.LENGTH:
+                if (value != null && value.length() > 0)
+                    value += " " + context.getString(R.string.display_minutes_suffix);
+                break;
+            case Movies.RATING:
+            case Movies.USER_RATING:
+                if (value != null && value.length() > 0)
+                    value += context.getString(R.string.rating_suffix_list);
+                break;
+            case Movies.CHECKED:
+                if (value != null && value.equals("True"))
+                    value = context.getString(R.string.list_seen_true);
+                else
+                    value = context.getString(R.string.list_seen_false);
+                break;
+            case Movies.DATE:
+            case Movies.DATE_WATCHED:
+                if (value != null) {
+                    try {
+                        Date date = SharedObjects.getInstance().dateAddedFormat.parse(value);
+                        value = SharedObjects.getInstance().dateFormat.format(date);
+                    } catch (Exception e) {
+                        // don't do anything, keep date as is
+                    }
                 }
-            }
+                break;
         }
 
         return value;

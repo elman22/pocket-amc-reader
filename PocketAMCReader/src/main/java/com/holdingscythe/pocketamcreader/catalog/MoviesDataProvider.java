@@ -347,6 +347,9 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         projection.add(Movies.PICTURE);
         projection.add(Movies.NUMBER);
 
+        // Always add sorting column
+        projection.add(Movies.SettingsSortFieldsMap.get(sortOrder));
+
         // Shown fields
         String[] listFields1 = this.preferences.getString("settingMoviesListLine1",
                 Movies.defaultListFieldsLine1).split(",");
@@ -362,11 +365,6 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 Movies.defaultListFieldsLine3).split(",");
         if (!TextUtils.isEmpty(listFields3[0])) {
             projection.addAll(Arrays.asList(listFields3));
-        }
-
-        // Fields dependent on settings
-        if (this.preferences.getBoolean("settingListForceSortField", true)) {
-            projection.add(Movies.SettingsSortFieldsMap.get(sortOrder));
         }
 
         // Fill MOVIES_PROJECTION

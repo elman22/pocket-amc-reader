@@ -601,7 +601,10 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             mMoviesAdapter.unregisterDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
-            mMoviesAdapter.changeCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
+            mMoviesAdapter.changeCursorAndColumns(
+                    mMoviesDataProvider.fetchMovies(S.CONTENT_URI),
+                    SharedObjects.getInstance().moviesProjection,
+                    new int[]{});
             mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.notifyDataSetChanged();
         }
