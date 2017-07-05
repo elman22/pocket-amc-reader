@@ -29,8 +29,7 @@ import java.util.Map;
  * Convenience definitions
  */
 public final class S {
-    // RELEASE: change to 6
-    public static final int LOGLEVEL = 6;
+    public static final int LOGLEVEL = BuildConfig.LOGLEVEL;
 
     public static final boolean STRICT = LOGLEVEL == 1;
     public static final boolean VERBOSE = LOGLEVEL <= 2;
