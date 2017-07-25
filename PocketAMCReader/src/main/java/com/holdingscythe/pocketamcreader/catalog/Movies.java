@@ -72,8 +72,15 @@ public final class Movies implements BaseColumns {
     public static final String CERTIFICATION = "Certification";
     public static final String FILE_PATH = "FilePath";
 
-    // Fields mappings extras
+    // Fields mapping foreign key for custom fields and extras
     public static final String MOVIES_ID = "Movies_id";
+
+    // Fields mapping custom fields
+    public static final String C_TYPE = "CType";
+    public static final String C_NAME = "CName";
+    public static final String C_VALUE = "CValue";
+
+    // Fields mappings extras
     public static final String E_CHECKED = "EChecked";
     public static final String E_TAG = "ETag";
     public static final String E_TITLE = "ETitle";
@@ -83,6 +90,11 @@ public final class Movies implements BaseColumns {
     public static final String E_COMMENTS = "EComments";
     public static final String E_CREATED_BY = "ECreatedBy";
     public static final String E_PICTURE = "EPicture";
+
+    // Custom fields properties
+    public static final String P_TAG = "Tag";
+    public static final String P_NAME = "Name";
+    public static final String P_TYPE = "Type";
 
     // Default projection for Movies List
     public static String[] MOVIES_PROJECTION = new String[]{BaseColumns._ID, Movies.NUMBER, Movies.FORMATTED_TITLE,

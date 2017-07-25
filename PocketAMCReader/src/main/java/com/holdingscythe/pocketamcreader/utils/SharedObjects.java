@@ -19,6 +19,7 @@ public class SharedObjects {
     // Static reference to opened database
     public SQLiteDatabase db;
     public SQLiteStatement dbInsertStatement;
+    public SQLiteStatement dbInsertCustomStatement;
     public SQLiteStatement dbInsertExtraStatement;
     public Integer dbReferences = 0;
 

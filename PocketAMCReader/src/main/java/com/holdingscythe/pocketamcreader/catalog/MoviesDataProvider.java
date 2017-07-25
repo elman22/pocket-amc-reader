@@ -46,9 +46,10 @@ import java.util.List;
 
 public class MoviesDataProvider extends ContentProvider implements FilterQueryProvider {
     private static final String DATABASE_NAME = "PocketAMCReader.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     private static final String TABLE_NAME = "Movies";
+    private static final String TABLE_NAME_CUSTOM = "CustomFields";
     private static final String TABLE_NAME_EXTRAS = "Extras";
     private static final String INSERT = "INSERT INTO " +
             TABLE_NAME +
@@ -65,6 +66,9 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             "" + Movies.USER_RATING + ", " + Movies.WRITER + ", " + Movies.COMPOSER + ", " +
             "" + Movies.CERTIFICATION + "," + Movies.FILE_PATH + ") " +
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_CUSTOM = "INSERT INTO " + TABLE_NAME_CUSTOM +
+            " (" + Movies.C_TYPE + ", " + Movies.C_NAME + ", " + Movies.C_VALUE + ")" +
+            " VALUES (?,?,?)";
     private static final String INSERT_EXTRA = "INSERT INTO " + TABLE_NAME_EXTRAS +
             " (" + Movies.MOVIES_ID + ", " + Movies.E_CHECKED + ", " + Movies.E_TAG + ", " + Movies.E_TITLE + ", " +
             "" + Movies.E_CATEGORY + ", " + Movies.E_URL + ", " + Movies.E_DESCRIPTION + ", " +
@@ -73,6 +77,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
 
     private SQLiteDatabase db;
     private SQLiteStatement insertStatement;
+    private SQLiteStatement insertCustomStatement;
     private SQLiteStatement insertExtraStatement;
     private MoviesOpenHelper openHelper;
     private SharedPreferences preferences;
@@ -136,6 +141,14 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     "[" + Movies.FILE_PATH + "] varchar(256) COLLATE NOCASE " +
                     ")");
 
+            db.execSQL("CREATE TABLE [" + TABLE_NAME_CUSTOM + "] ( " +
+                    "[_id] integer PRIMARY KEY NOT NULL, " +
+                    "[" + Movies.MOVIES_ID + "] integer NOT NULL, " +
+                    "[" + Movies.C_TYPE + "] varchar(16) COLLATE NOCASE, " +
+                    "[" + Movies.C_NAME + "] varchar(256) COLLATE NOCASE, " +
+                    "[" + Movies.C_VALUE + "] text " +
+                    ")");
+
             db.execSQL("CREATE TABLE [" + TABLE_NAME_EXTRAS + "] ( " +
                     "[_id] integer PRIMARY KEY NOT NULL, " +
                     "[" + Movies.MOVIES_ID + "] integer NOT NULL, " +
@@ -150,7 +163,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     "[" + Movies.E_PICTURE + "] varchar(256) " +
                     ")");
 
-            this.createIndexes(db);
+            createIndexes(db);
         }
 
         @Override
@@ -159,11 +172,13 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 Log.i(S.TAG, "Upgrading database from version " + oldVersion + " to version " + newVersion +
                         ". This will drop tables and recreate.");
 
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            dropIndexes(db);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_EXTRAS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CUSTOM);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
 
-            /** Update imported file size to zero so import is forced */
+            /* Update imported file size to zero so import is forced */
             if (S.INFO)
                 Log.i(S.TAG, "Setting last catalog import size to 0 to force catalog refresh.");
 
@@ -172,7 +187,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             editor.apply();
         }
 
-        public void createIndexes(SQLiteDatabase db) {
+        void createIndexes(SQLiteDatabase db) {
             db.execSQL("CREATE INDEX [IDX_MOVIES_NUMBER] ON [" + TABLE_NAME + "] ([" + Movies.NUMBER + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_CHECKED] ON [" + TABLE_NAME + "] ([" + Movies.CHECKED + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_FORMATTEDTITLE] ON [" + TABLE_NAME + "] ([" + Movies.FORMATTED_TITLE
@@ -190,11 +205,13 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     .TRANSLATED_TITLE + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_USERRATING] ON [" + TABLE_NAME + "] ([" + Movies.USER_RATING + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_DATEWATCHED] ON [" + TABLE_NAME + "] ([" + Movies.DATE_WATCHED + "])");
+            db.execSQL("CREATE INDEX [IDX_CUSTOM_MOVIES_ID] ON [" + TABLE_NAME_CUSTOM + "] ([" + Movies.MOVIES_ID +
+                    "])");
             db.execSQL("CREATE INDEX [IDX_EXTRAS_MOVIES_ID] ON [" + TABLE_NAME_EXTRAS + "] ([" + Movies.MOVIES_ID +
                     "])");
         }
 
-        public void dropIndexes(SQLiteDatabase db) {
+        void dropIndexes(SQLiteDatabase db) {
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_NUMBER]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_CHECKED]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_FORMATTEDTITLE]");
@@ -209,6 +226,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_TRANSLATEDTITLE]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_USERRATING]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_DATEWATCHED]");
+            db.execSQL("DROP INDEX IF EXISTS [IDX_CUSTOM_MOVIES_ID]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_EXTRAS_MOVIES_ID]");
         }
     }
@@ -218,6 +236,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         if (SharedObjects.getInstance().db != null) {
             this.db = SharedObjects.getInstance().db;
             this.insertStatement = SharedObjects.getInstance().dbInsertStatement;
+            this.insertCustomStatement = SharedObjects.getInstance().dbInsertCustomStatement;
             this.insertExtraStatement = SharedObjects.getInstance().dbInsertExtraStatement;
         } else {
             // Cache objects as this class gets initiated on every page
@@ -228,6 +247,9 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
 
             this.insertStatement = this.db.compileStatement(INSERT);
             SharedObjects.getInstance().dbInsertStatement = this.insertStatement;
+
+            this.insertCustomStatement = this.db.compileStatement(INSERT_CUSTOM);
+            SharedObjects.getInstance().dbInsertCustomStatement = this.insertCustomStatement;
 
             this.insertExtraStatement = this.db.compileStatement(INSERT_EXTRA);
             SharedObjects.getInstance().dbInsertExtraStatement = this.insertExtraStatement;
@@ -445,6 +467,18 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     }
 
     /**
+     * Insert data into CUSTOM
+     */
+    public long insertCustom(long Movies_id, String CType, String CName, String CValue) {
+        this.insertExtraStatement.bindLong(1, Movies_id);
+        bindHelper(this.insertExtraStatement, 2, CType);
+        bindHelper(this.insertExtraStatement, 3, CName);
+        bindHelper(this.insertExtraStatement, 4, CValue);
+
+        return this.insertExtraStatement.executeInsert();
+    }
+
+    /**
      * Insert data into EXTRAS
      */
     public long insertExtra(long Movies_id, String EChecked, String ETag, String ETitle, String ECategory, String EURL,
@@ -494,8 +528,9 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Empty database
      */
     public void deleteAll() {
-        this.db.delete(TABLE_NAME, null, null);
         this.db.delete(TABLE_NAME_EXTRAS, null, null);
+        this.db.delete(TABLE_NAME_CUSTOM, null, null);
+        this.db.delete(TABLE_NAME, null, null);
     }
 
     /**
@@ -509,6 +544,8 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         if (SharedObjects.getInstance().dbReferences == 0) {
             SharedObjects.getInstance().dbInsertStatement.close();
             SharedObjects.getInstance().dbInsertStatement = null;
+            SharedObjects.getInstance().dbInsertCustomStatement.close();
+            SharedObjects.getInstance().dbInsertCustomStatement = null;
             SharedObjects.getInstance().dbInsertExtraStatement.close();
             SharedObjects.getInstance().dbInsertExtraStatement = null;
             SharedObjects.getInstance().db.close();
