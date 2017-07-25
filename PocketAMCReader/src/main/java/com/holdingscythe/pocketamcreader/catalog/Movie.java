@@ -94,13 +94,6 @@ public class Movie {
         // Read preferences
         SharedPreferences mPreferences = SharedObjects.getInstance().preferences;
         mPreferencePicturesDirectory = mPreferences.getString("settingPicturesFolder", "/");
-//        this.settingIMDb = this.preferences.getString("settingIMDb", "original");
-//        this.settingDefaultTab = Integer.valueOf(this.preferences.getString("settingDefaultTab", "0"));
-//        this.settingShowColorTags = this.preferences.getBoolean("settingShowColorTags", true);
-//        this.settingMultifieldSeparator = this.preferences.getString("settingMultivalueSeparator", ",");
-//        this.settingPlotInBasic = Integer.valueOf(this.preferences.getString("settingPlotInBasic", "1"));
-//        this.settingFontSize = Integer.valueOf(this.preferences.getString("settingFontSize", "0"));
-//        this.settingHideUnusedFields = this.preferences.getBoolean("hideUnusedFields", false);
 
         // Fill model
         mMovie = new MovieModel(
