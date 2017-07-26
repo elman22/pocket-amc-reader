@@ -67,8 +67,8 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             "" + Movies.CERTIFICATION + "," + Movies.FILE_PATH + ") " +
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERT_CUSTOM = "INSERT INTO " + TABLE_NAME_CUSTOM +
-            " (" + Movies.C_TYPE + ", " + Movies.C_NAME + ", " + Movies.C_VALUE + ")" +
-            " VALUES (?,?,?)";
+            " (" + Movies.MOVIES_ID + ", " + Movies.C_TYPE + ", " + Movies.C_NAME + ", " + Movies.C_VALUE + ")" +
+            " VALUES (?,?,?,?)";
     private static final String INSERT_EXTRA = "INSERT INTO " + TABLE_NAME_EXTRAS +
             " (" + Movies.MOVIES_ID + ", " + Movies.E_CHECKED + ", " + Movies.E_TAG + ", " + Movies.E_TITLE + ", " +
             "" + Movies.E_CATEGORY + ", " + Movies.E_URL + ", " + Movies.E_DESCRIPTION + ", " +
@@ -470,12 +470,12 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Insert data into CUSTOM
      */
     public long insertCustom(long Movies_id, String CType, String CName, String CValue) {
-        this.insertExtraStatement.bindLong(1, Movies_id);
-        bindHelper(this.insertExtraStatement, 2, CType);
-        bindHelper(this.insertExtraStatement, 3, CName);
-        bindHelper(this.insertExtraStatement, 4, CValue);
+        this.insertCustomStatement.bindLong(1, Movies_id);
+        bindHelper(this.insertCustomStatement, 2, CType);
+        bindHelper(this.insertCustomStatement, 3, CName);
+        bindHelper(this.insertCustomStatement, 4, CValue);
 
-        return this.insertExtraStatement.executeInsert();
+        return this.insertCustomStatement.executeInsert();
     }
 
     /**
