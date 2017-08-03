@@ -58,21 +58,21 @@ public class Movie {
     private ArrayList<ImageView> mPictureViews;
 
     // Logical data types
-    final int STRING_REGULAR = 0;
-    final int STRING_EXPANDABLE = 1;
-    final int STRING_CLICKABLE = 2;
-    final int BOOLEAN_REGULAR = 3;
-    final int BOOLEAN_CLICKABLE = 4;
-    final int DATE_REGULAR = 5;
+    private final int STRING_REGULAR = 0;
+    private final int STRING_EXPANDABLE = 1;
+    private final int STRING_CLICKABLE = 2;
+    private final int BOOLEAN_REGULAR = 3;
+    private final int BOOLEAN_CLICKABLE = 4;
+    private final int DATE_REGULAR = 5;
 
     // String extensions
-    final int EXT_STRING_NONE = 0;
-    final int EXT_STRING_PREFIX = 1;
-    final int EXT_STRING_SUFFIX = 2;
-    final int EXT_STRING_PREFIX_PADDED = 3;
-    final int EXT_STRING_SUFFIX_PADDED = 4;
-    final int EXT_PLURALS_PREFIX_PADDED = 5;
-    final int EXT_PLURALS_SUFFIX_PADDED = 6;
+    private final int EXT_STRING_NONE = 0;
+    private final int EXT_STRING_PREFIX = 1;
+    private final int EXT_STRING_SUFFIX = 2;
+    private final int EXT_STRING_PREFIX_PADDED = 3;
+    private final int EXT_STRING_SUFFIX_PADDED = 4;
+    private final int EXT_PLURALS_PREFIX_PADDED = 5;
+    private final int EXT_PLURALS_SUFFIX_PADDED = 6;
 
     public Movie(Cursor cursor, View view, View.OnClickListener clickListener, Activity activity) {
         mView = view;
