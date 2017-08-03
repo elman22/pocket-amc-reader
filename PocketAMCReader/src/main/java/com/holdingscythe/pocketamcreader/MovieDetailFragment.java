@@ -35,6 +35,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.holdingscythe.pocketamcreader.catalog.CustomFields;
 import com.holdingscythe.pocketamcreader.catalog.Extras;
 import com.holdingscythe.pocketamcreader.catalog.Movie;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
@@ -58,6 +59,7 @@ import java.util.regex.Pattern;
  */
 public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
+    private CustomFields mCustomFields;
     private Extras mExtras;
     private MoviesDataProvider mMoviesDataProvider;
     private Filters mFilters;
@@ -132,6 +134,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             mMovie = new Movie(cursor, getView(), this, getActivity());
             cursor.close();
 
+            // Fetch custom fields
+            Cursor cursorCustomFields = mMoviesDataProvider.fetchMovieCustomFields(Uri.withAppendedPath(uri, "custom"));
+            cursorCustomFields.moveToFirst();
+            mCustomFields = new CustomFields(cursorCustomFields, getView(), getActivity());
+            cursorCustomFields.close();
+
             // Fetch extras
             Cursor cursorExtras = mMoviesDataProvider.fetchMovieExtras(Uri.withAppendedPath(uri, "extras"));
             cursorExtras.moveToFirst();
@@ -155,9 +163,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_movie_detail, container, false);
     }
 
     @Override

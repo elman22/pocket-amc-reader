@@ -88,6 +88,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     private static final int SEARCH_MOVIES = 1;
     private static final int GET_MOVIE = 2;
     private static final int GET_MOVIE_EXTRAS = 3;
+    private static final int GET_MOVIE_CUSTOM_FIELDS = 4;
     private static final UriMatcher sURIMatcher = buildUriMatcher();
 
     private static class MoviesOpenHelper extends SQLiteOpenHelper {
@@ -271,6 +272,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         matcher.addURI(S.AUTHORITY, "movies", GET_MOVIES);
         matcher.addURI(S.AUTHORITY, "movies/_id/#", GET_MOVIE);
         matcher.addURI(S.AUTHORITY, "movies/_id/#/extras", GET_MOVIE_EXTRAS);
+        matcher.addURI(S.AUTHORITY, "movies/_id/#/custom", GET_MOVIE_CUSTOM_FIELDS);
         matcher.addURI(S.AUTHORITY, "movies/*", SEARCH_MOVIES);
 
         return matcher;
@@ -317,6 +319,12 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: movie");
                 cursor = this.db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                return cursor;
+
+            case GET_MOVIE_CUSTOM_FIELDS:
+                if (S.DEBUG)
+                    Log.d(S.TAG, "URI match: movie custom fields");
+                cursor = this.db.query(TABLE_NAME_CUSTOM, projection, selection, selectionArgs, null, null, sortOrder);
                 return cursor;
 
             case GET_MOVIE_EXTRAS:
@@ -404,6 +412,13 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     public Cursor fetchMovie(Uri uri) {
         String[] eqArg = new String[]{uri.getLastPathSegment()};
         return query(uri, Movies.MOVIE_PROJECTION, BaseColumns._ID + "=?", eqArg, null);
+    }
+
+    public Cursor fetchMovieCustomFields(Uri uri) {
+        List<String> segments = uri.getPathSegments();
+        String[] eqArg = new String[]{segments.get(segments.size() - 2)};
+        return query(uri, Movies.MOVIE_CUSTOM_FIELDS_PROJECTION, Movies.MOVIES_ID + "=?", eqArg, BaseColumns._ID +
+                " " + "asc");
     }
 
     public Cursor fetchMovieExtras(Uri uri) {
