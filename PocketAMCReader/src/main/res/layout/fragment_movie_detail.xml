@@ -848,5 +848,21 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
         </TableLayout>
 
+        <TextView
+            android:id="@+id/customTitle"
+            style="@style/SectionTitle"
+            android:layout_below="@id/technicalBoxTable"
+            android:text="@string/details_section_custom"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/CustomFieldsWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customTitle"
+            android:orientation="vertical"
+            android:visibility="gone">
+        </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>

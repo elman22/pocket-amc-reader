@@ -113,6 +113,10 @@ public final class Movies implements BaseColumns {
             Movies.SIZE, Movies.DISKS, Movies.PICTURE, Movies.COLOR_TAG, Movies.DATE_WATCHED, Movies.USER_RATING,
             Movies.WRITER, Movies.COMPOSER, Movies.CERTIFICATION, Movies.FILE_PATH};
 
+    // Projection for Custom Fields
+    public static final String[] MOVIE_CUSTOM_FIELDS_PROJECTION = new String[]{BaseColumns._ID, Movies.MOVIES_ID,
+            Movies.C_TYPE, Movies.C_NAME, Movies.C_VALUE};
+
     // Projection for Movie Extras
     public static final String[] MOVIE_EXTRA_PROJECTION = new String[]{BaseColumns._ID, Movies.MOVIES_ID,
             Movies.E_CHECKED, Movies.E_TAG, Movies.E_TITLE, Movies.E_CATEGORY, Movies.E_URL, Movies.E_DESCRIPTION,

@@ -301,4 +301,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nAlso make
         sure you have enough free space on your device (not the SD card). Twice the size of XML is required.\n\nIf
         none of this helps, please, contact the author via web page shown on Google Play.</string>
+    <!--Version 2.1-->
+    <string name="details_section_custom">Custom fields</string>
 </resources>
