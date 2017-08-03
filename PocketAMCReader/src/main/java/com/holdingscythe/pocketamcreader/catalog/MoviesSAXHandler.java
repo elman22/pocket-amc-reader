@@ -21,6 +21,7 @@ package com.holdingscythe.pocketamcreader.catalog;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.model.CustomFieldsModel;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -125,13 +126,13 @@ public class MoviesSAXHandler extends DefaultHandler {
                         String CValue = atts.getValue(f);
 
                         switch (CType) {
-                            case "ftText":
-                                parseMultiline(CValue);
+                            case CustomFieldsModel.CFT_TEXT:
+                                CValue = parseMultiline(CValue);
                                 break;
-                            case "ftReal":
-                            case "ftReal1":
-                            case "ftReal2":
-                                parseFloat(CValue);
+                            case CustomFieldsModel.CFT_REAL:
+                            case CustomFieldsModel.CFT_REAL1:
+                            case CustomFieldsModel.CFT_REAL2:
+                                CValue = parseFloat(CValue);
                                 break;
                         }
 
