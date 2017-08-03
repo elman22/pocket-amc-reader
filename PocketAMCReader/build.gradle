@@ -18,13 +18,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
     defaultConfig {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 87
-        versionName '2.0.1'
+        versionCode 88
+        versionName '2.1b1'
     }
     buildTypes {
         release {
