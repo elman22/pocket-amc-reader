@@ -59,13 +59,9 @@ import java.util.regex.Pattern;
  */
 public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
-    private CustomFields mCustomFields;
     private Extras mExtras;
-    private MoviesDataProvider mMoviesDataProvider;
     private Filters mFilters;
 
-    private SharedPreferences mPreferences;
-    private String mSettingMultivaluedSeparator;
     private Pattern regExpMultivaluedCleaner;
     private String regExpMultivaluedSeparator;
 
@@ -108,16 +104,16 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     (getActivity().getApplicationContext());
         }
 
-        mPreferences = SharedObjects.getInstance().preferences;
-        mSettingMultivaluedSeparator = mPreferences.getString("settingMultivalueSeparator", ",/");
+        SharedPreferences preferences = SharedObjects.getInstance().preferences;
+        String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
 
         if (getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
-            mMoviesDataProvider = new MoviesDataProvider(getActivity());
+            MoviesDataProvider moviesDataProvider = new MoviesDataProvider(getActivity());
 
             // Set (and compile) regular expressions
-            regExpMultivaluedCleaner = Pattern.compile("\\s*\\([^\\)]*\\)+");
-            regExpMultivaluedSeparator = "\\s*[" + Pattern.quote(mSettingMultivaluedSeparator) + "]\\s*";
+            regExpMultivaluedCleaner = Pattern.compile("\\s*\\([^)]*\\)+");
+            regExpMultivaluedSeparator = "\\s*[" + Pattern.quote(settingMultivaluedSeparator) + "]\\s*";
 
             // Benchmark start
             long startTime;
@@ -129,25 +125,25 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
             // Fetch movie
             Uri uri = Uri.withAppendedPath(S.CONTENT_URI, "_id/" + getArguments().getString(ARG_MOVIE_ID, "0"));
-            Cursor cursor = mMoviesDataProvider.fetchMovie(uri);
+            Cursor cursor = moviesDataProvider.fetchMovie(uri);
             cursor.moveToFirst();
             mMovie = new Movie(cursor, getView(), this, getActivity());
             cursor.close();
 
             // Fetch custom fields
-            Cursor cursorCustomFields = mMoviesDataProvider.fetchMovieCustomFields(Uri.withAppendedPath(uri, "custom"));
+            Cursor cursorCustomFields = moviesDataProvider.fetchMovieCustomFields(Uri.withAppendedPath(uri, "custom"));
             cursorCustomFields.moveToFirst();
-            mCustomFields = new CustomFields(cursorCustomFields, getView(), getActivity());
+            new CustomFields(cursorCustomFields, getView(), getActivity());
             cursorCustomFields.close();
 
             // Fetch extras
-            Cursor cursorExtras = mMoviesDataProvider.fetchMovieExtras(Uri.withAppendedPath(uri, "extras"));
+            Cursor cursorExtras = moviesDataProvider.fetchMovieExtras(Uri.withAppendedPath(uri, "extras"));
             cursorExtras.moveToFirst();
             mExtras = new Extras(cursorExtras);
             cursorExtras.close();
 
             // Close database
-            mMoviesDataProvider.closeDatabase();
+            moviesDataProvider.closeDatabase();
 
             // Benchmark end
             if (S.INFO) {
@@ -341,7 +337,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
      * Split multivalued field into respective values
      */
     private String[] separateMultivaluedField(View v) {
-        ArrayList<String> availableValues = new ArrayList<String>();
+        ArrayList<String> availableValues = new ArrayList<>();
         TextView multiField = (TextView) v;
         String multiValue = multiField.getText().toString();
 

@@ -29,7 +29,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <TextView
         android:id="@+id/customLabel"
         style="@style/Label"
-        android:text="LABEL"/>
+        android:text="@string/ph_text_line"/>
 
     <TextView
         android:id="@+id/customValue"
@@ -37,5 +37,5 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/wrapper_spacing_block"
-        android:text="VALUE"/>
+        android:text="@string/ph_text_short"/>
 </LinearLayout>
