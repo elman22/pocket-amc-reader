@@ -218,7 +218,14 @@ public class Movie {
 
     /**
      * Fill string from database into view. String can be clickable visibly or invisibly.
-     * Params: column name, data type, extension type, extension value id,  default value id
+     * If updating formatting, be sure also to check formatting in @CustomFields.java
+     *
+     * @param columnName          column name
+     * @param value               column value
+     * @param dataType            column data type
+     * @param valueExtensionType  extension type
+     * @param valueExtensionId    extension id
+     * @param defaultValueId      default value to be shown if empty
      */
     private void fillStringIntoView(String columnName, String value, int dataType, int valueExtensionType, int
             valueExtensionId, int defaultValueId) {

@@ -20,6 +20,7 @@ package com.holdingscythe.pocketamcreader.catalog;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -28,22 +29,29 @@ import android.widget.TextView;
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.model.CustomFieldsModel;
+import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+
+import java.util.Date;
 
 /**
- * Serializable object with custom fields
+ * Add custom fields to base movie detail layout
  */
-// TODO CLEAN UP
 public class CustomFields {
-//    private ArrayList<CustomFieldsModel> mCustomFields;
-    private LinearLayout mCustomLayout;
+    private Activity mActivity;
 
+    /**
+     * Instantiates a new Custom fields.
+     *
+     * @param cursor   the cursor
+     * @param view     the view
+     * @param activity the activity
+     */
     public CustomFields(Cursor cursor, View view, Activity activity) {
-//        mCustomFields = new ArrayList<>();
-//        Context context = activity.getBaseContext();
+        mActivity = activity;
 
         if (cursor.getCount() > 0) {
-            mCustomLayout = view.findViewById(R.id.CustomFieldsWrapper);
-            mCustomLayout.setVisibility(View.VISIBLE);
+            LinearLayout wrapperLayout = view.findViewById(R.id.CustomFieldsWrapper);
+            wrapperLayout.setVisibility(View.VISIBLE);
 
             TextView textViewSection = view.findViewById(R.id.customTitle);
             textViewSection.setVisibility(View.VISIBLE);
@@ -59,16 +67,22 @@ public class CustomFields {
                     );
 
                     // Inflate layout, because this is the only way to set correct theme
-                    LinearLayout customLayout = (LinearLayout)activity.getLayoutInflater().inflate(R.layout
+                    LinearLayout customLayout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout
                             .details_custom_field, null);
 
                     TextView customLabel = customLayout.findViewById(R.id.customLabel);
                     customLabel.setText(customField.getCName());
 
                     TextView customValue = customLayout.findViewById(R.id.customValue);
+
+                    // If custom field is of type URL, make it clickable
+                    if (customField.getCType().equals(CustomFieldsModel.CFT_URL)) {
+                        customValue.setAutoLinkMask(Linkify.ALL);
+                    }
+
                     customValue.setText(FormatValue(customField.getCType(), customField.getCValue()));
 
-                    mCustomLayout.addView(customLayout);
+                    wrapperLayout.addView(customLayout);
                 } while (cursor.moveToNext());
 
                 if (S.DEBUG)
@@ -81,31 +95,39 @@ public class CustomFields {
         }
     }
 
+    /**
+     * Format value according to the type
+     * If updating formatting, be sure to also check formatting in @Movie.java
+     *
+     * @param type  custom field type
+     * @param value custom field value
+     * @return String
+     */
     private String FormatValue(String type, String value) {
         switch (type) {
             case CustomFieldsModel.CFT_BOOLEAN:
-                // TODO
+                if (value.equals("True"))
+                    value = mActivity.getString(R.string.details_boolean_true);
+                else
+                    value = mActivity.getString(R.string.details_boolean_false);
                 break;
             case CustomFieldsModel.CFT_DATE:
-                // TODO
+                try {
+                    Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
+                    value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                } catch (Exception e) {
+                    // don't do anything, keep date as is
+                }
                 break;
             case CustomFieldsModel.CFT_REAL:
             case CustomFieldsModel.CFT_REAL1:
             case CustomFieldsModel.CFT_REAL2:
-                // TODO
-                break;
-            case CustomFieldsModel.CFT_URL:
-                // TODO
+                // Don't use locale unless rating, user rating and framerate use locale
+                // value = NumberFormat.getInstance().format(Float.valueOf(value));
                 break;
         }
 
         return value;
     }
 
-    /**
-     * Return array list of all custom fields
-     */
-//    public ArrayList<CustomFieldsModel> getCustomFieldsList() {
-//        return this.mCustomFields;
-//    }
 }
