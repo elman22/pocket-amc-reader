@@ -1,5 +1,5 @@
 # Pocket AMC Reader
-Version 2.0
+Version 2.1
 
 This application will allow you to read catalogs created by [Ant Movie Catalog](http://www.antp.be/software/moviecatalog) on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
 
@@ -59,6 +59,9 @@ Show pictures in details either resized to full screen or with their original si
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
+#### 29.08.2017 Version 2.1
+- ADDED Custom fields are now shown on details page
+
 #### 05.07.2017 Version 2.0.1
 - FIXED FC on Android 4.4 with list fields configuration
 - FIXED FC when changing sorting on fields that are not displayed by default
