@@ -46,6 +46,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="number_prefix">#</string>
     <plurals name="list_showing">
         <item quantity="one">Displaying %1$d movie</item>
+        <item quantity="few">Displaying %1$d movies</item>
         <item quantity="other">Displaying %1$d movies</item>
     </plurals>
     <string name="details_checked_label">Watched</string>
@@ -67,6 +68,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="display_filessizes_suffix">MB</string>
     <plurals name="details_disks">
         <item quantity="one">disc/file</item>
+        <item quantity="few">discs/files</item>
         <item quantity="other">discs/files</item>
     </plurals>
     <string name="display_files_separator">on</string>
