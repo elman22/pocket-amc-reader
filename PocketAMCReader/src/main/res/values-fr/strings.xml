@@ -1,236 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
-This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
-Copyright © 2013 Xavier Muller
-
-Pocket AMC Reader is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Pocket AMC Reader is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
--->
-
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="app_name">Pocket AMC Reader</string>
-    <string name="import_in_progress">Importé</string>
-    <string name="import_read_file">Lecture du catalogue&#x2026;</string>
-    <string name="pref_category_catalog">Catalogue</string>
-    <string name="pref_setting_catalog">Catalogue source</string>
-    <string name="menu_settings">Options</string>
-    <string name="pref_setting_catalog_summary">Sélectionner un catalogue sur la carte SD</string>
-    <string name="display_minutes_suffix">min.</string>
-    <string name="pref_category_display">Détails</string>
-    <string name="pref_setting_encoding">Encodage du catalogue</string>
-    <string name="pref_setting_encoding_summary">Définit le code langue utilisé par votre PC </string>
-    <string-array name="pref_setting_encoding_keys">
-        <item>Europe de l\'Ouest</item>
-        <item>Europe centrale</item>
-        <item>Cyrillique</item>
-        <item>Grec</item>
-        <item>Turc</item>
-        <item>Hebreu</item>
-        <item>Arabe</item>
-        <item>Balte</item>
-        <item>Vietnamien</item>
-    </string-array>
-    <string name="pref_category_debug">Avancé</string>
-    <string name="pref_setting_force_import">Réimport forcé</string>
-    <string name="pref_setting_force_import_summary">Force la réimportation du catalogue à la fermeture du menu Options</string>
-    <string name="search_hint">Recherche de films</string>
-    <string name="app_label">Pocket AMC Reader</string>
-    <string name="search_label">Texte à chercher:</string>
-    <string name="items_separator_details">-</string>
-    <string name="details_director_label">Réalisateur:</string>
-    <string name="details_producer_label">Producteur:</string>
-    <string name="number_prefix">#</string>
-    <plurals name="list_showing">
-        <item quantity="one">Film affiché: %1$d</item>
-        <item quantity="other">Films affichés: %1$d</item>
-    </plurals>
-    <plurals name="search_found">
-        <item quantity="one">Film trouvé: %1$d</item>
-        <item quantity="other">Films trouvés: %1$d</item>
-    </plurals>
-    <string name="details_checked_label">Vu:</string>
-    <string name="details_boolean_true">Oui</string>
-    <string name="details_boolean_false">Non</string>
-    <string name="details_actors_label">Acteurs:</string>
-    <string name="details_medialabel_label">Etiquette:</string>
-    <string name="details_mediatype_label">Type:</string>
-    <string name="details_source_label">Source:</string>
-    <string name="details_borrower_label">Emprunteur:</string>
-    <string name="details_languages_label">Langues:</string>
-    <string name="details_subtitles_label">Sous-titres:</string>
-    <string-array name="pref_setting_default_tab_keys">
-        <item>Synthèse</item>
-        <item>Image</item>
-        <item>Description</item>
-        <item>Autres</item>
-    </string-array>
-    <string name="pref_setting_default_tab">Onglet par défaut</string>
-    <string name="pref_setting_default_tab_summary">Onglet à ouvrir par défaut pour afficher les Détails d\'un film</string>
-    <string name="menu_search">Recherche</string>
-    <string name="tab_basic">Synthèse</string>
-    <string name="tab_picture">Image</string>
-    <string name="tab_description">Description</string>
-    <string name="tab_other">Autres</string>
-    <string name="details_video_label">Video:</string>
-    <string name="display_bitrate_suffix">kb/s</string>
-    <string name="details_audio_label">Audio:</string>
-    <string name="details_resolution_label">Résolution:</string>
-    <string name="details_framerate_label">Fréquence images:</string>
-    <string name="display_framerate_suffix">i/s</string>
-    <string name="display_filessizes_suffix">Mo</string>
-    <plurals name="details_disks">
-        <item quantity="one">disque/fichier</item>
-        <item quantity="other">disques/fichiers</item>
-    </plurals>
-    <string name="details_files_label">Fichiers:</string>
-    <string name="display_files_separator">sur</string>
-    <string name="details_comments_label">Commentaires:</string>
-    <string name="details_url_label">URL:</string>
-    <string name="details_date_label">Date d\'ajoût:</string>
-    <string name="menu_about">A propos</string>
-    <string name="about">%1$s\nversion %2$s\n\nDéveloppée par Elman\nCopyright © %3$s Holding Scythe\n\nCe programme est un logiciel libre; vous pouvez le redistribuer et/ou le modifier selon les termes de la License Publique Général GNU telle que publiée par la Free Software Foundation; soit la version 2 de la GNU GPL, ou (si vous préférez) toute version ultérieure.\n\nTraducteurs\n%4$s</string>
-    <string name="menu_sort_title">Tri</string>
-    <string name="menu_sort_formattedtitle_desc">Titre (Z - A)</string>
-    <string name="menu_sort_formattedtitle_asc">Titre (A - Z)</string>
-    <string name="menu_sort_number_desc">Nombre (Récent)</string>
-    <string name="menu_sort_number_asc">Nombre (Ancien)</string>
-    <string name="menu_previous_movie">Précédent</string>
-    <string name="menu_next_movie">Suivant</string>
-    <string name="menu_random_movie">Aléatoire</string>
-    <plurals name="import_in_progress_suffix">
-        <item quantity="one">film</item>
-        <item quantity="other">films</item>
-    </plurals>
-    <string name="welcome_title">Bienvenue</string>
-    <string name="welcome_message">Pour commencer à utiliser cette application vous serez dirigé vers \"%1$s\" afin de:\n\n- Sélectionner votre catalogue XML dans le paramètre \"%2$s\",\n- Modifier \"%3$s\" pour correspondre au codage du PC.\n\nL\'application va importer les données de vos films dès que vous quitterez \"%1$s\".</string>
-    <string name="welcome_dialog_dismiss">Suite</string>
-    <string name="dialog_positive">Valider</string>
-    <string name="dialog_neutral">Suite</string>
-    <string name="dialog_negative">Annuler</string>
-    <string name="filter_type_is">est</string>
-    <string name="filter_type_equals">=</string>
-    <plurals name="filter_label">
-        <item quantity="one">Filtre:</item>
-        <item quantity="other">Filtres:</item>
-    </plurals>
-    <string name="filter_none">aucun</string>
-    <string name="filter_action">Annuler</string>
-    <string name="filter_type_contains">contient</string>
-    <string name="details_rating_label">Note:</string>
-    <string name="details_videoformat_label">Format Video:</string>
-    <string name="details_audioformat_label">Format Audio:</string>
-    <string name="error_import">Erreur lors de l\'importation de votre catalogue. C\'est causé généralement par la présence de caractères non reconnus dans le catalogue. Pour nettoyer votre catalogue, lancez Ant Movie Catalog sur votre PC et avec (Maj+F6) exécutez le script appelé RemoveBadChars puis ré-importez ce catalogue corrigé. Si ça ne suffit pas, vous pouvez essayer:\n\n- Assurez-vous quevous avez assez d\'espace libre sur votre appareil (hors carte SD). Vous avez besoin de deux fois la taille du fichier XML.\n- Essayez de modifier l\'option \"%1$s\".\n\nEn cas d\'échec, veuillez contacter l\'auteur via la page web indiquée sur Google Play.</string>
-    <string name="menu_add_filter">Filtre</string>
-    <string name="filter_add_first_step">Choix du premier champ</string>
-    <string name="details_country_label">Pays:</string>
-    <string name="details_category_label">Catégorie:</string>
-    <string name="filter_type_larger">&gt;</string>
-    <string name="filter_type_smaller">&lt;</string>
-    <string name="filter_type_equals_not">différent de</string>
-    <string name="filter_type_contains_not">ne contient pas</string>
-    <string name="filter_type_begins_with">commence par</string>
-    <string name="filter_type_ends_with">se termine par</string>
-    <string name="details_formattedtitle_label">Titre:</string>
-    <string name="details_number_label">Nombre:</string>
-    <string name="details_year_label">Année:</string>
-    <string name="details_length_label">Durée:</string>
-    <string name="details_description_label">Description:</string>
-    <string name="details_videobitrate_label">Débit video:</string>
-    <string name="details_audiobitrate_label">Débit audio:</string>
-    <string name="details_size_label">Taille:</string>
-    <string name="details_disks_label">Disques:</string>
-    <string name="filter_join_and"><i>et</i></string>
-    <string name="error_import_label">Erreur!</string>
-    <string name="pref_setting_show_thumbs">Vignettes</string>
-    <string name="pref_setting_show_thumbs_summary">Affiche les vignettes dans la liste de films</string>
-    <string name="pref_setting_clear_thumb_cache">Vider le cache</string>
-    <string name="pref_setting_clear_thumb_cache_summary">Vide le cache des vignettes dès la fermeture du menu Options</string>
-    <string name="import_clear_cache">Vidage du cache des vignettes&#x2026;</string>
-    <string name="menu_sort_year_desc">Année (Récente)</string>
-    <string name="menu_sort_year_asc">Année (Ancienne)</string>
-    <string name="menu_sort_length_desc">Durée (Longue)</string>
-    <string name="menu_sort_length_asc">Durée (Courte)</string>
-    <string name="menu_sort_rating_desc">Note (Bonne)</string>
-    <string name="menu_sort_rating_asc">Note (Mauvaise)</string>
-    <string name="menu_sort_borrower_desc">Emprunteur (Z - A)</string>
-    <string name="menu_sort_borrower_asc">Emprunteur (A - Z)</string>
-    <string name="menu_sort_medialabel_desc">Titre formaté (Z - A)</string>
-    <string name="menu_sort_medialabel_asc">Titre formaté (A - Z)</string>
-    <string name="import_add_indexes">Optimisation des performances&#x2026;</string>
-    <string name="filter_type_is_null">est vide</string>
-    <string name="filter_type_is_null_not">n\'est pas vide</string>
-    <string name="pref_setting_imdb">Liens IMDb</string>
-    <string name="pref_setting_imdb_summary">Choisit la façon de traiter le champ IMDb des films</string>
-    <string-array name="pref_setting_imdb_keys">
-        <item>Dans le navigateur, tel quel</item>
-        <item>Dans le navigateur, après redirection sur la version anglaise mobile</item>
-        <item>Dans l\'application IMDb d\'Android</item>
-    </string-array>
-    <string name="error_imdb_app_not_found">Application \"IMDb Movies &amp; TV\" introuvable. Souhaitez-vous utiliser Google Play et installer cette application?</string>
-    <string name="error_browser_not_found">Navigateur internet absent</string>
-    <string name="dialog_positive_boolean">Oui</string>
-    <string name="dialog_negative_boolean">Non</string>
-    <string name="error_market_app_not_found">Application Google Play absente</string>
-    <string name="pref_setting_list_no_items">Il n\'y a plus de champs à ajouter</string>
-    <string name="pref_setting_list_add_title">Choix du champ</string>
-    <string name="pref_setting_list_add_button">Ajouter</string>
-    <string name="pref_setting_list_save_button">Enreg.</string>
-    <string name="pref_setting_list_saved">Liste enregistrée</string>
-    <string name="pref_category_list">Liste des films</string>
-    <string name="pref_setting_list_force_sort_field">Champ du tri</string>
-    <string name="pref_setting_list_force_sort_field_summary">Affiche toujours en 3e ligne le champ servant au tri de la liste, sauf si déjà affiché</string>
-    <string name="pref_setting_list_line1">Champs 1e ligne</string>
-    <string name="pref_setting_list_line1_summary">Choix des champs affichés sur la 1e ligne</string>
-    <string name="pref_setting_list_line2">Champs 2e ligne</string>
-    <string name="pref_setting_list_line2_summary">Choix des champs affichés sur la 2e ligne</string>
-    <string name="pref_setting_list_line3">Champs 3e ligne</string>
-    <string name="pref_setting_list_line3_summary">Choix des champs affichés sur la 3e ligne</string>
-    <string name="pref_setting_list_separator">Séparateur de champs</string>
-    <string name="pref_setting_list_separator_summary">Caractère(s) à utiliser pour séparés les champs d\'une même ligne (virgule utilisée par défaut)</string>
-    <string name="details_picture_label">Image:</string>
-    <string name="details_originaltitle_label">Titre original:</string>
-    <string name="details_translatedtitle_label">Titre traduit:</string>
-    <string name="menu_sort_originaltitle_desc">Titre original (Z - A)</string>
-    <string name="menu_sort_originaltitle_asc">Titre original (A - Z)</string>
-    <string name="menu_sort_translatedtitle_desc">Titre traduit (Z - A)</string>
-    <string name="menu_sort_translatedtitle_asc">Titre traduit (A - Z)</string>
-    <string name="pref_setting_show_color_tags">Etiquettes colorées</string>
-    <string name="pref_setting_show_color_tags_summary">Coloration du titre des films en fonction de la couleur éventuelle de leur étiquette</string>
-    <string name="menu_sort_color_tag_desc">Couleur (Haute)</string>
-    <string name="menu_sort_color_tag_asc">Couleur (Basse)</string>
-    <string name="details_colortag_label">Etiquette colorée:</string>
-    <string name="pref_setting_multivalue">Séparateur de champ multiple</string>
-    <string name="pref_setting_multivalue_summary">Définition du séparateur à utiliser pour lister réalisateurs, producteurs, acteurs, etc. Vous pouvez utiliser plusieur séparateurs en même temps</string>
-    <string name="details_img_description">Image du film</string>
-    <string name="pref_setting_plot_basic">Commentaires de l\'onglet Synthèse</string>
-    <string name="pref_setting_plot_basic_summary">L\'application tente de résumer le champ description du film et les affiche dans l\'onglet de Synthèse</string>
-    <string-array name="pref_setting_plot_basic_keys">
-        <item>Aucun</item>
-        <item>Premières lignes du champ Description complet</item>
-        <item>Idem mais sans les lignes de Tags, anecdotes IMDb, etc.</item>
-    </string-array>
-    <string name="input_filter_hint">Filtres</string>
-    <string name="pref_category_general">Généralités</string>
-    <string name="pref_setting_font_size">Taille de police</string>
-    <string name="pref_setting_font_size_summary">Choix de la taille de police</string>
-    <string-array name="pref_setting_font_size_keys">
-        <item>Normale</item>
-        <item>Grande</item>
-        <item>Très grande</item>
-        <item>Tablet</item>
-    </string-array>
-    <string name="menu_sort_date_desc">Date d\'ajoût (Récente)</string>
-    <string name="menu_sort_date_asc">Date d\'ajoût (Ancienne)</string>
+  <string name="app_name">Pocket AMC Reader</string>
+  <string name="import_in_progress">Importé</string>
+  <string name="import_read_file">Lecture du catalogue…</string>
+  <string name="pref_category_catalog">Catalogue</string>
+  <string name="pref_setting_catalog">Catalogue source</string>
+  <string name="menu_settings">Options</string>
+  <string name="pref_setting_catalog_summary">Sélectionner un catalogue sur la carte SD</string>
+  <string name="display_minutes_suffix">min.</string>
+  <string name="pref_category_display">Détails</string>
+  <string name="pref_setting_encoding">Encodage du catalogue</string>
+  <string name="pref_setting_encoding_summary">Définit le code langue utilisé par votre PC</string>
+  <string-array name="pref_setting_encoding_keys">
+    <item>Europe de l\'Ouest</item>
+    <item>Europe centrale</item>
+    <item>Cyrillique</item>
+    <item>Grec</item>
+    <item>Turc</item>
+    <item>Hebreu</item>
+    <item>Arabe</item>
+    <item>Balte</item>
+    <item>Vietnamien</item>
+  </string-array>
+  <string name="details_director_label">Réalisateur</string>
+  <string name="details_producer_label">Producteur</string>
+  <string name="number_prefix">#</string>
+  <plurals name="list_showing">
+    <item quantity="one">Film affiché: %1$d</item>
+    <item quantity="few">Films affichés: %1$d</item>
+    <item quantity="other">Films affichés: %1$d</item>
+  </plurals>
+  <string name="details_checked_label">Vu</string>
+  <string name="details_boolean_true">Oui</string>
+  <string name="details_boolean_false">Non</string>
+  <string name="details_actors_label">Acteurs</string>
+  <string name="details_medialabel_label">Etiquette</string>
+  <string name="details_mediatype_label">Type</string>
+  <string name="details_source_label">Source</string>
+  <string name="details_borrower_label">Emprunteur</string>
+  <string name="details_languages_label">Langues</string>
+  <string name="details_subtitles_label">Sous-titres</string>
+  <string name="menu_search">Recherche</string>
+  <string name="details_video_label">Video</string>
+  <string name="display_bitrate_suffix">kb/s</string>
+  <string name="details_audio_label">Audio</string>
+  <string name="details_resolution_label">Résolution</string>
+  <string name="details_framerate_label">Fréquence images</string>
+  <string name="display_filessizes_suffix">Mo</string>
+  <plurals name="details_disks">
+    <item quantity="one">disque/fichier</item>
+    <item quantity="few">disques/fichiers</item>
+    <item quantity="other">disques/fichiers</item>
+  </plurals>
+  <string name="display_files_separator">sur</string>
+  <string name="details_comments_label">Commentaires</string>
+  <string name="details_url_label">URL</string>
+  <string name="details_date_label">Date d\'ajoût</string>
+  <string name="menu_about">A propos</string>
+  <string name="about">%1$s\nversion %2$s\n\nDéveloppée par Elman\nCopyright © %3$s Holding Scythe\n\nCe programme est un logiciel libre; vous pouvez le redistribuer et/ou le modifier selon les termes de la License Publique Général GNU telle que publiée par la Free Software Foundation; soit la version 2 de la GNU GPL, ou (si vous préférez) toute version ultérieure.\n\nTraducteurs\n%4$s\n\nBibliothèques utilisées\n%5$s</string>
+  <string name="menu_sort_title">Tri</string>
+  <string name="menu_sort_formattedtitle_desc">Titre (Z - A)</string>
+  <string name="menu_sort_formattedtitle_asc">Titre (A - Z)</string>
+  <string name="menu_sort_number_desc">Nombre (Récent)</string>
+  <string name="menu_sort_number_asc">Nombre (Ancien)</string>
+  <string name="welcome_title">Bienvenue</string>
+  <string name="welcome_message">Pour commencer à utiliser cette application vous serez dirigé vers \"%1$s\" afin de:\n\n- Sélectionner votre catalogue XML dans le paramètre \"%2$s\",\n- Modifier \"%3$s\" pour correspondre au codage du PC.\n\nL\'application va importer les données de vos films dès que vous quitterez \"%1$s\".</string>
+  <string name="welcome_dialog_dismiss">Suite</string>
+  <string name="dialog_positive">Valider</string>
+  <string name="dialog_negative">Annuler</string>
+  <string name="filter_type_is">est</string>
+  <string name="filter_type_equals">=</string>
+  <plurals name="filter_label">
+    <item quantity="one">Filtre:</item>
+    <item quantity="other">Filtres:</item>
+  </plurals>
+  <string name="filter_none">aucun</string>
+  <string name="filter_type_contains">contient</string>
+  <string name="details_rating_label">Note</string>
+  <string name="details_videoformat_label">Format Video</string>
+  <string name="details_audioformat_label">Format Audio</string>
+  <string name="menu_add_filter">Filtre</string>
+  <string name="filter_add_first_step">Choix du premier champ</string>
+  <string name="details_country_label">Pays</string>
+  <string name="details_category_label">Catégorie</string>
+  <string name="filter_type_larger">></string>
+  <string name="filter_type_smaller">&lt;</string>
+  <string name="filter_type_equals_not">différent de</string>
+  <string name="filter_type_contains_not">ne contient pas</string>
+  <string name="filter_type_begins_with">commence par</string>
+  <string name="filter_type_ends_with">se termine par</string>
+  <string name="details_formattedtitle_label">Titre</string>
+  <string name="details_number_label">Nombre</string>
+  <string name="details_year_label">Année</string>
+  <string name="details_length_label">Durée</string>
+  <string name="details_description_label">Description</string>
+  <string name="details_videobitrate_label">Débit video</string>
+  <string name="details_audiobitrate_label">Débit audio</string>
+  <string name="details_size_label">Taille</string>
+  <string name="details_disks_label">Disques</string>
+  <string name="filter_join_and">&lt;i&gt;et&lt;/i&gt;</string>
+  <string name="error_import_label">Erreur!</string>
+  <string name="pref_setting_show_thumbs">Vignettes</string>
+  <string name="pref_setting_show_thumbs_summary">Affiche les vignettes dans la liste de films</string>
+  <string name="menu_sort_year_desc">Année (Récente)</string>
+  <string name="menu_sort_year_asc">Année (Ancienne)</string>
+  <string name="menu_sort_length_desc">Durée (Longue)</string>
+  <string name="menu_sort_length_asc">Durée (Courte)</string>
+  <string name="menu_sort_rating_desc">Note (Bonne)</string>
+  <string name="menu_sort_rating_asc">Note (Mauvaise)</string>
+  <string name="menu_sort_borrower_desc">Emprunteur (Z - A)</string>
+  <string name="menu_sort_borrower_asc">Emprunteur (A - Z)</string>
+  <string name="menu_sort_medialabel_desc">Titre formaté (Z - A)</string>
+  <string name="menu_sort_medialabel_asc">Titre formaté (A - Z)</string>
+  <string name="import_add_indexes">Optimisation des performances…</string>
+  <string name="filter_type_is_null">est vide</string>
+  <string name="filter_type_is_null_not">n\'est pas vide</string>
+  <string name="pref_setting_list_saved">Liste enregistrée</string>
+  <string name="pref_category_list">Liste des films</string>
+  <string name="pref_setting_list_force_sort_field">Champ du tri</string>
+  <string name="pref_setting_list_force_sort_field_summary">Affiche toujours en 3e ligne le champ servant au tri de la liste, sauf si déjà affiché</string>
+  <string name="pref_setting_list_separator">Séparateur de champs</string>
+  <string name="pref_setting_list_separator_summary">Caractère(s) à utiliser pour séparés les champs d\'une même ligne (virgule utilisée par défaut)</string>
+  <string name="details_picture_label">Image</string>
+  <string name="details_originaltitle_label">Titre original</string>
+  <string name="details_translatedtitle_label">Titre traduit</string>
+  <string name="menu_sort_originaltitle_desc">Titre original (Z - A)</string>
+  <string name="menu_sort_originaltitle_asc">Titre original (A - Z)</string>
+  <string name="menu_sort_translatedtitle_desc">Titre traduit (Z - A)</string>
+  <string name="menu_sort_translatedtitle_asc">Titre traduit (A - Z)</string>
+  <string name="menu_sort_color_tag_desc">Couleur (Haute)</string>
+  <string name="menu_sort_color_tag_asc">Couleur (Basse)</string>
+  <string name="details_colortag_label">Etiquette colorée</string>
+  <string name="pref_setting_multivalue">Séparateur de champ multiple</string>
+  <string name="pref_setting_multivalue_summary">Définition du séparateur à utiliser pour lister réalisateurs, producteurs, acteurs, etc. Vous pouvez utiliser plusieur séparateurs en même temps</string>
+  <string name="details_img_description">Image du film</string>
+  <string name="input_filter_hint">Filtres</string>
+  <string name="menu_sort_date_desc">Date d\'ajoût (Récente)</string>
+  <string name="menu_sort_date_asc">Date d\'ajoût (Ancienne)</string>
 </resources>
