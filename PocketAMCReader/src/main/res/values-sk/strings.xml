@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">Pocket AMC Reader</string>
+  <string name="import_in_progress">Importovanie filmov ...</string>
+  <string name="import_read_file">Čítanie katalógu ...</string>
+  <string name="pref_category_catalog">Katalóg</string>
+  <string name="pref_setting_catalog">Katalóg</string>
+  <string name="menu_settings">Nastavenia</string>
+  <string name="pref_setting_catalog_summary">Vyberte si katalóg z karty SD</string>
+  <string name="display_minutes_suffix">min.</string>
+  <string name="pref_category_display">Podrobnosti</string>
+  <string name="pref_setting_encoding">Kódovanie katalógu</string>
+  <string name="pref_setting_encoding_summary">Nastavte správne kódovanie z počítača</string>
+  <string-array name="pref_setting_encoding_keys">
+    <item>Západoeurópske</item>
+    <item>Stredoeurópske</item>
+    <item>Cyriliky</item>
+    <item>Grécky</item>
+    <item>Turecké</item>
+    <item>Hebrejské</item>
+    <item>Arabské</item>
+    <item>Baltské</item>
+    <item>Vietnamské</item>
+  </string-array>
+  <string name="details_director_label">Režisér</string>
+  <string name="details_producer_label">Producent</string>
+  <string name="number_prefix">#</string>
+  <plurals name="list_showing">
+    <item quantity="one">Zobrazujem %1$d film</item>
+    <item quantity="few">Zobrazujem %1$d filmy</item>
+    <item quantity="other">Zobrazujem %1$d filmov</item>
+  </plurals>
+  <string name="details_checked_label">Sledované</string>
+  <string name="details_boolean_true">Áno</string>
+  <string name="details_boolean_false">Nie</string>
+  <string name="details_actors_label">Herci</string>
+  <string name="details_medialabel_label">Štítok</string>
+  <string name="details_mediatype_label">Typ</string>
+  <string name="details_source_label">Zdroj</string>
+  <string name="details_borrower_label">Dlžník</string>
+  <string name="details_languages_label">Jazyky</string>
+  <string name="details_subtitles_label">Titulky</string>
+  <string name="menu_search">Vyhľadávanie</string>
+  <string name="details_video_label">Video</string>
+  <string name="display_bitrate_suffix">kbps</string>
+  <string name="details_audio_label">Audio</string>
+  <string name="details_resolution_label">Rozlíšenie</string>
+  <string name="details_framerate_label">Snímky za sekundu</string>
+  <string name="display_filessizes_suffix">MB</string>
+  <plurals name="details_disks">
+    <item quantity="one">disk / súbor</item>
+    <item quantity="few">disky / súbory</item>
+    <item quantity="other">diskov / súborov</item>
+  </plurals>
+  <string name="display_files_separator">na</string>
+  <string name="details_comments_label">Komentáre</string>
+  <string name="details_url_label">URL</string>
+  <string name="details_date_label">Dátum pridania</string>
+  <string name="menu_about">O...</string>
+  <string name="about">%1$s\nverzia %2$s\n\nVyvinul Elman\nCopyright © %3$s Holding Scythe\n\nTento program je slobodný softvér: môžete ho ďalej šíriť a / alebo ho upravovať pod podmienkami Všeobecnej verejnej licencie GNU, ktorú uverejňuje Free Software Foundation, buď verzia 3 licencie, alebo (podľa vlastného uváženia) akákoľvek neskoršia verzia.\n\nPrekladatelia\n%4$s\n\nPoužité knižnice\n%5$s</string>
+  <string name="menu_sort_title">Triedenie</string>
+  <string name="menu_sort_formattedtitle_desc">Názov (od Z do A)</string>
+  <string name="menu_sort_formattedtitle_asc">Názov (od A do Z)</string>
+  <string name="menu_sort_number_desc">Číslo (najnovšie)</string>
+  <string name="menu_sort_number_asc">Číslo (najstaršie)</string>
+  <string name="welcome_title">Vitajte</string>
+  <string name="welcome_message">Pre spustenie tejto aplikácie budete presmerovaní na adresu \"%1$s\", kde:\n\n- Vyberte si svoj katalóg XML v nastavení \"%2$s\",\n- Zmeňte \"%3$s\" tak, aby zodpovedali nastaveniam vášho PC.\n\nAplikácia importuje vaše filmy po opustení stránky \"%1$s\".</string>
+  <string name="welcome_dialog_dismiss">Pokračovať</string>
+  <string name="dialog_positive">OK</string>
+  <string name="dialog_negative">Storno</string>
+  <string name="filter_type_is">je</string>
+  <string name="filter_type_equals">=</string>
+  <plurals name="filter_label">
+    <item quantity="one">Filter:</item>
+    <item quantity="other">Filtre:</item>
+  </plurals>
+  <string name="filter_none">žiadny</string>
+  <string name="filter_type_contains">obsahuje</string>
+  <string name="details_rating_label">Hodnotenie</string>
+  <string name="details_videoformat_label">Formát videa</string>
+  <string name="details_audioformat_label">Zvukový formát</string>
+  <string name="menu_add_filter">Filter</string>
+  <string name="filter_add_first_step">Vyberte pole</string>
+  <string name="details_country_label">Krajina</string>
+  <string name="details_category_label">Kategória</string>
+  <string name="filter_type_larger">></string>
+  <string name="filter_type_smaller">&lt;</string>
+  <string name="filter_type_equals_not">sa nerovná</string>
+  <string name="filter_type_contains_not">neobsahuje</string>
+  <string name="filter_type_begins_with">začína s</string>
+  <string name="filter_type_ends_with">končí s</string>
+  <string name="details_formattedtitle_label">Názov</string>
+  <string name="details_number_label">Číslo</string>
+  <string name="details_year_label">Rok</string>
+  <string name="details_length_label">Dĺžka</string>
+  <string name="details_description_label">Popis</string>
+  <string name="details_videobitrate_label">Video bitrate</string>
+  <string name="details_audiobitrate_label">Audio bitrate</string>
+  <string name="details_size_label">Veľkosť</string>
+  <string name="details_disks_label">Disky</string>
+  <string name="filter_join_and">&lt;i&gt;a &lt;/i&gt;</string>
+  <string name="error_import_label">Problém s importom</string>
+  <string name="pref_setting_show_thumbs">Zobraziť miniatúry</string>
+  <string name="pref_setting_show_thumbs_summary">Zobraziť miniatúry v zozname filmov</string>
+  <string name="menu_sort_year_desc">Rok (najnovší)</string>
+  <string name="menu_sort_year_asc">Rok (najstarší)</string>
+  <string name="menu_sort_length_desc">Dĺžka (najdlhší)</string>
+  <string name="menu_sort_length_asc">Dĺžka (najkratší)</string>
+  <string name="menu_sort_rating_desc">Hodnotenie (Najlepšie)</string>
+  <string name="menu_sort_rating_asc">Hodnotenie (najhoršie)</string>
+  <string name="menu_sort_borrower_desc">Dlžník (od Z do A)</string>
+  <string name="menu_sort_borrower_asc">Dlžník (od A do Z)</string>
+  <string name="menu_sort_medialabel_desc">Štítok (od Z do A)</string>
+  <string name="menu_sort_medialabel_asc">Štítok (od A do Z)</string>
+  <string name="import_add_indexes">Optimalizácia výkonu ...</string>
+  <string name="filter_type_is_null">je prázdny</string>
+  <string name="filter_type_is_null_not">nie je prázdny</string>
+  <string name="pref_setting_list_saved">Nastavenia boli uložené</string>
+  <string name="pref_category_list">Zoznam</string>
+  <string name="pref_setting_list_force_sort_field">Zobraziť triedené pole</string>
+  <string name="pref_setting_list_force_sort_field_summary">Zobraziť triedené pole v 3. riadku, ak už nie je zobrazené</string>
+  <string name="pref_setting_list_separator">Oddeľovač polí</string>
+  <string name="pref_setting_list_separator_summary">Oddeľovač textu zobrazený medzi políčkami (v predvolenom nastavení je použitá čiarka)</string>
+  <string name="details_picture_label">Obrázok</string>
+  <string name="details_originaltitle_label">Pôvodný názov</string>
+  <string name="details_translatedtitle_label">Preložený názov</string>
+  <string name="menu_sort_originaltitle_desc">Pôvodný názov (od Z do A)</string>
+  <string name="menu_sort_originaltitle_asc">Pôvodný názov (od A do Z)</string>
+  <string name="menu_sort_translatedtitle_desc">Preložený názov (od Z do A)</string>
+  <string name="menu_sort_translatedtitle_asc">Preložený názov (od A do Z)</string>
+  <string name="menu_sort_color_tag_desc">Farebná značka (najvyššia)</string>
+  <string name="menu_sort_color_tag_asc">Farebná značka (najnižšia)</string>
+  <string name="details_colortag_label">Farebná značka</string>
+  <string name="pref_setting_multivalue">Viacpoložkový oddeľovač</string>
+  <string name="pref_setting_multivalue_summary">Zadajte oddeľovač, ktorý sa použije na oddelenie režisérov, producentov, hercov atď. Môžete použiť viac oddeľovačov naraz</string>
+  <string name="details_img_description">Obrázok filmu</string>
+  <string name="input_filter_hint">Hodnota filtra</string>
+  <string name="menu_sort_date_desc">Dátum pridania (najnovší)</string>
+  <string name="menu_sort_date_asc">Dátum pridania (najstarší)</string>
+  <string name="details_writer_label">Scenár</string>
+  <string name="details_composer_label">Skladateľ</string>
+  <string name="details_filepath_label">Cesta k súboru</string>
+  <string name="details_userrating_label">Moje hodnotenie</string>
+  <string name="menu_sort_userrating_desc">Moje hodnotenie (Najlepšie)</string>
+  <string name="menu_sort_userrating_asc">Moje hodnotenie (Najhoršie)</string>
+  <string name="details_datewatched_label">Dátum sledovania</string>
+  <string name="menu_sort_datewatched_desc">Dátum sledovania (najnovší)</string>
+  <string name="menu_sort_datewatched_asc">Dátum sledovania (najstarší)</string>
+  <string name="details_certification_label">Certifikácia</string>
+  <string name="menu_sort_certification_desc">Certifikácia (od Z do A)</string>
+  <string name="menu_sort_certification_asc">Certifikácia (od A do Z)</string>
+  <string name="pref_setting_fit_picture">Prispôsobiť obrázok</string>
+  <string name="pref_setting_fit_picture_summary">Prispôsobiť veľkosť obrázka podľa displeja</string>
+  <string name="details_etag_label">Štítok</string>
+  <string name="details_etitle_label">Názov</string>
+  <string name="details_ecategory_label">Kategória</string>
+  <string name="details_eurl_label">URL</string>
+  <string name="details_edescription_label">Popis</string>
+  <string name="details_ecomments_label">Komentáre</string>
+  <string name="details_ecreated_by_label">Vytvoril</string>
+  <string name="filter_remove">Vyčistiť filtre</string>
+  <string name="filter_remove_all">Všetky filtre</string>
+  <!--Version 2.0-->
+  <string name="import_check_file">Kontrola aktualizácií ...</string>
+  <string name="loading">Načítavam…</string>
+  <string name="details_picture_description">Filmový plagát</string>
+  <string name="details_certification_label_short">Cert.</string>
+  <string name="details_section_media">Podrobnosti o médiách</string>
+  <string name="details_section_technical">Technické detaily</string>
+  <string name="pref_setting_list_lines">Polia zobrazené v zozname</string>
+  <string name="pref_setting_list_lines_summary">Zvoľte a usporiadajte polia, ktoré sa zobrazia v zozname filmov</string>
+  <string name="list_holder_row1">Pridajte niektoré polia (napríklad titul)</string>
+  <string name="list_holder_row2">Pridajte niektoré polia (napríklad číslo, rok, dĺžka, hodnotenie)</string>
+  <string name="list_holder_row3">Pridajte niektoré polia (napríklad kategóriu)</string>
+  <string name="settings_cards_column1_title">Riadok 1</string>
+  <string name="settings_cards_column2_title">Riadok 2</string>
+  <string name="settings_cards_column3_title">Riadok 3</string>
+  <string name="settings_cards_column4_title">Dostupné polia</string>
+  <string name="card_click_hint">Podržte a ťahajte pre usporiadanie</string>
+  <string name="pref_setting_remove_bad_chars">Odstráňte zlé znaky</string>
+  <string name="pref_setting_remove_bad_chars_summary">Odstráňte zlé znaky v XML súbore počas importu. Používajte len vtedy, keď sa pôvodné XML nedarí načítať</string>
+  <string name="error_import2">Vyskytol sa problém s importom. Obvykle sa to stane, keď katalóg obsahuje niektoré neštandardné znaky. Ak to chcete vyriešiť, môžete vyskúšať:\n\n- Prejdite na nastavenia a skontrolujte \"%1$s\"\n- Skúste zmeniť nastavenie \"%2$s\"\n- Spustite vo svojom PC Ant Movie Catalog skript s názvom RemoveBadChars a skúste znova import\n\nTaktiež sa uistite, že máte vo svojom zariadení dostatok voľného miesta (nie na karte SD). Je potrebná dvojnásobná veľkosť XML.\n\nAk vám nič z toho nepomôže, kontaktujte autorov prostredníctvom webovej stránky zobrazenej v službe Google Play.</string>
+  <!--Version 2.1-->
+  <string name="details_section_custom">Vlastné polia</string>
+</resources>
