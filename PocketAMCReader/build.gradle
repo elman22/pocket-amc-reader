@@ -23,8 +23,8 @@ android {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 89
-        versionName '2.1'
+        versionCode 90
+        versionName '2.2.beta1'
     }
     buildTypes {
         release {

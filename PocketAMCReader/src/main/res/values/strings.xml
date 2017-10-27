@@ -72,6 +72,7 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Filter:</item>
+    <item quantity="few">Filter:</item>
     <item quantity="other">Filters:</item>
   </plurals>
   <string name="filter_none">none</string>

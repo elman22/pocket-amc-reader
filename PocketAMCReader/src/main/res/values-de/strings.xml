@@ -27,7 +27,6 @@
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
     <item quantity="one">Zeige %1$d Film</item>
-    <item quantity="few">Zeige %1$d Filme</item>
     <item quantity="other">Zeige %1$d Filme</item>
   </plurals>
   <string name="details_checked_label">Gesehen</string>
@@ -49,7 +48,6 @@
   <string name="display_filessizes_suffix">MB</string>
   <plurals name="details_disks">
     <item quantity="one">disc/file</item>
-    <item quantity="few">discs/files</item>
     <item quantity="other">discs/files</item>
   </plurals>
   <string name="display_files_separator">auf</string>
