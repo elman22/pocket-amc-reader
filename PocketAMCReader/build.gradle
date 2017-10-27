@@ -48,8 +48,8 @@ android {
         }
     }
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
+        variant.outputs.all { output ->
+            outputFileName = new File(
                     output.outputFile.parent,
                     output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
         }
@@ -86,11 +86,12 @@ if (project.hasProperty("signingProperties") && new File(project.property("signi
 
 repositories {
     jcenter()
+    google()
 }
 
 ext {
     // versions for libraries
-    supportLibVersion = '26.0.0-alpha1'
+    supportLibVersion = '26.1.0'
 }
 
 dependencies {
