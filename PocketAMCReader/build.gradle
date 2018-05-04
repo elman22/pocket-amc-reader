@@ -90,26 +90,26 @@ repositories {
 
 ext {
     // versions for libraries
-    supportLibVersion = '26.1.0'
+    supportLibVersion = '27.1.1'
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Android support
-    compile "com.android.support:support-v4:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:cardview-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
     // https://github.com/spacecowboy/NoNonsense-FilePicker
-    compile 'com.nononsenseapps:filepicker:4.1.0'
+    implementation 'com.nononsenseapps:filepicker:4.1.0'
     // https://github.com/Manabu-GT/ExpandableTextView
-    compile 'com.ms-square:expandableTextView:0.1.4'
+    implementation 'com.ms-square:expandableTextView:0.1.4'
     // https://github.com/nostra13/Android-Universal-Image-Loader
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     // https://github.com/chrisjenx/Calligraphy
-    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     // https://github.com/ksoichiro/Android-ObservableScrollView
-    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     // https://github.com/woxblom/DragListView
-    compile 'com.github.woxthebox:draglistview:1.4.4'
+    implementation 'com.github.woxthebox:draglistview:1.4.4'
 }
