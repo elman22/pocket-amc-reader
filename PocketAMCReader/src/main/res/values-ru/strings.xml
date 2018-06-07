@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Импортировано</string>
   <string name="import_read_file">Чтение каталога…</string>
@@ -57,7 +57,7 @@
   <string name="details_url_label">URL</string>
   <string name="details_date_label">Добавлен</string>
   <string name="menu_about">О программе</string>
-  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nЭта программа является свободным программным обеспечением, вы можете распространять и / или модифицировать его на условиях GNU General Public License, опубликованной Free Software Foundation; либо версии 2 Лицензии, либо (по вашему выбору) любой более поздней версии.\n\nПереводчики\n%4$s\n\nИспользуемые библиотеки\n%5$s</string>
+  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nЭта программа является свободным программным обеспечением, вы можете распространять и / или модифицировать его на условиях GNU General Public License, опубликованной Free Software Foundation; либо версии 3 Лицензии, либо (по вашему выбору) любой более поздней версии.\n\nПереводчики\n%4$s\n\nИспользуемые библиотеки\n%5$s</string>
   <string name="menu_sort_title">Сортировать</string>
   <string name="menu_sort_formattedtitle_desc">Оригинальное название по убыванию</string>
   <string name="menu_sort_formattedtitle_asc">Оригинальное название по возрастанию</string>
@@ -72,6 +72,7 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Фильтр:</item>
+    <item quantity="few">Фильтры:</item>
     <item quantity="other">Фильтры:</item>
   </plurals>
   <string name="filter_none">нет</string>
@@ -98,7 +99,7 @@
   <string name="details_audiobitrate_label">Аудио битрейт</string>
   <string name="details_size_label">Размер</string>
   <string name="details_disks_label">Кол-во дисков</string>
-  <string name="filter_join_and">&lt;i&gt;и&lt;/i&gt;</string>
+  <string name="filter_join_and">и</string>
   <string name="error_import_label">Ошибка!</string>
   <string name="pref_setting_show_thumbs">Показывать эскизы</string>
   <string name="pref_setting_show_thumbs_summary">Показывать эскизы в списке фильмов</string>
@@ -131,4 +132,5 @@
   <string name="menu_sort_color_tag_desc">Цветная метка по убыванию</string>
   <string name="menu_sort_color_tag_asc">Цветная метка по возрастанию</string>
   <string name="details_colortag_label">Цветная метка</string>
+  <string name="details_composer_label">Композитор</string>
 </resources>
