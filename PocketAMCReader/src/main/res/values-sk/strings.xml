@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importovanie filmov…</string>
   <string name="import_read_file">Čítanie katalógu…</string>
@@ -99,7 +99,7 @@
   <string name="details_audiobitrate_label">Audio bitrate</string>
   <string name="details_size_label">Veľkosť</string>
   <string name="details_disks_label">Disky</string>
-  <string name="filter_join_and">&lt;i&gt;a &lt;/i&gt;</string>
+  <string name="filter_join_and">a</string>
   <string name="error_import_label">Problém s importom</string>
   <string name="pref_setting_show_thumbs">Zobraziť miniatúry</string>
   <string name="pref_setting_show_thumbs_summary">Zobraziť miniatúry v zozname filmov</string>
@@ -113,7 +113,7 @@
   <string name="menu_sort_borrower_asc">Dlžník (od A do Z)</string>
   <string name="menu_sort_medialabel_desc">Štítok (od Z do A)</string>
   <string name="menu_sort_medialabel_asc">Štítok (od A do Z)</string>
-  <string name="import_add_indexes">Optimalizácia výkonu …</string>
+  <string name="import_add_indexes">Optimalizácia výkonu…</string>
   <string name="filter_type_is_null">je prázdny</string>
   <string name="filter_type_is_null_not">nie je prázdny</string>
   <string name="pref_setting_list_saved">Nastavenia boli uložené</string>
