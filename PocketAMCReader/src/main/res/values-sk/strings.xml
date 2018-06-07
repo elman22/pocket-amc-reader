@@ -113,7 +113,7 @@
   <string name="menu_sort_borrower_asc">Dlžník (od A do Z)</string>
   <string name="menu_sort_medialabel_desc">Štítok (od Z do A)</string>
   <string name="menu_sort_medialabel_asc">Štítok (od A do Z)</string>
-  <string name="import_add_indexes">Optimalizácia výkonu …</string>
+  <string name="import_add_indexes">Optimalizácia výkonu…</string>
   <string name="filter_type_is_null">je prázdny</string>
   <string name="filter_type_is_null_not">nie je prázdny</string>
   <string name="pref_setting_list_saved">Nastavenia boli uložené</string>

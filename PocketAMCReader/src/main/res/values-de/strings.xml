@@ -57,7 +57,7 @@
   <string name="details_url_label">URL</string>
   <string name="details_date_label">Eingabedatum</string>
   <string name="menu_about">Über</string>
-  <string name="about">%1$s\nVersion %2$s\n\nEntwickelt von Elman\nCopyright © %3$s Holding Scythe\n\nDieses Programm ist Freeware; Sie können es verteilen und/oder ändern unter den Bedingungen der GNU General Public License wie sie von der Free Software Foundation veröffentlicht wurde; entweder gemäß der Version 2 der Lizenz, oder (nach Ihrer Wahl) einer späteren Version.\n\nÜbersetzer\n%4$s\n\nGebrauchte Bibliotheken\n%5$s</string>
+  <string name="about">%1$s\nVersion %2$s\n\nEntwickelt von Elman\nCopyright © %3$s Holding Scythe\n\nDieses Programm ist Freeware; Sie können es verteilen und/oder ändern unter den Bedingungen der GNU General Public License wie sie von der Free Software Foundation veröffentlicht wurde; entweder gemäß der Version 3 der Lizenz, oder (nach Ihrer Wahl) einer späteren Version.\n\nÜbersetzer\n%4$s\n\nGebrauchte Bibliotheken\n%5$s</string>
   <string name="menu_sort_title">Sort</string>
   <string name="menu_sort_formattedtitle_desc">Titel (Z - A)</string>
   <string name="menu_sort_formattedtitle_asc">Titel (A - Z)</string>

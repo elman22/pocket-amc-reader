@@ -57,7 +57,7 @@
   <string name="details_url_label">URL</string>
   <string name="details_date_label">Добавлен</string>
   <string name="menu_about">О программе</string>
-  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nЭта программа является свободным программным обеспечением, вы можете распространять и / или модифицировать его на условиях GNU General Public License, опубликованной Free Software Foundation; либо версии 2 Лицензии, либо (по вашему выбору) любой более поздней версии.\n\nПереводчики\n%4$s\n\nИспользуемые библиотеки\n%5$s</string>
+  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nЭта программа является свободным программным обеспечением, вы можете распространять и / или модифицировать его на условиях GNU General Public License, опубликованной Free Software Foundation; либо версии 3 Лицензии, либо (по вашему выбору) любой более поздней версии.\n\nПереводчики\n%4$s\n\nИспользуемые библиотеки\n%5$s</string>
   <string name="menu_sort_title">Сортировать</string>
   <string name="menu_sort_formattedtitle_desc">Оригинальное название по убыванию</string>
   <string name="menu_sort_formattedtitle_asc">Оригинальное название по возрастанию</string>
