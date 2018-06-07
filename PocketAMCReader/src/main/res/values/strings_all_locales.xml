@@ -26,16 +26,19 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="locale_ru_independent" translatable="false">Russian</string>
     <string name="locale_de_independent" translatable="false">German</string>
     <string name="locale_fr_independent" translatable="false">French</string>
+    <string name="locale_sk_independent" translatable="false">Slovak</string>
 
     <string name="locale_en_local" translatable="false">English</string>
     <string name="locale_ru_local" translatable="false">Русский</string>
     <string name="locale_de_local" translatable="false">Deutsch</string>
     <string name="locale_fr_local" translatable="false">Français</string>
+    <string name="locale_sk_local" translatable="false">Slovensky</string>
 
     <string name="locale_en_translator" translatable="false">Elman</string>
     <string name="locale_ru_translator" translatable="false">migver</string>
     <string name="locale_de_translator" translatable="false">Klaus Oed</string>
     <string name="locale_fr_translator" translatable="false">Xavier Muller</string>
+    <string name="locale_sk_translator" translatable="false">František Goliaš</string>
 
     <string name="copyright_year" translatable="false">2017</string>
     <string name="rating_star" translatable="false">&#x2605;</string>

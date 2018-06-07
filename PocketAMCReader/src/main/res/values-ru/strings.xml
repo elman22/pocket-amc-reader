@@ -28,6 +28,7 @@
   <plurals name="list_showing">
     <item quantity="one">Показан %1$d фильм</item>
     <item quantity="few">Показано %1$d фильмов</item>
+    <item quantity="many">Показано %1$d фильмов</item>
     <item quantity="other">Показано %1$d фильмов</item>
   </plurals>
   <string name="details_checked_label">Просмотрено</string>
@@ -48,8 +49,9 @@
   <string name="details_framerate_label">Частота кадров</string>
   <string name="display_filessizes_suffix">MB</string>
   <plurals name="details_disks">
-    <item quantity="one">диск/файл</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">диск/файл</item>
     <item quantity="few">диски/файлы</item>
+    <item quantity="many">диски/файлы</item>
     <item quantity="other">диски/файлы</item>
   </plurals>
   <string name="display_files_separator">на</string>
@@ -71,8 +73,9 @@
   <string name="filter_type_is">Полное соответствие</string>
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
-    <item quantity="one">Фильтр:</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">Фильтр:</item>
     <item quantity="few">Фильтры:</item>
+    <item quantity="many">Фильтры:</item>
     <item quantity="other">Фильтры:</item>
   </plurals>
   <string name="filter_none">нет</string>
