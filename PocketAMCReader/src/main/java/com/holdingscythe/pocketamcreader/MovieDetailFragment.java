@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -107,7 +108,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
 
-        if (getArguments().containsKey(ARG_MOVIE_ID)) {
+        if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
             MoviesDataProvider moviesDataProvider = new MoviesDataProvider(getActivity());
 
@@ -157,7 +158,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_movie_detail, container, false);
     }
