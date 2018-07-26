@@ -19,6 +19,9 @@
 package com.holdingscythe.pocketamcreader.filters;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.R;
@@ -114,9 +117,9 @@ public class Filters {
     /**
      * Return human info for all filters as string
      */
-    public String getFiltersHumanInfo() {
+    public Spanned getFiltersHumanInfo() {
         if (mFilters.size() == 0)
-            return mContext.getString(R.string.filter_none);
+            return new SpannableString(mContext.getString(R.string.filter_none));
 
         String[] info = new String[this.getCount()];
         int i = 0;
@@ -125,7 +128,8 @@ public class Filters {
             i++;
         }
 
-        return Utils.arrayToString(info, " " + mContext.getString(R.string.filter_join_and) + "\n");
+        return Html.fromHtml(Utils.arrayToString(info, "&nbsp;<i>" + mContext.getString(R.string.filter_join_and)
+                + "</i><br/>"));
     }
 
     /**

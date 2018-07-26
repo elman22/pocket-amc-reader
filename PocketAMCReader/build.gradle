@@ -101,7 +101,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:${supportLibVersion}"
     implementation "com.android.support:design:${supportLibVersion}"
     // https://github.com/spacecowboy/NoNonsense-FilePicker
-    implementation 'com.nononsenseapps:filepicker:4.1.0'
+    implementation 'com.nononsenseapps:filepicker:4.2.1'
     // https://github.com/Manabu-GT/ExpandableTextView
     implementation 'com.ms-square:expandableTextView:0.1.4'
     // https://github.com/nostra13/Android-Universal-Image-Loader
