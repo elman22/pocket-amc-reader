@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Pocket AMC Reader</string>
+  <string name="import_in_progress">Importowanie filmów...</string>
+  <string name="import_read_file">Odczytywanie katalogu...</string>
+  <string name="pref_category_catalog">Katalog</string>
+  <string name="pref_setting_catalog">Katalog</string>
+  <string name="menu_settings">Ustawienia</string>
+  <string name="pref_setting_catalog_summary">Wybierz swój katalog z karty SD</string>
+  <string name="display_minutes_suffix">min.</string>
+  <string name="pref_category_display">Szczegóły</string>
+  <string name="pref_setting_encoding">Kodowanie katalogu</string>
+  <string name="pref_setting_encoding_summary">Ustaw prawidłowe kodowanie z komputera</string>
+  <string-array name="pref_setting_encoding_keys">
+    <item>Zachodnio europejski</item>
+    <item>Środkowo europejski</item>
+    <item>Cyrylica</item>
+    <item>Grecki</item>
+    <item>Turecki</item>
+    <item>Hebrajski</item>
+    <item>Arabski</item>
+    <item>Bałtycki</item>
+    <item>Wietnamski</item>
+  </string-array>
+  <string name="details_director_label">Reżyser</string>
+  <string name="details_producer_label">Producent</string>
+  <string name="number_prefix">#</string>
+  <plurals name="list_showing">
+    <item quantity="one">Wyświetlone %1$d filmy</item>
+    <item quantity="few">Wyświetlone %1$d filmy</item>
+    <item quantity="other">Wyświetlone %1$d filmy</item>
+  </plurals>
+  <string name="details_checked_label">Oglądane</string>
+  <string name="details_boolean_true">Tak</string>
+  <string name="details_boolean_false">Nie</string>
+  <string name="details_actors_label">Aktorzy</string>
+  <string name="details_medialabel_label">Okładka</string>
+  <string name="details_mediatype_label">Rodzaj nośnika</string>
+  <string name="details_source_label">Źródło</string>
+  <string name="details_borrower_label">Pożyczający</string>
+  <string name="details_languages_label">Język</string>
+  <string name="details_subtitles_label">Napisy</string>
+  <string name="menu_search">Szukaj</string>
+  <string name="details_video_label">Wideo</string>
+  <string name="display_bitrate_suffix">kbps</string>
+  <string name="details_audio_label">Audio</string>
+  <string name="details_resolution_label">Rozdzielczość</string>
+  <string name="details_framerate_label">Klatek/sekundę</string>
+  <string name="display_filessizes_suffix">MB</string>
+  <plurals name="details_disks">
+    <item quantity="one">dysk/plik</item>
+    <item quantity="few">dyski/pliki</item>
+    <item quantity="other">dyski/pliki</item>
+  </plurals>
+  <string name="display_files_separator">na</string>
+  <string name="details_comments_label">Komentarze</string>
+  <string name="details_url_label">URL</string>
+  <string name="details_date_label">Data dodania</string>
+  <string name="menu_about">O aplikacji</string>
+  <string name="about">%1$s\nwersja %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nTen program jest darmowym oprogramowaniem: możesz go redystrybuować/lub modyfikować na warunkach licencji GNU General Public License opublikowanej przez Free Software Foundation, licencja wersja 3, lub (według twojego wyboru) dowolnej późniejszej wersji.\n\nTłumacze\n%4$s\n\nUżywane biblioteki\n%5$s</string>
+  <string name="menu_sort_title">Sortuj</string>
+  <string name="menu_sort_formattedtitle_desc">Tytuł (od Z do A)</string>
+  <string name="menu_sort_formattedtitle_asc">Tytuł (od A do Z)</string>
+  <string name="menu_sort_number_desc">Numer (najnowszy)</string>
+  <string name="menu_sort_number_asc">Numer (najstarszy)</string>
+  <string name="welcome_title">Witamy</string>
+  <string name="welcome_message">Aby rozpocząć korzystanie z tej aplikacji, nastąpi przekierowanie do \"%1$s\", gdzie:\n\n- Wybierz swój katalog XML w ustawieniach \"%2$s\",\n- Zmień \"%3$s\", aby dopasować ustawienia komputera.\n\nAplikacja zaimportuje twoje filmy po opuszczeniu \"%1$s\".</string>
+  <string name="welcome_dialog_dismiss">Kontynuuj</string>
+  <string name="dialog_positive">OK</string>
+  <string name="dialog_negative">Anuluj</string>
+  <string name="filter_type_is">jest</string>
+  <string name="filter_type_equals">=</string>
+  <plurals name="filter_label">
+    <item quantity="one">Filtr:</item>
+    <item quantity="few">Filtr:</item>
+    <item quantity="other">Filtry:</item>
+  </plurals>
+  <string name="filter_none">brak</string>
+  <string name="filter_type_contains">zawiera</string>
+  <string name="details_rating_label">Ocena</string>
+  <string name="details_videoformat_label">Format wideo</string>
+  <string name="details_audioformat_label">Format audio</string>
+  <string name="menu_add_filter">Filtr</string>
+  <string name="filter_add_first_step">Wybierz pole</string>
+  <string name="details_country_label">Kraj</string>
+  <string name="details_category_label">Kategoria</string>
+  <string name="filter_type_larger">></string>
+  <string name="filter_type_smaller">&lt;</string>
+  <string name="filter_type_equals_not">nie równy</string>
+  <string name="filter_type_contains_not">nie zawiera</string>
+  <string name="filter_type_begins_with">"zaczyna się "</string>
+  <string name="filter_type_ends_with">kończy się</string>
+  <string name="details_formattedtitle_label">Tytuł</string>
+  <string name="details_number_label">Numer</string>
+  <string name="details_year_label">Rok</string>
+  <string name="details_length_label">Długość</string>
+  <string name="details_description_label">Opis</string>
+  <string name="details_videobitrate_label">Wideo bitrate</string>
+  <string name="details_audiobitrate_label">Audio bitrate</string>
+  <string name="details_size_label">Rozmiar</string>
+  <string name="details_disks_label">Dyski</string>
+  <string name="filter_join_and">i</string>
+  <string name="error_import_label">Problem z importem</string>
+  <string name="pref_setting_show_thumbs">Pokaż miniatury</string>
+  <string name="pref_setting_show_thumbs_summary">Pokaż miniatury w liście filmów</string>
+  <string name="menu_sort_year_desc">Rok (najnowszy)</string>
+  <string name="menu_sort_year_asc">Rok (najstarszy)</string>
+  <string name="menu_sort_length_desc">Długość (najdłuższa)</string>
+  <string name="menu_sort_length_asc">Długość (najkrótsza)</string>
+  <string name="menu_sort_rating_desc">Ocena (najlepsza)</string>
+  <string name="menu_sort_rating_asc">Ocena (najgorsza)</string>
+  <string name="menu_sort_borrower_desc">Pożyczający (od Z do A)</string>
+  <string name="menu_sort_borrower_asc">Pożyczający (od A do Z)</string>
+  <string name="menu_sort_medialabel_desc">Okładka (od Z do A)</string>
+  <string name="menu_sort_medialabel_asc">Okładka (od A do Z)</string>
+  <string name="import_add_indexes">Optymalizacja wydajności ...</string>
+  <string name="filter_type_is_null">jest pusty</string>
+  <string name="filter_type_is_null_not">nie jest pusty</string>
+  <string name="pref_setting_list_saved">Ustawienia zapisane</string>
+  <string name="pref_category_list">Lista</string>
+  <string name="pref_setting_list_force_sort_field">Pokaż  pole sortowania</string>
+  <string name="pref_setting_list_force_sort_field_summary">Wyświetlaj pole sortowania w trzeciej linii, chyba że jest już wyświetlone</string>
+  <string name="pref_setting_list_separator">Separator pól</string>
+  <string name="pref_setting_list_separator_summary">Separator tekstu wyświetlany pomiędzy polami (przecinek jest domyślnie używany)</string>
+  <string name="details_picture_label">Obraz</string>
+  <string name="details_originaltitle_label">Tytuł oryginalny</string>
+  <string name="details_translatedtitle_label">Tytuł polski</string>
+  <string name="menu_sort_originaltitle_desc">Tytuł oryginalny (od Z do A)</string>
+  <string name="menu_sort_originaltitle_asc">Tytuł oryginalny (od A do Z)</string>
+  <string name="menu_sort_translatedtitle_desc">Tytuł polski (od Z do A)</string>
+  <string name="menu_sort_translatedtitle_asc">Tytuł polski (od A do Z)</string>
+  <string name="menu_sort_color_tag_desc">Kolor znacznika (najwyższy)</string>
+  <string name="menu_sort_color_tag_asc">Kolor znacznika (najniższy)</string>
+  <string name="details_colortag_label">Kolor znacznika</string>
+  <string name="pref_setting_multivalue">Separator z wieloma polami</string>
+  <string name="pref_setting_multivalue_summary">Określ separator używany do rozdzielania reżyserów, producentów, aktorów itd. Możesz użyć więcej separatorów naraz</string>
+  <string name="details_img_description">Obraz filmu</string>
+  <string name="input_filter_hint">Wartość filtra</string>
+  <string name="menu_sort_date_desc">Data dodania (najnowsze)</string>
+  <string name="menu_sort_date_asc">Data dodania (najstarsze)</string>
+  <string name="details_writer_label">Scenariusz</string>
+  <string name="details_composer_label">Muzyka</string>
+  <string name="details_filepath_label">Ścieżka pliku</string>
+  <string name="details_userrating_label">Moja ocena</string>
+  <string name="menu_sort_userrating_desc">Moja ocena (najlepsza)</string>
+  <string name="menu_sort_userrating_asc">Moja ocena (najgorsza)</string>
+  <string name="details_datewatched_label">Data obejrzenia</string>
+  <string name="menu_sort_datewatched_desc">Data obejrzenia (najnowsze)</string>
+  <string name="menu_sort_datewatched_asc">Data obejrzenia (najstarsze)</string>
+  <string name="details_certification_label">Certyfikacja</string>
+  <string name="menu_sort_certification_desc">Certyfikacja (od Z do A)</string>
+  <string name="menu_sort_certification_asc">Certyfikacja (od A do Z)</string>
+  <string name="pref_setting_fit_picture">Dopasuj obraz</string>
+  <string name="pref_setting_fit_picture_summary">Zmień rozmiar obrazu, aby zmieścił się na ekranie</string>
+  <string name="details_etag_label">Znacznik</string>
+  <string name="details_etitle_label">Tytuł</string>
+  <string name="details_ecategory_label">Kategoria</string>
+  <string name="details_eurl_label">URL</string>
+  <string name="details_edescription_label">Opis</string>
+  <string name="details_ecomments_label">Komentarze</string>
+  <string name="details_ecreated_by_label">Utworzony przez</string>
+  <string name="filter_remove">Wyczyść filtry</string>
+  <string name="filter_remove_all">Wszystkie filtry</string>
+  <!--Version 2.0-->
+  <string name="import_check_file">Sprawdzanie aktualizacji…</string>
+  <string name="loading">Ładowanie…</string>
+  <string name="details_picture_description">Plakat filmowy</string>
+  <string name="details_certification_label_short">Cert.</string>
+  <string name="details_section_media">Szczegóły mediów</string>
+  <string name="details_section_technical">Szczegóły techniczne</string>
+  <string name="pref_setting_list_lines">Pola wyświetlane na liście</string>
+  <string name="pref_setting_list_lines_summary">Wybierz i ustaw kolejność pól, które mają być wyświetlane na liście filmów</string>
+  <string name="list_holder_row1">Dodaj kilka pól (np. tytuł)</string>
+  <string name="list_holder_row2">Dodaje kilka pól (np. numer, rok, długość, ocena)</string>
+  <string name="list_holder_row3">Dodaj kilka pól (np. kategoria)</string>
+  <string name="settings_cards_column1_title">Linia 1</string>
+  <string name="settings_cards_column2_title">Linia 2</string>
+  <string name="settings_cards_column3_title">Linia 3</string>
+  <string name="settings_cards_column4_title">Dostępne pola</string>
+  <string name="card_click_hint">Przytrzymaj i przeciągnij, aby zmienić kolejność</string>
+  <string name="pref_setting_remove_bad_chars">Usuń złe znaki</string>
+  <string name="pref_setting_remove_bad_chars_summary">Usuń złe znaki w pliku XML podczas importu. Używaj tylko wtedy, gdy oryginalny plik XML nie załaduje się</string>
+  <string name="error_import2">Wystąpił problem z importowaniem. Zwykle dzieje się tak, gdy katalog zawiera jakieś niestandardowe znaki. Aby to naprawić, możesz spróbować:\n\n- Przejdź do ustawień i sprawdź \"%1$s\"\n- Spróbuj zmienić ustawieniia \"%2$s\"\n- Uruchom skrypt PC Ant Movie Catalog o nazwie RemoveBadChars i spróbuj ponownie zaimportować\n\nUpewnij się czy masz wystarczająco dużo wolnego miejsca na swoim urządzeniu (nie na karcie SD). Wymagany jest dwukrotnie większy rozmiar XML.\n\nJeśli nic z tego nie pomoże, skontaktuj się z autorem za pośrednictwem strony internetowej wyświetlanej w Google Play.</string>
+  <!--Version 2.1-->
+  <string name="details_section_custom">Pola niestandardowe</string>
+</resources>
