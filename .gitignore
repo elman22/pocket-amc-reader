@@ -1,6 +1,7 @@
 # Generated files
 bin/
 gen/
+PocketAMCReader/release/
 
 # Gradle files
 .gradle/
