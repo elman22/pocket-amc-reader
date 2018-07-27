@@ -183,12 +183,15 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                         + getString(R.string.locale_fr_translator);
                 String t_sk = getString(R.string.locale_sk_local) + getString(R.string.locale_translation_separator)
                         + getString(R.string.locale_sk_translator);
+                String t_pl = getString(R.string.locale_pl_local) + getString(R.string.locale_translation_separator)
+                        + getString(R.string.locale_pl_translator);
 
                 // Prepare alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.app_name));
                 builder.setMessage(String.format(getString(R.string.about), getString(R.string.app_name), versionName,
-                        getString(R.string.copyright_year), t_ru + "\n" + t_de + "\n" + t_fr + "\n" + t_sk, getString(R.string.used_libraries)));
+                        getString(R.string.copyright_year), t_ru + "\n" + t_de + "\n" + t_fr + "\n" + t_sk + "\n" + t_pl,
+                        getString(R.string.used_libraries)));
                 builder.setNeutralButton(getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
