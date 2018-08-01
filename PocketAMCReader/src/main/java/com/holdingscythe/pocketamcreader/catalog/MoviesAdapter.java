@@ -18,16 +18,16 @@
 
 package com.holdingscythe.pocketamcreader.catalog;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.R;
@@ -36,14 +36,16 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MoviesAdapter extends SimpleCursorAdapter {
-    private int mLayout;
+/**
+ * Adapter for movies stored in database
+ */
+public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.MovieHolder> {
+    private Context mContext;
     private Boolean mShowThumbs;
     private String mPicturesFolder;
     private String mSortedField;
@@ -55,88 +57,120 @@ public class MoviesAdapter extends SimpleCursorAdapter {
     private ImageLoader mImageLoader;
     private DisplayImageOptions mImageOptions;
 
-    private static class MovieHolder {
+    // Recycler views
+    private final int GRID = 0;
+    private final int LIST = 1;
+    private int mViewType;
+
+    /**
+     * Recycler view holder
+     */
+    class MovieHolder extends RecyclerView.ViewHolder {
         TextView FormattedTitle_text;
         TextView movieShortDescription_text;
         TextView movieShortDescription2_text;
         TextView movieColorTag;
-        ImageViewAware moviePictureView;
+        ImageView moviePictureView;
+
+        /**
+         * @param itemView itemView
+         * @param viewType viewType
+         */
+        MovieHolder(View itemView, int viewType) {
+            super(itemView);
+
+            if (viewType == GRID) {
+                FormattedTitle_text = (TextView) itemView.findViewById(R.id.movieTitleGrid);
+                movieShortDescription_text = null;
+                movieShortDescription2_text = null;
+                movieColorTag = (TextView) itemView.findViewById(R.id.ListColorTagGrid);
+                moviePictureView = (ImageView) itemView.findViewById(R.id.imageCoverGrid);
+            } else {
+                FormattedTitle_text = (TextView) itemView.findViewById(R.id.movieTitle);
+                movieShortDescription_text = (TextView) itemView.findViewById(R.id.movieShortDescription);
+                movieShortDescription2_text = (TextView) itemView.findViewById(R.id.movieShortDescription2);
+                movieColorTag = (TextView) itemView.findViewById(R.id.ListColorTag);
+                moviePictureView = (ImageView) itemView.findViewById(R.id.imageCover);
+                if (!mShowThumbs) {
+                    moviePictureView.setVisibility(View.GONE);
+                }
+            }
+        }
     }
 
-    public MoviesAdapter(Activity a, int layout, Cursor c, String[] from, int[] to) {
-        // If set the adapter will register a content observer on the cursor and will call onContentChanged()
-        // when a notification comes in. Be careful when using this flag: you will need to unset the current Cursor
-        // from the adapter to avoid leaks due to its registered observers. This flag is not needed when using a
-        // CursorAdapter with a CursorLoader.
-        super(a.getBaseContext(), layout, c, from, to, FLAG_REGISTER_CONTENT_OBSERVER);
-        mLayout = layout;
+    /**
+     * @param context context
+     * @param cursor cursor
+     * @param viewType viewType
+     */
+    public MoviesAdapter(Context context, Cursor cursor, int viewType) {
+        super(context, cursor);
+        mContext = context;
+        mViewType = viewType;
+        loadConfiguration(context);
+    }
 
-        loadConfiguration(a.getBaseContext());
+    // Inflating views if the existing layout items are not being recycled
+    @NonNull
+    @Override
+    public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView;
+        if (viewType == GRID) {
+            // Inflate the grid cell as a view item
+            itemView = inflater.inflate(R.layout.grid_movie_item, parent, false);
+        } else {
+            // Inflate the list row as a view item
+            itemView = inflater.inflate(R.layout.list_movie_item, parent, false);
+        }
+
+        return new MovieHolder(itemView, viewType);
+    }
+
+    // Using the variable "mViewType" to check which layout is to be displayed
+    @Override
+    public int getItemViewType(int position) {
+        if (mViewType == GRID) {
+            return GRID;
+        } else {
+            return LIST;
+        }
     }
 
     @Override
-    public View newView(Context context, Cursor c, ViewGroup parent) {
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(mLayout, parent, false);
-
-        // Find all required views
-        TextView FormattedTitle_text = (TextView) v.findViewById(R.id.movieTitle);
-        TextView movieShortDescription_text = (TextView) v.findViewById(R.id.movieShortDescription);
-        TextView movieShortDescription2_text = (TextView) v.findViewById(R.id.movieShortDescription2);
-        TextView movieColorTag = (TextView) v.findViewById(R.id.ListColorTag);
-        ImageView moviePictureView = (ImageView) v.findViewById(R.id.imageCover);
-        if (!mShowThumbs) {
-            moviePictureView.setVisibility(View.GONE);
-        }
-
-        // Assign views to holder
-        MovieHolder holder = new MovieHolder();
-        holder.FormattedTitle_text = FormattedTitle_text;
-        holder.movieShortDescription_text = movieShortDescription_text;
-        holder.movieShortDescription2_text = movieShortDescription2_text;
-        holder.movieColorTag = movieColorTag;
-        if (mShowThumbs) {
-            holder.moviePictureView = new ImageViewAware(moviePictureView, false);
-        }
-        v.setTag(holder);
-
-        return v;
-    }
-
-    @Override
-    public void bindView(View v, Context context, Cursor c) {
-        MovieHolder holder = (MovieHolder) v.getTag();
-
-        if (S.VERBOSE)
-            Log.v(S.TAG, "Using view: " + v.getTag().toString());
-
+    public void onBindViewHolder(@NonNull MovieHolder holder, Cursor cursor) {
         Boolean sortedFieldDisplayed = false;
 
-        ArrayList<String> line1 = new ArrayList<String>();
-        ArrayList<String> line2 = new ArrayList<String>();
-        ArrayList<String> line3 = new ArrayList<String>();
+        ArrayList<String> line1 = new ArrayList<>();
+        ArrayList<String> line2 = new ArrayList<>();
+        ArrayList<String> line3 = new ArrayList<>();
 
         if (!mListFieldsLine1[0].isEmpty()) {
             for (String field : mListFieldsLine1) {
-                line1.add(getDBValue(field, context, c));
+                line1.add(getDBValue(field, cursor));
                 if (field.equals(mSortedField))
                     sortedFieldDisplayed = true;
             }
         }
 
-        if (!mListFieldsLine2[0].isEmpty()) {
-            for (String field : mListFieldsLine2) {
-                line2.add(getDBValue(field, context, c));
-                if (field.equals(mSortedField))
-                    sortedFieldDisplayed = true;
+        if (holder.movieShortDescription_text != null) {
+            if (!mListFieldsLine2[0].isEmpty()) {
+                for (String field : mListFieldsLine2) {
+                    line2.add(getDBValue(field, cursor));
+                    if (field.equals(mSortedField))
+                        sortedFieldDisplayed = true;
+                }
             }
         }
 
-        if (!mListFieldsLine3[0].isEmpty()) {
-            for (String field : mListFieldsLine3) {
-                line3.add(getDBValue(field, context, c));
-                if (field.equals(mSortedField))
-                    sortedFieldDisplayed = true;
+        if (holder.movieShortDescription2_text != null) {
+            if (!mListFieldsLine3[0].isEmpty()) {
+                for (String field : mListFieldsLine3) {
+                    line3.add(getDBValue(field, cursor));
+                    if (field.equals(mSortedField))
+                        sortedFieldDisplayed = true;
+                }
             }
         }
 
@@ -152,7 +186,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
 
         if (holder.movieShortDescription2_text != null) {
             if (mSettingListForceSortField && !sortedFieldDisplayed) {
-                holder.movieShortDescription2_text.setText(getDBValue(mSortedField, context, c));
+                holder.movieShortDescription2_text.setText(getDBValue(mSortedField, cursor));
             } else if (line3.size() > 0) {
                 holder.movieShortDescription2_text.setText(Utils.arrayToString(line3.toArray(new String[line3.size()]),
                         mSettingMoviesListSeparator));
@@ -162,7 +196,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         // Display image with Image Loader
         if (mShowThumbs) {
             // Make full path or keep null if picture is not present
-            String movieCatalogPicture = c.getString(c.getColumnIndex(Movies.PICTURE));
+            String movieCatalogPicture = cursor.getString(cursor.getColumnIndex(Movies.PICTURE));
 
             if (movieCatalogPicture != null && !movieCatalogPicture.equals("")) {
                 if (new File(mPicturesFolder + movieCatalogPicture).isFile()) {
@@ -182,7 +216,7 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         }
 
         //<editor-fold desc="Repaint color indicator to match Color tag">
-        String currentColor = getDBValue(Movies.COLOR_TAG, context, c);
+        String currentColor = getDBValue(Movies.COLOR_TAG, cursor);
         if (currentColor == null || currentColor.equals("")) {
             currentColor = "0";
         }
@@ -241,10 +275,19 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         //</editor-fold>
     }
 
-    public void loadConfiguration(Context c) {
+    /**
+     * Load configuration for current instance
+     *
+     * @param c context
+     */
+    private void loadConfiguration(Context c) {
         // Get preferences
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
+
+        // Always set to true if grid view is used
         mShowThumbs = preferences.getBoolean("settingShowThumbs", true);
+        if (mViewType == GRID) mShowThumbs = true;
+
         mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
         String sortOrder = preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
         mSortedField = Movies.SettingsSortFieldsMap.get(sortOrder);
@@ -269,28 +312,34 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         }
     }
 
-    private String getDBValue(String fld, Context context, Cursor c) {
+    /**
+     * Get field value from cursor
+     * @param fld field
+     * @param c cursor
+     * @return value
+     */
+    private String getDBValue(String fld, Cursor c) {
         String value = c.getString(c.getColumnIndex(fld));
 
         switch (fld) {
             case Movies.NUMBER:
                 if (value != null)
-                    value = context.getString(R.string.number_prefix) + value;
+                    value = mContext.getString(R.string.number_prefix) + value;
                 break;
             case Movies.LENGTH:
                 if (value != null && value.length() > 0)
-                    value += " " + context.getString(R.string.display_minutes_suffix);
+                    value += " " + mContext.getString(R.string.display_minutes_suffix);
                 break;
             case Movies.RATING:
             case Movies.USER_RATING:
                 if (value != null && value.length() > 0)
-                    value += context.getString(R.string.rating_suffix_list);
+                    value += mContext.getString(R.string.rating_suffix_list);
                 break;
             case Movies.CHECKED:
                 if (value != null && value.equals("True"))
-                    value = context.getString(R.string.list_seen_true);
+                    value = mContext.getString(R.string.list_seen_true);
                 else
-                    value = context.getString(R.string.list_seen_false);
+                    value = mContext.getString(R.string.list_seen_false);
                 break;
             case Movies.DATE:
             case Movies.DATE_WATCHED:
@@ -308,6 +357,9 @@ public class MoviesAdapter extends SimpleCursorAdapter {
         return value;
     }
 
+    /**
+     * Stop loading of images in background thread
+     */
     public void stopImageLoader() {
         if (mImageLoader != null)
             mImageLoader.stop();
