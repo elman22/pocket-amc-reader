@@ -62,7 +62,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:maxLines="1"
+        android:singleLine="true"
         android:text="@string/list_holder_row1"/>
 
     <TextView
@@ -74,7 +74,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:maxLines="1"
+        android:singleLine="true"
         android:text="@string/list_holder_row2"/>
 
     <TextView
@@ -87,6 +87,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:ellipsize="marquee"
-        android:maxLines="1"
+        android:singleLine="true"
         android:text="@string/list_holder_row3"/>
 </RelativeLayout>
