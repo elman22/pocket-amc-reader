@@ -31,7 +31,7 @@ public class SharedObjects {
 
     // References between intents
     public boolean twoPane = false;
-    public MoviesAdapter listMovieAdapter;
+    public MoviesAdapter recyclerMovieAdapter;
     public MovieListFragment movieListFragment;
     public boolean moviesListActivityRefreshRequested = false;
     public boolean restartAppRequested = false;

@@ -108,7 +108,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (SharedObjects.getInstance().listMovieAdapter == null)
+        if (SharedObjects.getInstance().recyclerMovieAdapter == null)
             this.finish();
     }
 }
