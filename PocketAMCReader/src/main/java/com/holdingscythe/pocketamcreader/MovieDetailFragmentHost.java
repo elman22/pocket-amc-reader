@@ -29,7 +29,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
@@ -70,12 +69,11 @@ public class MovieDetailFragmentHost extends Fragment {
 
         @Override
         public Fragment getItem(final int position) {
-//            mListView.setSelection(position);
-//            mListView.setSelected(true);
-            mListView.post(new Runnable() {
+            mRecyclerView.setSelected(true);
+            mRecyclerView.post(new Runnable() {
                 @Override
                 public void run() {
-                    mListView.smoothScrollToPosition(position);
+                    mRecyclerView.smoothScrollToPosition(position);
                 }
             });
 
@@ -87,7 +85,7 @@ public class MovieDetailFragmentHost extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
 
         ViewPager viewPager = (ViewPager) root.findViewById(R.id.movieDetailViewPager);
@@ -102,7 +100,8 @@ public class MovieDetailFragmentHost extends Fragment {
             }
 
         } catch (NullPointerException e) {
-            getActivity().finish();
+            if (getActivity() != null)
+                getActivity().finish();
         }
 
         return root;
