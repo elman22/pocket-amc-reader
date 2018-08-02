@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Pocket AMC Reader.
+Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+
+Pocket AMC Reader is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Pocket AMC Reader is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<RelativeLayout
+    style="@android:style/Widget.Holo.GridView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_bg"
+    android:paddingBottom="@dimen/list_margin_vertical"
+    android:paddingLeft="@dimen/list_margin_horizontal"
+    android:paddingRight="@dimen/list_margin_horizontal"
+    android:paddingTop="@dimen/list_margin_vertical"
+    tools:context=".MovieListActivity">
+
+    <ImageView
+        android:id="@+id/imageCoverGrid"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_item_height"
+        android:contentDescription="@string/details_img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/movie_thumb_stub"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/detail_title_background">
+
+        <TextView
+            android:id="@+id/ListColorTagGrid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/colortag_height"/>
+
+        <TextView
+            android:id="@+id/movieTitleGrid"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            fontPath="fonts/RobotoCondensed-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:paddingBottom="@dimen/list_margin_vertical"
+            android:paddingLeft="@dimen/list_margin_horizontal"
+            android:paddingRight="@dimen/list_margin_horizontal"
+            android:paddingTop="@dimen/list_margin_vertical"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:singleLine="true"
+            android:text="@string/list_holder_row1"
+            tools:ignore="MissingPrefix"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
