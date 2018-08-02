@@ -116,7 +116,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     final int GRID_SPAN = 3;
     int mViewType;
 
-    protected class CursorAdapterObserver extends DataSetObserver {
+    protected class CursorAdapterObserver extends RecyclerView.AdapterDataObserver {
         CursorAdapterObserver() {
         }
 
@@ -243,51 +243,37 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         RelativeLayout headerViewFilter = (RelativeLayout) getActivity().findViewById(R.id.filter_info_layout);
         headerViewFilter.setOnClickListener(this);
 
-        // Attach adapter to list
-        mMoviesAdapter = new MoviesAdapter(
-                getActivity(),
-                R.layout.list_movie_item,
-                mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
-                        null),
-                SharedObjects.getInstance().moviesProjection,
-                new int[]{}
-        );
+        // Prepare adapter to list
+        prepareMoviesAdapter();
 
         // Set filter query provider
         mMoviesAdapter.setFilterQueryProvider(mMoviesDataProvider);
 
         // Data change observer
         mCursorAdapterObserver = new CursorAdapterObserver();
-        mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
-
-        // Set list view parameters
-        mListView.setFastScrollEnabled(true);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        mListView.setDrawSelectorOnTop(true);
+        mMoviesAdapter.registerAdapterDataObserver(mCursorAdapterObserver);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mListView.setNestedScrollingEnabled(true);
+            mRecyclerView.setNestedScrollingEnabled(true);
         }
 
-        // Set list adapter
-        mListView.setAdapter(mMoviesAdapter);
-
-        // Open movie detail when clicked on item
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mCallbacks.onItemSelected(String.valueOf(id));
-            }
-        });
+        // Prepare recycler view
+        if (mViewType == GRID) {
+            mRecyclerView.setLayoutManager(mGridLayoutManager);
+        } else {
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        }
+        mRecyclerView.setAdapter(mMoviesAdapter);
 
         // Update list header views info
         updateHeaderInfo();
 
         // Store references
-        SharedObjects.getInstance().listMovieAdapter = mMoviesAdapter;
+        SharedObjects.getInstance().recyclerMovieAdapter = mMoviesAdapter;
         SharedObjects.getInstance().movieListFragment = this;
 
         // Show welcome screen if zero movies are displayed
-        if (mMoviesAdapter.getCount() == 0 && mFilters.getCount() == 0) {
+        if (mMoviesAdapter.getItemCount() == 0 && mFilters.getCount() == 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(getString(R.string.welcome_title));
             builder.setMessage(String.format(getString(R.string.welcome_message), getString(R.string.menu_settings),
@@ -567,7 +553,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         }
 
         try {
-            mListView.setAdapter(null);
+            mRecyclerView.setAdapter(null);
         } catch (Exception e) {
             if (S.ERROR)
                 Log.e(S.TAG, "Content view not yet created");
@@ -622,7 +608,6 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             editor.putString("settingMovieListOrder", order);
             editor.apply();
             mMenu.findItem(menuId).setChecked(true);
-            // TODO check if refresh works
             refreshList();
         }
     }
@@ -641,14 +626,11 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             if (mSearchMenuItem != null)
                 mSearchMenuItem.collapseActionView();
 
-            mMoviesAdapter.unregisterDataSetObserver(mCursorAdapterObserver);
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
-            mMoviesAdapter.changeCursorAndColumns(
-                    mMoviesDataProvider.fetchMovies(S.CONTENT_URI),
-                    SharedObjects.getInstance().moviesProjection,
-                    new int[]{});
-            mMoviesAdapter.registerDataSetObserver(mCursorAdapterObserver);
+            Cursor oldCursor = mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
+            if (oldCursor != null)
+                oldCursor.close();
             mMoviesAdapter.notifyDataSetChanged();
         }
     }
