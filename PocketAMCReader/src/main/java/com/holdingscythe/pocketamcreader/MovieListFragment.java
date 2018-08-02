@@ -366,6 +366,31 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             case R.id.menu_add_filter:
                 addFilter();
                 return true;
+            case R.id.menu_switch_view:
+                if (mViewType == GRID) {
+                    // Change to list view
+                    mViewType = LIST;
+                    prepareMoviesAdapter();
+                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                    mRecyclerView.setAdapter(mMoviesAdapter);
+
+                    // Save preferences
+                    SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
+                    editor.putInt("settingMovieListViewId", mViewType);
+                    editor.apply();
+                } else {
+                    // Change to grid view
+                    mViewType = GRID;
+                    prepareMoviesAdapter();
+                    mRecyclerView.setLayoutManager(mGridLayoutManager);
+                    mRecyclerView.setAdapter(mMoviesAdapter);
+
+                    // Save preferences
+                    SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
+                    editor.putInt("settingMovieListViewId", mViewType);
+                    editor.apply();
+                }
+                return true;
             case R.id.menu_sort_formattedtitle_asc:
                 setSortOrder(R.id.menu_sort_formattedtitle_asc, Movies.SORT_ORDER_TITLE_ASC);
                 return true;
