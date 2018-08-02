@@ -44,7 +44,7 @@ import java.util.Date;
 /**
  * Adapter for movies stored in database
  */
-public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.MovieHolder> {
+public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHolder> {
     private Context mContext;
     private Boolean mShowThumbs;
     private String mPicturesFolder;
@@ -149,7 +149,7 @@ public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.Movie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieHolder holder, Cursor cursor) {
+    public void onBindViewHolderCursor(@NonNull MovieHolder holder, Cursor cursor) {
         Boolean sortedFieldDisplayed = false;
 
         ArrayList<String> line1 = new ArrayList<>();
@@ -290,7 +290,7 @@ public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.Movie
      *
      * @param c context
      */
-    private void loadConfiguration(Context c) {
+    public void loadConfiguration(Context c) {
         // Get preferences
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
 
