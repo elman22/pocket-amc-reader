@@ -22,13 +22,19 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -49,6 +55,7 @@ import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
+import com.holdingscythe.pocketamcreader.catalog.MoviesAdapterClickListener;
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
 import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
@@ -89,7 +96,8 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     private MoviesDataProvider mMoviesDataProvider;
     private MoviesAdapter mMoviesAdapter;
     private Filters mFilters;
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mGridLayoutManager, mLinearLayoutManager;
     private TextView mHeaderListCountView;
     private TextView mFilterHeaderLabelText;
     private TextView mFilterHeaderText;
@@ -101,6 +109,12 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     private int mDpYear;
     private int mDpMonth;
     private int mDpDay;
+
+    // Recycler views
+    final int GRID = 0;
+    final int LIST = 1;
+    final int GRID_SPAN = 3;
+    int mViewType;
 
     protected class CursorAdapterObserver extends DataSetObserver {
         CursorAdapterObserver() {
@@ -208,12 +222,15 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         mFilters = new Filters(getActivity());
         mMoviesDataProvider.setFilters(mFilters);
 
-        // Prepare list view
-        mListView = (ListView) getView().findViewById(R.id.movie_list);
+        // Prepare recycler view
+        mRecyclerView = (RecyclerView) getView().findViewById(R.id.movie_list_recycler);
 
-        // Remove divider
-        mListView.setDivider(null);
-        mListView.setDividerHeight(0);
+        // Define layout managers
+        mLinearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), GRID_SPAN);
+
+        // Setting view preference or list as default view
+        mViewType = SharedObjects.getInstance().preferences.getInt("settingMovieListViewId", LIST);
 
         // Add counter header
         mHeaderListCountView = (TextView) getActivity().findViewById(R.id.nowShowing);
@@ -509,7 +526,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             SharedObjects.getInstance().restartAppRequested = true;
 
         // Restart if adapter is not available
-        if (mMoviesAdapter == null && mListView != null)
+        if (mMoviesAdapter == null && mRecyclerView != null)
             SharedObjects.getInstance().restartAppRequested = true;
 
         // Restart if preferences are not available
@@ -525,7 +542,8 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             SharedObjects.getInstance().moviesListActivityRefreshRequested = false;
 
             Intent importIntent = new Intent(getActivity(), ImportActivity.class);
-            getActivity().finish();
+            if (getActivity() != null)
+                getActivity().finish();
             startActivity(importIntent);
 
         } else if (SharedObjects.getInstance().moviesListActivityRefreshRequested) {
@@ -587,9 +605,8 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      * Updates list header about number of movies displayed
      */
     private void updateHeaderInfo() {
-        mMoviesAdapter.getCount();
         mHeaderListCountView.setText(String.format(getResources().getQuantityString(R.plurals.list_showing,
-                mMoviesAdapter.getCount()), mMoviesAdapter.getCount()));
+                mMoviesAdapter.getItemCount()), mMoviesAdapter.getItemCount()));
 
         mFilterHeaderLabelText.setText(getResources().getQuantityString(R.plurals.filter_label, mFilters.getCount()));
         mFilterHeaderText.setText(mFilters.getFiltersHumanInfo());
@@ -599,12 +616,13 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      * Set default order to preferences and sort list
      */
     protected void setSortOrder(int menuId, String order) {
-        if (mMoviesDataProvider != null && mListView != null) {
+        if (mMoviesDataProvider != null && mRecyclerView != null) {
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
             editor.putInt("settingMovieListOrderId", menuId);
             editor.putString("settingMovieListOrder", order);
             editor.apply();
             mMenu.findItem(menuId).setChecked(true);
+            // TODO check if refresh works
             refreshList();
         }
     }
@@ -613,7 +631,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      * Refresh list view
      */
     protected void refreshList() {
-        if (mMoviesDataProvider != null && mListView != null) {
+        if (mMoviesDataProvider != null && mRecyclerView != null) {
             if (SharedObjects.getInstance().preferences == null) {
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
                         (getActivity().getApplicationContext());
@@ -639,7 +657,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      * Display first movie in details pager to if two pane display
      */
     private void resetDetailPager() {
-        if (SharedObjects.getInstance().twoPane && mMoviesAdapter.getCount() > 0) {
+        if (SharedObjects.getInstance().twoPane && mMoviesAdapter.getItemCount() > 0) {
             mMoviesAdapter.getCursor().moveToFirst();
             mCallbacks.onItemSelected("");
         }
@@ -821,6 +839,28 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
+    }
+
+    /**
+     * Create or update movies adapter
+     */
+    private void prepareMoviesAdapter() {
+        mMoviesAdapter = new MoviesAdapter(
+                getActivity().getBaseContext(),
+                mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
+                        null),
+                mViewType,
+                new MoviesAdapterClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        // Open movie detail when clicked on item
+                        if (S.INFO)
+                            Log.i(S.TAG, "List clicked position: " + position);
+
+                        mCallbacks.onItemSelected(String.valueOf(position));
+                    }
+                }
+        );
     }
 
 }

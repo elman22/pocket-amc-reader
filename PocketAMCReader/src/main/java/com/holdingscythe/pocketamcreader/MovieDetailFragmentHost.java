@@ -19,10 +19,12 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,15 +42,15 @@ public class MovieDetailFragmentHost extends Fragment {
 
     public static class MovieDetailAdapter extends FragmentPagerAdapter {
         private MoviesAdapter mMoviesAdapter;
-        private ListView mListView;
+        private RecyclerView mRecyclerView;
 
-        public MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
+        MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
             super(fm);
-            mMoviesAdapter = SharedObjects.getInstance().listMovieAdapter;
-            mListView = (ListView) SharedObjects.getInstance().movieListFragment.getView().findViewById(R.id
-                    .movie_list);
+            mMoviesAdapter = SharedObjects.getInstance().recyclerMovieAdapter;
+            mRecyclerView = (RecyclerView) SharedObjects.getInstance().movieListFragment.getView().findViewById(R.id
+                    .movie_list_recycler);
 
-            if (mMoviesAdapter == null || mListView == null) {
+            if (mMoviesAdapter == null || mRecyclerView == null) {
                 throw new NullPointerException();
             }
 
@@ -57,7 +59,7 @@ public class MovieDetailFragmentHost extends Fragment {
         @Override
         public int getCount() {
             try {
-                return mMoviesAdapter.getCount();
+                return mMoviesAdapter.getItemCount();
             } catch (NullPointerException e) {
                 if (S.DEBUG)
                     Log.i(S.TAG, "MovieDetailAdapter is null");
@@ -95,7 +97,8 @@ public class MovieDetailFragmentHost extends Fragment {
 
             // Set current item based on clicked item
             if (getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
-                viewPager.setCurrentItem(SharedObjects.getInstance().listMovieAdapter.getCursor().getPosition());
+                Integer clickedPosition = Integer.parseInt(getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID));
+                viewPager.setCurrentItem(clickedPosition);
             }
 
         } catch (NullPointerException e) {
@@ -111,7 +114,7 @@ public class MovieDetailFragmentHost extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (SharedObjects.getInstance().listMovieAdapter == null)
+        if (SharedObjects.getInstance().recyclerMovieAdapter == null && getActivity() != null)
             getActivity().finish();
     }
 
