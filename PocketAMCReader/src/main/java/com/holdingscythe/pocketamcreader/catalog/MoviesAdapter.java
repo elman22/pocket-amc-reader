@@ -61,6 +61,7 @@ public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.Movie
     private final int GRID = 0;
     private final int LIST = 1;
     private int mViewType;
+    private MoviesAdapterClickListener mListener;
 
     /**
      * Recycler view holder
@@ -103,10 +104,11 @@ public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.Movie
      * @param cursor cursor
      * @param viewType viewType
      */
-    public MoviesAdapter(Context context, Cursor cursor, int viewType) {
-        super(context, cursor);
+    public MoviesAdapter(Context context, Cursor cursor, int viewType, MoviesAdapterClickListener listener) {
+        super(cursor);
         mContext = context;
         mViewType = viewType;
+        mListener = listener;
         loadConfiguration(context);
     }
 
@@ -125,7 +127,15 @@ public class MoviesAdapter extends CursorRecyclerViewAdapter<MoviesAdapter.Movie
             itemView = inflater.inflate(R.layout.list_movie_item, parent, false);
         }
 
-        return new MovieHolder(itemView, viewType);
+        final MovieHolder mMovieHolder = new MovieHolder(itemView, viewType);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onItemClick(v, mMovieHolder.getAdapterPosition());
+            }
+        });
+        return mMovieHolder;
     }
 
     // Using the variable "mViewType" to check which layout is to be displayed
