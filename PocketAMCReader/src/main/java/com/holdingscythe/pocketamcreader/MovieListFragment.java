@@ -101,7 +101,6 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     private TextView mHeaderListCountView;
     private TextView mFilterHeaderLabelText;
     private TextView mFilterHeaderText;
-    private CursorAdapterObserver mCursorAdapterObserver;
     private MenuItem mSearchMenuItem;
     private Menu mMenu;
 
@@ -245,13 +244,6 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
 
         // Prepare adapter to list
         prepareMoviesAdapter();
-
-        // Set filter query provider
-        mMoviesAdapter.setFilterQueryProvider(mMoviesDataProvider);
-
-        // Data change observer
-        mCursorAdapterObserver = new CursorAdapterObserver();
-        mMoviesAdapter.registerAdapterDataObserver(mCursorAdapterObserver);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mRecyclerView.setNestedScrollingEnabled(true);
@@ -843,6 +835,13 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                     }
                 }
         );
+
+        // Set filter query provider
+        mMoviesAdapter.setFilterQueryProvider(mMoviesDataProvider);
+
+        // Data change observer
+        CursorAdapterObserver cursorAdapterObserver = new CursorAdapterObserver();
+        mMoviesAdapter.registerAdapterDataObserver(cursorAdapterObserver);
     }
 
 }
