@@ -66,6 +66,8 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * A list fragment representing a list of Movies. This fragment
  * also supports tablet devices by allowing list items to be given an
