@@ -96,6 +96,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     private MoviesDataProvider mMoviesDataProvider;
     private MoviesAdapter mMoviesAdapter;
     private Filters mFilters;
+    private String mFilterQuery;
     private RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mGridLayoutManager, mLinearLayoutManager;
     private TextView mHeaderListCountView;
@@ -175,6 +176,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      * fragment (e.g. upon screen orientation changes).
      */
     public MovieListFragment() {
+        mFilterQuery = "";
     }
 
     @Override
@@ -346,6 +348,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
             @Override
             public boolean onQueryTextChange(String newText) {
                 mMoviesAdapter.getFilter().filter(newText);
+                mFilterQuery = newText;
                 return true;
             }
         });
@@ -368,23 +371,23 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                     prepareMoviesAdapter();
                     mRecyclerView.setLayoutManager(mLinearLayoutManager);
                     mRecyclerView.setAdapter(mMoviesAdapter);
-
-                    // Save preferences
-                    SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-                    editor.putInt("settingMovieListViewId", mViewType);
-                    editor.apply();
                 } else {
                     // Change to grid view
                     mViewType = GRID;
                     prepareMoviesAdapter();
                     mRecyclerView.setLayoutManager(mGridLayoutManager);
                     mRecyclerView.setAdapter(mMoviesAdapter);
-
-                    // Save preferences
-                    SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-                    editor.putInt("settingMovieListViewId", mViewType);
-                    editor.apply();
                 }
+
+                // Set filter query from previous view
+                if (!mFilterQuery.equals(""))
+                    mMoviesAdapter.getFilter().filter(mFilterQuery);
+
+                // Save preferences
+                SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
+                editor.putInt("settingMovieListViewId", mViewType);
+                editor.apply();
+
                 return true;
             case R.id.menu_sort_formattedtitle_asc:
                 setSortOrder(R.id.menu_sort_formattedtitle_asc, Movies.SORT_ORDER_TITLE_ASC);
