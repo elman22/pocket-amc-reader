@@ -264,7 +264,6 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         updateHeaderInfo();
 
         // Store references
-        SharedObjects.getInstance().recyclerMovieAdapter = mMoviesAdapter;
         SharedObjects.getInstance().movieListFragment = this;
 
         // Show welcome screen if zero movies are displayed
@@ -852,6 +851,9 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         // Data change observer
         CursorAdapterObserver cursorAdapterObserver = new CursorAdapterObserver();
         mMoviesAdapter.registerAdapterDataObserver(cursorAdapterObserver);
+
+        // Store references
+        SharedObjects.getInstance().recyclerMovieAdapter = mMoviesAdapter;
     }
 
     /**
