@@ -64,7 +64,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:shadowDy="1"
             android:shadowRadius="2"
             android:singleLine="true"
-            android:text="@string/list_holder_row1"
+            android:text="@string/ph_formatted_title"
             tools:ignore="MissingPrefix"/>
 
     </RelativeLayout>
