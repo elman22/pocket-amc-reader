@@ -61,7 +61,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_below="@id/ListColorTag"
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row1"/>
 
@@ -73,7 +73,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_below="@id/movieTitle"
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row2"/>
 
@@ -86,7 +86,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_marginBottom="2dip"
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row3"/>
 </RelativeLayout>

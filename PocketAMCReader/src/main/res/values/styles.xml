@@ -38,6 +38,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <item name="android:textColor">@color/primary_text_dark_nostates</item>
     </style>
 
+    <!-- Theme for grid view -->
+    <style name="GridTextTitle">
+        <!--<item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>-->
+        <item name="android:textColor">@color/primary_text_dark_nostates</item>
+    </style>
+
     <!-- Specific styles -->
     <style name="BasicValue">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>

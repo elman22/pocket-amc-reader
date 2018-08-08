@@ -31,6 +31,10 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <dimen name="list_item_width">48dip</dimen>
     <dimen name="list_margin_horizontal">6dip</dimen>
     <dimen name="list_margin_vertical">3dip</dimen>
+    <!-- Grid view -->
+    <dimen name="grid_item_height">192dip</dimen>
+    <dimen name="grid_margin_horizontal">2dip</dimen>
+    <dimen name="grid_margin_vertical">4dip</dimen>
     <!-- Details -->
     <dimen name="detail_hero_img_height">240dip</dimen>
     <dimen name="detail_hero_img_land_width">180dip</dimen>
