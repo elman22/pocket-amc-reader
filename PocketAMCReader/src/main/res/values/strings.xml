@@ -183,4 +183,6 @@
   <string name="error_import2">There is a problem with import. This usually happens when catalog contains some non standard characters. To fix it, you can try:\n\n- Go to settings and check \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nAlso make sure you have enough free space on your device (not the SD card). Twice the size of XML is required.\n\nIf none of this helps, please, contact the author via web page shown on Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Custom fields</string>
+  <!--Version 2.2-->
+  <string name="menu_switch_view">View</string>
 </resources>

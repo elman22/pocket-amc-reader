@@ -30,6 +30,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         app:showAsAction="always|collapseActionView|withText"
         tools:ignore="AppCompatResource"/>
     <item
+        android:id="@+id/menu_switch_view"
+        android:icon="@drawable/ic_grid_on_white_48dp"
+        android:title="@string/menu_switch_view"
+        app:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource"/>
+    <item
         android:id="@+id/menu_add_filter"
         android:icon="@drawable/ic_filter_list_white_48dp"
         android:title="@string/menu_add_filter"

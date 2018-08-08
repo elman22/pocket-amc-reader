@@ -336,6 +336,9 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                 Log.i(S.TAG, "Preferred list order not found.");
         }
 
+        // Set correct icon for layout view
+        changeMenuLayoutIcon();
+
         // Add search widget
         mSearchMenuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
@@ -388,6 +391,9 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                 SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
                 editor.putInt("settingMovieListViewId", mViewType);
                 editor.apply();
+
+                // Change menu icon
+                changeMenuLayoutIcon();
 
                 return true;
             case R.id.menu_sort_formattedtitle_asc:
@@ -846,6 +852,22 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         // Data change observer
         CursorAdapterObserver cursorAdapterObserver = new CursorAdapterObserver();
         mMoviesAdapter.registerAdapterDataObserver(cursorAdapterObserver);
+    }
+
+    /**
+     * Change icon in menu according to used layout
+     */
+    public void changeMenuLayoutIcon() {
+        if (mMenu != null) {
+            MenuItem item = mMenu.findItem(R.id.menu_switch_view);
+            if (item != null) {
+                if (mViewType == LIST) {
+                    item.setIcon(R.drawable.ic_grid_on_white_48dp);
+                } else {
+                    item.setIcon(R.drawable.ic_list_white_48dp);
+                }
+            }
+        }
     }
 
 }
