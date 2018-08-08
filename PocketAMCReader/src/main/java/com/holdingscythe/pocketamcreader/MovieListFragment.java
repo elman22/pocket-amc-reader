@@ -22,12 +22,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -573,17 +571,19 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
-        mListView.setChoiceMode(activateOnItemClick
-                ? ListView.CHOICE_MODE_SINGLE
-                : ListView.CHOICE_MODE_NONE);
+        // TODO update when implementing TwoPane
+//        mListView.setChoiceMode(activateOnItemClick
+//                ? ListView.CHOICE_MODE_SINGLE
+//                : ListView.CHOICE_MODE_NONE);
     }
 
     private void setActivatedPosition(int position) {
-        if (position == ListView.INVALID_POSITION) {
-            mListView.setItemChecked(mActivatedPosition, false);
-        } else {
-            mListView.setItemChecked(position, true);
-        }
+        // TODO update when implementing TwoPane
+//        if (position == ListView.INVALID_POSITION) {
+//            mListView.setItemChecked(mActivatedPosition, false);
+//        } else {
+//            mListView.setItemChecked(position, true);
+//        }
 
         mActivatedPosition = position;
     }
