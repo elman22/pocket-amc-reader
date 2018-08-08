@@ -36,15 +36,19 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Adapter for movies stored in database
  */
-public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHolder> {
+public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHolder> implements FastScrollRecyclerView
+        .SectionedAdapter {
     private Context mContext;
     private Boolean mShowThumbs;
     private String mPicturesFolder;
@@ -54,8 +58,10 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     private String[] mListFieldsLine3;
     private Boolean mSettingListForceSortField;
     private String mSettingMoviesListSeparator;
+    private String mSettingMovieListOrderField;
     private ImageLoader mImageLoader;
     private DisplayImageOptions mImageOptions;
+    private Calendar mCalendar;
 
     // Recycler views
     private final int GRID = 0;
@@ -285,6 +291,45 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         //</editor-fold>
     }
 
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        String value;
+
+        try {
+            // Using cursor which is not always at "position"
+            // This is intentional for performance reasons
+            value = getDBValue(mSettingMovieListOrderField, getCursor());
+        } catch (Exception e) {
+            value = null;
+        }
+
+        if (value == null) {
+            value = "";
+        } else {
+            switch (mSettingMovieListOrderField) {
+                case Movies.FORMATTED_TITLE:
+                case Movies.BORROWER:
+                case Movies.ORIGINAL_TITLE:
+                case Movies.TRANSLATED_TITLE:
+                    value = value.substring(0, 1).toUpperCase();
+                    break;
+                case Movies.DATE:
+                case Movies.DATE_WATCHED:
+                    try {
+                        Date date = SharedObjects.getInstance().dateFormat.parse(value);
+                        mCalendar.setTime(date);
+                        value = String.valueOf(mCalendar.get(Calendar.YEAR));
+                    } catch (Exception e) {
+                        // don't do anything, keep date as is
+                    }
+                    break;
+            }
+        }
+
+        return value;
+    }
+
     /**
      * Load configuration for current instance
      *
@@ -306,7 +351,9 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         mListFieldsLine3 = preferences.getString("settingMoviesListLine3", Movies.defaultListFieldsLine3).split(",");
         mSettingListForceSortField = preferences.getBoolean("settingListForceSortField", true);
         mSettingMoviesListSeparator = preferences.getString("settingMoviesListSeparator", c.getString(R.string.items_separator_default));
+        mSettingMovieListOrderField = preferences.getString("settingMovieListOrderField", Movies.DEFAULT_SORT_FIELD);
 
+        // Start image loader if thumbs are displayed
         if (mShowThumbs) {
             // Prepare Image Loader
             mImageLoader = ImageLoader.getInstance();
@@ -320,6 +367,9 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                         .build();
             }
         }
+
+        // Prepare date conversion for section name
+        mCalendar = new GregorianCalendar();
     }
 
     /**

@@ -394,88 +394,94 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
 
                 return true;
             case R.id.menu_sort_formattedtitle_asc:
-                setSortOrder(R.id.menu_sort_formattedtitle_asc, Movies.SORT_ORDER_TITLE_ASC);
+                setSortOrder(R.id.menu_sort_formattedtitle_asc, Movies.SORT_ORDER_TITLE_ASC, Movies.FORMATTED_TITLE);
                 return true;
             case R.id.menu_sort_formattedtitle_desc:
-                setSortOrder(R.id.menu_sort_formattedtitle_desc, Movies.SORT_ORDER_TITLE_DESC);
+                setSortOrder(R.id.menu_sort_formattedtitle_desc, Movies.SORT_ORDER_TITLE_DESC, Movies.FORMATTED_TITLE);
                 return true;
             case R.id.menu_sort_number_asc:
-                setSortOrder(R.id.menu_sort_number_asc, Movies.SORT_ORDER_NUMBER_ASC);
+                setSortOrder(R.id.menu_sort_number_asc, Movies.SORT_ORDER_NUMBER_ASC, Movies.NUMBER);
                 return true;
             case R.id.menu_sort_number_desc:
-                setSortOrder(R.id.menu_sort_number_desc, Movies.SORT_ORDER_NUMBER_DESC);
+                setSortOrder(R.id.menu_sort_number_desc, Movies.SORT_ORDER_NUMBER_DESC, Movies.NUMBER);
                 return true;
             case R.id.menu_sort_rating_asc:
-                setSortOrder(R.id.menu_sort_rating_asc, Movies.SORT_ORDER_RATING_ASC);
+                setSortOrder(R.id.menu_sort_rating_asc, Movies.SORT_ORDER_RATING_ASC, Movies.RATING);
                 return true;
             case R.id.menu_sort_rating_desc:
-                setSortOrder(R.id.menu_sort_rating_desc, Movies.SORT_ORDER_RATING_DESC);
+                setSortOrder(R.id.menu_sort_rating_desc, Movies.SORT_ORDER_RATING_DESC, Movies.RATING);
                 return true;
             case R.id.menu_sort_medialabel_asc:
-                setSortOrder(R.id.menu_sort_medialabel_asc, Movies.SORT_ORDER_MEDIALABEL_ASC);
+                setSortOrder(R.id.menu_sort_medialabel_asc, Movies.SORT_ORDER_MEDIALABEL_ASC, Movies.MEDIA_LABEL);
                 return true;
             case R.id.menu_sort_medialabel_desc:
-                setSortOrder(R.id.menu_sort_medialabel_desc, Movies.SORT_ORDER_MEDIALABEL_DESC);
+                setSortOrder(R.id.menu_sort_medialabel_desc, Movies.SORT_ORDER_MEDIALABEL_DESC, Movies.MEDIA_LABEL);
                 return true;
             case R.id.menu_sort_length_asc:
-                setSortOrder(R.id.menu_sort_length_asc, Movies.SORT_ORDER_LENGTH_ASC);
+                setSortOrder(R.id.menu_sort_length_asc, Movies.SORT_ORDER_LENGTH_ASC, Movies.LENGTH);
                 return true;
             case R.id.menu_sort_length_desc:
-                setSortOrder(R.id.menu_sort_length_desc, Movies.SORT_ORDER_LENGTH_DESC);
+                setSortOrder(R.id.menu_sort_length_desc, Movies.SORT_ORDER_LENGTH_DESC, Movies.LENGTH);
                 return true;
             case R.id.menu_sort_year_asc:
-                setSortOrder(R.id.menu_sort_year_asc, Movies.SORT_ORDER_YEAR_ASC);
+                setSortOrder(R.id.menu_sort_year_asc, Movies.SORT_ORDER_YEAR_ASC, Movies.YEAR);
                 return true;
             case R.id.menu_sort_year_desc:
-                setSortOrder(R.id.menu_sort_year_desc, Movies.SORT_ORDER_YEAR_DESC);
+                setSortOrder(R.id.menu_sort_year_desc, Movies.SORT_ORDER_YEAR_DESC, Movies.YEAR);
                 return true;
             case R.id.menu_sort_date_asc:
-                setSortOrder(R.id.menu_sort_date_asc, Movies.SORT_ORDER_DATE_ASC);
+                setSortOrder(R.id.menu_sort_date_asc, Movies.SORT_ORDER_DATE_ASC, Movies.DATE);
                 return true;
             case R.id.menu_sort_date_desc:
-                setSortOrder(R.id.menu_sort_date_desc, Movies.SORT_ORDER_DATE_DESC);
+                setSortOrder(R.id.menu_sort_date_desc, Movies.SORT_ORDER_DATE_DESC, Movies.DATE);
                 return true;
             case R.id.menu_sort_borrower_asc:
-                setSortOrder(R.id.menu_sort_borrower_asc, Movies.SORT_ORDER_BORROWER_ASC);
+                setSortOrder(R.id.menu_sort_borrower_asc, Movies.SORT_ORDER_BORROWER_ASC, Movies.BORROWER);
                 return true;
             case R.id.menu_sort_borrower_desc:
-                setSortOrder(R.id.menu_sort_borrower_desc, Movies.SORT_ORDER_BORROWER_DESC);
+                setSortOrder(R.id.menu_sort_borrower_desc, Movies.SORT_ORDER_BORROWER_DESC, Movies.BORROWER);
                 return true;
             case R.id.menu_sort_color_tag_asc:
-                setSortOrder(R.id.menu_sort_color_tag_asc, Movies.SORT_ORDER_COLOR_TAG_ASC);
+                setSortOrder(R.id.menu_sort_color_tag_asc, Movies.SORT_ORDER_COLOR_TAG_ASC, Movies.COLOR_TAG);
                 return true;
             case R.id.menu_sort_color_tag_desc:
-                setSortOrder(R.id.menu_sort_color_tag_desc, Movies.SORT_ORDER_COLOR_TAG_DESC);
+                setSortOrder(R.id.menu_sort_color_tag_desc, Movies.SORT_ORDER_COLOR_TAG_DESC, Movies.COLOR_TAG);
                 return true;
             case R.id.menu_sort_originaltitle_asc:
-                setSortOrder(R.id.menu_sort_originaltitle_asc, Movies.SORT_ORDER_ORIGINAL_TITLE_ASC);
+                setSortOrder(R.id.menu_sort_originaltitle_asc, Movies.SORT_ORDER_ORIGINAL_TITLE_ASC, Movies
+                        .ORIGINAL_TITLE);
                 return true;
             case R.id.menu_sort_originaltitle_desc:
-                setSortOrder(R.id.menu_sort_originaltitle_desc, Movies.SORT_ORDER_ORIGINAL_TITLE_DESC);
+                setSortOrder(R.id.menu_sort_originaltitle_desc, Movies.SORT_ORDER_ORIGINAL_TITLE_DESC, Movies
+                        .ORIGINAL_TITLE);
                 return true;
             case R.id.menu_sort_translatedtitle_asc:
-                setSortOrder(R.id.menu_sort_translatedtitle_asc, Movies.SORT_ORDER_TRANSLATED_TITLE_ASC);
+                setSortOrder(R.id.menu_sort_translatedtitle_asc, Movies.SORT_ORDER_TRANSLATED_TITLE_ASC, Movies
+                        .TRANSLATED_TITLE);
                 return true;
             case R.id.menu_sort_translatedtitle_desc:
-                setSortOrder(R.id.menu_sort_translatedtitle_desc, Movies.SORT_ORDER_TRANSLATED_TITLE_DESC);
+                setSortOrder(R.id.menu_sort_translatedtitle_desc, Movies.SORT_ORDER_TRANSLATED_TITLE_DESC, Movies
+                        .TRANSLATED_TITLE);
                 return true;
             case R.id.menu_sort_datewatched_asc:
-                setSortOrder(R.id.menu_sort_datewatched_asc, Movies.SORT_ORDER_DATE_WATCHED_ASC);
+                setSortOrder(R.id.menu_sort_datewatched_asc, Movies.SORT_ORDER_DATE_WATCHED_ASC, Movies.DATE_WATCHED);
                 return true;
             case R.id.menu_sort_datewatched_desc:
-                setSortOrder(R.id.menu_sort_datewatched_desc, Movies.SORT_ORDER_DATE_WATCHED_DESC);
+                setSortOrder(R.id.menu_sort_datewatched_desc, Movies.SORT_ORDER_DATE_WATCHED_DESC, Movies.DATE_WATCHED);
                 return true;
             case R.id.menu_sort_userrating_asc:
-                setSortOrder(R.id.menu_sort_userrating_asc, Movies.SORT_ORDER_USER_RATING_ASC);
+                setSortOrder(R.id.menu_sort_userrating_asc, Movies.SORT_ORDER_USER_RATING_ASC, Movies.USER_RATING);
                 return true;
             case R.id.menu_sort_userrating_desc:
-                setSortOrder(R.id.menu_sort_userrating_desc, Movies.SORT_ORDER_USER_RATING_DESC);
+                setSortOrder(R.id.menu_sort_userrating_desc, Movies.SORT_ORDER_USER_RATING_DESC, Movies.USER_RATING);
                 return true;
             case R.id.menu_sort_certification_asc:
-                setSortOrder(R.id.menu_sort_certification_asc, Movies.SORT_ORDER_CERTIFICATION_ASC);
+                setSortOrder(R.id.menu_sort_certification_asc, Movies.SORT_ORDER_CERTIFICATION_ASC, Movies
+                        .CERTIFICATION);
                 return true;
             case R.id.menu_sort_certification_desc:
-                setSortOrder(R.id.menu_sort_certification_desc, Movies.SORT_ORDER_CERTIFICATION_DESC);
+                setSortOrder(R.id.menu_sort_certification_desc, Movies.SORT_ORDER_CERTIFICATION_DESC, Movies
+                        .CERTIFICATION);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -602,11 +608,12 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     /**
      * Set default order to preferences and sort list
      */
-    protected void setSortOrder(int menuId, String order) {
+    protected void setSortOrder(int menuId, String order, String field) {
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
             editor.putInt("settingMovieListOrderId", menuId);
             editor.putString("settingMovieListOrder", order);
+            editor.putString("settingMovieListOrderField", field);
             editor.apply();
             mMenu.findItem(menuId).setChecked(true);
             refreshList();

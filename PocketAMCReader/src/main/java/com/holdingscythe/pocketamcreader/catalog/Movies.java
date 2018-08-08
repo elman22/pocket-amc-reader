@@ -122,7 +122,11 @@ public final class Movies implements BaseColumns {
             Movies.E_CHECKED, Movies.E_TAG, Movies.E_TITLE, Movies.E_CATEGORY, Movies.E_URL, Movies.E_DESCRIPTION,
             Movies.E_COMMENTS, Movies.E_CREATED_BY, Movies.E_PICTURE};
 
-    // Sorting definitions
+    /**
+     * Sorting definitions
+     * Needs to be synchronized with {@link MoviesAdapter#getSectionName}
+     */
+    public static final String DEFAULT_SORT_FIELD = Movies.FORMATTED_TITLE;
     public static final String DEFAULT_SORT_ORDER = "FormattedTitle asc";
     public static final String SORT_ORDER_TITLE_ASC = "FormattedTitle asc";
     public static final String SORT_ORDER_TITLE_DESC = "FormattedTitle desc";

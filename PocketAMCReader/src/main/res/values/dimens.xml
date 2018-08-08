@@ -35,6 +35,9 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <dimen name="grid_item_height">192dip</dimen>
     <dimen name="grid_margin_horizontal">2dip</dimen>
     <dimen name="grid_margin_vertical">4dip</dimen>
+    <!-- Recycler view fast scroll -->
+    <dimen name="fast_scroll_popup_text">32dip</dimen>
+    <dimen name="fast_scroll_popup_background">56dip</dimen>
     <!-- Details -->
     <dimen name="detail_hero_img_height">240dip</dimen>
     <dimen name="detail_hero_img_land_width">180dip</dimen>

@@ -54,7 +54,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="picture_counter" translatable="false">%1$d\u2215%2$d</string>
     <string name="used_libraries" translatable="false">NoNonsense-FilePicker: Jonas Kalderstam\nExpandableTextView:
         Manabu Shimobe\nAndroid-Universal-Image-Loader: Sergey Tarasevich\nCalligraphy: Christopher
-		Jenkins\nAndroid-ObservableScrollView: Soichiro Kashima\nDragListView: Magnus Woxblom</string>
+        Jenkins\nAndroid-ObservableScrollView: Soichiro Kashima\nDragListView: Magnus
+        Woxblom\nRecyclerView-FastScroll: Tim Malseed</string>
 
     <!--Version 2.0-->
     <string name="year_none" translatable="false">\?</string>
