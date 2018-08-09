@@ -110,7 +110,7 @@ dependencies {
     // https://github.com/chrisjenx/Calligraphy
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     // https://github.com/woxblom/DragListView
-    implementation 'com.github.woxthebox:draglistview:1.4.4'
+    implementation 'com.github.woxthebox:draglistview:1.6.2'
     // https://github.com/timusus/RecyclerView-FastScroll
     implementation 'com.simplecityapps:recyclerview-fastscroll:1.0.18'
 }

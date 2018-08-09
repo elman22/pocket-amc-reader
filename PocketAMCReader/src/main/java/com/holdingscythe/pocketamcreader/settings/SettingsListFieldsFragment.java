@@ -23,6 +23,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -63,7 +64,7 @@ public class SettingsListFieldsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_list_items_board, container, false);
 
         mBoardView = (BoardView) view.findViewById(R.id.board_view);
@@ -77,16 +78,32 @@ public class SettingsListFieldsFragment extends Fragment {
             }
 
             @Override
-            public void onItemChangedColumn(int oldColumn, int newColumn) {
-            }
-
-            @Override
             public void onItemDragEnded(int fromColumn, int fromRow, int toColumn, int toRow) {
                 saveSettings();
             }
 
             @Override
             public void onItemChangedPosition(int oldColumn, int oldRow, int newColumn, int newRow) {
+            }
+
+            @Override
+            public void onItemChangedColumn(int oldColumn, int newColumn) {
+            }
+
+            @Override
+            public void onFocusedColumnChanged(int oldColumn, int newColumn) {
+            }
+
+            @Override
+            public void onColumnDragStarted(int position) {
+            }
+
+            @Override
+            public void onColumnDragChangedPosition(int oldPosition, int newPosition) {
+            }
+
+            @Override
+            public void onColumnDragEnded(int position) {
             }
         });
         return view;
@@ -154,7 +171,7 @@ public class SettingsListFieldsFragment extends Fragment {
             final SettingsListFieldsAdapter listAdapter = new SettingsListFieldsAdapter(mItemArray, R.layout.settings_list_item, R.id.item_layout, true);
             final View header = View.inflate(getActivity(), R.layout.settings_list_header, null);
             ((TextView) header.findViewById(R.id.card_column_header_text)).setText(columnNames[currentColumn++]);
-            mBoardView.addColumnList(listAdapter, header, false);
+            mBoardView.addColumn(listAdapter, header, null, false);
         }
     }
 
@@ -185,7 +202,7 @@ public class SettingsListFieldsFragment extends Fragment {
 
     private static class MyDragItem extends DragItem {
 
-        public MyDragItem(Context context, int layoutId) {
+        MyDragItem(Context context, int layoutId) {
             super(context, layoutId);
         }
 

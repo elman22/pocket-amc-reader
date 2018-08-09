@@ -19,6 +19,7 @@
 
 package com.holdingscythe.pocketamcreader.settings;
 
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,14 +51,15 @@ class SettingsListFieldsAdapter extends DragItemAdapter<SettingsListField, Setti
         setItemList(list);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         String text = mItemList.get(position).getDisplayText();
         holder.mText.setText(text);
@@ -65,7 +67,7 @@ class SettingsListFieldsAdapter extends DragItemAdapter<SettingsListField, Setti
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getUniqueItemId(int position) {
         return mItemList.get(position).getId();
     }
 
