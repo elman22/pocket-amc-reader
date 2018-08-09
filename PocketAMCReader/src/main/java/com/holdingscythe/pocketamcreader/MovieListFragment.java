@@ -25,6 +25,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -114,6 +115,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
     final int GRID = 0;
     final int LIST = 1;
     final int GRID_SPAN = 3;
+    final int GRID_SPAN_LANDSCAPE = 6;
     int mViewType;
 
     protected class CursorAdapterObserver extends RecyclerView.AdapterDataObserver {
@@ -228,7 +230,9 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
 
         // Define layout managers
         mLinearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), GRID_SPAN);
+        int gridSpan = (getActivity().getResources().getConfiguration().orientation == Configuration
+                .ORIENTATION_PORTRAIT ? GRID_SPAN : GRID_SPAN_LANDSCAPE);
+        mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), gridSpan);
 
         // Setting view preference or list as default view
         mViewType = SharedObjects.getInstance().preferences.getInt("settingMovieListViewId", LIST);
