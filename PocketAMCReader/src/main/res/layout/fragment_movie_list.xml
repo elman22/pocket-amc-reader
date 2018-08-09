@@ -31,5 +31,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     app:fastScrollPopupTextSize="@dimen/fast_scroll_popup_text"
     app:fastScrollPopupBackgroundSize="@dimen/fast_scroll_popup_background"
     app:fastScrollThumbColor="@color/blue.color_action_bar_bg"
+    app:fastScrollThumbInactiveColor="@color/blue.fast_scroll_thumb_inactive"
+    app:fastScrollEnableThumbInactiveColor="true"
     app:fastScrollPopupPosition="center">
 </com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView>
