@@ -19,7 +19,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@android:color/primary_text_dark" android:state_pressed="true"/> <!-- pressed -->
-    <item android:color="@android:color/primary_text_dark" android:state_focused="true"/> <!-- focused -->
+    <item android:color="@android:color/secondary_text_dark" android:state_pressed="true"/> <!-- pressed -->
+    <item android:color="@android:color/secondary_text_dark" android:state_focused="true"/> <!-- focused -->
     <item android:color="@android:color/secondary_text_dark"/> <!-- default -->
 </selector>

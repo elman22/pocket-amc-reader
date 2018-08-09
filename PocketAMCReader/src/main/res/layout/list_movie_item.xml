@@ -24,7 +24,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_outer_height"
-    android:background="@color/app_bg"
+    android:foreground="?selectableItemBackground"
     android:paddingBottom="@dimen/list_margin_vertical"
     android:paddingLeft="@dimen/list_margin_horizontal"
     android:paddingRight="@dimen/list_margin_horizontal"
