@@ -74,6 +74,7 @@ public final class S {
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
         tmpMap.put("settingShowThumbs", 1);
+        tmpMap.put("settingShowGridTitle", 1);
         SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
     }
 
