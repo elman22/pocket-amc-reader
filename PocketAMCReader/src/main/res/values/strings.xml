@@ -179,10 +179,12 @@
   <string name="settings_cards_column4_title">Available fields</string>
   <string name="card_click_hint">Hold and drag to rearrange</string>
   <string name="pref_setting_remove_bad_chars">Remove bad characters</string>
-  <string name="pref_setting_remove_bad_chars_summary">Remove bad characters in XML file during import. Use only when original XML will fail to load</string>
+  <string name="pref_setting_remove_bad_chars_summary">Remove bad characters in XML file during import. Use only when original XML fails to load</string>
   <string name="error_import2">There is a problem with import. This usually happens when catalog contains some non standard characters. To fix it, you can try:\n\n- Go to settings and check \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nAlso make sure you have enough free space on your device (not the SD card). Twice the size of XML is required.\n\nIf none of this helps, please, contact the author via web page shown on Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Custom fields</string>
   <!--Version 2.2-->
   <string name="menu_switch_view">View</string>
+  <string name="pref_setting_grid_title">Show title in grid view</string>
+  <string name="pref_setting_show_grid_title_summary">Show movie title in grid view (if picture is not available, title is always shown)</string>
 </resources>

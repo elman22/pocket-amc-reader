@@ -51,6 +51,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         .SectionedAdapter {
     private Context mContext;
     private Boolean mShowThumbs;
+    private Boolean mShowTitle;
     private String mPicturesFolder;
     private String mSortedField;
     private String[] mListFieldsLine1;
@@ -228,7 +229,21 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                 }
             }
 
+            // Display image
             mImageLoader.displayImage(movieCatalogPicture, holder.moviePictureView, mImageOptions);
+
+            // Hide view if preference is to hide title
+            // But if image is not available, always show title
+            if (!mShowTitle) {
+                if (movieCatalogPicture == null) {
+                    if (holder.FormattedTitle_text.getVisibility() == View.GONE)
+                        holder.FormattedTitle_text.setVisibility(View.VISIBLE);
+                } else {
+                    if (holder.FormattedTitle_text.getVisibility() == View.VISIBLE)
+                        holder.FormattedTitle_text.setVisibility(View.GONE);
+                }
+            }
+
         }
 
         //<editor-fold desc="Repaint color indicator to match Color tag">
@@ -342,6 +357,10 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         // Always set to true if grid view is used
         mShowThumbs = preferences.getBoolean("settingShowThumbs", true);
         if (mViewType == GRID) mShowThumbs = true;
+
+        // Always set to true if list view is used
+        mShowTitle = preferences.getBoolean("settingShowGridTitle", true);
+        if (mViewType == LIST) mShowTitle = true;
 
         mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
         String sortOrder = preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);

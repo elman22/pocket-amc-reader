@@ -59,6 +59,11 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:key="settingShowThumbs"
             android:summary="@string/pref_setting_show_thumbs_summary"
             android:title="@string/pref_setting_show_thumbs"/>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="settingShowGridTitle"
+            android:summary="@string/pref_setting_show_grid_title_summary"
+            android:title="@string/pref_setting_grid_title"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:orderingFromXml="true"
