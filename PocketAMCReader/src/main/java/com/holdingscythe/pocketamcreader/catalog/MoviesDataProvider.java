@@ -232,6 +232,10 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         }
     }
 
+    // Empty constructor for manifest provider registration
+    public MoviesDataProvider() {
+    }
+
     public MoviesDataProvider(Context context) {
 
         if (SharedObjects.getInstance().db != null) {
