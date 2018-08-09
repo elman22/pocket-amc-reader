@@ -60,6 +60,7 @@ import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -223,7 +224,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         mMoviesDataProvider.setFilters(mFilters);
 
         // Prepare recycler view
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.movie_list_recycler);
+        mRecyclerView = (FastScrollRecyclerView) getView().findViewById(R.id.movie_list_recycler);
 
         // Define layout managers
         mLinearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
