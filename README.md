@@ -9,7 +9,7 @@ http://www.antp.be/software/moviecatalog
 https://github.com/elman22/pocket-amc-reader
 
 ## Screenshots
-[![pocket-amc-reader-v2-screen1-thumbnail.png](https://s20.postimg.org/d2sxhemjh/pocket-amc-reader-v2-screen1-thumbnail.png)](https://postimg.org/image/g9nh116zd/) [![pocket-amc-reader-v2-screen2-thumbnail.png](https://s20.postimg.org/ne5aa2e8t/pocket-amc-reader-v2-screen2-thumbnail.png)](https://postimg.org/image/ogfgslx21/)
+[![pocket-amc-reader-v2-screen1-thumbnail.png](https://s20.postimg.cc/d2sxhemjh/pocket-amc-reader-v2-screen1-thumbnail.png)](https://postimg.cc/image/g9nh116zd/) [![pocket-amc-reader-v2-screen2-thumbnail.png](https://s20.postimg.cc/ne5aa2e8t/pocket-amc-reader-v2-screen2-thumbnail.png)](https://postimg.cc/image/ogfgslx21/)
 
 ## Requirements
 - Android 4.1 or later
