@@ -59,9 +59,12 @@ Show pictures in details either resized to full screen or with their original si
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
-#### xx.xx.201x Version 2.2
+#### 12.08.2018 Version 2.2
+- ADDED Thumbnail view with option to hide titles
+- ADDED List fast scroll with section names
 - ADDED Slovak translation
 - ADDED Polish translation
+- ADDED Filters are persisted when device is rotated
 - FIXED Some small visual glitches
 
 #### 29.08.2017 Version 2.1
