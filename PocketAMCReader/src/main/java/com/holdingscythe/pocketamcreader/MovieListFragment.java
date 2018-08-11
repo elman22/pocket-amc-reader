@@ -677,16 +677,20 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                         (getActivity().getApplicationContext());
             }
 
-            // Swap cursor
+            // Close search field
             if (mSearchMenuItem != null)
                 mSearchMenuItem.collapseActionView();
 
+            // Swap cursor
             mMoviesAdapter.stopImageLoader();
             mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
             Cursor oldCursor = mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             if (oldCursor != null)
                 oldCursor.close();
             mMoviesAdapter.notifyDataSetChanged();
+
+            // Scroll to top
+            mRecyclerView.scrollToPosition(0);
         }
     }
 
