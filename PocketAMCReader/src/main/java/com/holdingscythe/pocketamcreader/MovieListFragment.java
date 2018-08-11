@@ -86,6 +86,7 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
 
     // Saved current state of filters
     private static final String STATE_FILTERS = "active_filters";
+    private static final String STATE_FILTER_QUERY = "active_filter_query";
 
     /**
      * The fragment's current callback object, which is notified of list item clicks.
@@ -236,6 +237,11 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         }
         mFilters.setContext(getActivity());
 
+        // Setup filter query from bundle
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FILTER_QUERY)) {
+            mFilterQuery = savedInstanceState.getString(STATE_FILTER_QUERY);
+        }
+
         // Setup database and filters
         mMoviesDataProvider = new MoviesDataProvider(getActivity());
         mMoviesDataProvider.setFilters(mFilters);
@@ -340,6 +346,11 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                 Log.w(S.TAG, "Error serializing mFilters: " + ex.toString());
             }
         }
+
+        // Save filter query
+        if (!mFilterQuery.equals("")) {
+            outState.putString(STATE_FILTER_QUERY, mFilterQuery);
+        }
     }
 
     /**
@@ -368,6 +379,13 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         // Add search widget
         mSearchMenuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+
+        // If filter query was set via bundle, apply it
+        if (!mFilterQuery.equals("") && mMoviesAdapter != null) {
+            mSearchMenuItem.expandActionView();
+            searchView.setQuery(mFilterQuery, false);
+            mMoviesAdapter.getFilter().filter(mFilterQuery);
+        }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
