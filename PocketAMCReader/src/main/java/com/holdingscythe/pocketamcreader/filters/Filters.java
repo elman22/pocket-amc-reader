@@ -29,14 +29,18 @@ import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Filters {
+public class Filters implements Serializable {
     private ArrayList<Filter> mFilters = new ArrayList<Filter>();
-    private Context mContext;
+    private transient Context mContext;
 
-    public Filters(Context c) {
+    public Filters() {
+    }
+
+    public void setContext(Context c) {
         mContext = c;
     }
 

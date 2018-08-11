@@ -18,7 +18,9 @@
 
 package com.holdingscythe.pocketamcreader.filters;
 
-public class FilterType {
+import java.io.Serializable;
+
+public class FilterType implements Serializable {
     public FilterOperator[] operators;
 
     public FilterType(FilterOperator[] operators) {

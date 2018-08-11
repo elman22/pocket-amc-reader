@@ -21,9 +21,10 @@ package com.holdingscythe.pocketamcreader.filters;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Filter {
+public class Filter implements Serializable {
     private FilterField mField;
     private FilterOperator mOperator;
     private String mValue;

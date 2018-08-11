@@ -84,6 +84,9 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
+    // Saved current state of filters
+    private static final String STATE_FILTERS = "active_filters";
+
     /**
      * The fragment's current callback object, which is notified of list item clicks.
      */
@@ -220,9 +223,21 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
                     (getActivity().getApplicationContext());
         }
 
+        // Setup filters from bundle if available
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FILTERS)) {
+            try {
+                mFilters = (Filters) savedInstanceState.getSerializable(STATE_FILTERS);
+            } catch (Exception ex) {
+                Log.w(S.TAG, "Error de-serializing mFilters: " + ex.toString());
+                mFilters = new Filters();
+            }
+        } else {
+            mFilters = new Filters();
+        }
+        mFilters.setContext(getActivity());
+
         // Setup database and filters
         mMoviesDataProvider = new MoviesDataProvider(getActivity());
-        mFilters = new Filters(getActivity());
         mMoviesDataProvider.setFilters(mFilters);
 
         // Prepare recycler view
@@ -315,6 +330,15 @@ public class MovieListFragment extends android.support.v4.app.Fragment implement
         if (mActivatedPosition != ListView.INVALID_POSITION) {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+        }
+
+        // Save filter status if some exist
+        if (mFilters != null && mFilters.getCount() > 0) {
+            try {
+                outState.putSerializable(STATE_FILTERS, mFilters);
+            } catch (Exception ex) {
+                Log.w(S.TAG, "Error serializing mFilters: " + ex.toString());
+            }
         }
     }
 

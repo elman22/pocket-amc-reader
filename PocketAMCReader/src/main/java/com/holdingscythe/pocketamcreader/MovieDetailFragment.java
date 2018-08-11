@@ -96,7 +96,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         // Setup filters
-        mFilters = new Filters(getActivity());
+        mFilters = new Filters();
+        mFilters.setContext(getContext());
 
         // Read preferences
         if (SharedObjects.getInstance().preferences == null) {
