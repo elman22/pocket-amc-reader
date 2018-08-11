@@ -19,6 +19,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <!-- Icons from https://github.com/google/material-design-icons/ -->
+
+<!-- There is a strange bug in Android where menu items get lost when dynamically opening expandActionView
+     For now using showAsAction always
+     https://stackoverflow.com/questions/50260569/expandactionview-in-oncreateoptionsmenu-removes-or-hides-other-menu-items-from-a
+-->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools">
@@ -33,19 +39,19 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:id="@+id/menu_switch_view"
         android:icon="@drawable/ic_grid_on_white_48dp"
         android:title="@string/menu_switch_view"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="always|withText"
         tools:ignore="AppCompatResource"/>
     <item
         android:id="@+id/menu_add_filter"
         android:icon="@drawable/ic_filter_list_white_48dp"
         android:title="@string/menu_add_filter"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="always|withText"
         tools:ignore="AppCompatResource"/>
     <item
         android:id="@+id/submenu_sort"
         android:icon="@drawable/ic_sort_white_48dp"
         android:title="@string/menu_sort_title"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="always|withText"
         tools:ignore="AppCompatResource">
         <menu>
             <group android:checkableBehavior="single">
