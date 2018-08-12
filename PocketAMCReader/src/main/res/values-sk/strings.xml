@@ -179,8 +179,12 @@
   <string name="settings_cards_column4_title">Dostupné polia</string>
   <string name="card_click_hint">Podržte a ťahajte pre usporiadanie</string>
   <string name="pref_setting_remove_bad_chars">Odstráňte zlé znaky</string>
-  <string name="pref_setting_remove_bad_chars_summary">Odstráňte zlé znaky v XML súbore počas importu. Používajte len vtedy, keď sa pôvodné XML nedarí načítať</string>
+  <string name="pref_setting_remove_bad_chars_summary">Odstráňte chybné znaky v XML súbore počas importu. Používajte len vtedy, keď sa pôvodné XML nedarí načítať</string>
   <string name="error_import2">Vyskytol sa problém s importom. Obvykle sa to stane, keď katalóg obsahuje niektoré neštandardné znaky. Ak to chcete vyriešiť, môžete vyskúšať:\n\n- Prejdite na nastavenia a skontrolujte \"%1$s\"\n- Skúste zmeniť nastavenie \"%2$s\"\n- Spustite vo svojom PC Ant Movie Catalog skript s názvom RemoveBadChars a skúste znova import\n\nTaktiež sa uistite, že máte vo svojom zariadení dostatok voľného miesta (nie na karte SD). Je potrebná dvojnásobná veľkosť XML.\n\nAk vám nič z toho nepomôže, kontaktujte autorov prostredníctvom webovej stránky zobrazenej v službe Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Vlastné polia</string>
+  <!--Version 2.2-->
+  <string name="menu_switch_view">Pohľad</string>
+  <string name="pref_setting_grid_title">Zobraziť názov v mriežky pohľade</string>
+  <string name="pref_setting_show_grid_title_summary">Zobraziť názov filmu v mriežkovom pohľade (ak obrázok nie je k dispozícii, názov sa vždy zobrazí)</string>
 </resources>
