@@ -183,4 +183,8 @@
   <string name="error_import2">Wystąpił problem z importowaniem. Zwykle dzieje się tak, gdy katalog zawiera jakieś niestandardowe znaki. Aby to naprawić, możesz spróbować:\n\n- Przejdź do ustawień i sprawdź \"%1$s\"\n- Spróbuj zmienić ustawieniia \"%2$s\"\n- Uruchom skrypt PC Ant Movie Catalog o nazwie RemoveBadChars i spróbuj ponownie zaimportować\n\nUpewnij się czy masz wystarczająco dużo wolnego miejsca na swoim urządzeniu (nie na karcie SD). Wymagany jest dwukrotnie większy rozmiar XML.\n\nJeśli nic z tego nie pomoże, skontaktuj się z autorem za pośrednictwem strony internetowej wyświetlanej w Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Pola niestandardowe</string>
+  <!--Version 2.2-->
+  <string name="menu_switch_view">Widok</string>
+  <string name="pref_setting_grid_title">Pokaż tytuł filmu w widoku płytek</string>
+  <string name="pref_setting_show_grid_title_summary">Pokaż tytuł filmu w widoku płytek (jeśli obrazek nie jest dostępny, zawsze pokazany jest tytuł)</string>
 </resources>
