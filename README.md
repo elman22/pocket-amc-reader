@@ -47,7 +47,9 @@ If you select two or more fields in any of the lines, values will be separated b
 **Show sorted field**  
 If you sort your list by field which is not displayed, it will be shown in third line.  
 **Show thumbnails**  
-Show thumbnails in movie list.
+Show thumbnails in movie list.  
+**Show title in grid view**
+When you use grid view, title is by default displayed. This gives you the option to hide movie title.
 
 #### DETAILS
 **Multi field separator**  
