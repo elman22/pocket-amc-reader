@@ -19,7 +19,6 @@
 
 package com.holdingscythe.pocketamcreader.settings;
 
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,8 @@ import com.holdingscythe.pocketamcreader.R;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by elman on 28.4.2017.

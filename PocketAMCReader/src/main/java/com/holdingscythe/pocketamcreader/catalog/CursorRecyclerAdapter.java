@@ -28,31 +28,32 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Filter;
 import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
- * Provide a {@link android.support.v7.widget.RecyclerView.Adapter} implementation with cursor
+ * Provide a {@link androidx.recyclerview.widget.RecyclerView.Adapter} implementation with cursor
  * support.
  * <p>
  * Child classes only need to implement {@link #onCreateViewHolder(android.view.ViewGroup, int)} and
- * {@link #onBindViewHolderCursor(android.support.v7.widget.RecyclerView.ViewHolder, android.database.Cursor)}.
+ * {@link #onBindViewHolderCursor(androidx.recyclerview.widget.RecyclerView.ViewHolder, android.database.Cursor)}.
  * <p>
  * This class does not implement deprecated fields and methods from CursorAdapter! Incidentally,
  * only {@link android.widget.CursorAdapter#FLAG_REGISTER_CONTENT_OBSERVER} is available, so the
  * flag is implied, and only the Adapter behavior using this flag has been ported.
  *
  * @param <VH> {@inheritDoc}
- * @see android.support.v7.widget.RecyclerView.Adapter
+ * @see androidx.recyclerview.widget.RecyclerView.Adapter
  * @see android.widget.CursorAdapter
  * @see android.widget.Filterable
  * @see fr.shywim.tools.adapter.CursorFilter.CursorFilterClient
  */
 public abstract class CursorRecyclerAdapter<VH
-        extends android.support.v7.widget.RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
+        extends androidx.recyclerview.widget.RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
         implements Filterable, CursorFilter.CursorFilterClient {
     private boolean mDataValid;
     private int mRowIDColumn;

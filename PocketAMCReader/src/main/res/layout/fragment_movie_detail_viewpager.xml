@@ -22,7 +22,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/movieDetailViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

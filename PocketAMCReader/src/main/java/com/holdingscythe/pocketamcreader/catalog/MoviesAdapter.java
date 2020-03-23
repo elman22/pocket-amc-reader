@@ -21,8 +21,6 @@ package com.holdingscythe.pocketamcreader.catalog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +41,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Adapter for movies stored in database
@@ -107,8 +108,8 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     }
 
     /**
-     * @param context context
-     * @param cursor cursor
+     * @param context  context
+     * @param cursor   cursor
      * @param viewType viewType
      */
     public MoviesAdapter(Context context, Cursor cursor, int viewType, MoviesAdapterClickListener listener) {
@@ -393,8 +394,9 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
     /**
      * Get field value from cursor
+     *
      * @param fld field
-     * @param c cursor
+     * @param c   cursor
      * @return value
      */
     private String getDBValue(String fld, Cursor c) {

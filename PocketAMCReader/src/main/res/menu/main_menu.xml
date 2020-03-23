@@ -32,7 +32,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search_white_48dp"
         android:title="@string/menu_search"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView|withText"
         tools:ignore="AppCompatResource"/>
     <item

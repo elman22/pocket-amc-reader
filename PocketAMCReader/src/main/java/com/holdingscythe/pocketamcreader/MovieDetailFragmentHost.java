@@ -19,12 +19,6 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +26,13 @@ import android.view.ViewGroup;
 
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.

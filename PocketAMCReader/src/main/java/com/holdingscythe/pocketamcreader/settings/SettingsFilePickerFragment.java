@@ -19,11 +19,11 @@
 
 package com.holdingscythe.pocketamcreader.settings;
 
-import android.support.annotation.NonNull;
-
 import com.nononsenseapps.filepicker.FilePickerFragment;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by elman on 9.5.2017.

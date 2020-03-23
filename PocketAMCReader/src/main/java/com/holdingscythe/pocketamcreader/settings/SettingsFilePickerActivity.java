@@ -21,7 +21,6 @@ package com.holdingscythe.pocketamcreader.settings;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
@@ -30,6 +29,7 @@ import com.nononsenseapps.filepicker.AbstractFilePickerFragment;
 
 import java.io.File;
 
+import androidx.annotation.Nullable;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

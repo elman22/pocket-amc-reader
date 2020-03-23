@@ -92,7 +92,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         </activity>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.holdingscythe.pocketamcreader.provider"
             android:exported="false"
             android:grantUriPermissions="true">

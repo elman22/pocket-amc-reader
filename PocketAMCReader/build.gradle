@@ -58,6 +58,10 @@ android {
     }
     productFlavors {
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 if (project.hasProperty("signingProperties") && new File(project.property("signingProperties")).exists()) {
@@ -88,19 +92,10 @@ repositories {
     google()
 }
 
-ext {
-    // versions for libraries
-    supportLibVersion = '28.0.0'
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    // Android support
-    implementation "com.android.support:support-v4:${supportLibVersion}"
-    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
-    implementation "com.android.support:cardview-v7:${supportLibVersion}"
-    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
-    implementation "com.android.support:design:${supportLibVersion}"
+    // Android material design
+    implementation 'com.google.android.material:material:1.1.0'
     // https://github.com/spacecowboy/NoNonsense-FilePicker
     implementation 'com.nononsenseapps:filepicker:4.2.1'
     // https://github.com/Manabu-GT/ExpandableTextView
@@ -110,7 +105,7 @@ dependencies {
     // https://github.com/chrisjenx/Calligraphy
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     // https://github.com/woxblom/DragListView
-    implementation 'com.github.woxthebox:draglistview:1.6.2'
+    implementation 'com.github.woxthebox:draglistview:1.7.0'
     // https://github.com/timusus/RecyclerView-FastScroll
-    implementation 'com.simplecityapps:recyclerview-fastscroll:1.0.18'
+    implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
 }

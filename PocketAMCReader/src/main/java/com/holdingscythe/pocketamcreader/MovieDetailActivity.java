@@ -20,11 +20,11 @@ package com.holdingscythe.pocketamcreader;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
+import androidx.appcompat.app.AppCompatActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

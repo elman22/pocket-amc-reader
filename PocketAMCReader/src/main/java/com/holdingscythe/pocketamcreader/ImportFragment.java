@@ -24,7 +24,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
@@ -44,6 +43,8 @@ import java.util.Date;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * This Fragment manages a single background task and retains itself across
