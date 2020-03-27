@@ -220,12 +220,12 @@ public class Movie {
      * Fill string from database into view. String can be clickable visibly or invisibly.
      * If updating formatting, be sure also to check formatting in @CustomFields.java
      *
-     * @param columnName          column name
-     * @param value               column value
-     * @param dataType            column data type
-     * @param valueExtensionType  extension type
-     * @param valueExtensionId    extension id
-     * @param defaultValueId      default value to be shown if empty
+     * @param columnName         column name
+     * @param value              column value
+     * @param dataType           column data type
+     * @param valueExtensionType extension type
+     * @param valueExtensionId   extension id
+     * @param defaultValueId     default value to be shown if empty
      */
     private void fillStringIntoView(String columnName, String value, int dataType, int valueExtensionType, int
             valueExtensionId, int defaultValueId) {
@@ -260,12 +260,12 @@ public class Movie {
                         (valueExtensionId);
                 break;
             case EXT_PLURALS_PREFIX_PADDED:
-                value = mActivity.getResources().getQuantityString(valueExtensionId, Integer.valueOf(value)) +
+                value = mActivity.getResources().getQuantityString(valueExtensionId, Integer.parseInt(value)) +
                         mActivity.getString(R.string.string_extension_separator) + value;
                 break;
             case EXT_PLURALS_SUFFIX_PADDED:
                 value += mActivity.getString(R.string.string_extension_separator) + mActivity.getResources()
-                        .getQuantityString(valueExtensionId, Integer.valueOf(value));
+                        .getQuantityString(valueExtensionId, Integer.parseInt(value));
                 break;
         }
 
@@ -273,50 +273,57 @@ public class Movie {
         switch (dataType) {
             case STRING_REGULAR:
                 // Fill regular string from database into view.
-                TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                        mContext.getPackageName()));
-                tv.setText(value);
+                TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (tv != null) {
+                    tv.setText(value);
+                }
                 break;
             case STRING_EXPANDABLE:
                 // Fill expandable string from database into view.
-                ExpandableTextView etv = (ExpandableTextView) mView.findViewById(mResources.getIdentifier
-                        (columnName, "id", mContext.getPackageName()));
-                etv.setText(value);
+                ExpandableTextView etv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (etv != null) {
+                    etv.setText(value);
+                }
                 break;
             case STRING_CLICKABLE:
                 // Fill clickable string from database into view.
-                TextView ctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                        mContext.getPackageName()));
-                ctv.setText(Utils.markClickableText(value));
-                ctv.setOnClickListener(mClickListener);
+                TextView ctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (ctv != null) {
+                    ctv.setText(Utils.markClickableText(value));
+                    ctv.setOnClickListener(mClickListener);
+                }
                 break;
             case BOOLEAN_REGULAR:
-                TextView btv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                        mContext.getPackageName()));
-                if (value.equals("True"))
-                    btv.setText(mActivity.getString(R.string.details_boolean_true));
-                else
-                    btv.setText(mActivity.getString(R.string.details_boolean_false));
+                TextView btv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (btv != null) {
+                    if (value.equals("True"))
+                        btv.setText(mActivity.getString(R.string.details_boolean_true));
+                    else
+                        btv.setText(mActivity.getString(R.string.details_boolean_false));
+                }
                 break;
             case BOOLEAN_CLICKABLE:
-                TextView bctv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                        mContext.getPackageName()));
-                if (value.equals("True"))
-                    bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
-                else
-                    bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
-                bctv.setOnClickListener(mClickListener);
+                TextView bctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (bctv != null) {
+                    if (value.equals("True"))
+                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
+                    else
+                        bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
+                    bctv.setOnClickListener(mClickListener);
+                }
                 break;
             case DATE_REGULAR:
-                TextView dtv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                        mContext.getPackageName()));
-                try {
-                    Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
-                    value = SharedObjects.getInstance().dateFormat.format(parsedDate);
-                } catch (Exception e) {
-                    // don't do anything, keep date as is
+                TextView dtv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                if (dtv != null) {
+                    try {
+                        Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
+                        assert parsedDate != null;
+                        value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                    } catch (Exception e) {
+                        // don't do anything, keep date as is
+                    }
+                    dtv.setText(value);
                 }
-                dtv.setText(value);
                 break;
         }
     }
@@ -362,12 +369,14 @@ public class Movie {
     private void fillColorIntoView(String columnName, String currentColor) {
         TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
                 mContext.getPackageName()));
-        if (currentColor != null && S.COLOR_TAGS.containsKey(currentColor)) {
-            if (S.DEBUG)
-                Log.d(S.TAG, "Setting color to: " + currentColor);
-            tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get(currentColor)));
-        } else {
-            tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get("0")));
+        if (tv != null) {
+            if (currentColor != null && S.COLOR_TAGS.containsKey(currentColor)) {
+                if (S.DEBUG)
+                    Log.d(S.TAG, "Setting color to: " + currentColor);
+                tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get(currentColor)));
+            } else {
+                tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get("0")));
+            }
         }
     }
 
@@ -376,13 +385,16 @@ public class Movie {
      */
     private void hideEmptyView(String columnName) {
         View v = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
-        v.setVisibility(View.GONE);
+        if (v != null) {
+            v.setVisibility(View.GONE);
+        }
 
         // Also hide label, if shown
         String labelId = columnName + "Label";
         v = mView.findViewById(mResources.getIdentifier(labelId, "id", mContext.getPackageName()));
-        if (v != null)
+        if (v != null) {
             v.setVisibility(View.GONE);
+        }
     }
 
     /*
@@ -395,15 +407,15 @@ public class Movie {
     }
 
     /*
-    * Return title of the movie
-    */
+     * Return title of the movie
+     */
     public String getTitle() {
         return mMovie.getFormattedTitle();
     }
 
     /*
-    * Unbind data
-    */
+     * Unbind data
+     */
     public void unbindData() {
         for (ImageView view : mPictureViews) {
             Drawable drawable = view.getDrawable();

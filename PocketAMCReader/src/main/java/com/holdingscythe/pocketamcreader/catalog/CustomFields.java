@@ -51,10 +51,14 @@ public class CustomFields {
 
         if (cursor.getCount() > 0) {
             LinearLayout wrapperLayout = view.findViewById(R.id.CustomFieldsWrapper);
-            wrapperLayout.setVisibility(View.VISIBLE);
+            if (wrapperLayout != null) {
+                wrapperLayout.setVisibility(View.VISIBLE);
+            }
 
             TextView textViewSection = view.findViewById(R.id.customTitle);
-            textViewSection.setVisibility(View.VISIBLE);
+            if (textViewSection != null) {
+                textViewSection.setVisibility(View.VISIBLE);
+            }
 
             // add all extras from DB to the array list
             try {
@@ -82,7 +86,9 @@ public class CustomFields {
 
                     customValue.setText(FormatValue(customField.getCType(), customField.getCValue()));
 
-                    wrapperLayout.addView(customLayout);
+                    if (wrapperLayout != null) {
+                        wrapperLayout.addView(customLayout);
+                    }
                 } while (cursor.moveToNext());
 
                 if (S.DEBUG)
