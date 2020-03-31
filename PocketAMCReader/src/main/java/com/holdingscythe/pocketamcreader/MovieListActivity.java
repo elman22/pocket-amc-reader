@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,8 +36,10 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -83,11 +85,13 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
         setContentView(R.layout.activity_movie_list);
 
         // Set default font
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath(S.DEFAULT_FONT)
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath(S.DEFAULT_FONT)
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.quick_return_toolbar);
         setSupportActionBar(mToolbar);
@@ -123,7 +127,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
      */
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     /**

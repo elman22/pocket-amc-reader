@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 spacecowboy
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -30,8 +30,10 @@ import com.nononsenseapps.filepicker.AbstractFilePickerFragment;
 import java.io.File;
 
 import androidx.annotation.Nullable;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by elman on 9.5.2017.
@@ -42,11 +44,13 @@ public class SettingsFilePickerActivity extends AbstractFilePickerActivity {
     public SettingsFilePickerActivity() {
         super();
         // Set default font
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath(S.DEFAULT_FONT)
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath(S.DEFAULT_FONT)
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
 
     @Override
@@ -67,7 +71,7 @@ public class SettingsFilePickerActivity extends AbstractFilePickerActivity {
      */
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
 }
