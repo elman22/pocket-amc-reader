@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Pocket AMC Reader.
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+
+Pocket AMC Reader is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Pocket AMC Reader is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/technicalTitle"
+        style="@style/SectionTitle"
+        android:text="@string/details_section_technical" />
+
+    <LinearLayout
+        android:id="@+id/technicalLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/FilePathLabel"
+            style="@style/Label"
+            android:text="@string/details_filepath_label" />
+
+        <TextView
+            android:id="@+id/FilePath"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/wrapper_spacing_block"
+            android:text="@string/ph_text_short" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/technicalBoxTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/wrapper_spacing_block"
+        android:shrinkColumns="1"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:id="@+id/LanguagesLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_languages_label" />
+
+            <TextView
+                android:id="@+id/Languages"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ph_text_line" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/SubtitlesLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_subtitles_label" />
+
+            <TextView
+                android:id="@+id/Subtitles"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ph_text_short" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/VideoFormatLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_video_label" />
+
+            <LinearLayout
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/VideoFormat"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/detail_basic_spacing"
+                    android:layout_marginRight="@dimen/detail_basic_spacing"
+                    android:text="@string/ph_text_line" />
+
+                <TextView
+                    android:id="@+id/VideoBitrate"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_number_long" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/AudioFormatLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_audio_label" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/AudioFormat"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/detail_basic_spacing"
+                    android:layout_marginRight="@dimen/detail_basic_spacing"
+                    android:text="@string/ph_text_line" />
+
+                <TextView
+                    android:id="@+id/AudioBitrate"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_number_long" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/ResolutionLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_resolution_label" />
+
+            <TextView
+                android:id="@+id/Resolution"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ph_number_long" />
+
+        </TableRow>
+
+                <TableRow
+                    android:id="@+id/FramerateLabel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/Label.Table"
+                        android:text="@string/details_framerate_label" />
+
+                    <TextView
+                        android:id="@+id/Framerate"
+                        style="@style/RegularText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ph_number_long" />
+
+                </TableRow>
+
+        <TableRow
+            android:id="@+id/SizeLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_size_label" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Size"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/detail_basic_spacing"
+                    android:layout_marginRight="@dimen/detail_basic_spacing"
+                    android:text="@string/ph_number_long" />
+
+                <TextView
+                    style="@style/Label"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/detail_basic_spacing"
+                    android:layout_marginRight="@dimen/detail_basic_spacing"
+                    android:text="@string/display_files_separator" />
+
+                <TextView
+                    android:id="@+id/Disks"
+                    style="@style/RegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ph_number" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

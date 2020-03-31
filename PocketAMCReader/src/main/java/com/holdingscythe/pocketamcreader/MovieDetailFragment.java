@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,6 +34,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.holdingscythe.pocketamcreader.catalog.CustomFields;
 import com.holdingscythe.pocketamcreader.catalog.Extras;
 import com.holdingscythe.pocketamcreader.catalog.Movie;
@@ -147,6 +149,37 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
             // Close database
             moviesDataProvider.closeDatabase();
+
+            // Set collapsing toolbar title
+            CollapsingToolbarLayout collapsingToolbar = getView().findViewById(R.id.collapsingToolbar);
+            AppBarLayout appBarLayout = getView().findViewById(R.id.appBarLayout);
+
+            if (collapsingToolbar != null && appBarLayout != null) {
+                // Title must be space or else application name will be used
+                collapsingToolbar.setTitle(" ");
+
+                // Add listener to dynamically change toolbar title
+                appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                    boolean isShow = false;
+                    int scrollRange = -1;
+
+                    @Override
+                    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                        if (scrollRange == -1) {
+                            scrollRange = appBarLayout.getTotalScrollRange();
+                        }
+                        if (scrollRange + verticalOffset == 0) {
+                            // when collapsingToolbar is collapsed, display actionbar title
+                            collapsingToolbar.setTitle(mMovie.getTitle());
+                            isShow = true;
+                        } else if (isShow) {
+                            // there must a space between double quote otherwise it won't work
+                            collapsingToolbar.setTitle(" ");
+                            isShow = false;
+                        }
+                    }
+                });
+            }
 
             // Benchmark end
             if (S.INFO) {

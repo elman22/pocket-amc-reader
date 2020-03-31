@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Pocket AMC Reader.
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+
+Pocket AMC Reader is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Pocket AMC Reader is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titleBoxTable"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:background="@color/detail_title_background"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/wrapper_spacing_title">
+
+    <TextView
+        android:id="@+id/Number"
+        style="@style/RegularText.Basic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ph_number_long" />
+
+    <TextView
+        android:id="@+id/CertificationLabel"
+        style="@style/BasicExtra.Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_certification_label_short" />
+
+    <TextView
+        android:id="@+id/Certification"
+        style="@style/RegularText.Basic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ph_text_data" />
+
+    <TextView
+        android:id="@+id/CheckedLabel"
+        style="@style/BasicExtra.Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_checked_label" />
+
+    <TextView
+        android:id="@+id/Checked"
+        style="@style/RegularText.Basic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ph_boolean" />
+
+    <LinearLayout
+        android:id="@+id/UserRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/RegularText.Basic.Suffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userrating_star" />
+
+        <TextView
+            android:id="@+id/UserRating"
+            style="@style/RegularText.Basic.Suffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_number" />
+
+        <TextView
+            android:id="@+id/UserRatingSuffix"
+            style="@style/BasicExtra.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating_suffix" />
+
+    </LinearLayout>
+
+</LinearLayout>

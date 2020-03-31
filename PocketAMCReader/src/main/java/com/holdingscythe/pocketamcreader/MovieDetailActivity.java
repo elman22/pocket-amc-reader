@@ -72,9 +72,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .add(R.id.movie_detail_container, fragment)
                     .commit();
         }
-
-        // Hide title in Activity Bar
-        setTitle(null);
     }
 
     /**
