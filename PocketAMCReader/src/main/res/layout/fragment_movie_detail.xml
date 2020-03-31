@@ -66,18 +66,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
                 <TextView
                     android:id="@+id/FormattedTitle"
-                    style="@android:style/TextAppearance.DeviceDefault.Large"
-                    fontPath="fonts/RobotoCondensed-Bold.ttf"
+                    style="@style/DetailsFragmentTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/detail_title_background"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/wrapper_spacing_title"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:shadowColor="@android:color/black"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="2"
                     android:text="@string/ph_text_short"
                     tools:ignore="MissingPrefix" />
 
@@ -89,6 +83,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 android:id="@+id/animatedToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 

@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -45,6 +45,15 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     </style>
 
     <!-- Specific styles -->
+    <style name="DetailsFragmentTitle" parent="@android:style/TextAppearance.DeviceDefault.Large">
+        <item name="android:background">@color/detail_title_background</item>
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="fontPath">fonts/RobotoCondensed-Bold.ttf</item>
+    </style>
+
     <style name="BasicValue">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:layout_marginTop">@dimen/detail_basic_spacing</item>
@@ -127,10 +136,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
     </style>
 
-    <style name="FilePickerTheme" parent="NNF_BaseTheme">
-    </style>
+    <style name="FilePickerTheme" parent="NNF_BaseTheme"></style>
 
-    <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-    </style>
+    <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert"></style>
 
 </resources>
