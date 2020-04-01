@@ -28,6 +28,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -66,6 +68,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
     private Extras mExtras;
     private Filters mFilters;
+    private int mDensity;
 
     private Pattern regExpMultivaluedCleaner;
     private String regExpMultivaluedSeparator;
@@ -115,6 +118,14 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
+
+        // Set density dpi
+        if (SharedObjects.getInstance().densityPixelScale == 0) {
+            DisplayMetrics metrics = getResources().getDisplayMetrics();
+            SharedObjects.getInstance().densityPixelScale = (int) (metrics.density);
+        }
+
+        mDensity = SharedObjects.getInstance().densityPixelScale;
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
@@ -176,6 +187,14 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                         if (scrollRange == -1) {
                             scrollRange = appBarLayout.getTotalScrollRange();
+
+                            // Scroll collapsing toolbar to default position
+                            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+                            AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+                            if (behavior != null) {
+                                behavior.setTopAndBottomOffset((S.COLLAPSING_TOOLBAR_DEFAULT_HEIGHT * mDensity) - scrollRange);
+                            }
+                            appBarLayout.setLayoutParams(params);
                         }
                         if (scrollRange + verticalOffset == 0) {
                             // when collapsingToolbar is collapsed, display actionbar title

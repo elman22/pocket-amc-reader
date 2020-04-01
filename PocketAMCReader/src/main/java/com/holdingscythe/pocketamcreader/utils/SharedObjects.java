@@ -28,6 +28,7 @@ public class SharedObjects {
     public SharedPreferences preferences;
     public SimpleDateFormat dateAddedFormat = new SimpleDateFormat("yyyy-MM-dd", new Locale("US"));
     public DateFormat dateFormat = DateFormat.getDateInstance();
+    public int densityPixelScale = 0;
 
     // References between intents
     public boolean twoPane = false;
