@@ -100,7 +100,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         // Prepare custom font for the toolbar
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoCondensed-Regular.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), S.DEFAULT_FONT);
 
         // Setup filters
         mFilters = new Filters();
