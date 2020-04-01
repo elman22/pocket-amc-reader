@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -98,6 +99,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Prepare custom font for the toolbar
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoCondensed-Regular.ttf");
+
         // Setup filters
         mFilters = new Filters();
         mFilters.setContext(getContext());
@@ -155,6 +159,11 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             AppBarLayout appBarLayout = getView().findViewById(R.id.appBarLayout);
 
             if (collapsingToolbar != null && appBarLayout != null) {
+
+                // Set custom font to the toolbar
+                collapsingToolbar.setCollapsedTitleTypeface(tf);
+                collapsingToolbar.setExpandedTitleTypeface(tf);
+
                 // Title must be space or else application name will be used
                 collapsingToolbar.setTitle(" ");
 
