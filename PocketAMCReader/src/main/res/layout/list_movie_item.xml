@@ -48,7 +48,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:id="@+id/ListColorTag"
         android:layout_width="match_parent"
         android:layout_height="@dimen/colortag_height"
-        android:layout_above="@id/FormattedTitle"
         android:layout_toEndOf="@id/imageCover"
         android:layout_toRightOf="@id/imageCover"
         android:orientation="vertical"/>
