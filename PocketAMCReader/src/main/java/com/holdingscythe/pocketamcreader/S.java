@@ -61,9 +61,6 @@ public final class S {
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;
 
-    // Collapsing toolbar default height in dip
-    static final int COLLAPSING_TOOLBAR_DEFAULT_HEIGHT = 240;
-
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
         tmpMap.put("settingCatalogLocation", 1);

@@ -22,12 +22,12 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +68,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
     private Extras mExtras;
     private Filters mFilters;
-    private int mDensity;
+    private int mDeviceWidthPixels;
+    private int mActionBarHeight;
+    private int mHeroImageHeight;
 
     private Pattern regExpMultivaluedCleaner;
     private String regExpMultivaluedSeparator;
@@ -119,13 +121,30 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
 
-        // Set density dpi
-        if (SharedObjects.getInstance().densityPixelScale == 0) {
-            DisplayMetrics metrics = getResources().getDisplayMetrics();
-            SharedObjects.getInstance().densityPixelScale = (int) (metrics.density);
+        // Set default variables from runtime
+        if (SharedObjects.getInstance().deviceWidthPixels == 0 ||
+                SharedObjects.getInstance().actionBarHeight == 0 ||
+                SharedObjects.getInstance().heroImageHeight == 0) {
+
+            // Set device width pixels
+            SharedObjects.getInstance().deviceWidthPixels =
+                    getResources().getDisplayMetrics().widthPixels;
+
+            // Set action bar height
+            final TypedArray styledAttributes =
+                    getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+            SharedObjects.getInstance().actionBarHeight =
+                    (int) styledAttributes.getDimension(0, 0);
+            styledAttributes.recycle();
+
+            // Set hero image height
+            SharedObjects.getInstance().heroImageHeight =
+                    (int) getResources().getDimension(R.dimen.detail_hero_img_height);
         }
 
-        mDensity = SharedObjects.getInstance().densityPixelScale;
+        mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
+        mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
+        mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
@@ -178,6 +197,22 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 // Title must be space or else application name will be used
                 collapsingToolbar.setTitle(" ");
 
+                // Get adjusted height for AppBarLayout
+                int adjustedHeight;
+
+                if (mMovie.getPictureAspectRatio() > 0) {
+                    adjustedHeight =
+                            (int) Math.floor((long) mDeviceWidthPixels / mMovie.getPictureAspectRatio());
+                } else {
+                    adjustedHeight = mHeroImageHeight + mActionBarHeight;
+                }
+
+                // Set adjusted height to AppBarLayout
+                CoordinatorLayout.LayoutParams params =
+                        (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+                params.height = adjustedHeight;
+                appBarLayout.setLayoutParams(params);
+
                 // Add listener to dynamically change toolbar title
                 appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
                     boolean isShow = false;
@@ -189,10 +224,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             scrollRange = appBarLayout.getTotalScrollRange();
 
                             // Scroll collapsing toolbar to default position
-                            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-                            AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+                            CoordinatorLayout.LayoutParams params =
+                                    (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+                            AppBarLayout.Behavior behavior =
+                                    (AppBarLayout.Behavior) params.getBehavior();
                             if (behavior != null) {
-                                behavior.setTopAndBottomOffset((S.COLLAPSING_TOOLBAR_DEFAULT_HEIGHT * mDensity) - scrollRange);
+                                behavior.setTopAndBottomOffset(mHeroImageHeight - scrollRange);
                             }
                             appBarLayout.setLayoutParams(params);
                         }

@@ -56,6 +56,7 @@ public class Movie {
     private Context mContext;
     private String mPreferencePicturesDirectory;
     private ArrayList<ImageView> mPictureViews;
+    private double mPictureAspectRatio = 0;
 
     // Logical data types
     private final int STRING_REGULAR = 0;
@@ -349,11 +350,14 @@ public class Movie {
                     iv.setImageBitmap(picture);
                     iv.setOnClickListener(mClickListener);
 
+                    // Save image aspect ratio
+                    mPictureAspectRatio = (double) picture.getWidth() / (double) picture.getHeight();
+
                     // Save reference for cleanup
                     mPictureViews.add(iv);
 
                 } catch (Exception e) {
-                    // file can't be read
+                    // File can't be read
                     if (S.ERROR)
                         Log.e(S.TAG, "Picture " + picturePath + " could not be displayed.");
                 }
@@ -410,7 +414,14 @@ public class Movie {
      * Return title of the movie
      */
     public String getTitle() {
-        return mMovie.getFormattedTitle();
+        return mMovieModel.getFormattedTitle();
+    }
+
+    /*
+     * Return picture aspect ratio
+     */
+    public double getPictureAspectRatio() {
+        return mPictureAspectRatio;
     }
 
     /*
