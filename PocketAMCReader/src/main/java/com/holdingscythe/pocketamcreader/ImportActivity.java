@@ -20,7 +20,6 @@ package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -30,6 +29,7 @@ import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -82,12 +82,12 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
                                 .build()))
                 .build());
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         // Initialize views
-        mTextView = (TextView) findViewById(R.id.progress_status);
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_horizontal);
+        mTextView = findViewById(R.id.progress_status);
+        mProgressBar = findViewById(R.id.progress_horizontal);
 
         // Restore saved state
         if (savedInstanceState != null) {
@@ -108,7 +108,7 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_CURRENT_LABEL, mTextView.getText().toString());
         outState.putInt(KEY_CURRENT_PROGRESS, mProgressBar.getProgress());
@@ -147,12 +147,9 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
                 builder.setMessage(String.format(getString(R.string.error_import2), getString(R.string
                         .pref_setting_remove_bad_chars), getString(R.string.pref_setting_encoding)));
                 builder.setNeutralButton(getString(R.string.dialog_positive),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                startMainActivity();
-                            }
+                        (dialog, id) -> {
+                            dialog.cancel();
+                            startMainActivity();
                         }
                 );
                 AlertDialog alertDialog = builder.create();

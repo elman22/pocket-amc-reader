@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -48,7 +47,6 @@ import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.catalog.MoviesAdapter;
-import com.holdingscythe.pocketamcreader.catalog.MoviesAdapterClickListener;
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
 import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
@@ -104,7 +102,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private Filters mFilters;
     private String mFilterQuery;
     private RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mGridLayoutManager, mLinearLayoutManager;
+    private RecyclerView.LayoutManager mGridLayoutManager, mLinearLayoutManager;
     private TextView mHeaderListCountView;
     private TextView mFilterHeaderLabelText;
     private TextView mFilterHeaderText;
@@ -117,11 +115,11 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private int mDpDay;
 
     // Recycler views
-    final int GRID = 0;
-    final int LIST = 1;
-    final int GRID_SPAN = 3;
-    final int GRID_SPAN_LANDSCAPE = 6;
-    int mViewType;
+    private final int GRID = 0;
+    private final int LIST = 1;
+    private final int GRID_SPAN = 3;
+    private final int GRID_SPAN_LANDSCAPE = 6;
+    private int mViewType;
 
     protected class CursorAdapterObserver extends RecyclerView.AdapterDataObserver {
         CursorAdapterObserver() {
@@ -147,7 +145,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             if (!mIsFilterSet) {
-                String filterValue = String.valueOf(year) + "-"
+                String filterValue = year + "-"
                         + String.format("%2s", String.valueOf(monthOfYear + 1)).replace(' ', '0') + "-"
                         + String.format("%2s", String.valueOf(dayOfMonth)).replace(' ', '0');
                 mFilters.addFilter(new Filter(mFilterField, mFilterOperator, filterValue));
@@ -172,10 +170,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * A dummy implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
-    private static Callbacks sDummyCallbacks = new Callbacks() {
-        @Override
-        public void onItemSelected(String id) {
-        }
+    private static Callbacks sDummyCallbacks = id -> {
     };
 
     /**
@@ -260,14 +255,14 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         mViewType = SharedObjects.getInstance().preferences.getInt("settingMovieListViewId", LIST);
 
         // Add counter header
-        mHeaderListCountView = (TextView) getActivity().findViewById(R.id.nowShowing);
-        LinearLayout headerView = (LinearLayout) getActivity().findViewById(R.id.showing_info_layout);
+        mHeaderListCountView = getActivity().findViewById(R.id.nowShowing);
+        LinearLayout headerView = getActivity().findViewById(R.id.showing_info_layout);
         headerView.setOnClickListener(this);
 
         // Add filter header
-        mFilterHeaderLabelText = (TextView) getActivity().findViewById(R.id.filter_label);
-        mFilterHeaderText = (TextView) getActivity().findViewById(R.id.filter_detail);
-        RelativeLayout headerViewFilter = (RelativeLayout) getActivity().findViewById(R.id.filter_info_layout);
+        mFilterHeaderLabelText = getActivity().findViewById(R.id.filter_label);
+        mFilterHeaderText = getActivity().findViewById(R.id.filter_detail);
+        RelativeLayout headerViewFilter = getActivity().findViewById(R.id.filter_info_layout);
         headerViewFilter.setOnClickListener(this);
 
         // Prepare adapter to list
@@ -297,12 +292,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             builder.setTitle(getString(R.string.welcome_title));
             builder.setMessage(String.format(getString(R.string.welcome_message), getString(R.string.menu_settings),
                     getString(R.string.pref_setting_catalog), getString(R.string.pref_setting_encoding)));
-            builder.setNeutralButton(getString(R.string.welcome_dialog_dismiss), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                    startActivity(new Intent(getActivity(), SettingsActivity.class));
-                }
+            builder.setNeutralButton(getString(R.string.welcome_dialog_dismiss), (dialog, id) -> {
+                dialog.cancel();
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
             });
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
@@ -312,7 +304,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
 
         // Activities containing this fragment must implement its callbacks.
@@ -358,7 +350,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * Create menu for main activity
      */
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // Store reference for future use
         mMenu = menu;
 
@@ -543,12 +535,10 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.filter_info_layout:
-                // Click on filters info
-                removeFilters(v);
-                break;
             case R.id.showing_info_layout:
                 // Click on now showing info
-                removeFilters(v);
+                // Click on filters info
+                removeFilters();
                 break;
         }
     }
@@ -656,7 +646,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     /**
      * Set default order to preferences and sort list
      */
-    protected void setSortOrder(int menuId, String order, String field) {
+    private void setSortOrder(int menuId, String order, String field) {
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
             editor.putInt("settingMovieListOrderId", menuId);
@@ -671,7 +661,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     /**
      * Refresh list view
      */
-    protected void refreshList() {
+    private void refreshList() {
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             if (SharedObjects.getInstance().preferences == null) {
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
@@ -711,22 +701,15 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private void addFilter() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.filter_add_first_step));
-        builder.setItems(mFilters.getAvailableFilters(), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                // Shortcut for boolean type
-                if (Movies.availableFilterFields[item].type == Movies.FILTER_TYPE_BOOLEAN) {
-                    addFilterThirdStep(Movies.availableFilterFields[item], Movies.FILTER_OPERATOR_EQUALS);
-                } else {
-                    addFilterSecondStep(Movies.availableFilterFields[item]);
-                }
+        builder.setItems(mFilters.getAvailableFilters(), (dialog, item) -> {
+            // Shortcut for boolean type
+            if (Movies.availableFilterFields[item].type == Movies.FILTER_TYPE_BOOLEAN) {
+                addFilterThirdStep(Movies.availableFilterFields[item], Movies.FILTER_OPERATOR_EQUALS);
+            } else {
+                addFilterSecondStep(Movies.availableFilterFields[item]);
             }
         });
-        builder.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        });
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -737,17 +720,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private void addFilterSecondStep(final FilterField field) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mFilters.getFilterFieldHumanName(field.resId));
-        builder.setItems(mFilters.getAvailableOperators(field), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                addFilterThirdStep(field, field.type.operators[item]);
-            }
-        });
-        builder.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        });
+        builder.setItems(mFilters.getAvailableOperators(field),
+                (dialog, item) -> addFilterThirdStep(field, field.type.operators[item]));
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -777,17 +752,15 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             // If filter type boolean show list yes/no
             final String[] booleanValues = new String[]{getString(R.string.details_boolean_true),
                     getString(R.string.details_boolean_false)};
-            builder.setItems(booleanValues, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    mFilters.addFilter(new Filter(field, operator, booleanValues[item], getString(R.string.details_boolean_true)));
-                    refreshList();
-                }
+            builder.setItems(booleanValues, (dialog, item) -> {
+                mFilters.addFilter(new Filter(field, operator, booleanValues[item],
+                        getString(R.string.details_boolean_true)));
+                refreshList();
             });
         } else {
             // Prepare view with text input
             View filterView = getActivity().getLayoutInflater().inflate(R.layout.filter_input, null);
-            final EditText filterValueView = (EditText) filterView.findViewById(R.id.filterValue);
+            final EditText filterValueView = filterView.findViewById(R.id.filterValue);
             if (field.type == Movies.FILTER_TYPE_NUMBER) {
                 DigitsKeyListener digitsKeyListener = new DigitsKeyListener(false, true);
                 filterValueView.setKeyListener(digitsKeyListener);
@@ -795,41 +768,30 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             builder.setView(filterView);
 
             // Prepare positive button
-            builder.setPositiveButton(getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int button) {
-                    String filterValue = filterValueView.getText().toString();
-                    mFilters.addFilter(new Filter(field, operator, filterValue));
-                    refreshList();
-                }
+            builder.setPositiveButton(getString(R.string.dialog_positive), (dialog, button) -> {
+                String filterValue = filterValueView.getText().toString();
+                mFilters.addFilter(new Filter(field, operator, filterValue));
+                refreshList();
             });
         }
 
         // Negative button is for both options
-        builder.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        });
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
 
         AlertDialog alertDialog = builder.create();
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                }
+        alertDialog.setOnShowListener(dialog -> {
+            if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
+                InputMethodManager imm =
+                        (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
         });
-        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                }
+        alertDialog.setOnDismissListener(dialog -> {
+            if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
+                InputMethodManager imm =
+                        (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
         alertDialog.show();
@@ -847,7 +809,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * Function to remove one or all filters
      * If there is only one filter - clear it, if there is more, user chooses
      */
-    private void removeFilters(View v) {
+    private void removeFilters() {
         if (mFilters.getCount() == 1) {
             // if there is only one filter, remove and refresh
             mFilters.removeAllFilters();
@@ -855,28 +817,22 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         } else if (mFilters.getCount() > 1) {
             // if there are more filters, let user decide
             // prepare array of all filters
-            ArrayList<String> filtersList = new ArrayList<String>();
+            ArrayList<String> filtersList = new ArrayList<>();
             filtersList.add(getString(R.string.filter_remove_all));
             filtersList.addAll(mFilters.getFiltersHumanInfoList());
 
             // build alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(getString(R.string.filter_remove));
-            builder.setItems(filtersList.toArray(new String[filtersList.size()]), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    if (item == 0) {
-                        mFilters.removeAllFilters();
-                    } else {
-                        mFilters.removeFilter(item - 1);
-                    }
-                    refreshList();
+            builder.setItems(filtersList.toArray(new String[0]), (dialog, item) -> {
+                if (item == 0) {
+                    mFilters.removeAllFilters();
+                } else {
+                    mFilters.removeFilter(item - 1);
                 }
+                refreshList();
             });
-            builder.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                }
+            builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {
             });
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
@@ -892,15 +848,12 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
                 mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
                         null),
                 mViewType,
-                new MoviesAdapterClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-                        // Open movie detail when clicked on item
-                        if (S.INFO)
-                            Log.i(S.TAG, "List clicked position: " + position);
+                (v, position) -> {
+                    // Open movie detail when clicked on item
+                    if (S.INFO)
+                        Log.i(S.TAG, "List clicked position: " + position);
 
-                        mCallbacks.onItemSelected(String.valueOf(position));
-                    }
+                    mCallbacks.onItemSelected(String.valueOf(position));
                 }
         );
 

@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@ import java.util.Date;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -103,7 +104,7 @@ public class ImportFragment extends Fragment {
      * method after each configuration change.
      */
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
 
         if (!(activity instanceof TaskCallbacks)) {
@@ -141,9 +142,9 @@ public class ImportFragment extends Fragment {
      * updates and results back to the Activity.
      */
     public class CatalogImportTask extends AsyncTask<Void, Integer, Void> {
-        protected long bytesToBeImported;
+        private long bytesToBeImported;
 
-        public CatalogImportTask() {
+        private CatalogImportTask() {
         }
 
         @Override
@@ -159,6 +160,7 @@ public class ImportFragment extends Fragment {
             boolean isImportFileReady = false;
             boolean isImportFileConverted = false;
             boolean isImportFileFinished = false;
+            PowerManager.WakeLock wakeLock = null;
 
             long startTime;
             long endTime;
@@ -177,11 +179,13 @@ public class ImportFragment extends Fragment {
 
             // Get partial wake lock
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.TAG);
-            wakeLock.acquire();
+            if (pm != null) {
+                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.WAKE_LOCK_TAG);
+                wakeLock.acquire(10*60*1000L /*10 minutes*/);
 
-            if (S.DEBUG)
-                Log.d(S.TAG, "Wake Lock acquired.");
+                if (S.DEBUG)
+                    Log.d(S.TAG, "Wake Lock acquired.");
+            }
 
             // Open file for size check
             try {
@@ -310,9 +314,12 @@ public class ImportFragment extends Fragment {
             }
 
             // Do some cleaning
-            wakeLock.release();
-            if (S.DEBUG)
-                Log.d(S.TAG, "Wake Lock released.");
+            if (wakeLock != null) {
+                wakeLock.release();
+
+                if (S.DEBUG)
+                    Log.d(S.TAG, "Wake Lock released.");
+            }
 
             moviesDataProvider.closeDatabase();
 
@@ -322,7 +329,7 @@ public class ImportFragment extends Fragment {
         /* Publish state from external sources e.g. from {@link ProgressFilterInputStream} */
         public void publishExternalProgress(long state) {
             if (S.VERBOSE)
-                Log.v(S.TAG, "Publishing state: " + String.valueOf((int) ((float) state / bytesToBeImported * 100)) +
+                Log.v(S.TAG, "Publishing state: " + (int) ((float) state / bytesToBeImported * 100) +
                         " %");
 
             publishProgress((int) ((float) state / bytesToBeImported * 100));

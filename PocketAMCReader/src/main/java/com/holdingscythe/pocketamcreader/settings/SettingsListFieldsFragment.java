@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 Magnus Woxblom
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -68,7 +68,7 @@ public class SettingsListFieldsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_list_items_board, container, false);
 
-        mBoardView = (BoardView) view.findViewById(R.id.board_view);
+        mBoardView = view.findViewById(R.id.board_view);
         mBoardView.setSnapToColumnsWhenScrolling(true);
         mBoardView.setSnapToColumnWhenDragging(true);
         mBoardView.setSnapDragItemToTouch(true);
@@ -190,7 +190,7 @@ public class SettingsListFieldsFragment extends Fragment {
                 prefsArrayList.add(fld.getDatabaseField());
             }
 
-            editor.putString("settingMoviesListLine" + String.valueOf(f + 1), Utils.arrayToString(prefsArrayList, ","));
+            editor.putString("settingMoviesListLine" + (f + 1), Utils.arrayToString(prefsArrayList, ","));
         }
 
         editor.apply();
@@ -211,8 +211,8 @@ public class SettingsListFieldsFragment extends Fragment {
         public void onBindDragView(View clickedView, View dragView) {
             CharSequence text = ((TextView) clickedView.findViewById(R.id.card_text)).getText();
             ((TextView) dragView.findViewById(R.id.card_text)).setText(text);
-            CardView dragCard = ((CardView) dragView.findViewById(R.id.card));
-            CardView clickedCard = ((CardView) clickedView.findViewById(R.id.card));
+            CardView dragCard = dragView.findViewById(R.id.card);
+            CardView clickedCard = clickedView.findViewById(R.id.card);
 
             dragCard.setMaxCardElevation(40);
             dragCard.setCardElevation(clickedCard.getCardElevation());
@@ -222,8 +222,8 @@ public class SettingsListFieldsFragment extends Fragment {
 
         @Override
         public void onMeasureDragView(View clickedView, View dragView) {
-            CardView dragCard = ((CardView) dragView.findViewById(R.id.card));
-            CardView clickedCard = ((CardView) clickedView.findViewById(R.id.card));
+            CardView dragCard = dragView.findViewById(R.id.card);
+            CardView clickedCard = clickedView.findViewById(R.id.card);
             int widthDiff = dragCard.getPaddingLeft() - clickedCard.getPaddingLeft() + dragCard.getPaddingRight() -
                     clickedCard.getPaddingRight();
             int heightDiff = dragCard.getPaddingTop() - clickedCard.getPaddingTop() + dragCard.getPaddingBottom() -
@@ -239,7 +239,7 @@ public class SettingsListFieldsFragment extends Fragment {
 
         @Override
         public void onStartDragAnimation(View dragView) {
-            CardView dragCard = ((CardView) dragView.findViewById(R.id.card));
+            CardView dragCard = dragView.findViewById(R.id.card);
             ObjectAnimator anim = ObjectAnimator.ofFloat(dragCard, "CardElevation", dragCard.getCardElevation(), 40);
             anim.setInterpolator(new DecelerateInterpolator());
             anim.setDuration(ANIMATION_DURATION);
@@ -248,7 +248,7 @@ public class SettingsListFieldsFragment extends Fragment {
 
         @Override
         public void onEndDragAnimation(View dragView) {
-            CardView dragCard = ((CardView) dragView.findViewById(R.id.card));
+            CardView dragCard = dragView.findViewById(R.id.card);
             ObjectAnimator anim = ObjectAnimator.ofFloat(dragCard, "CardElevation", dragCard.getCardElevation(), 6);
             anim.setInterpolator(new DecelerateInterpolator());
             anim.setDuration(ANIMATION_DURATION);

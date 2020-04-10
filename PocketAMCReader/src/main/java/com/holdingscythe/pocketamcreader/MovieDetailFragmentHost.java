@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,10 +45,13 @@ public class MovieDetailFragmentHost extends Fragment {
         private RecyclerView mRecyclerView;
 
         MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             mMoviesAdapter = SharedObjects.getInstance().recyclerMovieAdapter;
-            mRecyclerView = (RecyclerView) SharedObjects.getInstance().movieListFragment.getView().findViewById(R.id
-                    .movie_list_recycler);
+            View fragmentView = SharedObjects.getInstance().movieListFragment.getView();
+
+            if (fragmentView != null) {
+                mRecyclerView = fragmentView.findViewById(R.id.movie_list_recycler);
+            }
 
             if (mMoviesAdapter == null || mRecyclerView == null) {
                 throw new NullPointerException();
@@ -68,15 +71,11 @@ public class MovieDetailFragmentHost extends Fragment {
             }
         }
 
+        @NonNull
         @Override
         public Fragment getItem(final int position) {
             mRecyclerView.setSelected(true);
-            mRecyclerView.post(new Runnable() {
-                @Override
-                public void run() {
-                    mRecyclerView.smoothScrollToPosition(position);
-                }
-            });
+            mRecyclerView.post(() -> mRecyclerView.smoothScrollToPosition(position));
 
             Bundle args = new Bundle();
             args.putString(MovieDetailFragment.ARG_MOVIE_ID, String.valueOf(mMoviesAdapter.getItemId(position)));
@@ -89,15 +88,18 @@ public class MovieDetailFragmentHost extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
 
-        ViewPager viewPager = (ViewPager) root.findViewById(R.id.movieDetailViewPager);
+        ViewPager viewPager = root.findViewById(R.id.movieDetailViewPager);
         try {
             // Important: Must use the child FragmentManager or you will see side effects.
             viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
 
             // Set current item based on clicked item
-            if (getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
-                Integer clickedPosition = Integer.parseInt(getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID));
-                viewPager.setCurrentItem(clickedPosition);
+            if (getArguments() != null && getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
+                String argumentMovieId = getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID);
+                if (argumentMovieId != null && !argumentMovieId.equals("")) {
+                    int clickedPosition = Integer.parseInt(argumentMovieId);
+                    viewPager.setCurrentItem(clickedPosition);
+                }
             }
 
         } catch (NullPointerException e) {

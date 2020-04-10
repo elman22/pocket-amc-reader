@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -77,7 +77,11 @@ public class Filter implements Serializable {
         if (mField.type == Movies.FILTER_TYPE_DATE) {
             try {
                 Date date = SharedObjects.getInstance().dateAddedFormat.parse(mValue);
-                return SharedObjects.getInstance().dateFormat.format(date);
+                if (date != null) {
+                    return SharedObjects.getInstance().dateFormat.format(date);
+                } else {
+                    throw new Exception();
+                }
             } catch (Exception e) {
                 // don't do anything, use default value
             }

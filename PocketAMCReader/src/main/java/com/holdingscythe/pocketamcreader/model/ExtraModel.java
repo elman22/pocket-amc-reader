@@ -34,15 +34,15 @@ public class ExtraModel {
     private String ECreatedBy;
 
     /**
-     * @param EPicture
-     * @param EChecked
-     * @param ETag
-     * @param ETitle
-     * @param ECategory
-     * @param EURL
-     * @param EDescription
-     * @param EComments
-     * @param ECreatedBy
+     * @param EPicture     Extra picture picture
+     * @param EChecked     Extra picture checked
+     * @param ETag         Extra picture tag
+     * @param ETitle       Extra picture title
+     * @param ECategory    Extra picture category
+     * @param EURL         Extra picture URL
+     * @param EDescription Extra picture description
+     * @param EComments    Extra picture comments
+     * @param ECreatedBy   Extra picture created by
      */
     public ExtraModel(String EPicture, boolean EChecked, String ETag, String ETitle, String ECategory, String EURL,
                       String EDescription, String EComments, String ECreatedBy) {

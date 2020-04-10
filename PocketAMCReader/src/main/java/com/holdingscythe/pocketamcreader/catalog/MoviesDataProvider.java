@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,6 +43,8 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class MoviesDataProvider extends ContentProvider implements FilterQueryProvider {
     private static final String DATABASE_NAME = "PocketAMCReader.db";
@@ -288,7 +290,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * the selectionArgs argument must carry the search query as the first element. All other arguments are ignored.
      */
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Use the UriMatcher to see what kind of query we have and format the DB query accordingly
         if (S.DEBUG)
             Log.d(S.TAG, uri.toString());
@@ -371,7 +373,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Update projection so only required fields are loaded from database
      */
     private void updateProjection(String sortOrder) {
-        HashSet<String> projection = new HashSet<String>();
+        HashSet<String> projection = new HashSet<>();
 
         // Required fields
         projection.add(BaseColumns._ID);
@@ -402,10 +404,10 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         }
 
         // Fill MOVIES_PROJECTION
-        SharedObjects.getInstance().moviesProjection = projection.toArray(new String[projection.size()]);
+        SharedObjects.getInstance().moviesProjection = projection.toArray(new String[0]);
 
         if (S.DEBUG)
-            Log.d(S.TAG, "Projection fields: " + String.valueOf(SharedObjects.getInstance().moviesProjection.length)
+            Log.d(S.TAG, "Projection fields: " + SharedObjects.getInstance().moviesProjection.length
                     + " - " + Utils.arrayToString(SharedObjects.getInstance().moviesProjection, ", "));
     }
 
@@ -488,20 +490,21 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     /**
      * Insert data into CUSTOM
      */
-    public long insertCustom(long Movies_id, String CType, String CName, String CValue) {
+    public void insertCustom(long Movies_id, String CType, String CName, String CValue) {
         this.insertCustomStatement.bindLong(1, Movies_id);
         bindHelper(this.insertCustomStatement, 2, CType);
         bindHelper(this.insertCustomStatement, 3, CName);
         bindHelper(this.insertCustomStatement, 4, CValue);
 
-        return this.insertCustomStatement.executeInsert();
+        this.insertCustomStatement.executeInsert();
     }
 
     /**
      * Insert data into EXTRAS
      */
-    public long insertExtra(long Movies_id, String EChecked, String ETag, String ETitle, String ECategory, String EURL,
-                            String EDescription, String EComments, String ECreatedBy, String EPicture) {
+    public void insertExtra(long Movies_id, String EChecked, String ETag, String ETitle,
+                            String ECategory, String EURL, String EDescription, String EComments,
+                            String ECreatedBy, String EPicture) {
         this.insertExtraStatement.bindLong(1, Movies_id);
         bindHelper(this.insertExtraStatement, 2, EChecked);
         bindHelper(this.insertExtraStatement, 3, ETag);
@@ -513,7 +516,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         bindHelper(this.insertExtraStatement, 9, ECreatedBy);
         bindHelper(this.insertExtraStatement, 10, EPicture);
 
-        return this.insertExtraStatement.executeInsert();
+        this.insertExtraStatement.executeInsert();
     }
 
     /**
@@ -580,7 +583,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         switch (sURIMatcher.match(uri)) {
             case GET_MOVIES:
                 if (S.DEBUG)
@@ -613,17 +616,18 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
+                      String[] selectionArgs) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException();
     }
 

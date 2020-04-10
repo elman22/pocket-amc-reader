@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -89,17 +89,17 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
             super(itemView);
 
             if (viewType == GRID) {
-                FormattedTitle_text = (TextView) itemView.findViewById(R.id.movieTitleGrid);
+                FormattedTitle_text = itemView.findViewById(R.id.movieTitleGrid);
                 movieShortDescription_text = null;
                 movieShortDescription2_text = null;
-                movieColorTag = (TextView) itemView.findViewById(R.id.ListColorTagGrid);
-                moviePictureView = (ImageView) itemView.findViewById(R.id.imageCoverGrid);
+                movieColorTag = itemView.findViewById(R.id.ListColorTagGrid);
+                moviePictureView = itemView.findViewById(R.id.imageCoverGrid);
             } else {
-                FormattedTitle_text = (TextView) itemView.findViewById(R.id.movieTitle);
-                movieShortDescription_text = (TextView) itemView.findViewById(R.id.movieShortDescription);
-                movieShortDescription2_text = (TextView) itemView.findViewById(R.id.movieShortDescription2);
-                movieColorTag = (TextView) itemView.findViewById(R.id.ListColorTag);
-                moviePictureView = (ImageView) itemView.findViewById(R.id.imageCover);
+                FormattedTitle_text = itemView.findViewById(R.id.movieTitle);
+                movieShortDescription_text = itemView.findViewById(R.id.movieShortDescription);
+                movieShortDescription2_text = itemView.findViewById(R.id.movieShortDescription2);
+                movieColorTag = itemView.findViewById(R.id.ListColorTag);
+                moviePictureView = itemView.findViewById(R.id.imageCover);
                 if (!mShowThumbs) {
                     moviePictureView.setVisibility(View.GONE);
                 }
@@ -137,12 +137,8 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
         final MovieHolder mMovieHolder = new MovieHolder(itemView, viewType);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onItemClick(v, mMovieHolder.getAdapterPosition());
-            }
-        });
+        itemView.setOnClickListener(v -> mListener.onItemClick(v,
+                mMovieHolder.getAdapterPosition()));
         return mMovieHolder;
     }
 
@@ -158,7 +154,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
     @Override
     public void onBindViewHolderCursor(@NonNull MovieHolder holder, Cursor cursor) {
-        Boolean sortedFieldDisplayed = false;
+        boolean sortedFieldDisplayed = false;
 
         ArrayList<String> line1 = new ArrayList<>();
         ArrayList<String> line2 = new ArrayList<>();
@@ -193,12 +189,12 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         }
 
         if (holder.FormattedTitle_text != null && line1.size() > 0) {
-            holder.FormattedTitle_text.setText(Utils.arrayToString(line1.toArray(new String[line1.size()]),
+            holder.FormattedTitle_text.setText(Utils.arrayToString(line1.toArray(new String[0]),
                     mSettingMoviesListSeparator));
         }
 
         if (holder.movieShortDescription_text != null && line2.size() > 0) {
-            holder.movieShortDescription_text.setText(Utils.arrayToString(line2.toArray(new String[line2.size()]),
+            holder.movieShortDescription_text.setText(Utils.arrayToString(line2.toArray(new String[0]),
                     mSettingMoviesListSeparator));
         }
 
@@ -206,7 +202,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
             if (mSettingListForceSortField && !sortedFieldDisplayed) {
                 holder.movieShortDescription2_text.setText(getDBValue(mSortedField, cursor));
             } else if (line3.size() > 0) {
-                holder.movieShortDescription2_text.setText(Utils.arrayToString(line3.toArray(new String[line3.size()]),
+                holder.movieShortDescription2_text.setText(Utils.arrayToString(line3.toArray(new String[0]),
                         mSettingMoviesListSeparator));
             }
         }
@@ -256,7 +252,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
             Log.v(S.TAG, "Setting color to: " + currentColor);
 
         int background;
-        switch (Integer.valueOf(currentColor)) {
+        switch (Integer.parseInt(currentColor)) {
             case 1:
                 background = R.color.color_tag_1;
                 break;
@@ -298,7 +294,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         }
 
         // If no color is assigned, hide view
-        if (Integer.valueOf(currentColor) == 0) {
+        if (Integer.parseInt(currentColor) == 0) {
             holder.movieColorTag.setVisibility(View.GONE);
         } else {
             holder.movieColorTag.setVisibility(View.VISIBLE);
@@ -334,8 +330,12 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                 case Movies.DATE_WATCHED:
                     try {
                         Date date = SharedObjects.getInstance().dateFormat.parse(value);
-                        mCalendar.setTime(date);
-                        value = String.valueOf(mCalendar.get(Calendar.YEAR));
+                        if (date != null) {
+                            mCalendar.setTime(date);
+                            value = String.valueOf(mCalendar.get(Calendar.YEAR));
+                        } else {
+                            value = "";
+                        }
                     } catch (Exception e) {
                         // don't do anything, keep date as is
                     }
@@ -427,7 +427,11 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                 if (value != null) {
                     try {
                         Date date = SharedObjects.getInstance().dateAddedFormat.parse(value);
-                        value = SharedObjects.getInstance().dateFormat.format(date);
+                        if (date != null) {
+                            value = SharedObjects.getInstance().dateFormat.format(date);
+                        } else {
+                            value = "";
+                        }
                     } catch (Exception e) {
                         // don't do anything, keep date as is
                     }

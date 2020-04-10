@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,7 +69,7 @@ public class Extras {
                 } while (cursor.moveToNext());
 
                 if (S.DEBUG)
-                    Log.d(S.TAG, "Total extras found: " + String.valueOf(mExtras.size()));
+                    Log.d(S.TAG, "Total extras found: " + mExtras.size());
 
             } catch (Exception e) {
                 if (S.ERROR)

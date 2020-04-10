@@ -75,7 +75,7 @@ public class PictureViewActivity extends AppCompatActivity {
         }
 
         // create viewpager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.fullscreen_picture_pager);
+        ViewPager viewPager = findViewById(R.id.fullscreen_picture_pager);
         TouchImageAdapter adapter = new TouchImageAdapter(PictureViewActivity.this, filePaths, settingFitPicture);
         viewPager.setAdapter(adapter);
 

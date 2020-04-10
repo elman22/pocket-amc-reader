@@ -56,9 +56,11 @@ public class SettingsListFieldsActivity extends AppCompatActivity {
                 .replace(R.id.list_fields_wrapper, new SettingsListFieldsFragment())
                 .commit();
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     /**

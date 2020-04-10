@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 spacecowboy
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -55,7 +55,7 @@ public class SettingsFilePickerFragment extends FilePickerFragment {
         boolean ret = super.isItemVisible(file);
         if (ret && !isDir(file) && (mode == MODE_FILE || mode == MODE_FILE_AND_DIR)) {
             String ext = getExtension(file);
-            return ext != null && EXTENSION.equalsIgnoreCase(ext);
+            return EXTENSION.equalsIgnoreCase(ext);
         }
         return ret;
     }

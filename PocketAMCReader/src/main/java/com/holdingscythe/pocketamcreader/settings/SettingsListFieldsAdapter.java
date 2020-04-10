@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 Magnus Woxblom
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -77,7 +77,7 @@ class SettingsListFieldsAdapter extends DragItemAdapter<SettingsListField, Setti
 
         ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId, mDragOnLongPress);
-            mText = (TextView) itemView.findViewById(R.id.card_text);
+            mText = itemView.findViewById(R.id.card_text);
         }
 
         @Override

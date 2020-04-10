@@ -39,11 +39,12 @@ public class CustomFieldsModel {
     public static final String CFT_TEXT = "ftText";
     public static final String CFT_URL = "ftUrl";
     public static final String CFT_VIRTUAL = "ftVirtual";
+    public static final String CFT_NULL = "ftNull";
 
     /**
-     * @param CType
-     * @param CName
-     * @param CValue
+     * @param CType  Type of custom field
+     * @param CName  Name of custom field
+     * @param CValue Value of custom field
      */
     public CustomFieldsModel(String CType, String CName, String CValue) {
         this.CType = CType;

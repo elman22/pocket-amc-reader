@@ -93,7 +93,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                                 .build()))
                 .build());
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.quick_return_toolbar);
+        Toolbar mToolbar = findViewById(R.id.quick_return_toolbar);
         setSupportActionBar(mToolbar);
 
         if (savedInstanceState == null) {
@@ -196,12 +196,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                 builder.setMessage(String.format(getString(R.string.about), getString(R.string.app_name), versionName,
                         getString(R.string.copyright_year), t_ru + "\n" + t_de + "\n" + t_fr + "\n" + t_sk + "\n" + t_pl,
                         getString(R.string.used_libraries)));
-                builder.setNeutralButton(getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                builder.setNeutralButton(getString(R.string.dialog_positive), (dialog, id) -> dialog.cancel());
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 return true;

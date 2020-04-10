@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Filters implements Serializable {
-    private ArrayList<Filter> mFilters = new ArrayList<Filter>();
+    private ArrayList<Filter> mFilters = new ArrayList<>();
     private transient Context mContext;
 
     public Filters() {
@@ -58,7 +58,7 @@ public class Filters implements Serializable {
         if (mFilters.size() == 0)
             return null;
 
-        ArrayList<String> conditions = new ArrayList<String>();
+        ArrayList<String> conditions = new ArrayList<>();
         String sqlWhere;
 
         for (Filter f : mFilters) {
@@ -71,7 +71,7 @@ public class Filters implements Serializable {
             }
         }
 
-        sqlWhere = Utils.arrayToString(conditions.toArray(new String[conditions.size()]), " and ");
+        sqlWhere = Utils.arrayToString(conditions.toArray(new String[0]), " and ");
 
         // Log event
         if (S.DEBUG)
@@ -87,7 +87,7 @@ public class Filters implements Serializable {
         if (mFilters.size() == 0)
             return null;
 
-        HashSet<String> dbFields = new HashSet<String>();
+        HashSet<String> dbFields = new HashSet<>();
 
         for (Filter f : mFilters) {
             dbFields.add(f.getSQLField());
@@ -103,7 +103,7 @@ public class Filters implements Serializable {
         if (mFilters.size() == 0)
             return null;
 
-        ArrayList<String> values = new ArrayList<String>();
+        ArrayList<String> values = new ArrayList<>();
 
         for (Filter f : mFilters) {
             String value = f.getSQLValue();
@@ -113,9 +113,9 @@ public class Filters implements Serializable {
 
         // Log event
         if (S.DEBUG)
-            Log.d(S.TAG, "Filter values: " + Utils.arrayToString(values.toArray(new String[values.size()]), ", "));
+            Log.d(S.TAG, "Filter values: " + Utils.arrayToString(values.toArray(new String[0]), ", "));
 
-        return values.toArray(new String[values.size()]);
+        return values.toArray(new String[0]);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Filters implements Serializable {
      * Return human info for all filters as array
      */
     public ArrayList<String> getFiltersHumanInfoList() {
-        ArrayList<String> info = new ArrayList<String>();
+        ArrayList<String> info = new ArrayList<>();
 
         for (Filter f : mFilters) {
             info.add(this.getFilterHumanInfo(f));
@@ -203,22 +203,22 @@ public class Filters implements Serializable {
      * Get names for all filter for wizard
      */
     public String[] getAvailableFilters() {
-        ArrayList<String> availableFilters = new ArrayList<String>();
+        ArrayList<String> availableFilters = new ArrayList<>();
         for (FilterField f : Movies.availableFilterFields) {
             availableFilters.add(getFilterFieldHumanName(f.resId));
         }
-        return availableFilters.toArray(new String[availableFilters.size()]);
+        return availableFilters.toArray(new String[0]);
     }
 
     /**
      * Get names for all operators for given field in wizard
      */
     public String[] getAvailableOperators(FilterField field) {
-        ArrayList<String> availableOperators = new ArrayList<String>();
+        ArrayList<String> availableOperators = new ArrayList<>();
         for (FilterOperator o : field.type.operators) {
             availableOperators.add(mContext.getString(o.resId));
         }
-        return availableOperators.toArray(new String[availableOperators.size()]);
+        return availableOperators.toArray(new String[0]);
     }
 
     /**

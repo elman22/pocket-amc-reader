@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -92,7 +92,7 @@ public class CustomFields {
                 } while (cursor.moveToNext());
 
                 if (S.DEBUG)
-                    Log.d(S.TAG, "Total custom fields found: " + String.valueOf(cursor.getCount()));
+                    Log.d(S.TAG, "Total custom fields found: " + cursor.getCount());
 
             } catch (Exception e) {
                 if (S.ERROR)
@@ -120,7 +120,11 @@ public class CustomFields {
             case CustomFieldsModel.CFT_DATE:
                 try {
                     Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
-                    value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                    if (parsedDate != null) {
+                        value = SharedObjects.getInstance().dateFormat.format(parsedDate);
+                    } else {
+                        value = "";
+                    }
                 } catch (Exception e) {
                     // don't do anything, keep date as is
                 }

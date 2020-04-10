@@ -40,6 +40,7 @@ public final class S {
 
     public static final String AUTHORITY = "com.holdingscythe.provider.MovieCatalog";
     public static final String TAG = "PocketAMCReader";
+    public static final String WAKE_LOCK_TAG = TAG + ":WakeLock";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/movies");
     public static final String DEFAULT_FONT = "fonts/RobotoCondensed-Regular.ttf";
 
@@ -51,11 +52,11 @@ public final class S {
 
     // Import
     static final String CATALOG_TMP_FILENAME = "/amc_import_tmp.xml";
-    public static final int IMPORT_CONVERSION_START = -1;
-    public static final int IMPORT_LOADING_START = -2;
-    public static final int IMPORT_INDEXING_START = -3;
-    public static final int IMPORT_ERROR_CONVERSION = -10;
-    public static final int IMPORT_ERROR_LOADING = -11;
+    static final int IMPORT_CONVERSION_START = -1;
+    static final int IMPORT_LOADING_START = -2;
+    static final int IMPORT_INDEXING_START = -3;
+    static final int IMPORT_ERROR_CONVERSION = -10;
+    static final int IMPORT_ERROR_LOADING = -11;
 
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;

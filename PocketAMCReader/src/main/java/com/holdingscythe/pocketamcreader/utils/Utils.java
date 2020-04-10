@@ -1,3 +1,21 @@
+/*
+    This file is part of Pocket AMC Reader.
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+
+    Pocket AMC Reader is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pocket AMC Reader is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.holdingscythe.pocketamcreader.utils;
 
 import android.app.Activity;
@@ -16,11 +34,11 @@ public class Utils {
         StringBuilder sb = new StringBuilder();
         if (str == null)
             return null;
-        for (int f = 0; f < str.length; f++) {
-            if (str[f] != null && str[f].length() > 0) {
+        for (String s : str) {
+            if (s != null && s.length() > 0) {
                 if (sb.length() != 0)
                     sb.append(separator);
-                sb.append(str[f]);
+                sb.append(s);
             }
         }
         return sb.toString();
@@ -70,11 +88,11 @@ public class Utils {
      * Get rating string
      */
     public static String getRatingString(String s, int n) {
-        String rating = "";
+        StringBuilder rating = new StringBuilder();
         for (int f = 0; f < n; f++) {
-            rating += s;
+            rating.append(s);
         }
-        return rating;
+        return rating.toString();
     }
 
     /**

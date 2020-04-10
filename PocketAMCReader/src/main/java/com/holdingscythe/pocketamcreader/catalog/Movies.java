@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -161,7 +161,7 @@ public final class Movies implements BaseColumns {
     public static final Map<String, String> SettingsSortFieldsMap;
 
     static {
-        Map<String, String> tmpMap = new HashMap<String, String>();
+        Map<String, String> tmpMap = new HashMap<>();
         tmpMap.put(Movies.DEFAULT_SORT_ORDER, Movies.FORMATTED_TITLE);
         tmpMap.put(Movies.SORT_ORDER_TITLE_ASC, Movies.FORMATTED_TITLE);
         tmpMap.put(Movies.SORT_ORDER_TITLE_DESC, Movies.FORMATTED_TITLE);

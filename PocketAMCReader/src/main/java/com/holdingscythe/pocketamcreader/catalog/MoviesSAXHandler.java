@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ public class MoviesSAXHandler extends DefaultHandler {
 
     @Override
     public void startDocument() throws SAXException {
-        /** Delete all data before import */
+        // Delete all data before import
         moviesDataProvider.deleteAll();
     }
 
@@ -125,6 +125,10 @@ public class MoviesSAXHandler extends DefaultHandler {
                         String CName = customFieldsNames.get(CTag);
                         String CValue = atts.getValue(f);
 
+                        if (CType == null) {
+                            CType = CustomFieldsModel.CFT_NULL;
+                        }
+
                         switch (CType) {
                             case CustomFieldsModel.CFT_TEXT:
                                 CValue = parseMultiline(CValue);
@@ -136,7 +140,10 @@ public class MoviesSAXHandler extends DefaultHandler {
                                 break;
                         }
 
-                        moviesDataProvider.insertCustom(this.lastInsertedRowId, CType, CName, CValue);
+                        if (!CType.equals(CustomFieldsModel.CFT_NULL)) {
+                            moviesDataProvider.insertCustom(this.lastInsertedRowId, CType, CName,
+                                    CValue);
+                        }
 
                         // log event
                         if (S.VERBOSE)
@@ -144,7 +151,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                     }
                 } catch (Exception e) {
                     if (S.ERROR)
-                        Log.e(S.TAG, String.valueOf(lastInsertedRowId) + " -> " + e.toString());
+                        Log.e(S.TAG, lastInsertedRowId + " -> " + e.toString());
                 }
 
                 break;

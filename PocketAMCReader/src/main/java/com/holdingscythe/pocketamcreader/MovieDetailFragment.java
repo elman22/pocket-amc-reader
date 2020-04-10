@@ -20,7 +20,6 @@ package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -51,6 +50,7 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -346,13 +346,13 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,7})/?");
                 Matcher m = regExpImdb.matcher(url);
 
-                if (m.find()) {
-                    // prepare uri
-                    Uri uri = Uri.parse("imdb:///title/tt" + String.format(Locale.US, "%07d", Integer.parseInt(m
-                            .group(2))) + "/");
-
-                    // open intent
+                if (m.find() && m.group(2) != null) {
                     try {
+                        // prepare uri
+                        Uri uri = Uri.parse("imdb:///title/tt" + String.format(Locale.US, "%07d",
+                                Integer.parseInt(Objects.requireNonNull(m.group(2)))) + "/");
+
+                        // open intent
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(uri);
                         startActivity(i);
@@ -381,17 +381,10 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         } else if (availableValues.length > 1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(mFilters.getFilterFieldHumanName(field.resId) + " " + getString(operator.resId));
-            builder.setItems(availableValues, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    filterClick(new Filter(field, operator, availableValues[item]));
-                }
-            });
-            builder.setNegativeButton(getString(R.string.dialog_negative), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                }
-            });
+            builder.setItems(availableValues, (dialog, item) -> filterClick(new Filter(field,
+                    operator, availableValues[item])));
+            builder.setNegativeButton(getString(R.string.dialog_negative),
+                    (dialog, whichButton) -> {});
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
@@ -413,7 +406,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 availableValues.add(value);
         }
 
-        return availableValues.toArray(new String[availableValues.size()]);
+        return availableValues.toArray(new String[0]);
     }
 
     /**

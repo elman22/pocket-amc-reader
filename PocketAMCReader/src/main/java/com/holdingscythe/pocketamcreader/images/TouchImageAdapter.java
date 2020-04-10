@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ import com.holdingscythe.pocketamcreader.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 /**
@@ -57,19 +58,20 @@ public class TouchImageAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         TouchImageView imgDisplay;
         TextView pictureCount;
 
         LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.fullscreen_image, container, false);
 
-        imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.picture_display);
+        imgDisplay = viewLayout.findViewById(R.id.picture_display);
 
         // set scale according to preferences
         if (mScaleType == TouchImageView.ScaleType.CENTER)
@@ -81,7 +83,7 @@ public class TouchImageAdapter extends PagerAdapter {
         imgDisplay.setImageBitmap(bitmap);
 
         // display image counter, but only if at least one extra exists
-        pictureCount = (TextView) viewLayout.findViewById(R.id.picture_counter);
+        pictureCount = viewLayout.findViewById(R.id.picture_counter);
         if (getCount() > 1) {
             pictureCount.setText(String.format(mActivity.getString(R.string.picture_counter),
                     position + 1, getCount()));
@@ -95,7 +97,7 @@ public class TouchImageAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         container.removeView((RelativeLayout) object);
     }
 }
