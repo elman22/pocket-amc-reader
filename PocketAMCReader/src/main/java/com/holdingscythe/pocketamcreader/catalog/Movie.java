@@ -48,7 +48,7 @@ import java.util.Date;
  * Created by Elman on 11.10.2014.
  */
 public class Movie {
-    private MovieModel mMovie;
+    private MovieModel mMovieModel;
     private View mView;
     private View.OnClickListener mClickListener;
     private Activity mActivity;
@@ -96,7 +96,7 @@ public class Movie {
         mPreferencePicturesDirectory = mPreferences.getString("settingPicturesFolder", "/");
 
         // Fill model
-        mMovie = new MovieModel(
+        mMovieModel = new MovieModel(
                 cursor.getString(cursor.getColumnIndex(Movies.NUMBER)),
                 cursor.getString(cursor.getColumnIndex(Movies.CHECKED)),
                 cursor.getString(cursor.getColumnIndex(Movies.FORMATTED_TITLE)),
@@ -139,56 +139,56 @@ public class Movie {
         );
 
         // Display data
-        fillPictureIntoView(Movies.PICTURE, mMovie.getPicture());
+        fillPictureIntoView(Movies.PICTURE, mMovieModel.getPicture());
 
-        fillStringIntoView(Movies.FORMATTED_TITLE, mMovie.getFormattedTitle(), STRING_REGULAR);
-        fillStringIntoView(Movies.NUMBER, mMovie.getNumber(), STRING_REGULAR, EXT_STRING_PREFIX,
+        fillStringIntoView(Movies.FORMATTED_TITLE, mMovieModel.getFormattedTitle(), STRING_REGULAR);
+        fillStringIntoView(Movies.NUMBER, mMovieModel.getNumber(), STRING_REGULAR, EXT_STRING_PREFIX,
                 R.string.number_prefix);
-        fillStringIntoView(Movies.CERTIFICATION, mMovie.getCertification(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.CHECKED, mMovie.getChecked(), BOOLEAN_CLICKABLE);
-        fillStringIntoView(Movies.USER_RATING, mMovie.getUserRating(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.CERTIFICATION, mMovieModel.getCertification(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.CHECKED, mMovieModel.getChecked(), BOOLEAN_CLICKABLE);
+        fillStringIntoView(Movies.USER_RATING, mMovieModel.getUserRating(), STRING_CLICKABLE);
 
-        fillStringIntoView(Movies.YEAR, mMovie.getYear(), STRING_CLICKABLE, R.string.year_none);
-        fillStringIntoView(Movies.LENGTH, mMovie.getLength(), STRING_CLICKABLE, R.string.length_none);
-        fillStringIntoView(Movies.RATING, mMovie.getRating(), STRING_CLICKABLE, R.string.rating_none);
+        fillStringIntoView(Movies.YEAR, mMovieModel.getYear(), STRING_CLICKABLE, R.string.year_none);
+        fillStringIntoView(Movies.LENGTH, mMovieModel.getLength(), STRING_CLICKABLE, R.string.length_none);
+        fillStringIntoView(Movies.RATING, mMovieModel.getRating(), STRING_CLICKABLE, R.string.rating_none);
 
-        fillStringIntoView(Movies.CATEGORY, mMovie.getCategory(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.DESCRIPTION, mMovie.getDescription(), STRING_EXPANDABLE);
-        fillStringIntoView(Movies.DIRECTOR, mMovie.getDirector(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.ACTORS, mMovie.getActors(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.PRODUCER, mMovie.getProducer(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.WRITER, mMovie.getWriter(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.COMPOSER, mMovie.getComposer(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.COUNTRY, mMovie.getCountry(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.COMMENTS, mMovie.getComments(), STRING_EXPANDABLE);
-        fillStringIntoView(Movies.URL, mMovie.getURL(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.CATEGORY, mMovieModel.getCategory(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.DESCRIPTION, mMovieModel.getDescription(), STRING_EXPANDABLE);
+        fillStringIntoView(Movies.DIRECTOR, mMovieModel.getDirector(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.ACTORS, mMovieModel.getActors(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.PRODUCER, mMovieModel.getProducer(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.WRITER, mMovieModel.getWriter(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.COMPOSER, mMovieModel.getComposer(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.COUNTRY, mMovieModel.getCountry(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.COMMENTS, mMovieModel.getComments(), STRING_EXPANDABLE);
+        fillStringIntoView(Movies.URL, mMovieModel.getURL(), STRING_CLICKABLE);
 
-        fillStringIntoView(Movies.MEDIA_LABEL, mMovie.getMediaLabel(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.MEDIA_TYPE, mMovie.getMediaType(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.SOURCE, mMovie.getSource(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.DATE, mMovie.getDate(), DATE_REGULAR);
-        fillStringIntoView(Movies.DATE_WATCHED, mMovie.getDateWatched(), DATE_REGULAR);
-        fillStringIntoView(Movies.BORROWER, mMovie.getBorrower(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.ORIGINAL_TITLE, mMovie.getOriginalTitle(), STRING_REGULAR);
-        fillStringIntoView(Movies.TRANSLATED_TITLE, mMovie.getTranslatedTitle(), STRING_REGULAR);
+        fillStringIntoView(Movies.MEDIA_LABEL, mMovieModel.getMediaLabel(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.MEDIA_TYPE, mMovieModel.getMediaType(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.SOURCE, mMovieModel.getSource(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.DATE, mMovieModel.getDate(), DATE_REGULAR);
+        fillStringIntoView(Movies.DATE_WATCHED, mMovieModel.getDateWatched(), DATE_REGULAR);
+        fillStringIntoView(Movies.BORROWER, mMovieModel.getBorrower(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.ORIGINAL_TITLE, mMovieModel.getOriginalTitle(), STRING_REGULAR);
+        fillStringIntoView(Movies.TRANSLATED_TITLE, mMovieModel.getTranslatedTitle(), STRING_REGULAR);
 
-        fillStringIntoView(Movies.FILE_PATH, mMovie.getFilePath(), STRING_REGULAR);
-        fillStringIntoView(Movies.LANGUAGES, mMovie.getLanguages(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.SUBTITLES, mMovie.getSubtitles(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.VIDEO_FORMAT, mMovie.getVideoFormat(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.VIDEO_BITRATE, mMovie.getVideoBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
-                R.string.display_bitrate_suffix);
-        fillStringIntoView(Movies.AUDIO_FORMAT, mMovie.getAudioFormat(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.AUDIO_BITRATE, mMovie.getAudioBitrate(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
-                R.string.display_bitrate_suffix);
-        fillStringIntoView(Movies.RESOLUTION, mMovie.getResolution(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.FRAMERATE, mMovie.getFramerate(), STRING_CLICKABLE);
-        fillStringIntoView(Movies.SIZE, mMovie.getSize(), STRING_REGULAR, EXT_STRING_SUFFIX_PADDED,
-                R.string.display_filessizes_suffix);
-        fillStringIntoView(Movies.DISKS, mMovie.getDisks(), STRING_REGULAR, EXT_PLURALS_SUFFIX_PADDED,
-                R.plurals.details_disks);
+        fillStringIntoView(Movies.FILE_PATH, mMovieModel.getFilePath(), STRING_REGULAR);
+        fillStringIntoView(Movies.LANGUAGES, mMovieModel.getLanguages(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.SUBTITLES, mMovieModel.getSubtitles(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.VIDEO_FORMAT, mMovieModel.getVideoFormat(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.VIDEO_BITRATE, mMovieModel.getVideoBitrate(), STRING_REGULAR,
+                EXT_STRING_SUFFIX_PADDED, R.string.display_bitrate_suffix);
+        fillStringIntoView(Movies.AUDIO_FORMAT, mMovieModel.getAudioFormat(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.AUDIO_BITRATE, mMovieModel.getAudioBitrate(), STRING_REGULAR,
+                EXT_STRING_SUFFIX_PADDED, R.string.display_bitrate_suffix);
+        fillStringIntoView(Movies.RESOLUTION, mMovieModel.getResolution(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.FRAMERATE, mMovieModel.getFramerate(), STRING_CLICKABLE);
+        fillStringIntoView(Movies.SIZE, mMovieModel.getSize(), STRING_REGULAR,
+                EXT_STRING_SUFFIX_PADDED, R.string.display_filessizes_suffix);
+        fillStringIntoView(Movies.DISKS, mMovieModel.getDisks(), STRING_REGULAR,
+                EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
 
-        fillColorIntoView(Movies.COLOR_TAG, mMovie.getColorTag());
+        fillColorIntoView(Movies.COLOR_TAG, mMovieModel.getColorTag());
     }
 
     /**
@@ -402,7 +402,7 @@ public class Movie {
      */
     public ArrayList<String> getPicturesList() {
         ArrayList<String> pictureList = new ArrayList<>();
-        pictureList.add(mPreferencePicturesDirectory + mMovie.getPicture());
+        pictureList.add(mPreferencePicturesDirectory + mMovieModel.getPicture());
         return pictureList;
     }
 
