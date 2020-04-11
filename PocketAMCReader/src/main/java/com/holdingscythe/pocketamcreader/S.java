@@ -57,6 +57,8 @@ public final class S {
     static final int IMPORT_INDEXING_START = -3;
     static final int IMPORT_ERROR_CONVERSION = -10;
     static final int IMPORT_ERROR_LOADING = -11;
+    public static final String CATALOG_TRUE = "True";
+    public static final String CATALOG_FALSE = "False";
 
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;

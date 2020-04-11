@@ -297,7 +297,7 @@ public class Movie {
             case BOOLEAN_REGULAR:
                 TextView btv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (btv != null) {
-                    if (value.equals("True"))
+                    if (value.equals(S.CATALOG_TRUE))
                         btv.setText(mActivity.getString(R.string.details_boolean_true));
                     else
                         btv.setText(mActivity.getString(R.string.details_boolean_false));
@@ -306,7 +306,7 @@ public class Movie {
             case BOOLEAN_CLICKABLE:
                 TextView bctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (bctv != null) {
-                    if (value.equals("True"))
+                    if (value.equals(S.CATALOG_TRUE))
                         bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
                     else
                         bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));

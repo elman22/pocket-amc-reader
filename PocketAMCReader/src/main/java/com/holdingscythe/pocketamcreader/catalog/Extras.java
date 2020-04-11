@@ -57,7 +57,7 @@ public class Extras {
 
                     mExtras.add(new ExtraModel(
                             preferencePicturesDirectory + cursor.getString(cursor.getColumnIndex(Movies.E_PICTURE)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_CHECKED)).equals("True"),
+                            cursor.getString(cursor.getColumnIndex(Movies.E_CHECKED)).equals(S.CATALOG_TRUE),
                             cursor.getString(cursor.getColumnIndex(Movies.E_TAG)),
                             cursor.getString(cursor.getColumnIndex(Movies.E_TITLE)),
                             cursor.getString(cursor.getColumnIndex(Movies.E_CATEGORY)),

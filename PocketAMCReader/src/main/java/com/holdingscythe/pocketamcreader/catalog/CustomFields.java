@@ -112,7 +112,7 @@ public class CustomFields {
     private String FormatValue(String type, String value) {
         switch (type) {
             case CustomFieldsModel.CFT_BOOLEAN:
-                if (value.equals("True"))
+                if (value.equals(S.CATALOG_TRUE))
                     value = mActivity.getString(R.string.details_boolean_true);
                 else
                     value = mActivity.getString(R.string.details_boolean_false);

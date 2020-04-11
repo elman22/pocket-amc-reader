@@ -18,6 +18,7 @@
 
 package com.holdingscythe.pocketamcreader.filters;
 
+import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
@@ -67,7 +68,7 @@ public class Filter implements Serializable {
 
     public String getSQLValue() {
         if (mField.type == Movies.FILTER_TYPE_BOOLEAN) {
-            return mValue.equals(String.valueOf(mBoolTrueValue)) ? "True" : "False";
+            return mValue.equals(String.valueOf(mBoolTrueValue)) ? S.CATALOG_TRUE : S.CATALOG_FALSE;
         } else {
             return mValue;
         }

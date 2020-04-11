@@ -417,7 +417,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                     value += mContext.getString(R.string.rating_suffix_list);
                 break;
             case Movies.CHECKED:
-                if (value != null && value.equals("True"))
+                if (value != null && value.equals(S.CATALOG_TRUE))
                     value = mContext.getString(R.string.list_seen_true);
                 else
                     value = mContext.getString(R.string.list_seen_false);
