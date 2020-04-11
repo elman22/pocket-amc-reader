@@ -121,31 +121,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
 
-        // Set default variables from runtime
-        if (SharedObjects.getInstance().deviceWidthPixels == 0 ||
-                SharedObjects.getInstance().actionBarHeight == 0 ||
-                SharedObjects.getInstance().heroImageHeight == 0) {
-
-            // Set device width pixels
-            SharedObjects.getInstance().deviceWidthPixels =
-                    getResources().getDisplayMetrics().widthPixels;
-
-            // Set action bar height
-            final TypedArray styledAttributes =
-                    getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
-            SharedObjects.getInstance().actionBarHeight =
-                    (int) styledAttributes.getDimension(0, 0);
-            styledAttributes.recycle();
-
-            // Set hero image height
-            SharedObjects.getInstance().heroImageHeight =
-                    (int) getResources().getDimension(R.dimen.detail_hero_img_height);
-        }
-
-        mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
-        mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
-        mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
-
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
             MoviesDataProvider moviesDataProvider = new MoviesDataProvider(getActivity());
@@ -189,6 +164,31 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             AppBarLayout appBarLayout = getView().findViewById(R.id.appBarLayout);
 
             if (collapsingToolbar != null && appBarLayout != null) {
+
+                // Set default variables from runtime
+                if (SharedObjects.getInstance().deviceWidthPixels == 0 ||
+                        SharedObjects.getInstance().actionBarHeight == 0 ||
+                        SharedObjects.getInstance().heroImageHeight == 0) {
+
+                    // Set device width pixels
+                    SharedObjects.getInstance().deviceWidthPixels =
+                            getResources().getDisplayMetrics().widthPixels;
+
+                    // Set action bar height
+                    final TypedArray styledAttributes =
+                            getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+                    SharedObjects.getInstance().actionBarHeight =
+                            (int) styledAttributes.getDimension(0, 0);
+                    styledAttributes.recycle();
+
+                    // Set hero image height
+                    SharedObjects.getInstance().heroImageHeight =
+                            (int) getResources().getDimension(R.dimen.detail_hero_img_height);
+                }
+
+                mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
+                mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
+                mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
 
                 // Set custom font to the toolbar
                 collapsingToolbar.setCollapsedTitleTypeface(tf);
