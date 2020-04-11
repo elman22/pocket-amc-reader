@@ -61,7 +61,11 @@ public class MoviesSAXHandler extends DefaultHandler {
                 try {
                     // read attributes
                     String Number = atts.getValue(Movies.NUMBER);
-                    String Checked = atts.getValue(Movies.CHECKED);
+                    String Checked =
+                            (atts.getValue(Movies.CHECKED).equals(S.CATALOG_TRUE) ||
+                                    (atts.getValue(Movies.DATE_WATCHED) != null &&
+                                            !atts.getValue(Movies.DATE_WATCHED).isEmpty())
+                            ) ? S.CATALOG_TRUE : S.CATALOG_FALSE;
                     String FormattedTitle = atts.getValue(Movies.FORMATTED_TITLE);
                     String MediaLabel = atts.getValue(Movies.MEDIA_LABEL);
                     String MediaType = atts.getValue(Movies.MEDIA_TYPE);
