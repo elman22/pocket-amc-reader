@@ -208,6 +208,7 @@
   <string name="link_not_opened">Don\'t know how to open this link</string>
   <string name="link_not_opened_hint">Could not open the link. Do you have any application
     capable of handling this link?</string>
+  <string name="file_not_found">File not found</string>
   <string name="pref_setting_filepath_link">File path link</string>
   <string name="pref_setting_filepath_link_summary">Make file path clickable and try to
     open corresponding application</string>

@@ -407,6 +407,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 } else {
                     boolean isIntentValid = false;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
+                    int errorResource = R.string.link_not_opened;
 
                     if (url.startsWith(S.INTENT_SCHEME_HTTPS) || url.startsWith(S.INTENT_SCHEME_HTTP)) {
                         // If link starts with http(s), handle it as web link
@@ -418,15 +419,18 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             url = url.replace(S.INTENT_SCHEME_FILE, "");
                         } else {
                             // If link does not contain any scheme, make absolute path
-                            // Fix for Windows backslashes
-                            url = url.replace("\\", "/");
-                            url = mPicturesFolder + url;
+                            if (!url.startsWith("/")) {
+                                // Fix for Windows backslashes
+                                url = url.replace("\\", "/");
+                                url = mPicturesFolder + url;
+                            }
                         }
 
                         try {
                             File file = new File(url);
 
                             if (!file.exists()) {
+                                errorResource = R.string.file_not_found;
                                 throw new FileNotFoundException();
                             } else {
                                 intent.setDataAndType(Uri.parse(file.getPath()),
@@ -457,8 +461,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             Log.e(S.TAG, e.toString());
                         }
                     } else {
-                        Toast.makeText(view.getContext(),
-                                view.getContext().getText(R.string.link_not_opened),
+                        Toast.makeText(view.getContext(), view.getContext().getText(errorResource),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
