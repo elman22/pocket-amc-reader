@@ -412,22 +412,25 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         // If link starts with http(s), handle it as web link
                         intent.setData(Uri.parse(url));
                         isIntentValid = true;
-                    } else if (url.contains(S.INTENT_SCHEME_PORTION)) {
-                        // If link contains scheme, handle it as absolute url
-                        intent.setDataAndType(Uri.parse(url), Utils.getMimeFromUrl(url, S.MIME_VIDEO));
-                        isIntentValid = true;
-                    } else {
-                        // Else handle it as relative link
-                        try {
+                    } else if (url.startsWith(S.INTENT_SCHEME_FILE) || !url.contains(S.INTENT_SCHEME_PORTION)) {
+                        if (url.startsWith(S.INTENT_SCHEME_FILE)) {
+                            // If link starts with file scheme, remove it and leave absolute path
+                            url = url.replace(S.INTENT_SCHEME_FILE, "");
+                        } else {
+                            // If link does not contain any scheme, make absolute path
                             // Fix for Windows backslashes
                             url = url.replace("\\", "/");
                             url = mPicturesFolder + url;
+                        }
+
+                        try {
                             File file = new File(url);
 
                             if (!file.exists()) {
                                 throw new FileNotFoundException();
                             } else {
-                                intent.setDataAndType(Uri.parse(file.getPath()), Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                                intent.setDataAndType(Uri.parse(file.getPath()),
+                                        Utils.getMimeFromUrl(url, S.MIME_VIDEO));
                                 isIntentValid = true;
                             }
                         } catch (FileNotFoundException e) {
@@ -451,7 +454,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                                     view.getContext().getText(R.string.link_not_opened_hint),
                                     Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
-                            // TODO handle FileUriExposedException
                             Log.e(S.TAG, e.toString());
                         }
                     } else {
