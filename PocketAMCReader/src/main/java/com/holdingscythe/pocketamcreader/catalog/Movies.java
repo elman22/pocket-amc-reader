@@ -308,9 +308,11 @@ public final class Movies implements BaseColumns {
             new FilterField(Movies.FILTER_TYPE_TEXT, Movies.COMPOSER, R.string.details_composer_label);
     public static final FilterField FILTER_CERTIFICATION =
             new FilterField(Movies.FILTER_TYPE_TEXT, Movies.CERTIFICATION, R.string.details_certification_label);
+    public static final FilterField FILTER_FILEPATH =
+            new FilterField(Movies.FILTER_TYPE_TEXT, Movies.FILE_PATH, R.string.details_filepath_label);
 
     // Available filter fields for add field method - keep sorted as availableListFields[] to have consistent GUI
-    public static final FilterField availableFilterFields[] = {Movies.FILTER_CHECKED, Movies.FILTER_FORMATTED_TITLE,
+    public static final FilterField[] availableFilterFields = {Movies.FILTER_CHECKED, Movies.FILTER_FORMATTED_TITLE,
             Movies.FILTER_RATING, Movies.FILTER_USER_RATING, Movies.FILTER_DIRECTOR, Movies.FILTER_ACTORS,
             Movies.FILTER_CATEGORY, Movies.FILTER_MEDIA_LABEL, Movies.FILTER_LANGUAGES, Movies.FILTER_SUBTITLES,
             Movies.FILTER_COUNTRY, Movies.FILTER_LENGTH, Movies.FILTER_YEAR, Movies.FILTER_CERTIFICATION,
@@ -320,7 +322,7 @@ public final class Movies implements BaseColumns {
             Movies.FILTER_TRANSLATED_TITLE, Movies.FILTER_SOURCE, Movies.FILTER_MEDIA_TYPE,
             Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_VIDEO_BITRATE, Movies.FILTER_AUDIO_FORMAT,
             Movies.FILTER_AUDIO_BITRATE, Movies.FILTER_RESOLUTION, Movies.FILTER_FRAMERATE, Movies.FILTER_DISKS,
-            Movies.FILTER_SIZE, Movies.FILTER_PICTURE};
+            Movies.FILTER_SIZE, Movies.FILTER_FILEPATH, Movies.FILTER_PICTURE};
 
     // Available fields for list display - keep sorted as availableFilterFields[] to have consistent GUI
     public static final String defaultListFieldsLine1 = Movies.FORMATTED_TITLE;
