@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,6 +54,7 @@ public class Movie {
     private Activity mActivity;
     private Resources mResources;
     private Context mContext;
+    private Boolean mPreferenceFilePathLink;
     private String mPreferencePicturesDirectory;
     private ArrayList<ImageView> mPictureViews;
     private double mPictureAspectRatio = 0;
@@ -95,6 +96,7 @@ public class Movie {
         // Read preferences
         SharedPreferences mPreferences = SharedObjects.getInstance().preferences;
         mPreferencePicturesDirectory = mPreferences.getString("settingPicturesFolder", "/");
+        mPreferenceFilePathLink = mPreferences.getBoolean("settingFilePathLink", false);
 
         // Fill model
         mMovieModel = new MovieModel(
@@ -173,7 +175,11 @@ public class Movie {
         fillStringIntoView(Movies.ORIGINAL_TITLE, mMovieModel.getOriginalTitle(), STRING_REGULAR);
         fillStringIntoView(Movies.TRANSLATED_TITLE, mMovieModel.getTranslatedTitle(), STRING_REGULAR);
 
-        fillStringIntoView(Movies.FILE_PATH, mMovieModel.getFilePath(), STRING_REGULAR);
+        if (mPreferenceFilePathLink) {
+            fillStringIntoView(Movies.FILE_PATH, mMovieModel.getFilePath(), STRING_CLICKABLE);
+        } else {
+            fillStringIntoView(Movies.FILE_PATH, mMovieModel.getFilePath(), STRING_REGULAR);
+        }
         fillStringIntoView(Movies.LANGUAGES, mMovieModel.getLanguages(), STRING_CLICKABLE);
         fillStringIntoView(Movies.SUBTITLES, mMovieModel.getSubtitles(), STRING_CLICKABLE);
         fillStringIntoView(Movies.VIDEO_FORMAT, mMovieModel.getVideoFormat(), STRING_CLICKABLE);

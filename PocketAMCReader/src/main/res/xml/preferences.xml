@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -76,5 +76,10 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:key="settingFitPicture"
             android:summary="@string/pref_setting_fit_picture_summary"
             android:title="@string/pref_setting_fit_picture"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="settingFilePathLink"
+            android:summary="@string/pref_setting_filepath_link_summary"
+            android:title="@string/pref_setting_filepath_link"/>
     </PreferenceCategory>
 </PreferenceScreen>
