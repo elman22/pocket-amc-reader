@@ -47,6 +47,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/ph_number_long" />
+
         </LinearLayout>
 
         <LinearLayout

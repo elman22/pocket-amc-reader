@@ -194,25 +194,25 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
         </TableRow>
 
-                <TableRow
-                    android:id="@+id/FramerateLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
+        <TableRow
+            android:id="@+id/FramerateLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
 
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_framerate_label" />
+            <TextView
+                style="@style/Label.Table"
+                android:text="@string/details_framerate_label" />
 
-                    <TextView
-                        android:id="@+id/Framerate"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_number_long" />
+            <TextView
+                android:id="@+id/Framerate"
+                style="@style/RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ph_number_long" />
 
-                </TableRow>
+        </TableRow>
 
         <TableRow
             android:id="@+id/SizeLabel"
