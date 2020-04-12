@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -47,7 +48,10 @@ import com.holdingscythe.pocketamcreader.filters.FilterField;
 import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.Utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -68,6 +72,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
     private Extras mExtras;
     private Filters mFilters;
+    private String mPicturesFolder;
     private int mDeviceWidthPixels;
     private int mActionBarHeight;
     private int mHeroImageHeight;
@@ -120,6 +125,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
+        mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
@@ -378,6 +384,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.URL:
+            case R.id.FilePath:
                 // If link points to IMDb, open IMDb app if available
                 String url = ((TextView) view).getText().toString();
                 Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,7})/?");
@@ -398,8 +405,60 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         startActivity(browserIntent);
                     }
                 } else {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(browserIntent);
+                    boolean isIntentValid = false;
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+
+                    if (url.startsWith(S.INTENT_SCHEME_HTTPS) || url.startsWith(S.INTENT_SCHEME_HTTP)) {
+                        // If link starts with http(s), handle it as web link
+                        intent.setData(Uri.parse(url));
+                        isIntentValid = true;
+                    } else if (url.contains(S.INTENT_SCHEME_PORTION)) {
+                        // If link contains scheme, handle it as absolute url
+                        intent.setDataAndType(Uri.parse(url), Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                        isIntentValid = true;
+                    } else {
+                        // Else handle it as relative link
+                        try {
+                            // Fix for Windows backslashes
+                            url = url.replace("\\", "/");
+                            url = mPicturesFolder + url;
+                            File file = new File(url);
+
+                            if (!file.exists()) {
+                                throw new FileNotFoundException();
+                            } else {
+                                intent.setDataAndType(Uri.parse(file.getPath()), Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                                isIntentValid = true;
+                            }
+                        } catch (FileNotFoundException e) {
+                            if (S.WARN)
+                                Log.w(S.TAG, "Couldn't open file \"" + url + "\" for size check.");
+                        } catch (Exception e) {
+                            if (S.WARN)
+                                Log.w(S.TAG, "Error opening file.");
+                        }
+                    }
+
+                    if (S.DEBUG)
+                        Log.d(S.TAG,
+                                "Opening intent: (" + isIntentValid + ") " + intent.toString());
+
+                    if (isIntentValid) {
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(view.getContext(),
+                                    view.getContext().getText(R.string.link_not_opened_hint),
+                                    Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            // TODO handle FileUriExposedException
+                            Log.e(S.TAG, e.toString());
+                        }
+                    } else {
+                        Toast.makeText(view.getContext(),
+                                view.getContext().getText(R.string.link_not_opened),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 break;

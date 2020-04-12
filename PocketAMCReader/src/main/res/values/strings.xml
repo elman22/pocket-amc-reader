@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importing movies…</string>
   <string name="import_read_file">Reading catalog…</string>
@@ -187,4 +187,8 @@
   <string name="menu_switch_view">View</string>
   <string name="pref_setting_grid_title">Show title in grid view</string>
   <string name="pref_setting_show_grid_title_summary">Show movie title in grid view (if picture is not available, title is always shown)</string>
+  <!--Version 2.3-->
+  <string name="link_not_opened">Don\'t know how to open this link</string>
+  <string name="link_not_opened_hint">Could not open the link. Do you have any application
+    capable of handling this link?</string>
 </resources>

@@ -214,7 +214,8 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
             if (movieCatalogPicture != null && !movieCatalogPicture.equals("")) {
                 if (new File(mPicturesFolder + movieCatalogPicture).isFile()) {
-                    movieCatalogPicture = "file://" + mPicturesFolder + movieCatalogPicture;
+                    movieCatalogPicture =
+                            S.INTENT_SCHEME_FILE + mPicturesFolder + movieCatalogPicture;
 
                     if (S.VERBOSE)
                         Log.v(S.TAG, "Requesting picture: " + movieCatalogPicture);

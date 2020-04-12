@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,6 +59,14 @@ public final class S {
     static final int IMPORT_ERROR_LOADING = -11;
     public static final String CATALOG_TRUE = "True";
     public static final String CATALOG_FALSE = "False";
+
+    // Intent prefixes
+    public static final String INTENT_SCHEME_HTTP = "http://";
+    public static final String INTENT_SCHEME_HTTPS = "https://";
+    public static final String INTENT_SCHEME_FILE = "file://";
+    public static final String INTENT_SCHEME_CONTENT = "content://";
+    public static final String INTENT_SCHEME_PORTION = "://";
+    public static final String MIME_VIDEO = "video/*";
 
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;

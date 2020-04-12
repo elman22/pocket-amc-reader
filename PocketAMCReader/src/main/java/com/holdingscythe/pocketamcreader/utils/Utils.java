@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.webkit.MimeTypeMap;
 
 import java.util.ArrayList;
 
@@ -104,6 +105,20 @@ public class Utils {
                     (l + " cannot be cast to int without changing its value.");
         }
         return (int) l;
+    }
+
+    /**
+     * Get MIME type from URL
+     */
+    public static String getMimeFromUrl(String url, String fallback) {
+        String mime =
+                MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url));
+
+        if (mime == null || mime.equals("")) {
+            mime = fallback;
+        }
+
+        return mime;
     }
 
     /**
