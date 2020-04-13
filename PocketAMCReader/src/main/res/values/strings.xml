@@ -218,5 +218,13 @@
   <string-array name="pref_setting_theme_names">
     <item>Blue</item>
     <item>Red</item>
+    <item>Green</item>
+    <item>Indigo</item>
+    <item>Purple</item>
+    <item>Pink</item>
+    <item>Deep Orange</item>
+    <item>Brown</item>
+    <item>Grey</item>
+    <item>Black</item>
   </string-array>
 </resources>

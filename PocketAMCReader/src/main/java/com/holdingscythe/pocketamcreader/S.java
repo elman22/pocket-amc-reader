@@ -71,6 +71,14 @@ public final class S {
     // Themes
     public static final String THEME_BLUE = "theme_blue";
     public static final String THEME_RED = "theme_red";
+    public static final String THEME_INDIGO = "theme_indigo";
+    public static final String THEME_GREEN = "theme_green";
+    public static final String THEME_ORANGE = "theme_orange";
+    public static final String THEME_GREY = "theme_grey";
+    public static final String THEME_BROWN = "theme_brown";
+    public static final String THEME_PINK = "theme_pink";
+    public static final String THEME_PURPLE = "theme_purple";
+    public static final String THEME_BLACK = "theme_black";
 
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;

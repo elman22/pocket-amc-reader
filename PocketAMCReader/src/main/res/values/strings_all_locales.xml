@@ -71,6 +71,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string-array name="pref_setting_theme_values" translatable="false">
         <item>theme_blue</item>
         <item>theme_red</item>
+        <item>theme_green</item>
+        <item>theme_indigo</item>
+        <item>theme_purple</item>
+        <item>theme_pink</item>
+        <item>theme_orange</item>
+        <item>theme_brown</item>
+        <item>theme_grey</item>
+        <item>theme_black</item>
     </string-array>
 
     <!-- Placeholders -->

@@ -50,6 +50,30 @@ public class Theme {
             case S.THEME_RED:
                 theme = R.style.AppThemeRed;
                 break;
+            case S.THEME_INDIGO:
+                theme = R.style.AppThemeIndigo;
+                break;
+            case S.THEME_GREEN:
+                theme = R.style.AppThemeGreen;
+                break;
+            case S.THEME_ORANGE:
+                theme = R.style.AppThemeOrange;
+                break;
+            case S.THEME_GREY:
+                theme = R.style.AppThemeGrey;
+                break;
+            case S.THEME_BROWN:
+                theme = R.style.AppThemeBrown;
+                break;
+            case S.THEME_PINK:
+                theme = R.style.AppThemePink;
+                break;
+            case S.THEME_PURPLE:
+                theme = R.style.AppThemePurple;
+                break;
+            case S.THEME_BLACK:
+                theme = R.style.AppThemeBlack;
+                break;
             case S.THEME_BLUE:
             default:
                 theme = R.style.AppThemeBlue;

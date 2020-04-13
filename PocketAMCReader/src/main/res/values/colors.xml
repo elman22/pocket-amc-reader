@@ -44,6 +44,69 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <color name="red_color_basic_bg3">#e53935</color>
     <color name="red_color_fast_scroll_thumb_inactive">#aab71c1c</color>
 
+    <!-- Themed colors - green -->
+    <!-- https://colorswall.com/palette/16/ -->
+    <color name="green_color_action_bar_bg">#1b5e20</color>
+    <color name="green_color_basic_bg1">#2e7d32</color>
+    <color name="green_color_basic_bg2">#388e3c</color>
+    <color name="green_color_basic_bg3">#43a047</color>
+    <color name="green_color_fast_scroll_thumb_inactive">#aa1b5e20</color>
+
+    <!-- Themed colors - indigo -->
+    <!-- https://colorswall.com/palette/12/ -->
+    <color name="indigo_color_action_bar_bg">#1a237e</color>
+    <color name="indigo_color_basic_bg1">#283593</color>
+    <color name="indigo_color_basic_bg2">#303f9f</color>
+    <color name="indigo_color_basic_bg3">#3949ab</color>
+    <color name="indigo_color_fast_scroll_thumb_inactive">#aa1a237e</color>
+
+    <!-- Themed colors - orange -->
+    <!-- https://colorswall.com/palette/22/ -->
+    <color name="orange_color_action_bar_bg">#bf360c</color>
+    <color name="orange_color_basic_bg1">#d84315</color>
+    <color name="orange_color_basic_bg2">#e64a19</color>
+    <color name="orange_color_basic_bg3">#f4511e</color>
+    <color name="orange_color_fast_scroll_thumb_inactive">#aabf360c</color>
+
+    <!-- Themed colors - grey -->
+    <!-- https://colorswall.com/palette/24/ -->
+    <color name="grey_color_action_bar_bg">#212121</color>
+    <color name="grey_color_basic_bg1">#424242</color>
+    <color name="grey_color_basic_bg2">#616161</color>
+    <color name="grey_color_basic_bg3">#757575</color>
+    <color name="grey_color_fast_scroll_thumb_inactive">#aa212121</color>
+
+    <!-- Themed colors - brown -->
+    <!-- https://colorswall.com/palette/23/ -->
+    <color name="brown_color_action_bar_bg">#3e2723</color>
+    <color name="brown_color_basic_bg1">#4e342e</color>
+    <color name="brown_color_basic_bg2">#5d4037</color>
+    <color name="brown_color_basic_bg3">#6d4c41</color>
+    <color name="brown_color_fast_scroll_thumb_inactive">#aa3e2723</color>
+
+    <!-- Themed colors - pink -->
+    <!-- https://colorswall.com/palette/9/ -->
+    <color name="pink_color_action_bar_bg">#880e4f</color>
+    <color name="pink_color_basic_bg1">#ad1457</color>
+    <color name="pink_color_basic_bg2">#c2185b</color>
+    <color name="pink_color_basic_bg3">#d81b60</color>
+    <color name="pink_color_fast_scroll_thumb_inactive">#aa880e4f</color>
+
+    <!-- Themed colors - purple -->
+    <!-- https://colorswall.com/palette/10/ -->
+    <color name="purple_color_action_bar_bg">#4a148c</color>
+    <color name="purple_color_basic_bg1">#6a1b9a</color>
+    <color name="purple_color_basic_bg2">#7b1fa2</color>
+    <color name="purple_color_basic_bg3">#8e24aa</color>
+    <color name="purple_color_fast_scroll_thumb_inactive">#aa4a148c</color>
+
+    <!-- Themed colors - black -->
+    <color name="black_color_action_bar_bg">#000000</color>
+    <color name="black_color_basic_bg1">#101010</color>
+    <color name="black_color_basic_bg2">#202020</color>
+    <color name="black_color_basic_bg3">#303030</color>
+    <color name="black_color_fast_scroll_thumb_inactive">#aa000000</color>
+
     <!-- Color tags -->
     <color name="color_tag_0">@android:color/transparent</color>
     <color name="color_tag_1">#f16065</color>
