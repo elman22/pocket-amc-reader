@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,8 +19,9 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <resources>
-    <attr name="color_basic_bg1" format="reference"/>
-    <attr name="color_basic_bg2" format="reference"/>
-    <attr name="color_basic_bg3" format="reference"/>
-    <attr name="color_action_bar_bg" format="reference"/>
+    <attr name="color_action_bar_bg" format="color" />
+    <attr name="color_basic_bg1" format="color" />
+    <attr name="color_basic_bg2" format="color" />
+    <attr name="color_basic_bg3" format="color" />
+    <attr name="color_fast_scroll_thumb_inactive" format="color" />
 </resources>

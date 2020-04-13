@@ -20,12 +20,22 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
 <resources>
 
-    <!-- Base application theme -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="color_basic_bg1">@color/blue.color_basic_bg1</item>
-        <item name="color_basic_bg2">@color/blue.color_basic_bg2</item>
-        <item name="color_basic_bg3">@color/blue.color_basic_bg3</item>
-        <item name="color_action_bar_bg">@color/blue.color_action_bar_bg</item>
+    <!-- Base application theme - Blue -->
+    <style name="AppThemeBlue" parent="Theme.AppCompat.NoActionBar">
+        <item name="color_action_bar_bg">@color/blue_color_action_bar_bg</item>
+        <item name="color_basic_bg1">@color/blue_color_basic_bg1</item>
+        <item name="color_basic_bg2">@color/blue_color_basic_bg2</item>
+        <item name="color_basic_bg3">@color/blue_color_basic_bg3</item>
+        <item name="color_fast_scroll_thumb_inactive">@color/blue_color_fast_scroll_thumb_inactive</item>
+    </style>
+
+    <!-- Base application theme - Red -->
+    <style name="AppThemeRed" parent="Theme.AppCompat.NoActionBar">
+        <item name="color_action_bar_bg">@color/red_color_action_bar_bg</item>
+        <item name="color_basic_bg1">@color/red_color_basic_bg1</item>
+        <item name="color_basic_bg2">@color/red_color_basic_bg2</item>
+        <item name="color_basic_bg3">@color/red_color_basic_bg3</item>
+        <item name="color_fast_scroll_thumb_inactive">@color/red_color_fast_scroll_thumb_inactive</item>
     </style>
 
     <!-- Theme for list view -->

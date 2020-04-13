@@ -36,7 +36,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/blue.color_action_bar_bg"
+            app:contentScrim="?attr/color_action_bar_bg"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView

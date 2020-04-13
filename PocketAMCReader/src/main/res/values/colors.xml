@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,12 +28,21 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <color name="primary_text_dark_nostates">#f2f2f2</color>
     <color name="color_action_text">#fff</color>
 
-    <!-- Themed colors -->
-    <color name="blue.color_action_bar_bg">#0d47a1</color>
-    <color name="blue.color_basic_bg1">#1565c0</color>
-    <color name="blue.color_basic_bg2">#1976d2</color>
-    <color name="blue.color_basic_bg3">#1e88e5</color>
-    <color name="blue.fast_scroll_thumb_inactive">#aa0d47a1</color>
+    <!-- Themed colors - blue -->
+    <!-- https://colorswall.com/palette/8/ -->
+    <color name="blue_color_action_bar_bg">#0d47a1</color>
+    <color name="blue_color_basic_bg1">#1565c0</color>
+    <color name="blue_color_basic_bg2">#1976d2</color>
+    <color name="blue_color_basic_bg3">#1e88e5</color>
+    <color name="blue_color_fast_scroll_thumb_inactive">#aa0d47a1</color>
+
+    <!-- Themed colors - red -->
+    <!-- https://colorswall.com/palette/7/ -->
+    <color name="red_color_action_bar_bg">#b71c1c</color>
+    <color name="red_color_basic_bg1">#c62828</color>
+    <color name="red_color_basic_bg2">#d32f2f</color>
+    <color name="red_color_basic_bg3">#e53935</color>
+    <color name="red_color_fast_scroll_thumb_inactive">#aab71c1c</color>
 
     <!-- Color tags -->
     <color name="color_tag_0">@android:color/transparent</color>
