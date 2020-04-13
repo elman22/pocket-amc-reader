@@ -21,7 +21,6 @@ package com.holdingscythe.pocketamcreader;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -31,6 +30,7 @@ import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -80,6 +80,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                     .penaltyDeath()
                     .build());
         }
+
+        setTheme(new Theme(this).getTheme());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);

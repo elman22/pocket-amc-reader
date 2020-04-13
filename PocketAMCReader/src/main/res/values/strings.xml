@@ -212,4 +212,11 @@
   <string name="pref_setting_filepath_link">File path link</string>
   <string name="pref_setting_filepath_link_summary">Make file path clickable and try to
     open corresponding application</string>
+  <string name="pref_category_application">Application</string>
+  <string name="pref_setting_theme">Theme</string>
+  <string name="pref_setting_theme_summary">Application color theme</string>
+  <string-array name="pref_setting_theme_names">
+    <item>Blue</item>
+    <item>Red</item>
+  </string-array>
 </resources>

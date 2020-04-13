@@ -24,6 +24,7 @@ import android.os.Bundle;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +36,8 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(new Theme(this).getTheme());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 

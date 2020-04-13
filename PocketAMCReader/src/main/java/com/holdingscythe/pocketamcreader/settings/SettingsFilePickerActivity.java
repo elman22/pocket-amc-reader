@@ -20,10 +20,12 @@
 package com.holdingscythe.pocketamcreader.settings;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Environment;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 import com.nononsenseapps.filepicker.AbstractFilePickerActivity;
 import com.nononsenseapps.filepicker.AbstractFilePickerFragment;
 
@@ -51,6 +53,13 @@ public class SettingsFilePickerActivity extends AbstractFilePickerActivity {
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setTheme(new Theme(this).getTheme());
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override

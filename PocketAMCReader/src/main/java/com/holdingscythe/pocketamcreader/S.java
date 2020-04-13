@@ -68,6 +68,10 @@ public final class S {
     public static final String INTENT_SCHEME_PORTION = "://";
     public static final String MIME_VIDEO = "video/*";
 
+    // Themes
+    public static final String THEME_BLUE = "theme_blue";
+    public static final String THEME_RED = "theme_red";
+
     // SettingsActivity requesting import
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;
 
@@ -86,6 +90,7 @@ public final class S {
         Map<String, Integer> tmpMap = new HashMap<>();
         tmpMap.put("settingShowThumbs", 1);
         tmpMap.put("settingShowGridTitle", 1);
+        tmpMap.put("settingTheme", 1);
         SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
     }
 

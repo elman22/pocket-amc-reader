@@ -28,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +66,8 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
                     .penaltyDeath()
                     .build());
         }
+
+        setTheme(new Theme(this).getTheme());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import);

@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,6 +49,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
     public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
     public static final String KEY_PREF_LIST_FIELDS = "settingMoviesListLines";
+    public static final String KEY_PREF_THEME = "settingTheme";
 
     private static final int FILE_CODE = 9510; // onActivityResult request code
     private static SharedPreferences mPrefs;
@@ -82,12 +83,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         defaultTexts.put(KEY_PREF_CATALOG_ENCODING, getString(R.string.pref_setting_encoding_summary));
         defaultTexts.put(KEY_PREF_LIST_SEPARATOR, getString(R.string.pref_setting_list_separator_summary));
         defaultTexts.put(KEY_PREF_DETAIL_SEPARATOR, getString(R.string.pref_setting_multivalue_summary));
+        defaultTexts.put(KEY_PREF_THEME, getString(R.string.pref_setting_theme_summary));
 
         // Update current values
         updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
         updateSummary(mPrefs, KEY_PREF_CATALOG_ENCODING);
         updateSummary(mPrefs, KEY_PREF_LIST_SEPARATOR);
         updateSummary(mPrefs, KEY_PREF_DETAIL_SEPARATOR);
+        updateSummary(mPrefs, KEY_PREF_THEME);
     }
 
     @Override
@@ -178,21 +181,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         Preference pref = findPreference(key);
         String defaultText = defaultTexts.get(key);
 
-        if (key.equals(KEY_PREF_CATALOG_LOCATION)) {
+        // String preferences
+        if (key.equals(KEY_PREF_CATALOG_LOCATION) || key.equals(KEY_PREF_LIST_SEPARATOR) ||
+                key.equals(KEY_PREF_DETAIL_SEPARATOR)) {
             pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
 
-        if (key.equals(KEY_PREF_CATALOG_ENCODING)) {
+        // List preferences
+        if (key.equals(KEY_PREF_CATALOG_ENCODING) || key.equals(KEY_PREF_THEME)) {
             ListPreference listPref = (ListPreference) pref;
             pref.setSummary(listPref.getValue() == null ? defaultText : listPref.getEntry());
-        }
-
-        if (key.equals(KEY_PREF_LIST_SEPARATOR)) {
-            pref.setSummary(sharedPreferences.getString(key, defaultText));
-        }
-
-        if (key.equals(KEY_PREF_DETAIL_SEPARATOR)) {
-            pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
     }
 }

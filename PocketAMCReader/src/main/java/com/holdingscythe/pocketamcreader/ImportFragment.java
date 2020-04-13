@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
@@ -171,6 +172,12 @@ public class ImportFragment extends Fragment {
             String settingPicturesFolder = "";
 
             // Read settings for import
+            if (SharedObjects.getInstance().preferences == null) {
+                // Prepare Shared Objects
+                SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
+                        (getActivity().getApplicationContext());
+            }
+
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
             String settingCatalogLocation = preferences.getString("settingCatalogLocation", "");
             String settingCatalogEncoding = preferences.getString("settingCatalogEncoding", "Cp1252");

@@ -25,6 +25,7 @@ import android.preference.PreferenceManager;
 
 import com.holdingscythe.pocketamcreader.images.TouchImageAdapter;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,8 @@ public class PictureViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(new Theme(this).getTheme());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_view);
 

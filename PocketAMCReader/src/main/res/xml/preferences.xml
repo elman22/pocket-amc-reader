@@ -40,6 +40,17 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     </PreferenceCategory>
     <PreferenceCategory
         android:orderingFromXml="true"
+        android:title="@string/pref_category_application">
+        <ListPreference
+            android:dialogTitle="@string/pref_setting_theme"
+            android:entries="@array/pref_setting_theme_names"
+            android:entryValues="@array/pref_setting_theme_values"
+            android:key="settingTheme"
+            android:summary="@string/pref_setting_theme_summary"
+            android:title="@string/pref_setting_theme" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:orderingFromXml="true"
         android:title="@string/pref_category_list">
         <Preference
             android:key="settingMoviesListLines"

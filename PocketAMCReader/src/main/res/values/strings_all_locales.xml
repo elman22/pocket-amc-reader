@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -65,6 +65,13 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="filter_value_null" translatable="false">null</string>
     <string name="filter_value_null_operator" translatable="false">is</string>
     <string name="items_separator_default" translatable="false">,\u0020</string>
+
+    <!--Version 2.3-->
+    <string name="pref_setting_theme_default_value" translatable="false">theme_blue</string>
+    <string-array name="pref_setting_theme_values" translatable="false">
+        <item>theme_blue</item>
+        <item>theme_red</item>
+    </string-array>
 
     <!-- Placeholders -->
     <string name="ph_formatted_title" translatable="false">Formatted Movie Title</string>

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
@@ -43,6 +44,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(new Theme(this).getTheme());
+
         super.onCreate(savedInstanceState);
 
         // savedInstanceState is non-null when there is fragment state
