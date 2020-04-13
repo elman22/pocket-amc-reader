@@ -21,6 +21,7 @@ package com.holdingscythe.pocketamcreader.utils;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
@@ -79,6 +80,9 @@ public class Theme {
                 theme = R.style.AppThemeBlue;
                 break;
         }
+
+        if (S.DEBUG)
+            Log.d(S.TAG, "Setting theme " + settingTheme + " for activity " + this.activity.getLocalClassName());
 
         return theme;
     }
