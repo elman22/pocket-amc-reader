@@ -29,7 +29,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppThemeBlue"
+        android:theme="@style/AppThemeBlack"
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".ImportActivity"
