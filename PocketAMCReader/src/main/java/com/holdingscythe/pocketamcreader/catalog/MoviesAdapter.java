@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -357,22 +358,28 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
 
         // Always set to true if grid view is used
-        mShowThumbs = preferences.getBoolean("settingShowThumbs", true);
+        mShowThumbs = preferences.getBoolean(SettingsConstants.KEY_PREF_SHOW_THUMBS, true);
         if (mViewType == GRID) mShowThumbs = true;
 
         // Always set to true if list view is used
-        mShowTitle = preferences.getBoolean("settingShowGridTitle", true);
+        mShowTitle = preferences.getBoolean(SettingsConstants.KEY_PREF_SHOW_GRID_TITLE, true);
         if (mViewType == LIST) mShowTitle = true;
 
-        mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
-        String sortOrder = preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
+        mPicturesFolder = preferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
+        String sortOrder = preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER,
+                Movies.DEFAULT_SORT_ORDER);
         mSortedField = Movies.SettingsSortFieldsMap.get(sortOrder);
-        mListFieldsLine1 = preferences.getString("settingMoviesListLine1", Movies.defaultListFieldsLine1).split(",");
-        mListFieldsLine2 = preferences.getString("settingMoviesListLine2", Movies.defaultListFieldsLine2).split(",");
-        mListFieldsLine3 = preferences.getString("settingMoviesListLine3", Movies.defaultListFieldsLine3).split(",");
-        mSettingListForceSortField = preferences.getBoolean("settingListForceSortField", true);
-        mSettingMoviesListSeparator = preferences.getString("settingMoviesListSeparator", c.getString(R.string.items_separator_default));
-        mSettingMovieListOrderField = preferences.getString("settingMovieListOrderField", Movies.DEFAULT_SORT_FIELD);
+        mListFieldsLine1 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
+                Movies.defaultListFieldsLine1).split(",");
+        mListFieldsLine2 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
+                Movies.defaultListFieldsLine2).split(",");
+        mListFieldsLine3 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
+                Movies.defaultListFieldsLine3).split(",");
+        mSettingListForceSortField = preferences.getBoolean(SettingsConstants.KEY_PREF_FORCE_SORT_FIELD, true);
+        mSettingMoviesListSeparator = preferences.getString(SettingsConstants.KEY_PREF_LIST_SEPARATOR,
+                c.getString(R.string.items_separator_default));
+        mSettingMovieListOrderField = preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER_FIELD,
+                Movies.DEFAULT_SORT_FIELD);
 
         // Start image loader if thumbs are displayed
         if (mShowThumbs) {

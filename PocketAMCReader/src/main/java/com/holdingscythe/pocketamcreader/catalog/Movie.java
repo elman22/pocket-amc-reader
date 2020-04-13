@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.model.MovieModel;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
@@ -95,8 +96,8 @@ public class Movie {
 
         // Read preferences
         SharedPreferences mPreferences = SharedObjects.getInstance().preferences;
-        mPreferencePicturesDirectory = mPreferences.getString("settingPicturesFolder", "/");
-        mPreferenceFilePathLink = mPreferences.getBoolean("settingFilePathLink", false);
+        mPreferencePicturesDirectory = mPreferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
+        mPreferenceFilePathLink = mPreferences.getBoolean(SettingsConstants.KEY_PREF_FILE_PATH_LINK, false);
 
         // Fill model
         mMovieModel = new MovieModel(

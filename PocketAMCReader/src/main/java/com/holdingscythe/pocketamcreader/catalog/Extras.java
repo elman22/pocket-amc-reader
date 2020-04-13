@@ -24,6 +24,7 @@ import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.model.ExtraModel;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.io.File;
@@ -43,7 +44,8 @@ public class Extras {
 
             // Read preferences
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
-            String preferencePicturesDirectory = preferences.getString("settingPicturesFolder", "/");
+            String preferencePicturesDirectory = preferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER,
+                    "/");
 
             // add all extras from DB to the array list
             try {

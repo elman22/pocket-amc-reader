@@ -53,6 +53,7 @@ import com.holdingscythe.pocketamcreader.filters.FilterField;
 import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
@@ -252,7 +253,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), gridSpan);
 
         // Setting view preference or list as default view
-        mViewType = SharedObjects.getInstance().preferences.getInt("settingMovieListViewId", LIST);
+        mViewType = SharedObjects.getInstance().preferences.getInt(SettingsConstants.KEY_PREF_MOVIE_LIST_VIEW_ID, LIST);
 
         // Add counter header
         mHeaderListCountView = getActivity().findViewById(R.id.nowShowing);
@@ -358,7 +359,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         inflater.inflate(R.menu.main_menu, menu);
 
         // Set correct movie order
-        int settingMovieListOrderId = SharedObjects.getInstance().preferences.getInt("settingMovieListOrderId", 0);
+        int settingMovieListOrderId =
+                SharedObjects.getInstance().preferences.getInt(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER_ID, 0);
         try {
             menu.findItem(settingMovieListOrderId).setChecked(true);
         } catch (NullPointerException e) {
@@ -426,7 +428,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
                 // Save preferences
                 SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-                editor.putInt("settingMovieListViewId", mViewType);
+                editor.putInt(SettingsConstants.KEY_PREF_MOVIE_LIST_VIEW_ID, mViewType);
                 editor.apply();
 
                 // Change menu icon
@@ -649,9 +651,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private void setSortOrder(int menuId, String order, String field) {
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-            editor.putInt("settingMovieListOrderId", menuId);
-            editor.putString("settingMovieListOrder", order);
-            editor.putString("settingMovieListOrderField", field);
+            editor.putInt(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER_ID, menuId);
+            editor.putString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER, order);
+            editor.putString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER_FIELD, field);
             editor.apply();
             mMenu.findItem(menuId).setChecked(true);
             refreshList();

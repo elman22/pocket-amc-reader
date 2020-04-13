@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 
 public class Theme {
     private Activity activity;
@@ -44,7 +45,7 @@ public class Theme {
         }
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
-        String settingTheme = preferences.getString("settingTheme",
+        String settingTheme = preferences.getString(SettingsConstants.KEY_PREF_THEME,
                 this.activity.getString(R.string.pref_setting_theme_default_value));
 
         switch (settingTheme) {

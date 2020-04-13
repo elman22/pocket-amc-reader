@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import com.holdingscythe.pocketamcreader.images.TouchImageAdapter;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Theme;
 
@@ -65,7 +66,8 @@ public class PictureViewActivity extends AppCompatActivity {
             SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
                     (getApplicationContext());
         }
-        boolean settingFitPicture = SharedObjects.getInstance().preferences.getBoolean("settingFitPicture", true);
+        boolean settingFitPicture =
+                SharedObjects.getInstance().preferences.getBoolean(SettingsConstants.KEY_PREF_FIT_PICTURE, true);
 
         // Read picture list
         Intent i = getIntent();

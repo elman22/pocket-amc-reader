@@ -115,9 +115,12 @@ public class SettingsListFieldsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
-        String mFieldsLine1 = preferences.getString("settingMoviesListLine1", Movies.defaultListFieldsLine1);
-        String mFieldsLine2 = preferences.getString("settingMoviesListLine2", Movies.defaultListFieldsLine2);
-        String mFieldsLine3 = preferences.getString("settingMoviesListLine3", Movies.defaultListFieldsLine3);
+        String mFieldsLine1 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
+                Movies.defaultListFieldsLine1);
+        String mFieldsLine2 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
+                Movies.defaultListFieldsLine2);
+        String mFieldsLine3 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
+                Movies.defaultListFieldsLine3);
 
         final ArrayList<SettingsListField> mFieldsArray1 = new ArrayList<>();
         final ArrayList<SettingsListField> mFieldsArray2 = new ArrayList<>();
@@ -190,7 +193,8 @@ public class SettingsListFieldsFragment extends Fragment {
                 prefsArrayList.add(fld.getDatabaseField());
             }
 
-            editor.putString("settingMoviesListLine" + (f + 1), Utils.arrayToString(prefsArrayList, ","));
+            editor.putString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE + (f + 1),
+                    Utils.arrayToString(prefsArrayList, ","));
         }
 
         editor.apply();

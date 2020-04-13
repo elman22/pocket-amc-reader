@@ -37,6 +37,7 @@ import android.widget.FilterQueryProvider;
 
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.filters.Filters;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 
@@ -186,7 +187,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 Log.i(S.TAG, "Setting last catalog import size to 0 to force catalog refresh.");
 
             SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-            editor.putLong("settingLastImportedSize", 0);
+            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
             editor.apply();
         }
 
@@ -305,7 +306,8 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     Log.d(S.TAG, "URI match: movies");
 
                 // Get sort order from preferences
-                sortOrder = this.preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
+                sortOrder = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER,
+                        Movies.DEFAULT_SORT_ORDER);
 
                 // Prepare filters
                 if (this.filters != null) {
@@ -344,7 +346,8 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     Log.d(S.TAG, "URI match: search");
 
                 // Get sort order from preferences
-                sortOrder = this.preferences.getString("settingMovieListOrder", Movies.DEFAULT_SORT_ORDER);
+                sortOrder = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER,
+                        Movies.DEFAULT_SORT_ORDER);
 
                 // Prepare filters
                 if (this.filters != null) {
@@ -387,17 +390,17 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         projection.add(Movies.SettingsSortFieldsMap.get(sortOrder));
 
         // Shown fields
-        String[] listFields1 = this.preferences.getString("settingMoviesListLine1",
+        String[] listFields1 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
                 Movies.defaultListFieldsLine1).split(",");
         if (!TextUtils.isEmpty(listFields1[0])) {
             projection.addAll(Arrays.asList(listFields1));
         }
-        String[] listFields2 = this.preferences.getString("settingMoviesListLine2",
+        String[] listFields2 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
                 Movies.defaultListFieldsLine2).split(",");
         if (!TextUtils.isEmpty(listFields2[0])) {
             projection.addAll(Arrays.asList(listFields2));
         }
-        String[] listFields3 = this.preferences.getString("settingMoviesListLine3",
+        String[] listFields3 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
                 Movies.defaultListFieldsLine3).split(",");
         if (!TextUtils.isEmpty(listFields3[0])) {
             projection.addAll(Arrays.asList(listFields3));

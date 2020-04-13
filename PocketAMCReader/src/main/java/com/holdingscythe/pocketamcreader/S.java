@@ -21,6 +21,8 @@ package com.holdingscythe.pocketamcreader;
 import android.content.ContentResolver;
 import android.net.Uri;
 
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,9 +87,9 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put("settingCatalogLocation", 1);
-        tmpMap.put("settingCatalogEncoding", 1);
-        tmpMap.put("settingRemoveBadChars", 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_CATALOG_LOCATION, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_CATALOG_ENCODING, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, 1);
         SETTINGS_REQUESTING_IMPORT = Collections.unmodifiableMap(tmpMap);
     }
 
@@ -96,9 +98,9 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put("settingShowThumbs", 1);
-        tmpMap.put("settingShowGridTitle", 1);
-        tmpMap.put("settingTheme", 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_SHOW_THUMBS, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_SHOW_GRID_TITLE, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_THEME, 1);
         SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
     }
 
@@ -107,11 +109,11 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put("settingMoviesListLine1", 1);
-        tmpMap.put("settingMoviesListLine2", 1);
-        tmpMap.put("settingMoviesListLine3", 1);
-        tmpMap.put("settingListForceSortField", 1);
-        tmpMap.put("settingMoviesListSeparator", 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_FORCE_SORT_FIELD, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_LIST_SEPARATOR, 1);
         SETTINGS_REQUESTING_REFRESH = Collections.unmodifiableMap(tmpMap);
     }
 

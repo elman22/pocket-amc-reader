@@ -47,6 +47,7 @@ import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
 import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 
@@ -124,8 +125,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         }
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
-        String settingMultivaluedSeparator = preferences.getString("settingMultivalueSeparator", ",/");
-        mPicturesFolder = preferences.getString("settingPicturesFolder", "/");
+        String settingMultivaluedSeparator = preferences.getString(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR, ",/");
+        mPicturesFolder = preferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider

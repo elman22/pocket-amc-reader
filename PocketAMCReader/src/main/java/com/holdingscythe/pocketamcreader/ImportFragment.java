@@ -29,6 +29,7 @@ import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
 import com.holdingscythe.pocketamcreader.catalog.MoviesSAXHandler;
+import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.FileEncoder;
 import com.holdingscythe.pocketamcreader.utils.ProgressFilterInputStream;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
@@ -179,10 +180,11 @@ public class ImportFragment extends Fragment {
             }
 
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
-            String settingCatalogLocation = preferences.getString("settingCatalogLocation", "");
-            String settingCatalogEncoding = preferences.getString("settingCatalogEncoding", "Cp1252");
-            Boolean settingRemoveBadChars = preferences.getBoolean("settingRemoveBadChars", false);
-            long settingLastImportedSize = preferences.getLong("settingLastImportedSize", 0);
+            String settingCatalogLocation = preferences.getString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, "");
+            String settingCatalogEncoding = preferences.getString(SettingsConstants.KEY_PREF_CATALOG_ENCODING,
+                    "Cp1252");
+            Boolean settingRemoveBadChars = preferences.getBoolean(SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, false);
+            long settingLastImportedSize = preferences.getLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
 
             // Get partial wake lock
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
@@ -296,7 +298,7 @@ public class ImportFragment extends Fragment {
                     isImportFileFinished = true;
                 } catch (Exception e) {
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putLong("settingLastImportedSize", 0);
+                    editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
                     editor.apply();
 
                     if (S.ERROR)
@@ -309,9 +311,9 @@ public class ImportFragment extends Fragment {
                 if (isImportFileFinished) {
                     try {
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putLong("settingLastImportedSize", fileSizeToBeImported);
-                        editor.putString("settingLastImportedDate", new Date().toString());
-                        editor.putString("settingPicturesFolder", settingPicturesFolder);
+                        editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, fileSizeToBeImported);
+                        editor.putString(SettingsConstants.KEY_PREF_LAST_IMPORTED_DATE, new Date().toString());
+                        editor.putString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, settingPicturesFolder);
                         editor.apply();
                     } catch (Exception e) {
                         if (S.ERROR)

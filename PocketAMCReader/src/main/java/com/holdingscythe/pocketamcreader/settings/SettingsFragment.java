@@ -44,12 +44,6 @@ import java.util.Map;
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences
         .OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
-    public static final String KEY_PREF_CATALOG_LOCATION = "settingCatalogLocation";
-    public static final String KEY_PREF_CATALOG_ENCODING = "settingCatalogEncoding";
-    public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
-    public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
-    public static final String KEY_PREF_LIST_FIELDS = "settingMoviesListLines";
-    public static final String KEY_PREF_THEME = "settingTheme";
 
     private static final int FILE_CODE = 9510; // onActivityResult request code
     private static SharedPreferences mPrefs;
@@ -72,25 +66,25 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         mPrefs.registerOnSharedPreferenceChangeListener(this);
 
         // Attach onClick listeners
-        Preference locationPref = findPreference(KEY_PREF_CATALOG_LOCATION);
+        Preference locationPref = findPreference(SettingsConstants.KEY_PREF_CATALOG_LOCATION);
         locationPref.setOnPreferenceClickListener(this);
-        Preference linesPref = getPreferenceScreen().findPreference(KEY_PREF_LIST_FIELDS);
+        Preference linesPref = getPreferenceScreen().findPreference(SettingsConstants.KEY_PREF_LIST_FIELDS);
         linesPref.setOnPreferenceClickListener(this);
 
         // Prefetch default text hints
         defaultTexts = new HashMap<>();
-        defaultTexts.put(KEY_PREF_CATALOG_LOCATION, getString(R.string.pref_setting_catalog_summary));
-        defaultTexts.put(KEY_PREF_CATALOG_ENCODING, getString(R.string.pref_setting_encoding_summary));
-        defaultTexts.put(KEY_PREF_LIST_SEPARATOR, getString(R.string.pref_setting_list_separator_summary));
-        defaultTexts.put(KEY_PREF_DETAIL_SEPARATOR, getString(R.string.pref_setting_multivalue_summary));
-        defaultTexts.put(KEY_PREF_THEME, getString(R.string.pref_setting_theme_summary));
+        defaultTexts.put(SettingsConstants.KEY_PREF_CATALOG_LOCATION, getString(R.string.pref_setting_catalog_summary));
+        defaultTexts.put(SettingsConstants.KEY_PREF_CATALOG_ENCODING, getString(R.string.pref_setting_encoding_summary));
+        defaultTexts.put(SettingsConstants.KEY_PREF_LIST_SEPARATOR, getString(R.string.pref_setting_list_separator_summary));
+        defaultTexts.put(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR, getString(R.string.pref_setting_multivalue_summary));
+        defaultTexts.put(SettingsConstants.KEY_PREF_THEME, getString(R.string.pref_setting_theme_summary));
 
         // Update current values
-        updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
-        updateSummary(mPrefs, KEY_PREF_CATALOG_ENCODING);
-        updateSummary(mPrefs, KEY_PREF_LIST_SEPARATOR);
-        updateSummary(mPrefs, KEY_PREF_DETAIL_SEPARATOR);
-        updateSummary(mPrefs, KEY_PREF_THEME);
+        updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_LOCATION);
+        updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_ENCODING);
+        updateSummary(mPrefs, SettingsConstants.KEY_PREF_LIST_SEPARATOR);
+        updateSummary(mPrefs, SettingsConstants.KEY_PREF_DETAIL_SEPARATOR);
+        updateSummary(mPrefs, SettingsConstants.KEY_PREF_THEME);
     }
 
     @Override
@@ -102,7 +96,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             SharedObjects.getInstance().restartAppRequested = true;
 
             SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putLong("settingLastImportedSize", 0);
+            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
             editor.apply();
 
             if (S.INFO)
@@ -130,7 +124,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public boolean onPreferenceClick(Preference preference) {
         String key = preference.getKey();
 
-        if (key.equals(KEY_PREF_CATALOG_LOCATION)) {
+        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION)) {
             Intent i = new Intent(getActivity().getBaseContext(), SettingsFilePickerActivity.class);
 
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
@@ -142,7 +136,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             return true;
         }
 
-        if (key.equals(KEY_PREF_LIST_FIELDS)) {
+        if (key.equals(SettingsConstants.KEY_PREF_LIST_FIELDS)) {
             Intent i = new Intent(getActivity().getBaseContext(), SettingsListFieldsActivity.class);
 
             startActivity(i);
@@ -166,9 +160,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
                 try {
                     SharedPreferences.Editor editor = mPrefs.edit();
-                    editor.putString("settingCatalogLocation", file.toString());
+                    editor.putString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, file.toString());
                     editor.apply();
-                    updateSummary(mPrefs, KEY_PREF_CATALOG_LOCATION);
+                    updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_LOCATION);
                 } catch (Exception e) {
                     if (S.ERROR)
                         Log.e(S.TAG, "File select error " + e.getLocalizedMessage());
@@ -182,13 +176,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         String defaultText = defaultTexts.get(key);
 
         // String preferences
-        if (key.equals(KEY_PREF_CATALOG_LOCATION) || key.equals(KEY_PREF_LIST_SEPARATOR) ||
-                key.equals(KEY_PREF_DETAIL_SEPARATOR)) {
+        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION) ||
+                key.equals(SettingsConstants.KEY_PREF_LIST_SEPARATOR) ||
+                key.equals(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR)) {
             pref.setSummary(sharedPreferences.getString(key, defaultText));
         }
 
         // List preferences
-        if (key.equals(KEY_PREF_CATALOG_ENCODING) || key.equals(KEY_PREF_THEME)) {
+        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_ENCODING) ||
+                key.equals(SettingsConstants.KEY_PREF_THEME)) {
             ListPreference listPref = (ListPreference) pref;
             pref.setSummary(listPref.getValue() == null ? defaultText : listPref.getEntry());
         }
