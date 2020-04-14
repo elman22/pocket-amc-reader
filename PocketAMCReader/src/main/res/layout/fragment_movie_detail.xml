@@ -93,6 +93,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:background="?attr/color_app_bg"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MovieDetailActivity">
 
@@ -100,7 +101,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:id="@+id/detailsWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/app_bg"
             android:orientation="vertical">
 
             <include layout="@layout/fragment_movie_detail_basic_box" />

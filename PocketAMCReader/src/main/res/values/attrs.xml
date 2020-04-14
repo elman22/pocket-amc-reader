@@ -19,6 +19,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <resources>
+    <attr name="color_app_bg" format="color" />
     <attr name="color_action_bar_bg" format="color" />
     <attr name="color_basic_bg1" format="color" />
     <attr name="color_basic_bg2" format="color" />

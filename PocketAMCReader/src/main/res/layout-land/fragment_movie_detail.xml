@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,837 +18,92 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<ScrollView
-    android:id="@+id/detailsScrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingLeft="0dip"
-    android:paddingRight="0dip"
-    android:paddingTop="0dip"
-    tools:context=".MovieDetailActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/detailsWrapper"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_bg">
-
-        <RelativeLayout
-            android:id="@+id/detailsHighlightWrapper"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/wrapper_spacing_block"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/wrapper_spacing_block">
-
-            <ImageView
-                android:id="@+id/Picture"
-                android:layout_width="@dimen/detail_hero_img_land_width"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/details_picture_description"
-                android:scaleType="fitStart"
-                android:src="@drawable/movie_thumb_stub"/>
-
-            <TextView
-                android:id="@+id/FormattedTitle"
-                style="@android:style/TextAppearance.DeviceDefault.Large"
-                fontPath="fonts/RobotoCondensed-Bold.ttf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/Picture"
-                android:layout_toRightOf="@id/Picture"
-                android:text="@string/ph_text_short"
-                tools:ignore="MissingPrefix"/>
-
-            <TableLayout
-                android:id="@+id/titleBoxTable"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/FormattedTitle"
-                android:layout_toEndOf="@id/Picture"
-                android:layout_toRightOf="@id/Picture"
-                android:background="@color/detail_title_background"
-                android:paddingBottom="@dimen/wrapper_spacing_title">
-
-                <TableRow
-                    android:id="@+id/titleBoxTableRow"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/Number"
-                        style="@style/RegularText.Basic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_number_long"/>
-
-                    <TextView
-                        android:id="@+id/CertificationLabel"
-                        style="@style/BasicExtra.Label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/details_certification_label_short"/>
-
-                    <TextView
-                        android:id="@+id/Certification"
-                        style="@style/RegularText.Basic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_text_data"/>
-
-                    <TextView
-                        android:id="@+id/CheckedLabel"
-                        style="@style/BasicExtra.Label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/details_checked_label"/>
-
-                    <TextView
-                        android:id="@+id/Checked"
-                        style="@style/RegularText.Basic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_boolean"/>
-
-                    <LinearLayout
-                        android:id="@+id/UserRatingLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/RegularText.Basic.Suffix"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/userrating_star"/>
-
-                        <TextView
-                            android:id="@+id/UserRating"
-                            style="@style/RegularText.Basic.Suffix"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ph_number"/>
-
-                        <TextView
-                            android:id="@+id/UserRatingSuffix"
-                            style="@style/BasicExtra.Label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/rating_suffix"/>
-
-                    </LinearLayout>
-
-                </TableRow>
-
-            </TableLayout>
-
-            <TextView
-                android:id="@+id/Category"
-                style="@style/RegularText"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/titleBoxTable"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:layout_toEndOf="@id/Picture"
-                android:layout_toRightOf="@id/Picture"
-                android:text="@string/ph_text_line"/>
-
-            <TableLayout
-                android:id="@+id/mediaBoxTable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Category"
-                android:layout_toEndOf="@id/Picture"
-                android:layout_toRightOf="@id/Picture"
-                android:shrinkColumns="1"
-                android:stretchColumns="1">
-
-                <TableRow
-                    android:id="@+id/MediaLabelLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_medialabel_label"/>
-
-                    <TextView
-                        android:id="@+id/MediaLabel"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/MediaTypeLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_mediatype_label"/>
-
-                    <TextView
-                        android:id="@+id/MediaType"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/SourceLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_source_label"/>
-
-                    <TextView
-                        android:id="@+id/Source"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/BorrowerLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_borrower_label"/>
-
-                    <TextView
-                        android:id="@+id/Borrower"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/DateLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_date_label"/>
-
-                    <TextView
-                        android:id="@+id/Date"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/DateWatchedLabel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/Label.Table"
-                        android:text="@string/details_datewatched_label"/>
-
-                    <TextView
-                        android:id="@+id/DateWatched"
-                        style="@style/RegularText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/ph_text_line"/>
-
-                </TableRow>
-
-            </TableLayout>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/ColorTag"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/colortag_height"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:orientation="vertical"/>
-
-        <TableLayout
-            android:id="@+id/basicBoxTable"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/detailsHighlightWrapper"
-            android:paddingBottom="@dimen/wrapper_spacing_block">
-
-            <TableRow
-                android:id="@+id/basicBoxTableRow"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/color_basic_bg1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/Year"
-                        style="@style/BasicValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/ph_number_long"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/color_basic_bg2"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/Length"
-                        style="@style/BasicValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:text="@string/ph_number_long"/>
-
-                    <TextView
-                        android:id="@+id/LengthSuffix"
-                        style="@style/BasicExtra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/display_minutes_suffix"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/color_basic_bg3"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/RatingLabel"
-                        style="@style/BasicValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:text="@string/rating_star"/>
-
-                    <TextView
-                        android:id="@+id/Rating"
-                        style="@style/BasicValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:gravity="right"
-                        android:text="@string/ph_number"/>
-
-                    <TextView
-                        android:id="@+id/RatingSuffix"
-                        style="@style/BasicExtra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/rating_suffix"/>
-
-                </LinearLayout>
-
-            </TableRow>
-
-        </TableLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/detailsScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/color_app_bg"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MovieDetailActivity">
 
         <LinearLayout
-            android:id="@+id/essentialsDataGrid"
+            android:id="@+id/detailsWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/basicBoxTable"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/wrapper_spacing_block"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
+            android:orientation="vertical">
 
-            <com.ms.square.android.expandabletextview.ExpandableTextView
-                android:id="@+id/Description"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/detailsHighlightWrapper"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:orientation="vertical"
                 android:paddingBottom="@dimen/wrapper_spacing_block"
-                expandableTextView:animDuration="300"
-                expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
-                expandableTextView:expandDrawable="@drawable/ic_expand_shape"
-                expandableTextView:maxCollapsedLines="5">
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/wrapper_spacing_block">
+
+                <ImageView
+                    android:id="@+id/Picture"
+                    android:layout_width="@dimen/detail_hero_img_land_width"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/details_picture_description"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/movie_thumb_stub" />
 
                 <TextView
-                    android:id="@id/expandable_text"
-                    style="@style/RegularText"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ph_text_long"/>
-
-                <ImageButton
-                    android:id="@id/expand_collapse"
-                    style="@style/ExpandableArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
-                    android:layout_marginRight="@dimen/arrow_pull_horizontal"
-                    android:layout_marginTop="@dimen/arrow_pull_vertical"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/details_expandable_arrow_description"/>
-            </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-            <TextView
-                android:id="@+id/DirectorLabel"
-                style="@style/Label"
-                android:text="@string/details_director_label"/>
-
-            <TextView
-                android:id="@+id/Director"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/ActorsLabel"
-                style="@style/Label"
-                android:text="@string/details_actors_label"/>
-
-            <TextView
-                android:id="@+id/Actors"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_long"/>
-
-            <TextView
-                android:id="@+id/ProducerLabel"
-                style="@style/Label"
-                android:text="@string/details_producer_label"/>
-
-            <TextView
-                android:id="@+id/Producer"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/WriterLabel"
-                style="@style/Label"
-                android:text="@string/details_writer_label"/>
-
-            <TextView
-                android:id="@+id/Writer"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/ComposerLabel"
-                style="@style/Label"
-                android:text="@string/details_composer_label"/>
-
-            <TextView
-                android:id="@+id/Composer"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/CountryLabel"
-                style="@style/Label"
-                android:text="@string/details_country_label"/>
-
-            <TextView
-                android:id="@+id/Country"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_line"/>
-
-            <TextView
-                android:id="@+id/CommentsLabel"
-                style="@style/Label"
-                android:text="@string/details_comments_label"/>
-
-            <com.ms.square.android.expandabletextview.ExpandableTextView
-                android:id="@+id/Comments"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/wrapper_spacing_block"
-                expandableTextView:animDuration="300"
-                expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
-                expandableTextView:expandDrawable="@drawable/ic_expand_shape"
-                expandableTextView:maxCollapsedLines="5">
-
-                <TextView
-                    android:id="@id/expandable_text"
-                    style="@style/RegularText"
+                    android:id="@+id/FormattedTitle"
+                    style="@style/DetailsFragmentTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/ph_text_long"/>
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/Picture"
+                    android:layout_toRightOf="@id/Picture"
+                    android:text="@string/ph_text_short"
+                    tools:ignore="MissingPrefix" />
 
-                <ImageButton
-                    android:id="@id/expand_collapse"
-                    style="@style/ExpandableArrow"
-                    android:layout_width="wrap_content"
+                <include
+                    android:id="@+id/movieDetailTitleBoxInclude"
+                    layout="@layout/fragment_movie_detail_title_box"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
-                    android:layout_marginRight="@dimen/arrow_pull_horizontal"
-                    android:layout_marginTop="@dimen/arrow_pull_vertical"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/details_expandable_arrow_description"/>
-            </com.ms.square.android.expandabletextview.ExpandableTextView>
+                    android:layout_below="@id/FormattedTitle"
+                    android:layout_toEndOf="@id/Picture"
+                    android:layout_toRightOf="@id/Picture" />
+
+                <include
+                    layout="@layout/fragment_movie_detail_media"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/movieDetailTitleBoxInclude"
+                    android:layout_toEndOf="@id/Picture"
+                    android:layout_toRightOf="@id/Picture" />
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/URLLabel"
-                style="@style/Label"
-                android:text="@string/details_url_label"/>
-
-            <TextView
-                android:id="@+id/URL"
-                style="@style/RegularText"
+                android:id="@+id/ColorTag"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_short"/>
+                android:layout_height="@dimen/colortag_height"
+                android:background="@android:color/transparent" />
 
-            <TextView
-                android:id="@+id/OriginalTitleLabel"
-                style="@style/Label"
-                android:text="@string/details_originaltitle_label"/>
+            <include layout="@layout/fragment_movie_detail_basic_box" />
 
-            <TextView
-                android:id="@+id/OriginalTitle"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_short"/>
+            <include layout="@layout/fragment_movie_detail_essentials" />
 
-            <TextView
-                android:id="@+id/TranslatedTitleLabel"
-                style="@style/Label"
-                android:text="@string/details_translatedtitle_label"/>
+            <include layout="@layout/fragment_movie_detail_technical" />
 
-            <TextView
-                android:id="@+id/TranslatedTitle"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_short"/>
+            <include layout="@layout/fragment_movie_detail_custom" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/technicalTitle"
-            style="@style/SectionTitle"
-            android:layout_below="@id/essentialsDataGrid"
-            android:text="@string/details_section_technical"/>
+    </androidx.core.widget.NestedScrollView>
 
-        <LinearLayout
-            android:id="@+id/technicalLinear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/technicalTitle"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
-
-            <TextView
-                android:id="@+id/FilePathLabel"
-                style="@style/Label"
-                android:text="@string/details_filepath_label"/>
-
-            <TextView
-                android:id="@+id/FilePath"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/wrapper_spacing_block"
-                android:text="@string/ph_text_short"/>
-
-        </LinearLayout>
-
-        <TableLayout
-            android:id="@+id/technicalBoxTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/technicalLinear"
-            android:paddingBottom="@dimen/wrapper_spacing_block"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:shrinkColumns="1"
-            android:stretchColumns="1">
-
-            <TableRow
-                android:id="@+id/LanguagesLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_languages_label"/>
-
-                <TextView
-                    android:id="@+id/Languages"
-                    style="@style/RegularText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ph_text_line"/>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/SubtitlesLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_subtitles_label"
-                    />
-
-                <TextView
-                    android:id="@+id/Subtitles"
-                    style="@style/RegularText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ph_text_short"/>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/VideoFormatLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_video_label"/>
-
-                <LinearLayout
-                    style="@style/RegularText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/VideoFormat"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/detail_basic_spacing"
-                        android:text="@string/ph_text_line"/>
-
-                    <TextView
-                        android:id="@+id/VideoBitrate"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_number_long"/>
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/AudioFormatLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_audio_label"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/AudioFormat"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/detail_basic_spacing"
-                        android:text="@string/ph_text_line"/>
-
-                    <TextView
-                        android:id="@+id/AudioBitrate"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_number_long"/>
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/ResolutionLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_resolution_label"/>
-
-                <TextView
-                    android:id="@+id/Resolution"
-                    style="@style/RegularText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ph_number_long"/>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/FramerateLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_framerate_label"/>
-
-                <TextView
-                    android:id="@+id/Framerate"
-                    style="@style/RegularText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ph_number_long"/>
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/SizeLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <TextView
-                    style="@style/Label.Table"
-                    android:text="@string/details_size_label"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/Size"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/detail_basic_spacing"
-                        android:text="@string/ph_number_long"/>
-
-                    <TextView
-                        style="@style/Label"
-                        android:layout_width="wrap_content"
-                        android:layout_marginRight="@dimen/detail_basic_spacing"
-                        android:text="@string/display_files_separator"/>
-
-                    <TextView
-                        android:id="@+id/Disks"
-                        style="@style/RegularText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ph_number"/>
-
-                </LinearLayout>
-
-            </TableRow>
-
-        </TableLayout>
-
-        <TextView
-            android:id="@+id/customTitle"
-            style="@style/SectionTitle"
-            android:layout_below="@id/technicalBoxTable"
-            android:text="@string/details_section_custom"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/CustomFieldsWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/customTitle"
-            android:orientation="vertical"
-            android:visibility="gone">
-        </LinearLayout>
-
-    </RelativeLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

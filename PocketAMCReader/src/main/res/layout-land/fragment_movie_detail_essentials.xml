@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Pocket AMC Reader.
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+
+Pocket AMC Reader is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Pocket AMC Reader is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<LinearLayout android:id="@+id/essentialsDataGrid"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/wrapper_spacing_block"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/DirectorLabel"
+        style="@style/Label"
+        android:text="@string/details_director_label" />
+
+    <TextView
+        android:id="@+id/Director"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_line" />
+
+    <TextView
+        android:id="@+id/ActorsLabel"
+        style="@style/Label"
+        android:text="@string/details_actors_label" />
+
+    <TextView
+        android:id="@+id/Actors"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_long" />
+
+    <TextView
+        android:id="@+id/ProducerLabel"
+        style="@style/Label"
+        android:text="@string/details_producer_label" />
+
+    <TextView
+        android:id="@+id/Producer"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_line" />
+
+    <TextView
+        android:id="@+id/WriterLabel"
+        style="@style/Label"
+        android:text="@string/details_writer_label" />
+
+    <TextView
+        android:id="@+id/Writer"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_line" />
+
+    <TextView
+        android:id="@+id/ComposerLabel"
+        style="@style/Label"
+        android:text="@string/details_composer_label" />
+
+    <TextView
+        android:id="@+id/Composer"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_line" />
+
+    <TextView
+        android:id="@+id/CountryLabel"
+        style="@style/Label"
+        android:text="@string/details_country_label" />
+
+    <TextView
+        android:id="@+id/Country"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_line" />
+
+    <TextView
+        android:id="@+id/CommentsLabel"
+        style="@style/Label"
+        android:text="@string/details_comments_label" />
+
+    <TextView
+        android:id="@+id/URLLabel"
+        style="@style/Label"
+        android:text="@string/details_url_label" />
+
+    <TextView
+        android:id="@+id/URL"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_short" />
+
+    <TextView
+        android:id="@+id/OriginalTitleLabel"
+        style="@style/Label"
+        android:text="@string/details_originaltitle_label" />
+
+    <TextView
+        android:id="@+id/OriginalTitle"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_short" />
+
+    <TextView
+        android:id="@+id/TranslatedTitleLabel"
+        style="@style/Label"
+        android:text="@string/details_translatedtitle_label" />
+
+    <TextView
+        android:id="@+id/TranslatedTitle"
+        style="@style/RegularText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wrapper_spacing_block"
+        android:text="@string/ph_text_short" />
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView android:id="@+id/Description"
+        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/wrapper_spacing_block"
+        expandableTextView:animDuration="300"
+        expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
+        expandableTextView:expandDrawable="@drawable/ic_expand_shape"
+        expandableTextView:maxCollapsedLines="5">
+
+        <ImageButton
+            android:id="@id/expand_collapse"
+            style="@style/ExpandableArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="@dimen/arrow_pull_horizontal"
+            android:layout_marginRight="@dimen/arrow_pull_horizontal"
+            android:layout_marginTop="@dimen/arrow_pull_vertical"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/details_expandable_arrow_description" />
+
+        <TextView
+            android:id="@id/expandable_text"
+            style="@style/RegularText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_long" />
+
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView android:id="@+id/Comments"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/wrapper_spacing_block"
+        expandableTextView:animDuration="300"
+        expandableTextView:collapseDrawable="@drawable/ic_collapse_shape"
+        expandableTextView:expandDrawable="@drawable/ic_expand_shape"
+        expandableTextView:maxCollapsedLines="5">
+
+        <ImageButton
+            android:id="@id/expand_collapse"
+            style="@style/ExpandableArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="@dimen/arrow_pull_horizontal"
+            android:layout_marginRight="@dimen/arrow_pull_horizontal"
+            android:layout_marginTop="@dimen/arrow_pull_vertical"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/details_expandable_arrow_description" />
+
+        <TextView
+            android:id="@id/expandable_text"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_long" />
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+</LinearLayout>
