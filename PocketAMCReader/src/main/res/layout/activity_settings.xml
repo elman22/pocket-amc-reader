@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,16 +22,15 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/color_app_bg"
     android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        xmlns:android="http://schemas.android.com/apk/res/android"/>
+        layout="@layout/toolbar" />
 
     <FrameLayout
         android:id="@+id/settings_container"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
