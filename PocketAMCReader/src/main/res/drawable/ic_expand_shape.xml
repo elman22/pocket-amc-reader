@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <shape android:shape="rectangle">
             <gradient
                 android:angle="0"
-                android:centerColor="@color/app_bg"
-                android:endColor="@color/app_bg"
+                android:centerColor="?attr/color_app_bg"
+                android:endColor="?attr/color_app_bg"
                 android:startColor="@android:color/transparent"
                 android:type="linear"/>
         </shape>
