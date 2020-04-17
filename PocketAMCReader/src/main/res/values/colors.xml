@@ -108,7 +108,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <color name="black_color_fast_scroll_thumb_inactive">#aa000000</color>
 
     <!-- Color tags -->
-    <color name="color_tag_0">@android:color/transparent</color>
+    <!-- TODO: refactor color_tag_0 = primary_text_dark_nostates -->
+    <color name="color_tag_0">#f2f2f2</color>
     <color name="color_tag_1">#f16065</color>
     <color name="color_tag_2">#fea567</color>
     <color name="color_tag_3">#fef44c</color>

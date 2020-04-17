@@ -44,6 +44,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -65,6 +66,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     private ImageLoader mImageLoader;
     private DisplayImageOptions mImageOptions;
     private Calendar mCalendar;
+    private Boolean mColorTagTitle;
 
     // Recycler views
     private final int GRID = 0;
@@ -246,61 +248,28 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         }
 
         //<editor-fold desc="Repaint color indicator to match Color tag">
-        String currentColor = getDBValue(Movies.COLOR_TAG, cursor);
-        if (currentColor == null || currentColor.equals("")) {
-            currentColor = "0";
+        String colorTag = getDBValue(Movies.COLOR_TAG, cursor);
+        if (colorTag == null || colorTag.equals("") || !S.COLOR_TAGS.containsKey(colorTag)) {
+            // Since we are using holders, we always have to set a color
+            colorTag = "0";
         }
+
+        int color = S.COLOR_TAGS.get(colorTag);
+
         if (S.VERBOSE)
-            Log.v(S.TAG, "Setting color to: " + currentColor);
+            Log.v(S.TAG, "Setting color to: " + colorTag);
 
-        int background;
-        switch (Integer.parseInt(currentColor)) {
-            case 1:
-                background = R.color.color_tag_1;
-                break;
-            case 2:
-                background = R.color.color_tag_2;
-                break;
-            case 3:
-                background = R.color.color_tag_3;
-                break;
-            case 4:
-                background = R.color.color_tag_4;
-                break;
-            case 5:
-                background = R.color.color_tag_5;
-                break;
-            case 6:
-                background = R.color.color_tag_6;
-                break;
-            case 7:
-                background = R.color.color_tag_7;
-                break;
-            case 8:
-                background = R.color.color_tag_8;
-                break;
-            case 9:
-                background = R.color.color_tag_9;
-                break;
-            case 10:
-                background = R.color.color_tag_10;
-                break;
-            case 11:
-                background = R.color.color_tag_11;
-                break;
-            case 12:
-                background = R.color.color_tag_12;
-                break;
-            default:
-                background = R.color.color_tag_0;
-        }
-
-        // If no color is assigned, hide view
-        if (Integer.parseInt(currentColor) == 0) {
+        // Set color according to color tag
+        if (mColorTagTitle) {
             holder.movieColorTag.setVisibility(View.GONE);
+            holder.FormattedTitle_text.setTextColor(ContextCompat.getColor(mContext, color));
         } else {
-            holder.movieColorTag.setVisibility(View.VISIBLE);
-            holder.movieColorTag.setBackgroundResource(background);
+            if (color == (S.COLOR_TAGS.get("0"))) {
+                holder.movieColorTag.setVisibility(View.GONE);
+            } else {
+                holder.movieColorTag.setBackgroundResource(color);
+                holder.movieColorTag.setVisibility(View.VISIBLE);
+            }
         }
         //</editor-fold>
     }
@@ -380,6 +349,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                 c.getString(R.string.items_separator_default));
         mSettingMovieListOrderField = preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER_FIELD,
                 Movies.DEFAULT_SORT_FIELD);
+        mColorTagTitle = preferences.getBoolean(SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, false);
 
         // Start image loader if thumbs are displayed
         if (mShowThumbs) {

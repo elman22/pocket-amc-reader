@@ -44,6 +44,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
+import androidx.core.content.ContextCompat;
+
 /**
  * Movie model
  * Created by Elman on 11.10.2014.
@@ -55,7 +57,6 @@ public class Movie {
     private Activity mActivity;
     private Resources mResources;
     private Context mContext;
-    private Boolean mPreferenceFilePathLink;
     private String mPreferencePicturesDirectory;
     private ArrayList<ImageView> mPictureViews;
     private double mPictureAspectRatio = 0;
@@ -97,7 +98,8 @@ public class Movie {
         // Read preferences
         SharedPreferences mPreferences = SharedObjects.getInstance().preferences;
         mPreferencePicturesDirectory = mPreferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
-        mPreferenceFilePathLink = mPreferences.getBoolean(SettingsConstants.KEY_PREF_FILE_PATH_LINK, false);
+        boolean mPreferenceFilePathLink = mPreferences.getBoolean(SettingsConstants.KEY_PREF_FILE_PATH_LINK, false);
+        boolean mColorTagTitle = mPreferences.getBoolean(SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, false);
 
         // Fill model
         mMovieModel = new MovieModel(
@@ -196,7 +198,21 @@ public class Movie {
         fillStringIntoView(Movies.DISKS, mMovieModel.getDisks(), STRING_REGULAR,
                 EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
 
-        fillColorIntoView(Movies.COLOR_TAG, mMovieModel.getColorTag());
+        // Get movie color
+        Integer movieColor = null;
+        if (mMovieModel.getColorTag() != null && S.COLOR_TAGS.containsKey(mMovieModel.getColorTag())) {
+            if (S.DEBUG)
+                Log.d(S.TAG, "Setting color to: " + mMovieModel.getColorTag());
+            movieColor = S.COLOR_TAGS.get(mMovieModel.getColorTag());
+        }
+
+        // Set movie color
+        if (mColorTagTitle) {
+            setTextColor(Movies.FORMATTED_TITLE, movieColor);
+            fillColorIntoView(Movies.COLOR_TAG, null);
+        } else {
+            fillColorIntoView(Movies.COLOR_TAG, movieColor);
+        }
     }
 
     /**
@@ -377,17 +393,25 @@ public class Movie {
     /**
      * Fill view with selected color.
      */
-    private void fillColorIntoView(String columnName, String currentColor) {
-        TextView tv = (TextView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                mContext.getPackageName()));
+    private void fillColorIntoView(String columnName, Integer color) {
+        TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
         if (tv != null) {
-            if (currentColor != null && S.COLOR_TAGS.containsKey(currentColor)) {
-                if (S.DEBUG)
-                    Log.d(S.TAG, "Setting color to: " + currentColor);
-                tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get(currentColor)));
+            if (color == null || color.equals(S.COLOR_TAGS.get("0"))) {
+                tv.setVisibility(View.GONE);
             } else {
-                tv.setBackgroundColor(mContext.getResources().getColor(S.COLOR_TAGS.get("0")));
+                tv.setVisibility(View.VISIBLE);
+                tv.setBackgroundColor(ContextCompat.getColor(mContext, color));
             }
+        }
+    }
+
+    /**
+     * Set text color to a text view.
+     */
+    private void setTextColor(String columnName, Integer color) {
+        TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+        if (tv != null && color != null) {
+            tv.setTextColor(ContextCompat.getColor(mContext, color));
         }
     }
 

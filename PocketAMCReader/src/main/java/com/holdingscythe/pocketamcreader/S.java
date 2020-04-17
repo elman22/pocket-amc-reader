@@ -101,6 +101,7 @@ public final class S {
         tmpMap.put(SettingsConstants.KEY_PREF_SHOW_THUMBS, 1);
         tmpMap.put(SettingsConstants.KEY_PREF_SHOW_GRID_TITLE, 1);
         tmpMap.put(SettingsConstants.KEY_PREF_THEME, 1);
+        tmpMap.put(SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, 1);
         SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
     }
 
@@ -122,7 +123,7 @@ public final class S {
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put("0", android.R.color.transparent);
+        tmpMap.put("0", R.color.color_tag_0);
         tmpMap.put("1", R.color.color_tag_1);
         tmpMap.put("2", R.color.color_tag_2);
         tmpMap.put("3", R.color.color_tag_3);

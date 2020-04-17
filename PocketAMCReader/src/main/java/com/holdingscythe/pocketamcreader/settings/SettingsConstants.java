@@ -21,6 +21,7 @@ package com.holdingscythe.pocketamcreader.settings;
 public final class SettingsConstants {
     public static final String KEY_PREF_CATALOG_ENCODING = "settingCatalogEncoding";
     public static final String KEY_PREF_CATALOG_LOCATION = "settingCatalogLocation";
+    public static final String KEY_PREF_COLOR_TAG_TITLE = "settingColorTagTitle";
     public static final String KEY_PREF_DETAIL_SEPARATOR = "settingMultivalueSeparator";
     public static final String KEY_PREF_FILE_PATH_LINK = "settingFilePathLink";
     public static final String KEY_PREF_FIT_PICTURE = "settingFitPicture";
