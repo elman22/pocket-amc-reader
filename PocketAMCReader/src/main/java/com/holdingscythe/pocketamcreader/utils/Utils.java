@@ -18,11 +18,12 @@
 
 package com.holdingscythe.pocketamcreader.utils;
 
-import android.app.Activity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
 import android.webkit.MimeTypeMap;
+
+import com.holdingscythe.pocketamcreader.S;
 
 import java.util.ArrayList;
 
@@ -122,25 +123,23 @@ public class Utils {
     }
 
     /**
-     * Set the theme of the activity, according to the configuration
+     * Return boolean whether custom color tag is set
      */
-    // TODO: validate usage for themes
-    public static void onActivityCreateSetTheme(Activity activity, int theme) {
-//        switch (theme) {
-//            case Movies.THEME_NORMAL:
-//                break;
-//            case Movies.THEME_LARGE:
-//                activity.setTheme(R.style.Theme_Large);
-//                break;
-//            case Movies.THEME_X_LARGE:
-//                activity.setTheme(R.style.Theme_X_Large);
-//                break;
-//            case Movies.THEME_XX_LARGE:
-//                activity.setTheme(R.style.Theme_XX_Large);
-//                break;
-//            default:
-//                break;
-//        }
+    public static boolean isCustomColorTagSet(String colorTag) {
+        return colorTag != null &&
+                !colorTag.equals("") &&
+                !colorTag.equals(S.COLOR_TAG_DEFAULT) &&
+                S.COLOR_TAGS.containsKey(colorTag);
+    }
+
+    /**
+     * Return resource id for color based on color tag or default value
+     */
+    public static int getColorFromColorTag(String colorTag) {
+        if (Utils.isCustomColorTagSet(colorTag)) {
+            return S.COLOR_TAGS.get(colorTag);
+        }
+        return S.COLOR_TAGS.get(S.COLOR_TAG_DEFAULT);
     }
 
 }

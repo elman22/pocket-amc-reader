@@ -244,31 +244,37 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                         holder.FormattedTitle_text.setVisibility(View.GONE);
                 }
             }
-
         }
 
         //<editor-fold desc="Repaint color indicator to match Color tag">
         String colorTag = getDBValue(Movies.COLOR_TAG, cursor);
-        if (colorTag == null || colorTag.equals("") || !S.COLOR_TAGS.containsKey(colorTag)) {
-            // Since we are using holders, we always have to set a color
-            colorTag = "0";
-        }
-
-        int color = S.COLOR_TAGS.get(colorTag);
+        int color = Utils.getColorFromColorTag(colorTag);
+        boolean isCustomColorTagSet = Utils.isCustomColorTagSet(colorTag);
 
         if (S.VERBOSE)
             Log.v(S.TAG, "Setting color to: " + colorTag);
 
         // Set color according to color tag
         if (mColorTagTitle) {
-            holder.movieColorTag.setVisibility(View.GONE);
-            holder.FormattedTitle_text.setTextColor(ContextCompat.getColor(mContext, color));
-        } else {
-            if (color == (S.COLOR_TAGS.get("0"))) {
-                holder.movieColorTag.setVisibility(View.GONE);
-            } else {
+            // Use colored title, but if title is hidden, show line
+            if (!mShowTitle && isCustomColorTagSet) {
                 holder.movieColorTag.setBackgroundResource(color);
                 holder.movieColorTag.setVisibility(View.VISIBLE);
+            } else {
+                if (holder.movieColorTag.getVisibility() == View.VISIBLE)
+                    holder.movieColorTag.setVisibility(View.GONE);
+
+                if (holder.FormattedTitle_text.getVisibility() == View.VISIBLE)
+                    holder.FormattedTitle_text.setTextColor(ContextCompat.getColor(mContext, color));
+            }
+        } else {
+            // Use colored line
+            if (isCustomColorTagSet) {
+                holder.movieColorTag.setBackgroundResource(color);
+                holder.movieColorTag.setVisibility(View.VISIBLE);
+            } else {
+                if (holder.movieColorTag.getVisibility() == View.VISIBLE)
+                    holder.movieColorTag.setVisibility(View.GONE);
             }
         }
         //</editor-fold>

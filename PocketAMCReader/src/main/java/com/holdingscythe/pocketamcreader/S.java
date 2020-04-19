@@ -120,6 +120,7 @@ public final class S {
 
     // Color tags
     public static final Map<String, Integer> COLOR_TAGS;
+    public static final String COLOR_TAG_DEFAULT = "0";
 
     static {
         Map<String, Integer> tmpMap = new HashMap<>();

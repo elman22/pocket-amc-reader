@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -242,6 +243,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         }
                         if (scrollRange + verticalOffset == 0) {
                             // when collapsingToolbar is collapsed, display actionbar title
+                            int color = Utils.getColorFromColorTag(mMovie.getColorTag());
+                            collapsingToolbar.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), color));
                             collapsingToolbar.setTitle(mMovie.getTitle());
                             isShow = true;
                         } else if (isShow) {

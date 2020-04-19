@@ -198,20 +198,19 @@ public class Movie {
         fillStringIntoView(Movies.DISKS, mMovieModel.getDisks(), STRING_REGULAR,
                 EXT_PLURALS_SUFFIX_PADDED, R.plurals.details_disks);
 
-        // Get movie color
-        Integer movieColor = null;
-        if (mMovieModel.getColorTag() != null && S.COLOR_TAGS.containsKey(mMovieModel.getColorTag())) {
-            if (S.DEBUG)
-                Log.d(S.TAG, "Setting color to: " + mMovieModel.getColorTag());
-            movieColor = S.COLOR_TAGS.get(mMovieModel.getColorTag());
-        }
-
         // Set movie color
+        String colorTag = mMovieModel.getColorTag();
+        int color = Utils.getColorFromColorTag(colorTag);
+        boolean isCustomColorTagSet = Utils.isCustomColorTagSet(colorTag);
+
+        if (S.DEBUG)
+            Log.d(S.TAG, "Setting color to: " + colorTag);
+
         if (mColorTagTitle) {
-            setTextColor(Movies.FORMATTED_TITLE, movieColor);
-            fillColorIntoView(Movies.COLOR_TAG, null);
+            setTextColor(Movies.FORMATTED_TITLE, color);
+            fillColorIntoView(Movies.COLOR_TAG, false, color);
         } else {
-            fillColorIntoView(Movies.COLOR_TAG, movieColor);
+            fillColorIntoView(Movies.COLOR_TAG, isCustomColorTagSet, color);
         }
     }
 
@@ -393,14 +392,14 @@ public class Movie {
     /**
      * Fill view with selected color.
      */
-    private void fillColorIntoView(String columnName, Integer color) {
+    private void fillColorIntoView(String columnName, boolean isCustomColorTagSet, int color) {
         TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
         if (tv != null) {
-            if (color == null || color.equals(S.COLOR_TAGS.get("0"))) {
-                tv.setVisibility(View.GONE);
-            } else {
+            if (isCustomColorTagSet) {
                 tv.setVisibility(View.VISIBLE);
                 tv.setBackgroundColor(ContextCompat.getColor(mContext, color));
+            } else {
+                tv.setVisibility(View.GONE);
             }
         }
     }
@@ -408,9 +407,9 @@ public class Movie {
     /**
      * Set text color to a text view.
      */
-    private void setTextColor(String columnName, Integer color) {
+    private void setTextColor(String columnName, int color) {
         TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
-        if (tv != null && color != null) {
+        if (tv != null) {
             tv.setTextColor(ContextCompat.getColor(mContext, color));
         }
     }
@@ -453,6 +452,13 @@ public class Movie {
      */
     public double getPictureAspectRatio() {
         return mPictureAspectRatio;
+    }
+
+    /*
+     * Return color tag
+     */
+    public String getColorTag() {
+        return mMovieModel.getColorTag();
     }
 
     /*
