@@ -228,5 +228,6 @@
     <item>Black</item>
   </string-array>
   <string name="pref_setting_color_tag">Color tag</string>
-  <string name="pref_setting_color_tag_summary">Show color tag as colored movie title</string>
+  <string name="pref_setting_color_tag_summary">Show color tag as colored movie title (otherwise use color
+    lines)</string>
 </resources>
