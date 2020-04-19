@@ -102,9 +102,9 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
     <!-- Themed colors - black -->
     <color name="black_color_action_bar_bg">#000000</color>
-    <color name="black_color_basic_bg1">#101010</color>
-    <color name="black_color_basic_bg2">#202020</color>
-    <color name="black_color_basic_bg3">#303030</color>
+    <color name="black_color_basic_bg1">#202020</color>
+    <color name="black_color_basic_bg2">#303030</color>
+    <color name="black_color_basic_bg3">#404040</color>
     <color name="black_color_fast_scroll_thumb_inactive">#aa000000</color>
 
     <!-- Color tags -->
