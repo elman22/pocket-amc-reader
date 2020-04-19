@@ -202,7 +202,7 @@ public class SettingsListFieldsFragment extends Fragment {
         Toast.makeText(getContext(), getString(R.string.pref_setting_list_saved), Toast.LENGTH_SHORT).show();
 
         if (S.INFO)
-            Log.i(S.TAG, "Refresh requested (settingMoviesListLine)");
+            Log.i(S.TAG, "Refresh requested (" + SettingsConstants.KEY_PREF_MOVIES_LIST_LINE + ")");
     }
 
     private static class MyDragItem extends DragItem {
