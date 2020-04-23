@@ -40,9 +40,9 @@ Select encoding on your PC to ensure correct import of special characters.
 If import crashes leaving you with only some movies imported, check this option to fix it. It has the same functionality as AMC script [RemoveBadChars](http://forum.antp.be/phpbb2/viewtopic.php?p=33221#33221) by soulsnake.
 
 #### APPLICATION
-**Theme**
-Select color theme for the application.
-**Color tag**
+**Theme**  
+Select color theme for the application.  
+**Color tag**  
 If checked, movie title will be colored according to the color tag, just as in older 1.x versions. If disabled, colored line will be used.
 
 #### LIST
@@ -61,8 +61,8 @@ When you use grid view, title is by default displayed. This gives you the option
 **Multi field separator**  
 Define your separators in multi value fields (such as Country, Category, Actors, Producer ...). This allows you to filter specific values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).  
 **Fit picture**  
-Show pictures in details either resized to full screen or with their original size.
-**File path link**
+Show pictures in details either resized to full screen or with their original size.  
+**File path link**  
 If checked, file path will be clickable and Pocket AMC Reader will try to open corresponding application. However be aware that some links can't be opened on mobile device and you will be notified about that. If this features doesn't work for you and you believe it should, please, report a bug on GitHub.
 
 ## Known bugs
