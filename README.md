@@ -1,5 +1,5 @@
 # Pocket AMC Reader
-Version 2.2
+Version 2.3
 
 This application will allow you to read catalogs created by [Ant Movie Catalog](http://www.antp.be/software/moviecatalog) on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
 
@@ -39,6 +39,12 @@ Select encoding on your PC to ensure correct import of special characters.
 **Remove bad characters**  
 If import crashes leaving you with only some movies imported, check this option to fix it. It has the same functionality as AMC script [RemoveBadChars](http://forum.antp.be/phpbb2/viewtopic.php?p=33221#33221) by soulsnake.
 
+#### APPLICATION
+**Theme**
+Select color theme for the application.
+**Color tag**
+If checked, movie title will be colored according to the color tag, just as in older 1.x versions. If disabled, colored line will be used.
+
 #### LIST
 **Fields shown in list**  
 You can choose fields to be displayed in movie list.  
@@ -56,11 +62,22 @@ When you use grid view, title is by default displayed. This gives you the option
 Define your separators in multi value fields (such as Country, Category, Actors, Producer ...). This allows you to filter specific values from details. If you use more separators (e.g. comma for Producer and slash for Category) you can input both as ",/" (without quotes).  
 **Fit picture**  
 Show pictures in details either resized to full screen or with their original size.
+**File path link**
+If checked, file path will be clickable and Pocket AMC Reader will try to open corresponding application. However be aware that some links can't be opened on mobile device and you will be notified about that. If this features doesn't work for you and you believe it should, please, report a bug on GitHub.
 
 ## Known bugs
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
+#### 23.04.2020 Version 2.3
+- ADDED Application color themes
+- ADDED Swipe down in movie details to show whole picture
+- ADDED File path can be clickable (go to Settings to activate and report on GitHub if it doesn't work for you)
+- ADDED Movie is considered watched either when checkbox is checked or when date watched is set
+- ADDED Option to show color tags as colored movie title as in previous 1.x versions
+- UPDATED Third party libraries
+- FIXED Various application optimisations and fixes
+
 #### 12.08.2018 Version 2.2
 - ADDED Thumbnail view with option to hide titles
 - ADDED List fast scroll with section names
