@@ -69,6 +69,7 @@ If checked, file path will be clickable and Pocket AMC Reader will try to open c
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
+
 #### 23.04.2020 Version 2.3
 - ADDED Application color themes
 - ADDED Swipe down in movie details to show whole picture
@@ -76,7 +77,7 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 - ADDED Movie is considered watched either when checkbox is checked or when date watched is set
 - ADDED Option to show color tags as colored movie title as in previous 1.x versions
 - UPDATED Third party libraries
-- FIXED Various application optimisations and fixes
+- FIXED Various application optimizations and fixes
 
 #### 12.08.2018 Version 2.2
 - ADDED Thumbnail view with option to hide titles
@@ -258,4 +259,3 @@ You should have received a copy of the GNU General Public License along with thi
 
 Pocket AMC Reader for Android (c) 2010-2017 Holding Scythe.  
 Ant Movie Catalog was created by Antoine Potten and Mickaël Vanneufville.
-
