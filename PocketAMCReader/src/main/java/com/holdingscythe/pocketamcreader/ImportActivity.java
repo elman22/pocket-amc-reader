@@ -168,6 +168,7 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
     public void onPostExecute() {
         // Delay application start if dialog shown
         if (!mDelayMainActivity) {
+            mTextView.setText(R.string.import_check_finished);
             mProgressBar.setProgress(mProgressBar.getMax());
             startMainActivity();
         }
