@@ -42,6 +42,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -146,9 +147,6 @@ public class ImportFragment extends Fragment {
     public class CatalogImportTask extends AsyncTask<Void, Integer, Void> {
         private long bytesToBeImported;
 
-        private CatalogImportTask() {
-        }
-
         @Override
         protected void onPreExecute() {
             // Proxy the call to the Activity
@@ -176,7 +174,7 @@ public class ImportFragment extends Fragment {
             if (SharedObjects.getInstance().preferences == null) {
                 // Prepare Shared Objects
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                        (getActivity().getApplicationContext());
+                        (Objects.requireNonNull(getActivity()).getApplicationContext());
             }
 
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
@@ -190,7 +188,7 @@ public class ImportFragment extends Fragment {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             if (pm != null) {
                 wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.WAKE_LOCK_TAG);
-                wakeLock.acquire(10*60*1000L /*10 minutes*/);
+                wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
 
                 if (S.DEBUG)
                     Log.d(S.TAG, "Wake Lock acquired.");
@@ -199,6 +197,7 @@ public class ImportFragment extends Fragment {
             // Open file for size check
             try {
                 // Fix for Windows backslashes
+                assert settingCatalogLocation != null;
                 settingCatalogLocation = settingCatalogLocation.replace("\\", "/");
                 sourceCatalog = new File(settingCatalogLocation);
 

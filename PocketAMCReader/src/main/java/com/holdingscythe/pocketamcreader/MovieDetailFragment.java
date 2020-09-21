@@ -45,7 +45,6 @@ import com.holdingscythe.pocketamcreader.catalog.Movies;
 import com.holdingscythe.pocketamcreader.catalog.MoviesDataProvider;
 import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
-import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
@@ -75,8 +74,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Extras mExtras;
     private Filters mFilters;
     private String mPicturesFolder;
-    private int mDeviceWidthPixels;
-    private int mActionBarHeight;
     private int mHeroImageHeight;
 
     private Pattern regExpMultivaluedCleaner;
@@ -112,7 +109,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         // Prepare custom font for the toolbar
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), S.DEFAULT_FONT);
+        final Typeface tf = Typeface.createFromAsset(Objects.requireNonNull(getContext()).getAssets(), S.DEFAULT_FONT);
 
         // Setup filters
         mFilters = new Filters();
@@ -122,11 +119,13 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects
             SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                    (getActivity().getApplicationContext());
+                    (Objects.requireNonNull(getActivity()).getApplicationContext());
         }
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
-        String settingMultivaluedSeparator = preferences.getString(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR, ",/");
+        String settingMultivaluedSeparator =
+                Utils.coalesce(preferences.getString(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR,
+                        ",/"), ",/");
         mPicturesFolder = preferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
@@ -149,7 +148,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             Uri uri = Uri.withAppendedPath(S.CONTENT_URI, "_id/" + getArguments().getString(ARG_MOVIE_ID, "0"));
             Cursor cursor = moviesDataProvider.fetchMovie(uri);
             cursor.moveToFirst();
-            mMovie = new Movie(cursor, getView(), this, getActivity());
+            mMovie = new Movie(cursor, getView(), this, Objects.requireNonNull(getActivity()));
             cursor.close();
 
             // Fetch custom fields
@@ -168,7 +167,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             moviesDataProvider.closeDatabase();
 
             // Set collapsing toolbar title
-            CollapsingToolbarLayout collapsingToolbar = getView().findViewById(R.id.collapsingToolbar);
+            CollapsingToolbarLayout collapsingToolbar = Objects.requireNonNull(getView()).findViewById(R.id.collapsingToolbar);
             AppBarLayout appBarLayout = getView().findViewById(R.id.appBarLayout);
 
             if (collapsingToolbar != null && appBarLayout != null) {
@@ -194,8 +193,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             (int) getResources().getDimension(R.dimen.detail_hero_img_height);
                 }
 
-                mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
-                mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
+                int mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
+                int mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
                 mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
 
                 // Set custom font to the toolbar
@@ -244,7 +243,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         if (scrollRange + verticalOffset == 0) {
                             // when collapsingToolbar is collapsed, display actionbar title
                             int color = Utils.getColorFromColorTag(mMovie.getColorTag());
-                            collapsingToolbar.setCollapsedTitleTextColor(ContextCompat.getColor(getContext(), color));
+                            collapsingToolbar.setCollapsedTitleTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), color));
                             collapsingToolbar.setTitle(mMovie.getTitle());
                             isShow = true;
                         } else if (isShow) {
@@ -326,25 +325,25 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.Category:
-                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
                 break;
             case R.id.Director:
-                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
                 break;
             case R.id.Actors:
-                chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
                 break;
             case R.id.Producer:
-                chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, view);
                 break;
             case R.id.Writer:
-                chooseMultivaluedFieldValue(Movies.FILTER_WRITER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
                 break;
             case R.id.Composer:
-                chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
                 break;
             case R.id.Country:
-                chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
                 break;
 
             case R.id.MediaLabel:
@@ -365,10 +364,10 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.Languages:
-                chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
                 break;
             case R.id.Subtitles:
-                chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, Movies.FILTER_OPERATOR_CONTAINS, view);
+                chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
                 break;
             case R.id.VideoFormat:
                 filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
@@ -477,19 +476,20 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     /**
      * Prepare select to pick from available values in multivalued field
      */
-    private void chooseMultivaluedFieldValue(final FilterField field, final FilterOperator operator, View v) {
+    private void chooseMultivaluedFieldValue(final FilterField field, View v) {
         final String[] availableValues = separateMultivaluedField(v);
 
         // If only one field is available, make direct filter
         if (availableValues.length == 1) {
-            filterClick(new Filter(field, operator, availableValues[0]));
+            filterClick(new Filter(field, Movies.FILTER_OPERATOR_CONTAINS, availableValues[0]));
         } else if (availableValues.length > 1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(mFilters.getFilterFieldHumanName(field.resId) + " " + getString(operator.resId));
+            builder.setTitle(mFilters.getFilterFieldHumanName(field.resId) + " " + getString(Movies.FILTER_OPERATOR_CONTAINS.resId));
             builder.setItems(availableValues, (dialog, item) -> filterClick(new Filter(field,
-                    operator, availableValues[item])));
+                    Movies.FILTER_OPERATOR_CONTAINS, availableValues[item])));
             builder.setNegativeButton(getString(R.string.dialog_negative),
-                    (dialog, whichButton) -> {});
+                    (dialog, whichButton) -> {
+                    });
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }

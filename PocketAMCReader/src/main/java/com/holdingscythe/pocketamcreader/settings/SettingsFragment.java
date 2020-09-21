@@ -153,6 +153,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 // The URI will now be something like content://PACKAGE-NAME/root/path/to/file
                 Uri uri = intent.getData();
                 // A utility method is provided to transform the URI to a File object
+                assert uri != null;
                 File file = com.nononsenseapps.filepicker.Utils.getFileForUri(uri);
 
                 if (S.INFO)

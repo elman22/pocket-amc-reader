@@ -59,6 +59,7 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -218,7 +219,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects
             SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                    (getActivity().getApplicationContext());
+                    (Objects.requireNonNull(getActivity()).getApplicationContext());
         }
 
         // Setup filters from bundle if available
@@ -232,6 +233,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         } else {
             mFilters = new Filters();
         }
+        assert mFilters != null;
         mFilters.setContext(getActivity());
 
         // Setup filter query from bundle
@@ -244,10 +246,10 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         mMoviesDataProvider.setFilters(mFilters);
 
         // Prepare recycler view
-        mRecyclerView = (FastScrollRecyclerView) getView().findViewById(R.id.movie_list_recycler);
+        mRecyclerView = (FastScrollRecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.movie_list_recycler);
 
         // Define layout managers
-        mLinearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        mLinearLayoutManager = new LinearLayoutManager(Objects.requireNonNull(getActivity()).getApplicationContext());
         int gridSpan = (getActivity().getResources().getConfiguration().orientation == Configuration
                 .ORIENTATION_PORTRAIT ? GRID_SPAN : GRID_SPAN_LANDSCAPE);
         mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), gridSpan);
@@ -413,14 +415,13 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
                     mViewType = LIST;
                     prepareMoviesAdapter();
                     mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                    mRecyclerView.setAdapter(mMoviesAdapter);
                 } else {
                     // Change to grid view
                     mViewType = GRID;
                     prepareMoviesAdapter();
                     mRecyclerView.setLayoutManager(mGridLayoutManager);
-                    mRecyclerView.setAdapter(mMoviesAdapter);
                 }
+                mRecyclerView.setAdapter(mMoviesAdapter);
 
                 // Set filter query from previous view
                 if (!mFilterQuery.equals(""))
@@ -667,7 +668,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             if (SharedObjects.getInstance().preferences == null) {
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                        (getActivity().getApplicationContext());
+                        (Objects.requireNonNull(getActivity()).getApplicationContext());
             }
 
             // Close search field
@@ -676,7 +677,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
             // Swap cursor
             mMoviesAdapter.stopImageLoader();
-            mMoviesAdapter.loadConfiguration(getActivity().getBaseContext());
+            mMoviesAdapter.loadConfiguration(Objects.requireNonNull(getActivity()).getBaseContext());
             Cursor oldCursor = mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             if (oldCursor != null)
                 oldCursor.close();
@@ -711,7 +712,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
                 addFilterSecondStep(Movies.availableFilterFields[item]);
             }
         });
-        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {
+        });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -724,7 +726,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         builder.setTitle(mFilters.getFilterFieldHumanName(field.resId));
         builder.setItems(mFilters.getAvailableOperators(field),
                 (dialog, item) -> addFilterThirdStep(field, field.type.operators[item]));
-        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {
+        });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -742,7 +745,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         // Date picker is handled different way
         if (field.type == Movies.FILTER_TYPE_DATE) {
-            new DatePickerDialog(getActivity(), new FilterDatePickerListener(field, operator),
+            new DatePickerDialog(Objects.requireNonNull(getActivity()), new FilterDatePickerListener(field, operator),
                     mDpYear, mDpMonth, mDpDay).show();
             return;
         }
@@ -761,7 +764,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             });
         } else {
             // Prepare view with text input
-            View filterView = getActivity().getLayoutInflater().inflate(R.layout.filter_input, null);
+            View filterView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.filter_input, null);
             final EditText filterValueView = filterView.findViewById(R.id.filterValue);
             if (field.type == Movies.FILTER_TYPE_NUMBER) {
                 DigitsKeyListener digitsKeyListener = new DigitsKeyListener(false, true);
@@ -778,21 +781,22 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         }
 
         // Negative button is for both options
-        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {});
+        builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {
+        });
 
         AlertDialog alertDialog = builder.create();
 
         alertDialog.setOnShowListener(dialog -> {
             if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
                 InputMethodManager imm =
-                        (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                        (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
         });
         alertDialog.setOnDismissListener(dialog -> {
             if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
                 InputMethodManager imm =
-                        (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                        (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
@@ -846,7 +850,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     private void prepareMoviesAdapter() {
         mMoviesAdapter = new MoviesAdapter(
-                getActivity().getBaseContext(),
+                Objects.requireNonNull(getActivity()).getBaseContext(),
                 mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
                         null),
                 mViewType,

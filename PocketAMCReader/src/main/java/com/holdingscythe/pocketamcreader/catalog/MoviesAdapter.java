@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -344,12 +345,12 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         String sortOrder = preferences.getString(SettingsConstants.KEY_PREF_MOVIE_LIST_ORDER,
                 Movies.DEFAULT_SORT_ORDER);
         mSortedField = Movies.SettingsSortFieldsMap.get(sortOrder);
-        mListFieldsLine1 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
-                Movies.defaultListFieldsLine1).split(",");
-        mListFieldsLine2 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
-                Movies.defaultListFieldsLine2).split(",");
-        mListFieldsLine3 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
-                Movies.defaultListFieldsLine3).split(",");
+        mListFieldsLine1 = Objects.requireNonNull(preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
+                Movies.defaultListFieldsLine1)).split(",");
+        mListFieldsLine2 = Objects.requireNonNull(preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
+                Movies.defaultListFieldsLine2)).split(",");
+        mListFieldsLine3 = Objects.requireNonNull(preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
+                Movies.defaultListFieldsLine3)).split(",");
         mSettingListForceSortField = preferences.getBoolean(SettingsConstants.KEY_PREF_FORCE_SORT_FIELD, true);
         mSettingMoviesListSeparator = preferences.getString(SettingsConstants.KEY_PREF_LIST_SEPARATOR,
                 c.getString(R.string.items_separator_default));

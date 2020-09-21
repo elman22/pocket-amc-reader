@@ -44,6 +44,7 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 
@@ -390,18 +391,18 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         projection.add(Movies.SettingsSortFieldsMap.get(sortOrder));
 
         // Shown fields
-        String[] listFields1 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
-                Movies.defaultListFieldsLine1).split(",");
+        String[] listFields1 = Objects.requireNonNull(this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
+                Movies.defaultListFieldsLine1)).split(",");
         if (!TextUtils.isEmpty(listFields1[0])) {
             projection.addAll(Arrays.asList(listFields1));
         }
-        String[] listFields2 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
-                Movies.defaultListFieldsLine2).split(",");
+        String[] listFields2 = Objects.requireNonNull(this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2,
+                Movies.defaultListFieldsLine2)).split(",");
         if (!TextUtils.isEmpty(listFields2[0])) {
             projection.addAll(Arrays.asList(listFields2));
         }
-        String[] listFields3 = this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
-                Movies.defaultListFieldsLine3).split(",");
+        String[] listFields3 = Objects.requireNonNull(this.preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3,
+                Movies.defaultListFieldsLine3)).split(",");
         if (!TextUtils.isEmpty(listFields3[0])) {
             projection.addAll(Arrays.asList(listFields3));
         }

@@ -34,6 +34,8 @@ import com.holdingscythe.pocketamcreader.utils.Theme;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.Objects;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
@@ -112,8 +114,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
             mTwoPane = SharedObjects.getInstance().twoPane = true;
 
             // In two-pane mode, list items should be given the 'activated' state when touched.
-            ((MovieListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.movie_list_container))
+            ((MovieListFragment) Objects.requireNonNull(getSupportFragmentManager()
+                    .findFragmentById(R.id.movie_list_container)))
                     .setActivateOnItemClick(true);
         }
 

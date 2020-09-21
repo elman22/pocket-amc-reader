@@ -142,4 +142,11 @@ public class Utils {
         return S.COLOR_TAGS.get(S.COLOR_TAG_DEFAULT);
     }
 
+    /**
+     * Java coalescing operator alternative
+     */
+    public static <T> T coalesce(T one, T two) {
+        return one != null ? one : two;
+    }
+
 }

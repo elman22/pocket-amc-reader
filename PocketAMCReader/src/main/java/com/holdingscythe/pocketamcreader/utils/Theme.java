@@ -48,6 +48,7 @@ public class Theme {
         String settingTheme = preferences.getString(SettingsConstants.KEY_PREF_THEME,
                 this.activity.getString(R.string.pref_setting_theme_default_value));
 
+        assert settingTheme != null;
         switch (settingTheme) {
             case S.THEME_RED:
                 theme = R.style.AppThemeRed;

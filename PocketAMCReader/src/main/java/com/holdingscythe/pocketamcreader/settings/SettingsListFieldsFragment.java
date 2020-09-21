@@ -144,9 +144,11 @@ public class SettingsListFieldsFragment extends Fragment {
             String loadedPrefs = loadedLine.first;
             ArrayList<SettingsListField> loadedArray = loadedLine.second;
 
+            assert loadedPrefs != null;
             for (String fldDB : loadedPrefs.split(",")) {
                 for (SettingsListField fld : mFieldsArrayUnused) {
                     if (fld.getDatabaseField().equals(fldDB)) {
+                        assert loadedArray != null;
                         loadedArray.add(fld);
                         mFieldsArrayUnused.remove(fld);
                         break;

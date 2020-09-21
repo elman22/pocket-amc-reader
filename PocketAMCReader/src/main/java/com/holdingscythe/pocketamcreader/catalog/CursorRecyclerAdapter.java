@@ -84,8 +84,6 @@ public abstract class CursorRecyclerAdapter<VH
 
     /**
      * This method will move the Cursor to the correct position and call
-     * {@link #onBindViewHolderCursor(android.support.v7.widget.RecyclerView.ViewHolder,
-     * android.database.Cursor)}.
      *
      * @param holder {@inheritDoc}
      * @param i      {@inheritDoc}
@@ -104,7 +102,6 @@ public abstract class CursorRecyclerAdapter<VH
     /**
      * See {@link android.widget.CursorAdapter#bindView(android.view.View, android.content.Context,
      * android.database.Cursor)},
-     * {@link #onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)}
      *
      * @param holder View holder.
      * @param cursor The cursor from which to get the data. The cursor is already
