@@ -147,8 +147,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             if (!mIsFilterSet) {
                 String filterValue = year + "-"
-                        + String.format("%2s", String.valueOf(monthOfYear + 1)).replace(' ', '0') + "-"
-                        + String.format("%2s", String.valueOf(dayOfMonth)).replace(' ', '0');
+                        + String.format("%2s", (monthOfYear + 1)).replace(' ', '0') + "-"
+                        + String.format("%2s", dayOfMonth).replace(' ', '0');
                 mFilters.addFilter(new Filter(mFilterField, mFilterOperator, filterValue));
                 mIsFilterSet = true;
                 refreshList();
