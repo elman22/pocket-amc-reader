@@ -23,6 +23,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - blue -->
     <style name="AppThemeBlue" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/blue_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/blue_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/blue_color_basic_bg1</item>
@@ -34,6 +35,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - red -->
     <style name="AppThemeRed" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/red_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/red_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/red_color_basic_bg1</item>
@@ -45,6 +47,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - indigo -->
     <style name="AppThemeIndigo" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/indigo_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/indigo_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/indigo_color_basic_bg1</item>
@@ -56,6 +59,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - green -->
     <style name="AppThemeGreen" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/green_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/green_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/green_color_basic_bg1</item>
@@ -67,6 +71,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - orange -->
     <style name="AppThemeOrange" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/orange_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/orange_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/orange_color_basic_bg1</item>
@@ -78,6 +83,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - grey -->
     <style name="AppThemeGrey" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/grey_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/grey_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/grey_color_basic_bg1</item>
@@ -89,6 +95,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - brown -->
     <style name="AppThemeBrown" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/brown_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/brown_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/brown_color_basic_bg1</item>
@@ -100,6 +107,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - pink -->
     <style name="AppThemePink" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/pink_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/pink_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/pink_color_basic_bg1</item>
@@ -111,6 +119,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - purple -->
     <style name="AppThemePurple" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/purple_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/purple_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/purple_color_basic_bg1</item>
@@ -122,6 +131,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Base application theme - black -->
     <style name="AppThemeBlack" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/black_color_action_bar_bg</item>
+        <item name="android:navigationBarColor">@color/app_bg</item>
         <item name="color_app_bg">@color/app_bg</item>
         <item name="color_action_bar_bg">@color/black_color_action_bar_bg</item>
         <item name="color_basic_bg1">@color/black_color_basic_bg1</item>
