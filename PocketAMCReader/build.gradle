@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.1'
+    buildToolsVersion '30.0.2'
     defaultConfig {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdkVersion 16
@@ -94,7 +94,7 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Android material design
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
     // https://github.com/spacecowboy/NoNonsense-FilePicker
     implementation 'com.nononsenseapps:filepicker:4.2.1'
     // https://github.com/Manabu-GT/ExpandableTextView
@@ -105,7 +105,7 @@ dependencies {
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'io.github.inflationx:viewpump:2.0.3'
     // https://github.com/woxblom/DragListView
-    implementation 'com.github.woxthebox:draglistview:1.7.0'
+    implementation 'com.github.woxthebox:draglistview:1.7.2'
     // https://github.com/timusus/RecyclerView-FastScroll
     implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
 }
