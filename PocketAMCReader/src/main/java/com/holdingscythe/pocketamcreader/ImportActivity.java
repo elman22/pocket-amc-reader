@@ -48,7 +48,7 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
     private static final String KEY_CURRENT_PROGRESS = "current_progress";
     private ProgressBar mProgressBar;
     private TextView mTextView;
-    private boolean mDelayMainActivity = false;
+    private boolean mDelayedMainActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +143,7 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
                 break;
             case S.IMPORT_ERROR_CONVERSION:
             case S.IMPORT_ERROR_LOADING:
-                mDelayMainActivity = true;
+                mDelayedMainActivity = true;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.error_import_label));
@@ -167,7 +167,7 @@ public class ImportActivity extends AppCompatActivity implements ImportFragment.
     @Override
     public void onPostExecute() {
         // Delay application start if dialog shown
-        if (!mDelayMainActivity) {
+        if (!mDelayedMainActivity) {
             mTextView.setText(R.string.import_check_finished);
             mProgressBar.setIndeterminate(true);
             startMainActivity();
