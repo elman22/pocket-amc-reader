@@ -178,13 +178,37 @@
   <string name="settings_cards_column3_title">Linia 3</string>
   <string name="settings_cards_column4_title">Dostępne pola</string>
   <string name="card_click_hint">Przytrzymaj i przeciągnij, aby zmienić kolejność</string>
-  <string name="pref_setting_remove_bad_chars">Usuń złe znaki</string>
-  <string name="pref_setting_remove_bad_chars_summary">Usuń złe znaki w pliku XML podczas importu. Używaj tylko wtedy, gdy oryginalny plik XML nie załaduje się</string>
+  <string name="pref_setting_remove_bad_chars">Usuń nieprawidłowe znaki</string>
+  <string name="pref_setting_remove_bad_chars_summary">Usuń nieprawidłowe znaki w pliku XML podczas importu. Użyj tylko wtedy, gdy oryginalny plik XML nie załaduje się</string>
   <string name="error_import2">Wystąpił problem z importowaniem. Zwykle dzieje się tak, gdy katalog zawiera jakieś niestandardowe znaki. Aby to naprawić, możesz spróbować:\n\n- Przejdź do ustawień i sprawdź \"%1$s\"\n- Spróbuj zmienić ustawieniia \"%2$s\"\n- Uruchom skrypt PC Ant Movie Catalog o nazwie RemoveBadChars i spróbuj ponownie zaimportować\n\nUpewnij się czy masz wystarczająco dużo wolnego miejsca na swoim urządzeniu (nie na karcie SD). Wymagany jest dwukrotnie większy rozmiar XML.\n\nJeśli nic z tego nie pomoże, skontaktuj się z autorem za pośrednictwem strony internetowej wyświetlanej w Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Pola niestandardowe</string>
   <!--Version 2.2-->
   <string name="menu_switch_view">Widok</string>
   <string name="pref_setting_grid_title">Pokaż tytuł filmu w widoku płytek</string>
-  <string name="pref_setting_show_grid_title_summary">Pokaż tytuł filmu w widoku płytek (jeśli obrazek nie jest dostępny, zawsze pokazany jest tytuł)</string>
+  <string name="pref_setting_show_grid_title_summary">Pokaż tytuł filmu w widoku płytek (jeżeli obrazek nie jest dostępny, zawsze pokazany jest tytuł)</string>
+  <!--Version 2.3-->
+  <string name="link_not_opened">Nie wiem, jak otworzyć ten link</string>
+  <string name="link_not_opened_hint">Nie udało się otworzyć linku. Czy masz jakąś aplikację zdolną do obsługi tego linku?</string>
+  <string name="file_not_found">Pliku nie znaleziono</string>
+  <string name="pref_setting_filepath_link">Link do ścieżki pliku</string>
+  <string name="pref_setting_filepath_link_summary">Utwórz klikalną ścieżkę do pliku i spróbuj otworzyć odpowiednią aplikację</string>
+  <string name="pref_category_application">Aplikacja</string>
+  <string name="pref_setting_theme">Motyw</string>
+  <string name="pref_setting_theme_summary">Motyw koloru aplikacji</string>
+  <string-array name="pref_setting_theme_names">
+    <item>Niebieski</item>
+    <item>Czerwony</item>
+    <item>Zielony</item>
+    <item>Indygo</item>
+    <item>Fioletowy</item>
+    <item>Różowy</item>
+    <item>Pomarańczowy</item>
+    <item>Brązowy</item>
+    <item>Szary</item>
+    <item>Czarny</item>
+  </string-array>
+  <string name="pref_setting_color_tag">Kolor znacznika</string>
+  <string name="pref_setting_color_tag_summary">Pokaż kolor znacznika jako kolorowy tytuł filmu (w przeciwnym razie użyj kolorowych linii)</string>
+  <string name="import_check_finished">Ładowanie…</string>
 </resources>
