@@ -43,7 +43,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="locale_sk_translator" translatable="false">František Goliaš</string>
     <string name="locale_pl_translator" translatable="false">Marek Bogacz</string>
 
-    <string name="copyright_year" translatable="false">2020</string>
+    <string name="copyright_year" translatable="false">2021</string>
     <string name="rating_star" translatable="false">&#x2605;</string>
     <string name="userrating_star" translatable="false">&#x2606;</string>
     <string name="rating_suffix" translatable="false">/10</string>
