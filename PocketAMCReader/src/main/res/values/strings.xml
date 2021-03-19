@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importing movies…</string>
   <string name="import_read_file">Reading catalog…</string>
@@ -57,20 +57,14 @@
   <string name="details_url_label">URL</string>
   <string name="details_date_label">Date added</string>
   <string name="menu_about">About</string>
-  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding
-    Scythe\n\nThis program is free software: you can redistribute it and/or modify it under the
-    terms of the GNU General Public License as published by the Free Software Foundation, either
-    version 3 of the License, or (at your option) any later version.\n\nTranslators\n%4$s\n\nUsed
-    libraries\n%5$s</string>
+  <string name="about">%1$s\nversion %2$s\n\nDeveloped by Elman\nCopyright © %3$s Holding Scythe\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nTranslators\n%4$s\n\nUsed libraries\n%5$s</string>
   <string name="menu_sort_title">Sort</string>
   <string name="menu_sort_formattedtitle_desc">Title (Z to A)</string>
   <string name="menu_sort_formattedtitle_asc">Title (A to Z)</string>
   <string name="menu_sort_number_desc">Number (Most recent)</string>
   <string name="menu_sort_number_asc">Number (Oldest)</string>
   <string name="welcome_title">Welcome</string>
-  <string name="welcome_message">To start using this application you will be redirected to
-    \"%1$s\" where you shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\"
-    to match your PC settings.\n\nThe app will import your movies after leaving \"%1$s\".</string>
+  <string name="welcome_message">To start using this application you will be redirected to \"%1$s\" where you shall:\n\n- Pick your XML catalog in \"%2$s\" setting,\n- Change \"%3$s\" to match your PC settings.\n\nThe app will import your movies after leaving \"%1$s\".</string>
   <string name="welcome_dialog_dismiss">Continue</string>
   <string name="dialog_positive">OK</string>
   <string name="dialog_negative">Cancel</string>
@@ -125,11 +119,9 @@
   <string name="pref_setting_list_saved">Settings saved</string>
   <string name="pref_category_list">List</string>
   <string name="pref_setting_list_force_sort_field">Show sorted field</string>
-  <string name="pref_setting_list_force_sort_field_summary">Display sorted field in 3rd line
-    unless already displayed</string>
+  <string name="pref_setting_list_force_sort_field_summary">Display sorted field in 3rd line unless already displayed</string>
   <string name="pref_setting_list_separator">Fields separator</string>
-  <string name="pref_setting_list_separator_summary">Text separator displayed between fields
-    (comma is used by default)</string>
+  <string name="pref_setting_list_separator_summary">Text separator displayed between fields (comma is used by default)</string>
   <string name="details_picture_label">Picture</string>
   <string name="details_originaltitle_label">Original title</string>
   <string name="details_translatedtitle_label">Translated title</string>
@@ -141,8 +133,7 @@
   <string name="menu_sort_color_tag_asc">Color tag (Lowest)</string>
   <string name="details_colortag_label">Color tag</string>
   <string name="pref_setting_multivalue">Multi field separator</string>
-  <string name="pref_setting_multivalue_summary">Specify separator you use to separate directors,
-    producers, actors etc. You can use more separators at once</string>
+  <string name="pref_setting_multivalue_summary">Specify separator you use to separate directors, producers, actors etc. You can use more separators at once</string>
   <string name="details_img_description">Movie picture</string>
   <string name="input_filter_hint">Filter value</string>
   <string name="menu_sort_date_desc">Date added (Most recent)</string>
@@ -178,8 +169,7 @@
   <string name="details_section_media">Media details</string>
   <string name="details_section_technical">Technical details</string>
   <string name="pref_setting_list_lines">Fields shown in list</string>
-  <string name="pref_setting_list_lines_summary">Pick and order fields to be displayed in movie
-    list</string>
+  <string name="pref_setting_list_lines_summary">Pick and order fields to be displayed in movie list</string>
   <string name="list_holder_row1">Add some fields (e.g. Title)</string>
   <string name="list_holder_row2">Add some fields (e.g. Number, Year, Length, Rating)</string>
   <string name="list_holder_row3">Add some fields (e.g. Category)</string>
@@ -189,29 +179,20 @@
   <string name="settings_cards_column4_title">Available fields</string>
   <string name="card_click_hint">Hold and drag to rearrange</string>
   <string name="pref_setting_remove_bad_chars">Remove bad characters</string>
-  <string name="pref_setting_remove_bad_chars_summary">Remove bad characters in XML file during
-    import. Use only when original XML fails to load</string>
-  <string name="error_import2">There is a problem with import. This usually happens when catalog
-    contains some non standard characters. To fix it, you can try:\n\n- Go to settings and check
-    \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called
-    RemoveBadChars and try import again\n\nAlso make sure you have enough free space on your
-    device (not the SD card). Twice the size of XML is required.\n\nIf none of this helps,
-    please, contact the author via web page shown on Google Play.</string>
+  <string name="pref_setting_remove_bad_chars_summary">Remove bad characters in XML file during import. Use only when original XML fails to load</string>
+  <string name="error_import2">There is a problem with import. This usually happens when catalog contains some non standard characters. To fix it, you can try:\n\n- Go to settings and check \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nAlso make sure you have enough free space on your device (not the SD card). Twice the size of XML is required.\n\nIf none of this helps, please, contact the author via web page shown on Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Custom fields</string>
   <!--Version 2.2-->
   <string name="menu_switch_view">View</string>
   <string name="pref_setting_grid_title">Show title in grid view</string>
-  <string name="pref_setting_show_grid_title_summary">Show movie title in grid view (if picture
-    is not available, title is always shown)</string>
+  <string name="pref_setting_show_grid_title_summary">Show movie title in grid view (if picture is not available, title is always shown)</string>
   <!--Version 2.3-->
   <string name="link_not_opened">Don\'t know how to open this link</string>
-  <string name="link_not_opened_hint">Could not open the link. Do you have any application
-    capable of handling this link?</string>
+  <string name="link_not_opened_hint">Could not open the link. Do you have any application capable of handling this link?</string>
   <string name="file_not_found">File not found</string>
   <string name="pref_setting_filepath_link">File path link</string>
-  <string name="pref_setting_filepath_link_summary">Make file path clickable and try to
-    open corresponding application</string>
+  <string name="pref_setting_filepath_link_summary">Make file path clickable and try to open corresponding application</string>
   <string name="pref_category_application">Application</string>
   <string name="pref_setting_theme">Theme</string>
   <string name="pref_setting_theme_summary">Application color theme</string>
@@ -228,7 +209,6 @@
     <item>Black</item>
   </string-array>
   <string name="pref_setting_color_tag">Color tag</string>
-  <string name="pref_setting_color_tag_summary">Show color tag as colored movie title (otherwise use color
-    lines)</string>
+  <string name="pref_setting_color_tag_summary">Show color tag as colored movie title (otherwise use color lines)</string>
   <string name="import_check_finished">Loading…</string>
 </resources>
