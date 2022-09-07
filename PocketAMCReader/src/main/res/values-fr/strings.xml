@@ -61,8 +61,8 @@
   <string name="menu_sort_title">Tri</string>
   <string name="menu_sort_formattedtitle_desc">Titre (Z - A)</string>
   <string name="menu_sort_formattedtitle_asc">Titre (A - Z)</string>
-  <string name="menu_sort_number_desc">Nombre (Récent)</string>
-  <string name="menu_sort_number_asc">Nombre (Ancien)</string>
+  <string name="menu_sort_number_desc">Numéro (Récent)</string>
+  <string name="menu_sort_number_asc">Numéro (Ancien)</string>
   <string name="welcome_title">Bienvenue</string>
   <string name="welcome_message">Pour commencer à utiliser cette application vous serez dirigé vers \"%1$s\" afin de:\n\n- Sélectionner votre catalogue XML dans le paramètre \"%2$s\",\n- Modifier \"%3$s\" pour correspondre au codage du PC.\n\nL\'application va importer les données de vos films dès que vous quitterez \"%1$s\".</string>
   <string name="welcome_dialog_dismiss">Suite</string>
@@ -72,6 +72,7 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Filtre:</item>
+    <item quantity="few">Filtres:</item>
     <item quantity="other">Filtres:</item>
   </plurals>
   <string name="filter_none">aucun</string>
@@ -90,7 +91,7 @@
   <string name="filter_type_begins_with">commence par</string>
   <string name="filter_type_ends_with">se termine par</string>
   <string name="details_formattedtitle_label">Titre</string>
-  <string name="details_number_label">Nombre</string>
+  <string name="details_number_label">Numéro</string>
   <string name="details_year_label">Année</string>
   <string name="details_length_label">Durée</string>
   <string name="details_description_label">Description</string>
@@ -137,4 +138,77 @@
   <string name="input_filter_hint">Filtres</string>
   <string name="menu_sort_date_desc">Date d\'ajoût (Récente)</string>
   <string name="menu_sort_date_asc">Date d\'ajoût (Ancienne)</string>
+  <string name="details_writer_label">Scénariste</string>
+  <string name="details_composer_label">Compositeur</string>
+  <string name="details_filepath_label">Chemin du fichier</string>
+  <string name="details_userrating_label">Ma note</string>
+  <string name="menu_sort_userrating_desc">Ma note (Max)</string>
+  <string name="menu_sort_userrating_asc">Ma note (Min)</string>
+  <string name="details_datewatched_label">Vu le</string>
+  <string name="menu_sort_datewatched_desc">Vu le (Dernier)</string>
+  <string name="menu_sort_datewatched_asc">Vu le (Premier)</string>
+  <string name="details_certification_label">Certification</string>
+  <string name="menu_sort_certification_desc">Classification (Z à A)</string>
+  <string name="menu_sort_certification_asc">Classification (A à Z)</string>
+  <string name="pref_setting_fit_picture">Ajuster l'image</string>
+  <string name="pref_setting_fit_picture_summary">Ajuste la taille de l'image pour remplir l'écran</string>
+  <string name="details_etag_label">Mot-clé</string>
+  <string name="details_etitle_label">Titre</string>
+  <string name="details_ecategory_label">Categorie</string>
+  <string name="details_eurl_label">Lien</string>
+  <string name="details_edescription_label">Description</string>
+  <string name="details_ecomments_label">Commentaires</string>
+  <string name="details_ecreated_by_label">Créé par</string>
+  <string name="filter_remove">Effacer les critères</string>
+  <string name="filter_remove_all">Tous les critères</string>
+  <!--Version 2.0-->
+  <string name="import_check_file">Vérifier les mises à jour…</string>
+  <string name="loading">Chargement…</string>
+  <string name="details_picture_description">Affiche du film</string>
+  <string name="details_certification_label_short">Classif.</string>
+  <string name="details_section_media">Détails support</string>
+  <string name="details_section_technical">Détails techniques</string>
+  <string name="pref_setting_list_lines">Champ listés</string>
+  <string name="pref_setting_list_lines_summary">Choisir et trier les champs à afficher dans la liste des films</string>
+  <string name="list_holder_row1">Ajoûter des champs (ex: Titre)</string>
+  <string name="list_holder_row2">Ajoûter des champs (ex:  Numéro, Année, Durée, Note)</string>
+  <string name="list_holder_row3">Ajoûter des champs (ex:  Categorie)</string>
+  <string name="settings_cards_column1_title">Ligne 1</string>
+  <string name="settings_cards_column2_title">Ligne 2</string>
+  <string name="settings_cards_column3_title">Ligne 3</string>
+  <string name="settings_cards_column4_title">Champs disponibles</string>
+  <string name="card_click_hint">Saisir et tirer pour réorganiser</string>
+  <string name="pref_setting_remove_bad_chars">Supprimer les mauvais caractères</string>
+  <string name="pref_setting_remove_bad_chars_summary">Supprime les caractères incompatibles du fichier XML lors de l'import. À n'utiliser qu'en cas d'erreur de chargement du fichier XML d'origine</string>
+  <string name="error_import2">Il y a un problème d'import. C'est ce qui arrive quand le catalogue contient des caractères non conformes. Pour corriger, essayer de:\n\n- Cocher \"%1$s\" dans les paramètres\n- De modifier \"%2$s\"\n- De lancer sur PC le script de Ant Movie Catalog (F6) intitulé RemoveBadChars.ifs et essayer de réimporter\n\nAssurez-vous également que vous avez suffisament d'espace libre sur Android (pas sur la carte SD). Le double de la taille du fichier XML est nécessaire.\n\nEn cas d'échec, veuillez contacter l'auteur via la page web visible sur Google Play.</string>
+  <!--Version 2.1-->
+  <string name="details_section_custom">Champs personnalisée</string>
+  <!--Version 2.2-->
+  <string name="menu_switch_view">Vue</string>
+  <string name="pref_setting_grid_title">Affichage en mode tableau</string>
+  <string name="pref_setting_show_grid_title_summary">Présente les films en mode tableau (si l'image n'est pas disponible, le titre sera toujours indiqué)</string>
+  <!--Version 2.3-->
+  <string name="link_not_opened">Lien non reconnu</string>
+  <string name="link_not_opened_hint">Le lien n'a pas pu être ouvert. Avez-vous une application capable de traiter ce type de lien?</string>
+  <string name="file_not_found">Fichier non trouvé</string>
+  <string name="pref_setting_filepath_link">Chemin de fichier actif</string>
+  <string name="pref_setting_filepath_link_summary">Rend le chemin de fichier clickable et essaie d'ouvrir l'application correspondante</string>
+  <string name="pref_category_application">Application</string>
+  <string name="pref_setting_theme">Thème</string>
+  <string name="pref_setting_theme_summary">Thème couleur de l'application</string>
+  <string-array name="pref_setting_theme_names">
+    <item>Bleu</item>
+    <item>Rouge</item>
+    <item>Vert</item>
+    <item>Indigo</item>
+    <item>Violet</item>
+    <item>Rose</item>
+    <item>Orange</item>
+    <item>Marron</item>
+    <item>Gris</item>
+    <item>Noir</item>
+  </string-array>
+  <string name="pref_setting_color_tag">Champ couleur</string>
+  <string name="pref_setting_color_tag_summary">Utiliser le champ Couleur pour colorer le titre du film (sinon c'est la ligne séparatrice qui sera colorée)</string>
+  <string name="import_check_finished">Loading…</string>
 </resources>
