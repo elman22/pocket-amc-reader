@@ -121,7 +121,7 @@
   <string name="pref_setting_list_force_sort_field">Champ du tri</string>
   <string name="pref_setting_list_force_sort_field_summary">Affiche toujours en 3e ligne le champ servant au tri de la liste, sauf si déjà affiché</string>
   <string name="pref_setting_list_separator">Séparateur de champs</string>
-  <string name="pref_setting_list_separator_summary">Caractère(s) à utiliser pour séparés les champs d\'une même ligne (virgule utilisée par défaut)</string>
+  <string name="pref_setting_list_separator_summary">Caractère(s) à utiliser pour séparer les champs d\'une même ligne (virgule utilisée par défaut)</string>
   <string name="details_picture_label">Image</string>
   <string name="details_originaltitle_label">Titre original</string>
   <string name="details_translatedtitle_label">Titre traduit</string>
@@ -150,8 +150,8 @@
   <string name="details_certification_label">Certification</string>
   <string name="menu_sort_certification_desc">Classification (Z à A)</string>
   <string name="menu_sort_certification_asc">Classification (A à Z)</string>
-  <string name="pref_setting_fit_picture">Ajuster l'image</string>
-  <string name="pref_setting_fit_picture_summary">Ajuste la taille de l'image pour remplir l'écran</string>
+  <string name="pref_setting_fit_picture">Ajuster l\'image</string>
+  <string name="pref_setting_fit_picture_summary">Ajuste la taille de l\'image pour remplir l\'écran</string>
   <string name="details_etag_label">Mot-clé</string>
   <string name="details_etitle_label">Titre</string>
   <string name="details_ecategory_label">Categorie</string>
@@ -178,24 +178,24 @@
   <string name="settings_cards_column3_title">Ligne 3</string>
   <string name="settings_cards_column4_title">Champs disponibles</string>
   <string name="card_click_hint">Saisir et tirer pour réorganiser</string>
-  <string name="pref_setting_remove_bad_chars">Supprimer les mauvais caractères</string>
-  <string name="pref_setting_remove_bad_chars_summary">Supprime les caractères incompatibles du fichier XML lors de l'import. À n'utiliser qu'en cas d'erreur de chargement du fichier XML d'origine</string>
-  <string name="error_import2">Il y a un problème d'import. C'est ce qui arrive quand le catalogue contient des caractères non conformes. Pour corriger, essayer de:\n\n- Cocher \"%1$s\" dans les paramètres\n- De modifier \"%2$s\"\n- De lancer sur PC le script de Ant Movie Catalog (F6) intitulé RemoveBadChars.ifs et essayer de réimporter\n\nAssurez-vous également que vous avez suffisament d'espace libre sur Android (pas sur la carte SD). Le double de la taille du fichier XML est nécessaire.\n\nEn cas d'échec, veuillez contacter l'auteur via la page web visible sur Google Play.</string>
+  <string name="pref_setting_remove_bad_chars">Auto correction</string>
+  <string name="pref_setting_remove_bad_chars_summary">Éradique les caractères incompatibles du fichier XML lors de l\'import. À n\'utiliser qu\'en cas d\'erreur de chargement du fichier XML d\'origine</string>
+  <string name="error_import2">Il y a un problème d\'import. C\'est ce qui arrive quand le catalogue contient des caractères non conformes. Pour corriger, essayer de:\n\n- Cocher \"%1$s\" dans les paramètres\n- De modifier \"%2$s\"\n- De lancer sur PC le script de Ant Movie Catalog (F6) intitulé RemoveBadChars.ifs et essayer de réimporter\n\nAssurez-vous également que vous avez suffisament d\'espace libre sur Android (pas sur la carte SD). Le double de la taille du fichier XML est nécessaire.\n\nEn cas d\'échec, veuillez contacter l\'auteur via la page web visible sur Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Champs personnalisée</string>
   <!--Version 2.2-->
   <string name="menu_switch_view">Vue</string>
   <string name="pref_setting_grid_title">Affichage en mode tableau</string>
-  <string name="pref_setting_show_grid_title_summary">Présente les films en mode tableau (si l'image n'est pas disponible, le titre sera toujours indiqué)</string>
+  <string name="pref_setting_show_grid_title_summary">Présente les films en mode tableau (si l\'image n\'est pas disponible, le titre, lui, sera bien indiqué)</string>
   <!--Version 2.3-->
   <string name="link_not_opened">Lien non reconnu</string>
-  <string name="link_not_opened_hint">Le lien n'a pas pu être ouvert. Avez-vous une application capable de traiter ce type de lien?</string>
+  <string name="link_not_opened_hint">Le lien n\'a pas pu être ouvert. Avez-vous une application capable de traiter ce type de lien?</string>
   <string name="file_not_found">Fichier non trouvé</string>
   <string name="pref_setting_filepath_link">Chemin de fichier actif</string>
-  <string name="pref_setting_filepath_link_summary">Rend le chemin de fichier clickable et essaie d'ouvrir l'application correspondante</string>
+  <string name="pref_setting_filepath_link_summary">Rend le chemin de fichier clickable et essaie d\'ouvrir l\'application correspondante</string>
   <string name="pref_category_application">Application</string>
   <string name="pref_setting_theme">Thème</string>
-  <string name="pref_setting_theme_summary">Thème couleur de l'application</string>
+  <string name="pref_setting_theme_summary">Thème couleur de l\'application</string>
   <string-array name="pref_setting_theme_names">
     <item>Bleu</item>
     <item>Rouge</item>
@@ -209,6 +209,6 @@
     <item>Noir</item>
   </string-array>
   <string name="pref_setting_color_tag">Champ couleur</string>
-  <string name="pref_setting_color_tag_summary">Utiliser le champ Couleur pour colorer le titre du film (sinon c'est la ligne séparatrice qui sera colorée)</string>
+  <string name="pref_setting_color_tag_summary">Utiliser le champ Couleur pour colorer le titre du film (sinon c\'est la ligne séparatrice qui sera colorée)</string>
   <string name="import_check_finished">Loading…</string>
 </resources>
