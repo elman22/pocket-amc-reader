@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -368,9 +368,12 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 projection = SharedObjects.getInstance().moviesProjection;
 
                 // Fill filters and execute query
-                String likeField = "FormattedTitle like ?";
+                String likeField = "FormattedTitle like ? escape '\\'";
                 filterFields = filterFields == null ? likeField : likeField + " and " + filterFields;
-                String[] likeArg = new String[]{"%" + uri.getLastPathSegment() + "%"};
+                String searchText = uri.getLastPathSegment() == null ? "" : uri.getLastPathSegment();
+                // Escape LIKE wildcards typed by the user
+                searchText = searchText.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+                String[] likeArg = new String[]{"%" + searchText + "%"};
                 filterValues = filterValues == null ? likeArg : Utils.joinArrays(likeArg, filterValues);
                 cursor = this.db.query(TABLE_NAME, projection, filterFields, filterValues, null, null, sortOrder);
                 return cursor;
