@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -120,9 +120,12 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
         }
 
         // Create global configuration and initialize ImageLoader with this configuration
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .build();
-        ImageLoader.getInstance().init(config);
+        // (only once per process, init() on every onCreate re-initialises the loader e.g. on device rotation)
+        if (!ImageLoader.getInstance().isInited()) {
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                    .build();
+            ImageLoader.getInstance().init(config);
+        }
 
     }
 
