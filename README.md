@@ -1,5 +1,5 @@
 # Pocket AMC Reader
-Version 2.3.3
+Version 3.0.0
 
 This application will allow you to read catalogs created by [Ant Movie Catalog](http://www.antp.be/software/moviecatalog) on your Android phone. It will read XML catalog and import it into its own database which is done for performance reasons. On each start the application will check size of the XML file and when it changes, database is updated. Depending on size of your catalog and speed of your phone, it might take several minutes to import all movies and to start up.
 
@@ -12,7 +12,7 @@ https://github.com/elman22/pocket-amc-reader
 [![pocket-amc-reader-v2-screen1-thumbnail.png](https://s20.postimg.cc/d2sxhemjh/pocket-amc-reader-v2-screen1-thumbnail.png)](https://postimg.cc/image/g9nh116zd/) [![pocket-amc-reader-v2-screen2-thumbnail.png](https://s20.postimg.cc/ne5aa2e8t/pocket-amc-reader-v2-screen2-thumbnail.png)](https://postimg.cc/image/ogfgslx21/)
 
 ## Requirements
-- Android 4.1 or later
+- Android 7.0 or later
 - AMC database saved as XML
 - AMC database saved with relative links to pictures (if you want to see pictures)
 - Application needs approximately twice as much disk space as is the size of XML file
@@ -69,6 +69,21 @@ If checked, file path will be clickable and Pocket AMC Reader will try to open c
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
 
 ## History
+
+#### Unreleased Version 3.0.0
+
+- UPDATED Build system
+- UPDATED Minimum Android version is now 7.0 (API 24)
+- UPDATED Declared `android:exported`, backup and data extraction rules
+- FIXED Catalog import is much faster (single database transaction)
+- FIXED Failed import no longer wipes the previously imported catalog
+- FIXED Characters corrupted at buffer boundaries in multi-byte catalog encodings (e.g. CP932, GBK, UTF-16)
+- FIXED Catalog change detection now also uses modification time and re-imports when the database is empty
+- FIXED Image loader re-initialized on every screen rotation
+- FIXED Search treated % and _ as wildcards
+- FIXED Import progress calculation, leaked streams/temporary file after a failed import
+- FIXED Crash when opening IMDb link without IMDb app and without browser
+- REMOVED Conflicting, unused content provider declaration
 
 #### 19.03.2021 Version 2.3.3
 - UPDATED Slovak translation

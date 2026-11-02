@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 6-11 Auto Backup rules (see data_extraction_rules.xml for Android 12+). -->
+<full-backup-content>
+    <exclude domain="database" path="PocketAMCReader.db" />
+    <exclude domain="database" path="PocketAMCReader.db-journal" />
+    <exclude domain="file" path="amc_import_tmp.xml" />
+</full-backup-content>

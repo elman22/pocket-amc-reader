@@ -14,4 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // Some libraries are published only on JitPack
+        maven {
+            url 'https://jitpack.io'
+            content { includeGroupByRegex 'com\\.github\\..*' }
+        }
+        // jcenter() is sunset (read-only). Uncomment ONLY if a legacy artifact fails to resolve:
+        // jcenter()
+    }
+}
+
+rootProject.name = 'PocketAMCReader'
 include ':PocketAMCReader'

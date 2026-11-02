@@ -1,0 +1,39 @@
+[versions]
+agp = "8.13.0"
+material = "1.12.0"
+appcompat = "1.7.0"
+cardview = "1.0.0"
+recyclerview = "1.3.2"
+coordinatorlayout = "1.2.0"
+viewpager = "1.0.0"
+filepicker = "4.2.1"
+expandableTextView = "0.1.4"
+universalImageLoader = "1.9.5"
+calligraphy = "3.1.1"
+viewpump = "2.0.3"
+dragListView = "1.7.2"
+fastScroll = "2.0.1"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
+androidx-viewpager = { module = "androidx.viewpager:viewpager", version.ref = "viewpager" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+# https://github.com/spacecowboy/NoNonsense-FilePicker
+nononsense-filepicker = { module = "com.nononsenseapps:filepicker", version.ref = "filepicker" }
+# https://github.com/Manabu-GT/ExpandableTextView
+expandable-textview = { module = "com.ms-square:expandableTextView", version.ref = "expandableTextView" }
+# https://github.com/nostra13/Android-Universal-Image-Loader
+universal-image-loader = { module = "com.nostra13.universalimageloader:universal-image-loader", version.ref = "universalImageLoader" }
+# https://github.com/InflationX/Calligraphy
+calligraphy3 = { module = "io.github.inflationx:calligraphy3", version.ref = "calligraphy" }
+viewpump = { module = "io.github.inflationx:viewpump", version.ref = "viewpump" }
+# https://github.com/woxblom/DragListView
+draglistview = { module = "com.github.woxthebox:draglistview", version.ref = "dragListView" }
+# https://github.com/timusus/RecyclerView-FastScroll
+recyclerview-fastscroll = { module = "com.simplecityapps:recyclerview-fastscroll", version.ref = "fastScroll" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
