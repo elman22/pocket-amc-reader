@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -404,8 +404,15 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         i.setData(uri);
                         startActivity(i);
                     } catch (ActivityNotFoundException e) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        startActivity(browserIntent);
+                        // IMDb app not installed, fall back to browser
+                        try {
+                            String webUrl = url.contains(S.INTENT_SCHEME_PORTION) ? url : S.INTENT_SCHEME_HTTPS + url;
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)));
+                        } catch (ActivityNotFoundException e2) {
+                            Toast.makeText(view.getContext(),
+                                    view.getContext().getText(R.string.link_not_opened_hint),
+                                    Toast.LENGTH_LONG).show();
+                        }
                     }
                 } else {
                     boolean isIntentValid = false;
