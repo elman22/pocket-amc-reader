@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -97,8 +98,11 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
 
     private static class MoviesOpenHelper extends SQLiteOpenHelper {
 
+        private final Context appContext;
+
         MoviesOpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            this.appContext = context.getApplicationContext();
         }
 
         @Override
@@ -187,7 +191,10 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             if (S.INFO)
                 Log.i(S.TAG, "Setting last catalog import size to 0 to force catalog refresh.");
 
-            SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
+            SharedPreferences prefs = SharedObjects.getInstance().preferences != null ?
+                    SharedObjects.getInstance().preferences :
+                    PreferenceManager.getDefaultSharedPreferences(appContext);
+            SharedPreferences.Editor editor = prefs.edit();
             editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
             editor.apply();
         }
@@ -537,6 +544,31 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     /**
      * Create indexes in database
      */
+    public void beginTransaction() {
+        this.db.beginTransaction();
+    }
+
+    /**
+     * Mark transaction as successful, so it is committed by {@link #endTransaction()}
+     */
+    public void setTransactionSuccessful() {
+        this.db.setTransactionSuccessful();
+    }
+
+    /**
+     * End transaction. Commits when {@link #setTransactionSuccessful()} was called, rolls back otherwise.
+     */
+    public void endTransaction() {
+        this.db.endTransaction();
+    }
+
+    /**
+     * Number of imported movies
+     */
+    public long getMoviesCount() {
+        return DatabaseUtils.queryNumEntries(this.db, TABLE_NAME);
+    }
+
     public void createIndexes() {
         if (this.openHelper != null && this.db != null)
             this.openHelper.createIndexes(this.db);
@@ -563,19 +595,30 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Close database
      */
     public void closeDatabase() {
-        SharedObjects.getInstance().dbReferences--;
-        if (S.DEBUG)
-            Log.d(S.TAG, "DB reference removed. Total: " + SharedObjects.getInstance().dbReferences);
+        SharedObjects shared = SharedObjects.getInstance();
+        shared.dbReferences--;
 
-        if (SharedObjects.getInstance().dbReferences == 0) {
-            SharedObjects.getInstance().dbInsertStatement.close();
-            SharedObjects.getInstance().dbInsertStatement = null;
-            SharedObjects.getInstance().dbInsertCustomStatement.close();
-            SharedObjects.getInstance().dbInsertCustomStatement = null;
-            SharedObjects.getInstance().dbInsertExtraStatement.close();
-            SharedObjects.getInstance().dbInsertExtraStatement = null;
-            SharedObjects.getInstance().db.close();
-            SharedObjects.getInstance().db = null;
+        if (S.DEBUG)
+            Log.d(S.TAG, "DB reference removed. Total: " + shared.dbReferences);
+
+        if (shared.dbReferences <= 0) {
+            shared.dbReferences = 0;
+
+            if (shared.dbInsertStatement != null)
+                shared.dbInsertStatement.close();
+            shared.dbInsertStatement = null;
+
+            if (shared.dbInsertCustomStatement != null)
+                shared.dbInsertCustomStatement.close();
+            shared.dbInsertCustomStatement = null;
+
+            if (shared.dbInsertExtraStatement != null)
+                shared.dbInsertExtraStatement.close();
+            shared.dbInsertExtraStatement = null;
+
+            if (shared.db != null)
+                shared.db.close();
+            shared.db = null;
         }
     }
 

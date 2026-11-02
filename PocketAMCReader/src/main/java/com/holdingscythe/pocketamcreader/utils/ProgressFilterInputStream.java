@@ -18,10 +18,7 @@
 
 package com.holdingscythe.pocketamcreader.utils;
 
-import android.util.Log;
-
 import com.holdingscythe.pocketamcreader.ImportFragment;
-import com.holdingscythe.pocketamcreader.S;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -30,12 +27,12 @@ import java.io.InputStream;
 import androidx.annotation.NonNull;
 
 /**
- * Reads file input stream and returns bytes read back to AsyncTask.
+ * Reads file input stream and reports bytes actually read back to the import task.
  */
 public class ProgressFilterInputStream extends FilterInputStream {
 
     private long mBytesRead = 0;
-    private ImportFragment.CatalogImportTask mCatalogImportTask;
+    private final ImportFragment.CatalogImportTask mCatalogImportTask;
 
     public ProgressFilterInputStream(InputStream in, ImportFragment.CatalogImportTask cit) {
         super(in);
@@ -43,13 +40,31 @@ public class ProgressFilterInputStream extends FilterInputStream {
     }
 
     @Override
+    public int read() throws IOException {
+        int b = super.read();
+        if (b >= 0)
+            report(1);
+        return b;
+    }
+
+    @Override
     public int read(@NonNull byte[] buffer, int offset, int count) throws IOException {
-        mBytesRead += count;
+        int n = super.read(buffer, offset, count);
+        if (n > 0)
+            report(n);
+        return n;
+    }
+
+    @Override
+    public long skip(long count) throws IOException {
+        long skipped = super.skip(count);
+        if (skipped > 0)
+            report(skipped);
+        return skipped;
+    }
+
+    private void report(long bytes) {
+        mBytesRead += bytes;
         mCatalogImportTask.publishExternalProgress(mBytesRead);
-
-        if (S.VERBOSE)
-            Log.v(S.TAG, "Bytes read: " + mBytesRead);
-
-        return super.read(buffer, offset, count);
     }
 }

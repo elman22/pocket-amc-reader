@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@ public final class SettingsConstants {
     public static final String KEY_PREF_FORCE_SORT_FIELD = "settingListForceSortField";
     public static final String KEY_PREF_LAST_IMPORTED_DATE = "settingLastImportedDate";
     public static final String KEY_PREF_LAST_IMPORTED_SIZE = "settingLastImportedSize";
+    public static final String KEY_PREF_LAST_IMPORTED_MODIFIED = "settingLastImportedModified";
     public static final String KEY_PREF_LIST_FIELDS = "settingMoviesListLines";
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
     public static final String KEY_PREF_MOVIE_LIST_ORDER = "settingMovieListOrder";

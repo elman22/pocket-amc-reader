@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,70 +23,95 @@ import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.S;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A utility to convert catalog XML files to UTF-8.
+ * <p>
+ * The file is converted as a character stream, so multi-byte characters (e.g. in CP932, GBK or UTF-16 catalogs)
+ * are never split on buffer boundaries.
  */
 public class FileEncoder {
 
+    private static final int BUFFER_SIZE = 64 * 1024;
+
     /**
      * Encodings
-     * http://download.oracle.com/javase/1.3/docs/guide/intl/encoding.doc.html
+     * <a href="http://download.oracle.com/javase/1.3/docs/guide/intl/encoding.doc.html">...</a>
+     *
+     * @return path of the converted file or null on failure
      */
     public static String encodeToUtf(Context context, String pInputFilePath, String pOutputFileName, String encoding,
-                                     Boolean removeBadChars) {
+                                     boolean removeBadChars) {
 
-        int bufferSize = 131072;
+        File inputFile = new File(pInputFilePath);
+        String outputFilePath = context.getFilesDir().getAbsolutePath() + pOutputFileName;
+        File outputFile = new File(outputFilePath);
+        boolean success = false;
 
-        try {
-            File inputFile = new File(pInputFilePath);
-            String outputFilePath = context.getFilesDir().getAbsolutePath() + pOutputFileName;
-            FileInputStream fis = new FileInputStream(inputFile);
-            FileOutputStream fos = new FileOutputStream(outputFilePath);
+        try (Reader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(inputFile), Charset.forName(encoding)), BUFFER_SIZE);
+             Writer writer = new BufferedWriter(
+                     new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8), BUFFER_SIZE)) {
 
-            byte[] contents = new byte[bufferSize];
+            char[] buffer = new char[BUFFER_SIZE];
+            boolean first = true;
+            int read;
 
-            int readBytes = 0;
-            while (readBytes < inputFile.length()) {
-                if (readBytes + bufferSize > inputFile.length()) {
-                    bufferSize = (int) (inputFile.length() - readBytes);
-                    contents = new byte[bufferSize];
+            while ((read = reader.read(buffer)) != -1) {
+                int start = 0;
+
+                // Drop byte order mark, parser is told explicitly that data is UTF-8
+                if (first) {
+                    first = false;
+                    if (read > 0 && buffer[0] == '\uFEFF')
+                        start = 1;
                 }
 
-                if (fis.read(contents, 0, bufferSize) == 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-
-                String asString = new String(contents, encoding);
                 if (removeBadChars) {
                     // Based on http://mickaelvanneufville.online.fr/AMCU/scripts/RemoveBadChars.ifs
-                    asString = asString.replaceAll("[\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]", "");
+                    // Removes [\x00-\x09\x0B\x0C\x0E-\x1F\x7F]
+                    int out = 0;
+                    for (int i = start; i < read; i++) {
+                        char c = buffer[i];
+                        if (!isBadChar(c))
+                            buffer[out++] = c;
+                    }
+                    writer.write(buffer, 0, out);
+                } else {
+                    writer.write(buffer, start, read - start);
                 }
-                byte[] newBytes = asString.getBytes("UTF8");
-                fos.write(newBytes);
-
-                readBytes += bufferSize;
             }
 
-            fis.close();
-            fos.close();
+            success = true;
 
             if (S.INFO)
                 Log.i(S.TAG, "File " + pInputFilePath + " converted to " + outputFilePath + ".");
 
             return outputFilePath;
 
-        } catch (IndexOutOfBoundsException e) {
-            if (S.ERROR)
-                Log.e(S.TAG, "Couldn't convert file to UTF-8.");
-            return null;
         } catch (Exception e) {
             if (S.ERROR)
-                Log.e(S.TAG, "Couldn't convert file to UTF-8.");
+                Log.e(S.TAG, "Couldn't convert file to UTF-8.", e);
             return null;
+        } finally {
+            // Don't leave half-written temporary file behind
+            if (!success && outputFile.exists() && !outputFile.delete() && S.WARN)
+                Log.w(S.TAG, "Couldn't delete incomplete temporary file.");
         }
+    }
+
+    private static boolean isBadChar(char c) {
+        return c <= 0x09 || c == 0x0B || c == 0x0C || (c >= 0x0E && c <= 0x1F) || c == 0x7F;
     }
 }

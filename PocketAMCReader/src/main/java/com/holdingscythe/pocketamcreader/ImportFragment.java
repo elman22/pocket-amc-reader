@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,12 +37,13 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.Objects;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -129,11 +130,11 @@ public class ImportFragment extends Fragment {
 
     /**
      * Start the background task.
-     * Since async task can start without activity, context must be passed.
+     * Application context is used, so the task never keeps a destroyed Activity alive.
      */
     public void start(Context c) {
         if (!mRunning) {
-            mContext = c;
+            mContext = c.getApplicationContext();
             CatalogImportTask catalogImportTask = new CatalogImportTask();
             catalogImportTask.execute();
             mRunning = true;
@@ -146,6 +147,7 @@ public class ImportFragment extends Fragment {
      */
     public class CatalogImportTask extends AsyncTask<Void, Integer, Void> {
         private long bytesToBeImported;
+        private int lastPublishedPercent = Integer.MIN_VALUE;
 
         @Override
         protected void onPreExecute() {
@@ -155,6 +157,12 @@ public class ImportFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... ignore) {
+            // Read settings for import
+            if (SharedObjects.getInstance().preferences == null) {
+                // Prepare Shared Objects (before database is opened, upgrade may need them)
+                SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            }
+
             MoviesDataProvider moviesDataProvider = new MoviesDataProvider(mContext);
 
             boolean isImportFileReady = false;
@@ -166,181 +174,226 @@ public class ImportFragment extends Fragment {
             long endTime;
 
             File sourceCatalog = null;
+            File convertedCatalog = null;
             InputStream sourceCatalogStream = null;
             long fileSizeToBeImported = 0;
+            long fileModifiedToBeImported = 0;
             String settingPicturesFolder = "";
-
-            // Read settings for import
-            if (SharedObjects.getInstance().preferences == null) {
-                // Prepare Shared Objects
-                SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                        (Objects.requireNonNull(getActivity()).getApplicationContext());
-            }
 
             SharedPreferences preferences = SharedObjects.getInstance().preferences;
             String settingCatalogLocation = preferences.getString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, "");
             String settingCatalogEncoding = preferences.getString(SettingsConstants.KEY_PREF_CATALOG_ENCODING,
                     "Cp1252");
-            Boolean settingRemoveBadChars = preferences.getBoolean(SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, false);
+            boolean settingRemoveBadChars = preferences.getBoolean(SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, false);
             long settingLastImportedSize = preferences.getLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
+            long settingLastImportedModified = preferences.getLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_MODIFIED,
+                    0);
 
-            // Get partial wake lock
-            PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-            if (pm != null) {
-                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.WAKE_LOCK_TAG);
-                wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
-
-                if (S.DEBUG)
-                    Log.d(S.TAG, "Wake Lock acquired.");
-            }
-
-            // Open file for size check
             try {
-                // Fix for Windows backslashes
-                assert settingCatalogLocation != null;
-                settingCatalogLocation = settingCatalogLocation.replace("\\", "/");
-                sourceCatalog = new File(settingCatalogLocation);
+                // Get partial wake lock
+                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (pm != null) {
+                    wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, S.WAKE_LOCK_TAG);
+                    wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
 
-                if (!sourceCatalog.exists())
-                    throw new FileNotFoundException();
-                if (sourceCatalog.length() != settingLastImportedSize) {
-                    fileSizeToBeImported = sourceCatalog.length();
-                    settingPicturesFolder = sourceCatalog.getParent() + "/";
-                    isImportFileReady = true;
+                    if (S.DEBUG)
+                        Log.d(S.TAG, "Wake Lock acquired.");
                 }
-            } catch (FileNotFoundException e) {
-                if (S.WARN)
-                    Log.w(S.TAG, "Couldn't open catalog for size check.");
-            } catch (Exception e) {
-                if (S.WARN)
-                    Log.w(S.TAG, "Error processing catalog for conversion.");
-            }
 
-            // Convert file to UTF-8
-            if (isImportFileReady) {
-                publishProgress(S.IMPORT_CONVERSION_START);
-
+                // Open file for change check
                 try {
-                    String convertedCatalog = FileEncoder.encodeToUtf(mContext, settingCatalogLocation,
-                            S.CATALOG_TMP_FILENAME, settingCatalogEncoding, settingRemoveBadChars);
-                    if (convertedCatalog == null)
-                        throw new Exception();
-                    sourceCatalog = new File(convertedCatalog);
-                    bytesToBeImported = sourceCatalog.length();
-                    sourceCatalogStream = new ProgressFilterInputStream(new FileInputStream(sourceCatalog), this);
-                    isImportFileConverted = true;
+                    // Fix for Windows backslashes
+                    settingCatalogLocation = settingCatalogLocation == null ? "" :
+                            settingCatalogLocation.replace("\\", "/");
+                    sourceCatalog = new File(settingCatalogLocation);
+
+                    if (!sourceCatalog.exists())
+                        throw new FileNotFoundException();
+
+                    long size = sourceCatalog.length();
+                    long modified = sourceCatalog.lastModified();
+
+                    // Import when file size changed, when modification time changed (modification time is not
+                    // known for catalogs imported by older versions, so it is ignored then) or when the
+                    // database is empty (e.g. after restore from a backup).
+                    boolean sizeChanged = size != settingLastImportedSize;
+                    boolean modifiedChanged = settingLastImportedModified != 0 && modified != settingLastImportedModified;
+                    boolean databaseEmpty = moviesDataProvider.getMoviesCount() == 0;
+
+                    if (sizeChanged || modifiedChanged || databaseEmpty) {
+                        fileSizeToBeImported = size;
+                        fileModifiedToBeImported = modified;
+                        settingPicturesFolder = sourceCatalog.getParent() + "/";
+                        isImportFileReady = true;
+                    }
                 } catch (FileNotFoundException e) {
-                    if (S.ERROR)
-                        Log.e(S.TAG, "Couldn't open converted temporary file.");
-
-                    publishProgress(S.IMPORT_ERROR_CONVERSION);
-                } catch (IllegalArgumentException e) {
-                    // File is too large for progress bar
-                    if (S.ERROR)
-                        Log.e(S.TAG, "File is too large for progress bar.");
+                    if (S.WARN)
+                        Log.w(S.TAG, "Couldn't open catalog for size check.");
                 } catch (Exception e) {
-                    if (S.ERROR)
-                        Log.e(S.TAG, "Couldn't create temporary file.");
-
-                    publishProgress(S.IMPORT_ERROR_CONVERSION);
-                }
-            }
-
-            // Import data
-            if (isImportFileConverted) {
-                publishProgress(S.IMPORT_LOADING_START);
-
-                try {
-                    // Get a SAXParser from the SAXParserFactory.
-                    SAXParserFactory sFactory = SAXParserFactory.newInstance();
-                    SAXParser sParser = sFactory.newSAXParser();
-
-                    // Get the XMLReader of the SAXParser we created.
-                    XMLReader sReader = sParser.getXMLReader();
-
-                    // Create a new ContentHandler and apply it to the XML-Reader
-                    MoviesSAXHandler sHandler = new MoviesSAXHandler(moviesDataProvider);
-                    sReader.setContentHandler(sHandler);
-                    sReader.setErrorHandler(sHandler);
-
-                    // Parse the XML-data from our URL.
-                    InputSource sInput = new InputSource(sourceCatalogStream);
-                    sInput.setEncoding("UTF-8");
-
-                    startTime = System.currentTimeMillis();
-                    if (S.DEBUG) {
-                        Log.d(S.TAG, "Import start time: " + startTime);
-                    }
-
-                    // Drop indexes for faster import
-                    moviesDataProvider.dropIndexes();
-
-                    // Do actual import
-                    sReader.parse(sInput);
-
-                    // Recreate indexes
-                    publishProgress(S.IMPORT_INDEXING_START);
-                    moviesDataProvider.createIndexes();
-
-                    endTime = System.currentTimeMillis();
-                    if (S.DEBUG) {
-                        Log.d(S.TAG, "Import end time: " + endTime);
-                        Log.d(S.TAG, "Import elapsed time: " + (endTime - startTime) + " ms.");
-                    }
-
-                    sourceCatalogStream.close();
-                    if (!sourceCatalog.delete()) {
-                        if (S.ERROR)
-                            Log.e(S.TAG, "Couldn't create temporary file.");
-                    }
-
-                    isImportFileFinished = true;
-                } catch (Exception e) {
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
-                    editor.apply();
-
-                    if (S.ERROR)
-                        Log.e(S.TAG, "Couldn't import XML file.");
-
-                    publishProgress(S.IMPORT_ERROR_LOADING);
+                    if (S.WARN)
+                        Log.w(S.TAG, "Error processing catalog for conversion.", e);
                 }
 
-                // Update preferences for imported data
-                if (isImportFileFinished) {
+                // Convert file to UTF-8
+                if (isImportFileReady) {
+                    publishProgress(S.IMPORT_CONVERSION_START);
+
                     try {
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, fileSizeToBeImported);
-                        editor.putString(SettingsConstants.KEY_PREF_LAST_IMPORTED_DATE, new Date().toString());
-                        editor.putString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, settingPicturesFolder);
-                        editor.apply();
+                        String convertedPath = FileEncoder.encodeToUtf(mContext, settingCatalogLocation,
+                                S.CATALOG_TMP_FILENAME, settingCatalogEncoding, settingRemoveBadChars);
+                        if (convertedPath == null)
+                            throw new IOException("Conversion failed");
+                        convertedCatalog = new File(convertedPath);
+                        bytesToBeImported = convertedCatalog.length();
+                        sourceCatalogStream = new ProgressFilterInputStream(
+                                new BufferedInputStream(new FileInputStream(convertedCatalog)), this);
+                        isImportFileConverted = true;
+                    } catch (FileNotFoundException e) {
+                        if (S.ERROR)
+                            Log.e(S.TAG, "Couldn't open converted temporary file.", e);
+
+                        publishProgress(S.IMPORT_ERROR_CONVERSION);
                     } catch (Exception e) {
                         if (S.ERROR)
-                            Log.e(S.TAG, "Couldn't open update import statistics.");
+                            Log.e(S.TAG, "Couldn't create temporary file.", e);
+
+                        publishProgress(S.IMPORT_ERROR_CONVERSION);
                     }
                 }
+
+                // Import data
+                if (isImportFileConverted) {
+                    publishProgress(S.IMPORT_LOADING_START);
+
+                    boolean transactionStarted = false;
+
+                    try {
+                        // Get a SAXParser from the SAXParserFactory.
+                        SAXParserFactory sFactory = SAXParserFactory.newInstance();
+                        SAXParser sParser = sFactory.newSAXParser();
+
+                        // Get the XMLReader of the SAXParser we created.
+                        XMLReader sReader = sParser.getXMLReader();
+
+                        // Create a new ContentHandler and apply it to the XML-Reader
+                        MoviesSAXHandler sHandler = new MoviesSAXHandler(moviesDataProvider);
+                        sReader.setContentHandler(sHandler);
+                        sReader.setErrorHandler(sHandler);
+
+                        // Parse the XML-data from our URL.
+                        InputSource sInput = new InputSource(sourceCatalogStream);
+                        sInput.setEncoding("UTF-8");
+
+                        startTime = System.currentTimeMillis();
+                        if (S.DEBUG) {
+                            Log.d(S.TAG, "Import start time: " + startTime);
+                        }
+
+                        // Whole import (including delete of old data and index rebuild) runs in one transaction.
+                        // It is much faster than committing every row and a failed import keeps the old catalog.
+                        moviesDataProvider.beginTransaction();
+                        transactionStarted = true;
+
+                        // Drop indexes for faster import
+                        moviesDataProvider.dropIndexes();
+
+                        // Do actual import
+                        sReader.parse(sInput);
+
+                        // Recreate indexes
+                        publishProgress(S.IMPORT_INDEXING_START);
+                        moviesDataProvider.createIndexes();
+
+                        moviesDataProvider.setTransactionSuccessful();
+
+                        endTime = System.currentTimeMillis();
+                        if (S.DEBUG) {
+                            Log.d(S.TAG, "Import end time: " + endTime);
+                            Log.d(S.TAG, "Import elapsed time: " + (endTime - startTime) + " ms.");
+                        }
+
+                        isImportFileFinished = true;
+                    } catch (Exception e) {
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
+                        editor.apply();
+
+                        if (S.ERROR)
+                            Log.e(S.TAG, "Couldn't import XML file.", e);
+
+                        publishProgress(S.IMPORT_ERROR_LOADING);
+                    } finally {
+                        // Commits when successful, otherwise rolls back to the previously imported catalog
+                        if (transactionStarted) {
+                            try {
+                                moviesDataProvider.endTransaction();
+                            } catch (Exception e) {
+                                if (S.ERROR)
+                                    Log.e(S.TAG, "Couldn't finish import transaction.", e);
+                                isImportFileFinished = false;
+                            }
+                        }
+                    }
+
+                    // Update preferences for imported data
+                    if (isImportFileFinished) {
+                        try {
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, fileSizeToBeImported);
+                            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_MODIFIED,
+                                    fileModifiedToBeImported);
+                            editor.putString(SettingsConstants.KEY_PREF_LAST_IMPORTED_DATE, new Date().toString());
+                            editor.putString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, settingPicturesFolder);
+                            editor.apply();
+                        } catch (Exception e) {
+                            if (S.ERROR)
+                                Log.e(S.TAG, "Couldn't open update import statistics.", e);
+                        }
+                    }
+                }
+            } finally {
+                // Always clean up, also when import failed
+                if (sourceCatalogStream != null) {
+                    try {
+                        sourceCatalogStream.close();
+                    } catch (IOException ignored) {
+                        // nothing to do
+                    }
+                }
+
+                if (convertedCatalog != null && convertedCatalog.exists() && !convertedCatalog.delete()) {
+                    if (S.ERROR)
+                        Log.e(S.TAG, "Couldn't delete temporary file.");
+                }
+
+                if (wakeLock != null && wakeLock.isHeld()) {
+                    wakeLock.release();
+
+                    if (S.DEBUG)
+                        Log.d(S.TAG, "Wake Lock released.");
+                }
+
+                moviesDataProvider.closeDatabase();
             }
-
-            // Do some cleaning
-            if (wakeLock != null) {
-                wakeLock.release();
-
-                if (S.DEBUG)
-                    Log.d(S.TAG, "Wake Lock released.");
-            }
-
-            moviesDataProvider.closeDatabase();
 
             return null;
         }
 
         /* Publish state from external sources e.g. from {@link ProgressFilterInputStream} */
         public void publishExternalProgress(long state) {
-            if (S.VERBOSE)
-                Log.v(S.TAG, "Publishing state: " + (int) ((float) state / bytesToBeImported * 100) +
-                        " %");
+            if (bytesToBeImported <= 0)
+                return;
 
-            publishProgress((int) ((float) state / bytesToBeImported * 100));
+            // Publish only when percentage changes, not on every read
+            int percent = (int) Math.min(100L, state * 100L / bytesToBeImported);
+            if (percent != lastPublishedPercent) {
+                lastPublishedPercent = percent;
+
+                if (S.VERBOSE)
+                    Log.v(S.TAG, "Publishing state: " + percent + " %");
+
+                publishProgress(percent);
+            }
         }
 
         @Override
