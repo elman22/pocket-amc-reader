@@ -18,10 +18,13 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- Catalog import runs as a foreground service (WorkManager) with a progress notification -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:allowBackup="true"
@@ -29,8 +32,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppThemeBlack"
-        android:requestLegacyExternalStorage="true">
+        android:theme="@style/AppThemeBlack">
         <activity
             android:name=".ImportActivity"
             android:exported="true"
@@ -70,16 +72,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 android:value="com.holdingscythe.pocketamcreader.MovieListActivity"/>
         </activity>
         <activity
-            android:name=".settings.SettingsFilePickerActivity"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:parentActivityName="com.holdingscythe.pocketamcreader.settings.SettingsActivity"
-            android:theme="@style/FilePickerTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.holdingscythe.pocketamcreader.settings.SettingsActivity"/>
-        </activity>
-        <activity
             android:name=".settings.SettingsListFieldsActivity"
             android:exported="false"
             android:label="@string/app_name"
@@ -106,8 +98,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/nnf_provider_paths"/>
+                android:resource="@xml/file_paths"/>
         </provider>
+
+        <!-- Declares the foreground service type for the WorkManager based catalog import -->
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge"/>
     </application>
 
 </manifest>

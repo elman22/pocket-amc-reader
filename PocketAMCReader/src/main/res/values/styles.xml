@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -227,9 +227,5 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
     </style>
-
-    <style name="FilePickerTheme" parent="NNF_BaseTheme"></style>
-
-    <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert"></style>
 
 </resources>

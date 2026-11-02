@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 Magnus Woxblom
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -53,7 +53,7 @@ import androidx.fragment.app.Fragment;
  * Created by elman on 27.4.2017.
  * <p>
  * Derived from Magnus Woxblom
- * https://github.com/woxblom/DragListView
+ * <a href="https://github.com/woxblom/DragListView">...</a>
  */
 public class SettingsListFieldsFragment extends Fragment {
 
@@ -104,7 +104,7 @@ public class SettingsListFieldsFragment extends Fragment {
             }
 
             @Override
-            public void onColumnDragEnded(int position) {
+            public void onColumnDragEnded(int i, int i1) {
             }
         });
         return view;

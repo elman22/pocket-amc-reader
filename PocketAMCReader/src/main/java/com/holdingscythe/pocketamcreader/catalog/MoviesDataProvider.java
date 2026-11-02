@@ -243,37 +243,36 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         }
     }
 
-    // Empty constructor for manifest provider registration
-    public MoviesDataProvider() {
-    }
-
     public MoviesDataProvider(Context context) {
 
-        if (SharedObjects.getInstance().db != null) {
-            this.db = SharedObjects.getInstance().db;
-            this.insertStatement = SharedObjects.getInstance().dbInsertStatement;
-            this.insertCustomStatement = SharedObjects.getInstance().dbInsertCustomStatement;
-            this.insertExtraStatement = SharedObjects.getInstance().dbInsertExtraStatement;
-        } else {
-            // Cache objects as this class gets initiated on every page
-            this.openHelper = new MoviesOpenHelper(context);
+        // The worker thread and the UI may open the database at the same time
+        synchronized (SharedObjects.getInstance()) {
+            if (SharedObjects.getInstance().db != null) {
+                this.db = SharedObjects.getInstance().db;
+                this.insertStatement = SharedObjects.getInstance().dbInsertStatement;
+                this.insertCustomStatement = SharedObjects.getInstance().dbInsertCustomStatement;
+                this.insertExtraStatement = SharedObjects.getInstance().dbInsertExtraStatement;
+            } else {
+                // Cache objects as this class gets initiated on every page
+                this.openHelper = new MoviesOpenHelper(context);
 
-            this.db = openHelper.getWritableDatabase();
-            SharedObjects.getInstance().db = this.db;
+                this.db = openHelper.getWritableDatabase();
+                SharedObjects.getInstance().db = this.db;
 
-            this.insertStatement = this.db.compileStatement(INSERT);
-            SharedObjects.getInstance().dbInsertStatement = this.insertStatement;
+                this.insertStatement = this.db.compileStatement(INSERT);
+                SharedObjects.getInstance().dbInsertStatement = this.insertStatement;
 
-            this.insertCustomStatement = this.db.compileStatement(INSERT_CUSTOM);
-            SharedObjects.getInstance().dbInsertCustomStatement = this.insertCustomStatement;
+                this.insertCustomStatement = this.db.compileStatement(INSERT_CUSTOM);
+                SharedObjects.getInstance().dbInsertCustomStatement = this.insertCustomStatement;
 
-            this.insertExtraStatement = this.db.compileStatement(INSERT_EXTRA);
-            SharedObjects.getInstance().dbInsertExtraStatement = this.insertExtraStatement;
+                this.insertExtraStatement = this.db.compileStatement(INSERT_EXTRA);
+                SharedObjects.getInstance().dbInsertExtraStatement = this.insertExtraStatement;
+            }
+
+            SharedObjects.getInstance().dbReferences++;
+            if (S.DEBUG)
+                Log.d(S.TAG, "DB reference added. Total: " + SharedObjects.getInstance().dbReferences);
         }
-
-        SharedObjects.getInstance().dbReferences++;
-        if (S.DEBUG)
-            Log.d(S.TAG, "DB reference added. Total: " + SharedObjects.getInstance().dbReferences);
 
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -572,6 +571,29 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         return DatabaseUtils.queryNumEntries(this.db, TABLE_NAME);
     }
 
+    /**
+     * Distinct picture paths (movie pictures and extras) exactly as stored in the catalog
+     */
+    public java.util.List<String> getPicturePaths() {
+        java.util.LinkedHashSet<String> paths = new java.util.LinkedHashSet<>();
+        String[] queries = {
+                "SELECT DISTINCT [" + Movies.PICTURE + "] FROM " + TABLE_NAME,
+                "SELECT DISTINCT [" + Movies.E_PICTURE + "] FROM " + TABLE_NAME_EXTRAS
+        };
+
+        for (String query : queries) {
+            try (Cursor cursor = this.db.rawQuery(query, null)) {
+                while (cursor.moveToNext()) {
+                    String path = cursor.getString(0);
+                    if (path != null && !path.trim().isEmpty())
+                        paths.add(path);
+                }
+            }
+        }
+
+        return new java.util.ArrayList<>(paths);
+    }
+
     public void createIndexes() {
         if (this.openHelper != null && this.db != null)
             this.openHelper.createIndexes(this.db);
@@ -598,30 +620,32 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Close database
      */
     public void closeDatabase() {
-        SharedObjects shared = SharedObjects.getInstance();
-        shared.dbReferences--;
+        synchronized (SharedObjects.getInstance()) {
+            SharedObjects shared = SharedObjects.getInstance();
+            shared.dbReferences--;
 
-        if (S.DEBUG)
-            Log.d(S.TAG, "DB reference removed. Total: " + shared.dbReferences);
+            if (S.DEBUG)
+                Log.d(S.TAG, "DB reference removed. Total: " + shared.dbReferences);
 
-        if (shared.dbReferences <= 0) {
-            shared.dbReferences = 0;
+            if (shared.dbReferences <= 0) {
+                shared.dbReferences = 0;
 
-            if (shared.dbInsertStatement != null)
-                shared.dbInsertStatement.close();
-            shared.dbInsertStatement = null;
+                if (shared.dbInsertStatement != null)
+                    shared.dbInsertStatement.close();
+                shared.dbInsertStatement = null;
 
-            if (shared.dbInsertCustomStatement != null)
-                shared.dbInsertCustomStatement.close();
-            shared.dbInsertCustomStatement = null;
+                if (shared.dbInsertCustomStatement != null)
+                    shared.dbInsertCustomStatement.close();
+                shared.dbInsertCustomStatement = null;
 
-            if (shared.dbInsertExtraStatement != null)
-                shared.dbInsertExtraStatement.close();
-            shared.dbInsertExtraStatement = null;
+                if (shared.dbInsertExtraStatement != null)
+                    shared.dbInsertExtraStatement.close();
+                shared.dbInsertExtraStatement = null;
 
-            if (shared.db != null)
-                shared.db.close();
-            shared.db = null;
+                if (shared.db != null)
+                    shared.db.close();
+                shared.db = null;
+            }
         }
     }
 

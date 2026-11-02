@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,6 @@
 
 package com.holdingscythe.pocketamcreader.utils;
 
-import com.holdingscythe.pocketamcreader.ImportFragment;
-
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,16 +25,20 @@ import java.io.InputStream;
 import androidx.annotation.NonNull;
 
 /**
- * Reads file input stream and reports bytes actually read back to the import task.
+ * Reports bytes actually read. The listener may throw an IOException to abort reading (e.g. when cancelled).
  */
 public class ProgressFilterInputStream extends FilterInputStream {
 
-    private long mBytesRead = 0;
-    private final ImportFragment.CatalogImportTask mCatalogImportTask;
+    public interface Listener {
+        void onBytesRead(long totalBytesRead) throws IOException;
+    }
 
-    public ProgressFilterInputStream(InputStream in, ImportFragment.CatalogImportTask cit) {
+    private long mBytesRead = 0;
+    private final Listener mListener;
+
+    public ProgressFilterInputStream(InputStream in, Listener listener) {
         super(in);
-        mCatalogImportTask = cit;
+        mListener = listener;
     }
 
     @Override
@@ -63,8 +65,8 @@ public class ProgressFilterInputStream extends FilterInputStream {
         return skipped;
     }
 
-    private void report(long bytes) {
+    private void report(long bytes) throws IOException {
         mBytesRead += bytes;
-        mCatalogImportTask.publishExternalProgress(mBytesRead);
+        mListener.onBytesRead(mBytesRead);
     }
 }

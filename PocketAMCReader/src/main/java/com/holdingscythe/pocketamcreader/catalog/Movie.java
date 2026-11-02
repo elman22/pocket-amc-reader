@@ -467,8 +467,7 @@ public class Movie {
     public void unbindData() {
         for (ImageView view : mPictureViews) {
             Drawable drawable = view.getDrawable();
-            if (drawable instanceof BitmapDrawable) {
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if (drawable instanceof BitmapDrawable bitmapDrawable) {
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 bitmap.recycle();
             }

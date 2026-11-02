@@ -47,6 +47,7 @@ import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
+import com.holdingscythe.pocketamcreader.utils.SafHelper;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 
@@ -73,7 +74,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
     private Extras mExtras;
     private Filters mFilters;
-    private String mPicturesFolder;
     private int mHeroImageHeight;
 
     private Pattern regExpMultivaluedCleaner;
@@ -126,7 +126,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         String settingMultivaluedSeparator =
                 Utils.coalesce(preferences.getString(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR,
                         ",/"), ",/");
-        mPicturesFolder = preferences.getString(SettingsConstants.KEY_PREF_PICTURES_FOLDER, "/");
 
         if (getArguments() != null && getArguments().containsKey(ARG_MOVIE_ID)) {
             // Prepare Data Provider
@@ -424,35 +423,26 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         intent.setData(Uri.parse(url));
                         isIntentValid = true;
                     } else if (url.startsWith(S.INTENT_SCHEME_FILE) || !url.contains(S.INTENT_SCHEME_PORTION)) {
-                        if (url.startsWith(S.INTENT_SCHEME_FILE)) {
-                            // If link starts with file scheme, remove it and leave absolute path
+                        // Local file: relative to the catalog folder (granted by the user), or absolute path
+                        if (url.startsWith(S.INTENT_SCHEME_FILE))
                             url = url.replace(S.INTENT_SCHEME_FILE, "");
-                        } else {
-                            // If link does not contain any scheme, make absolute path
-                            if (!url.startsWith("/")) {
-                                // Fix for Windows backslashes
-                                url = url.replace("\\", "/");
-                                url = mPicturesFolder + url;
-                            }
-                        }
 
                         try {
-                            File file = new File(url);
+                            String treeString = SharedObjects.getInstance().preferences
+                                    .getString(SettingsConstants.KEY_PREF_CATALOG_TREE, "");
+                            Uri treeUri = SafHelper.isContentUri(treeString) ? Uri.parse(treeString) : null;
+                            Uri fileUri = SafHelper.resolveFileLink(view.getContext(), url, treeUri);
 
-                            if (!file.exists()) {
+                            if (fileUri == null) {
                                 errorResource = R.string.file_not_found;
-                                throw new FileNotFoundException();
                             } else {
-                                intent.setDataAndType(Uri.parse(file.getPath()),
-                                        Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                                intent.setDataAndType(fileUri, Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 isIntentValid = true;
                             }
-                        } catch (FileNotFoundException e) {
-                            if (S.WARN)
-                                Log.w(S.TAG, "Couldn't open file \"" + url + "\" for size check.");
                         } catch (Exception e) {
                             if (S.WARN)
-                                Log.w(S.TAG, "Error opening file.");
+                                Log.w(S.TAG, "Error opening file.", e);
                         }
                     }
 

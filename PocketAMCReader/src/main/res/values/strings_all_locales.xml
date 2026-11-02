@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="list_seen_false" translatable="false">&#x2715;</string>
     <string name="string_extension_separator" translatable="false">\u0020</string>
     <string name="picture_counter" translatable="false">%1$d\u2215%2$d</string>
-    <string name="used_libraries" translatable="false">NoNonsense-FilePicker: Jonas Kalderstam\nExpandableTextView:
+    <string name="used_libraries" translatable="false">ExpandableTextView:
         Manabu Shimobe\nAndroid-Universal-Image-Loader: Sergey Tarasevich\nCalligraphy: Christopher
         Jenkins\nDragListView: Magnus Woxblom\nRecyclerView-FastScroll: Tim Malseed</string>
 

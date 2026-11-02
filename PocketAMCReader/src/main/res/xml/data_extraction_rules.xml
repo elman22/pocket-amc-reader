@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Android 12+ backup / device-transfer rules. The movie database is rebuilt from the catalog XML,
-     so it is not backed up (the app re-imports when the database is empty). -->
+     and pictures are copied from the catalog folder, so neither is backed up (the app re-imports when the database is
+     empty). -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="database" path="PocketAMCReader.db" />
         <exclude domain="database" path="PocketAMCReader.db-journal" />
         <exclude domain="database" path="PocketAMCReader.db-wal" />
         <exclude domain="database" path="PocketAMCReader.db-shm" />
-        <exclude domain="file" path="amc_import_tmp.xml" />
+        <exclude domain="file" path="catalog_files" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="database" path="PocketAMCReader.db" />
         <exclude domain="database" path="PocketAMCReader.db-journal" />
         <exclude domain="database" path="PocketAMCReader.db-wal" />
         <exclude domain="database" path="PocketAMCReader.db-shm" />
-        <exclude domain="file" path="amc_import_tmp.xml" />
+        <exclude domain="file" path="catalog_files" />
     </device-transfer>
 </data-extraction-rules>

@@ -1,17 +1,18 @@
 [versions]
-agp = "8.13.0"
-material = "1.12.0"
-appcompat = "1.7.0"
+agp = "8.13.2"
+material = "1.14.0"
+appcompat = "1.8.0"
 cardview = "1.0.0"
-recyclerview = "1.3.2"
-coordinatorlayout = "1.2.0"
-viewpager = "1.0.0"
-filepicker = "4.2.1"
+recyclerview = "1.4.0"
+coordinatorlayout = "1.3.0"
+viewpager = "1.1.0"
+work = "2.12.0"
+documentfile = "1.1.0"
 expandableTextView = "0.1.4"
 universalImageLoader = "1.9.5"
 calligraphy = "3.1.1"
-viewpump = "2.0.3"
-dragListView = "1.7.2"
+viewpump = "2.1.1"
+dragListView = "1.7.3"
 fastScroll = "2.0.1"
 
 [libraries]
@@ -21,8 +22,8 @@ androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
 androidx-viewpager = { module = "androidx.viewpager:viewpager", version.ref = "viewpager" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
-# https://github.com/spacecowboy/NoNonsense-FilePicker
-nononsense-filepicker = { module = "com.nononsenseapps:filepicker", version.ref = "filepicker" }
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "work" }
+androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 # https://github.com/Manabu-GT/ExpandableTextView
 expandable-textview = { module = "com.ms-square:expandableTextView", version.ref = "expandableTextView" }
 # https://github.com/nostra13/Android-Universal-Image-Loader

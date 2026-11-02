@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,25 +18,34 @@
 
 package com.holdingscythe.pocketamcreader.settings;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
-import com.nononsenseapps.filepicker.FilePickerActivity;
+import com.holdingscythe.pocketamcreader.utils.SafHelper;
+import com.holdingscythe.pocketamcreader.utils.TreeIndex;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import androidx.documentfile.provider.DocumentFile;
 
 /**
  * Settings Fragment
@@ -45,7 +54,10 @@ import java.util.Map;
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences
         .OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-    private static final int FILE_CODE = 9510; // onActivityResult request code
+    // onActivityResult / onRequestPermissionsResult request codes
+    private static final int REQUEST_FOLDER = 9510;
+    private static final int REQUEST_FILE = 9511;
+    private static final int REQUEST_NOTIFICATIONS = 9512;
     private static SharedPreferences mPrefs;
     private Map<String, String> defaultTexts;
 
@@ -125,14 +137,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         String key = preference.getKey();
 
         if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION)) {
-            Intent i = new Intent(getActivity().getBaseContext(), SettingsFilePickerActivity.class);
-
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
-            i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
-            i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-
-            startActivityForResult(i, FILE_CODE);
+            showCatalogPicker();
             return true;
         }
 
@@ -146,39 +151,179 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         return false;
     }
 
+    /**
+     * Ask what to pick. Folder is recommended: it gives the app access to both the XML and the pictures.
+     * Android doesn't allow to pick some folders (e.g. the root of the storage), so the XML alone can be picked too.
+     */
+    private void showCatalogPicker() {
+        String[] items = {
+                getString(R.string.pref_catalog_pick_folder),
+                getString(R.string.pref_catalog_pick_file)
+        };
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.pref_setting_catalog)
+                .setItems(items, (dialog, which) -> {
+                    Intent i;
+                    int request;
+
+                    if (which == 0) {
+                        i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                        request = REQUEST_FOLDER;
+                    } else {
+                        i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        i.addCategory(Intent.CATEGORY_OPENABLE);
+                        i.setType("*/*");
+                        request = REQUEST_FILE;
+                    }
+
+                    i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
+                    try {
+                        startActivityForResult(i, request);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), R.string.catalog_picker_unavailable, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_negative, null)
+                .show();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
-            if (!intent.getBooleanExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false)) {
-                // The URI will now be something like content://PACKAGE-NAME/root/path/to/file
-                Uri uri = intent.getData();
-                // A utility method is provided to transform the URI to a File object
-                assert uri != null;
-                File file = com.nononsenseapps.filepicker.Utils.getFileForUri(uri);
+        if (resultCode != Activity.RESULT_OK || intent == null || intent.getData() == null || getActivity() == null)
+            return;
 
-                if (S.INFO)
-                    Log.i(S.TAG, "XML path Uri (" + file.toString() + ")");
+        Uri uri = intent.getData();
 
-                try {
-                    SharedPreferences.Editor editor = mPrefs.edit();
-                    editor.putString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, file.toString());
-                    editor.apply();
-                    updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_LOCATION);
-                } catch (Exception e) {
-                    if (S.ERROR)
-                        Log.e(S.TAG, "File select error " + e.getLocalizedMessage());
-                }
-            }
+        if (S.INFO)
+            Log.i(S.TAG, "Catalog Uri (" + uri + ")");
+
+        if (requestCode == REQUEST_FOLDER)
+            onFolderPicked(uri);
+        else if (requestCode == REQUEST_FILE)
+            onFilePicked(uri);
+    }
+
+    private void onFolderPicked(Uri treeUri) {
+        Context context = getActivity();
+
+        if (!SafHelper.takeReadPermission(context, treeUri)) {
+            Toast.makeText(context, R.string.catalog_picker_denied, Toast.LENGTH_LONG).show();
+            return;
         }
+
+        TreeIndex index = new TreeIndex(context.getContentResolver(), treeUri);
+        List<TreeIndex.Entry> xmlFiles = SafHelper.listXmlFiles(index);
+
+        if (xmlFiles.isEmpty()) {
+            Toast.makeText(context, R.string.catalog_no_xml_found, Toast.LENGTH_LONG).show();
+        } else if (xmlFiles.size() == 1) {
+            applyFolder(treeUri, index, xmlFiles.get(0));
+        } else {
+            String[] names = new String[xmlFiles.size()];
+            for (int i = 0; i < names.length; i++)
+                names[i] = xmlFiles.get(i).name;
+
+            new AlertDialog.Builder(context)
+                    .setTitle(R.string.catalog_choose_xml)
+                    .setItems(names, (dialog, which) -> applyFolder(treeUri, index, xmlFiles.get(which)))
+                    .setNegativeButton(R.string.dialog_negative, null)
+                    .show();
+        }
+    }
+
+    private void applyFolder(Uri treeUri, TreeIndex index, TreeIndex.Entry xml) {
+        DocumentFile folder = DocumentFile.fromTreeUri(getActivity(), treeUri);
+        String folderName = folder == null ? null : folder.getName();
+        String display = folderName == null || folderName.isEmpty() ? xml.name : folderName + "/" + xml.name;
+
+        storeCatalog(index.uriOf(xml), treeUri, display);
+    }
+
+    private void onFilePicked(Uri fileUri) {
+        Context context = getActivity();
+
+        if (!SafHelper.takeReadPermission(context, fileUri)) {
+            Toast.makeText(context, R.string.catalog_picker_denied, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        DocumentFile file = DocumentFile.fromSingleUri(context, fileUri);
+        String name = file == null ? null : file.getName();
+
+        storeCatalog(fileUri, null, name == null ? fileUri.getLastPathSegment() : name);
+    }
+
+    /**
+     * Remember the selected catalog (and the folder it comes from) and schedule import
+     */
+    private void storeCatalog(Uri catalogUri, Uri treeUri, String displayName) {
+        Context context = getActivity();
+
+        String oldLocation = mPrefs.getString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, "");
+        String oldTree = mPrefs.getString(SettingsConstants.KEY_PREF_CATALOG_TREE, "");
+        String newTree = treeUri == null ? "" : treeUri.toString();
+
+        try {
+            // Size 0 and pictures not synchronized: import everything again
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putString(SettingsConstants.KEY_PREF_CATALOG_TREE, newTree);
+            editor.putString(SettingsConstants.KEY_PREF_CATALOG_NAME, displayName);
+            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
+            editor.putBoolean(SettingsConstants.KEY_PREF_PICTURES_SYNCED, false);
+            editor.putString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, catalogUri.toString());
+            editor.apply();
+
+            // Don't keep access to locations we don't use anymore
+            if (!oldTree.isEmpty() && !oldTree.equals(newTree))
+                SafHelper.releasePermission(context, oldTree);
+            if (oldTree.isEmpty() && !oldLocation.equals(catalogUri.toString()))
+                SafHelper.releasePermission(context, oldLocation);
+
+            SharedObjects.getInstance().restartAppRequested = true;
+            updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_LOCATION);
+            requestNotificationPermission();
+        } catch (Exception e) {
+            if (S.ERROR)
+                Log.e(S.TAG, "File select error " + e.getLocalizedMessage());
+        }
+    }
+
+    /**
+     * Import runs as a foreground service with a progress notification. Android 13+ needs permission to show it
+     * (import works also without it). Asked only once, right before the first import.
+     */
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
+            return;
+
+        if (getActivity().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED
+                || mPrefs.getBoolean(SettingsConstants.KEY_PREF_NOTIFICATIONS_ASKED, false))
+            return;
+
+        mPrefs.edit().putBoolean(SettingsConstants.KEY_PREF_NOTIFICATIONS_ASKED, true).apply();
+        requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_NOTIFICATIONS);
     }
 
     private void updateSummary(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
         String defaultText = defaultTexts.get(key);
 
+        // Catalog is a content Uri now, show its name
+        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION)) {
+            String location = sharedPreferences.getString(key, "");
+            if (location.isEmpty())
+                pref.setSummary(defaultText);
+            else if (!SafHelper.isContentUri(location))
+                pref.setSummary(R.string.pref_setting_catalog_legacy);
+            else
+                pref.setSummary(sharedPreferences.getString(SettingsConstants.KEY_PREF_CATALOG_NAME, location));
+        }
+
         // String preferences
-        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION) ||
-                key.equals(SettingsConstants.KEY_PREF_LIST_SEPARATOR) ||
+        if (key.equals(SettingsConstants.KEY_PREF_LIST_SEPARATOR) ||
                 key.equals(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR)) {
             pref.setSummary(sharedPreferences.getString(key, defaultText));
         }

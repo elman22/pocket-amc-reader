@@ -93,7 +93,8 @@ dependencies {
     implementation libs.androidx.recyclerview
     implementation libs.androidx.coordinatorlayout
     implementation libs.androidx.viewpager
-    implementation libs.nononsense.filepicker
+    implementation libs.androidx.work.runtime
+    implementation libs.androidx.documentfile
     implementation libs.expandable.textview
     implementation libs.universal.image.loader
     implementation libs.calligraphy3

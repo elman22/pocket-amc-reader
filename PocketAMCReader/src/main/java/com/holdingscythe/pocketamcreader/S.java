@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,6 @@ public final class S {
 
     public static final String AUTHORITY = "com.holdingscythe.provider.MovieCatalog";
     public static final String TAG = "PocketAMCReader";
-    public static final String WAKE_LOCK_TAG = TAG + ":WakeLock";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/movies");
     public static final String DEFAULT_FONT = "fonts/RobotoCondensed-Regular.ttf";
 
@@ -53,12 +52,12 @@ public final class S {
             ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.com.holdingscythe.movie";
 
     // Import
-    static final String CATALOG_TMP_FILENAME = "/amc_import_tmp.xml";
-    static final int IMPORT_CONVERSION_START = -1;
     static final int IMPORT_LOADING_START = -2;
     static final int IMPORT_INDEXING_START = -3;
-    static final int IMPORT_ERROR_CONVERSION = -10;
+    static final int IMPORT_PICTURES_START = -4;
     static final int IMPORT_ERROR_LOADING = -11;
+    static final int IMPORT_ERROR_NOT_CONFIGURED = -12;
+    static final int IMPORT_ERROR_ACCESS = -13;
     public static final String CATALOG_TRUE = "True";
     public static final String CATALOG_FALSE = "False";
 

@@ -29,6 +29,10 @@ public final class SettingsConstants {
     public static final String KEY_PREF_LAST_IMPORTED_DATE = "settingLastImportedDate";
     public static final String KEY_PREF_LAST_IMPORTED_SIZE = "settingLastImportedSize";
     public static final String KEY_PREF_LAST_IMPORTED_MODIFIED = "settingLastImportedModified";
+    public static final String KEY_PREF_CATALOG_TREE = "settingCatalogTree";
+    public static final String KEY_PREF_CATALOG_NAME = "settingCatalogName";
+    public static final String KEY_PREF_PICTURES_SYNCED = "settingPicturesSynced";
+    public static final String KEY_PREF_NOTIFICATIONS_ASKED = "settingNotificationsAsked";
     public static final String KEY_PREF_LIST_FIELDS = "settingMoviesListLines";
     public static final String KEY_PREF_LIST_SEPARATOR = "settingMoviesListSeparator";
     public static final String KEY_PREF_MOVIE_LIST_ORDER = "settingMovieListOrder";
