@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Katalog</string>
   <string name="pref_setting_catalog">Katalog</string>
   <string name="menu_settings">Einstellungen</string>
-  <string name="pref_setting_catalog_summary">Pfad zum Katalog auf der SD Karte</string>
+  <string name="pref_setting_catalog_summary">Wählen Sie den Ordner mit Ihrem Katalog</string>
   <string name="display_minutes_suffix">min.</string>
   <string name="pref_category_display">Details</string>
   <string name="pref_setting_encoding">Katalog Codierung</string>
@@ -27,7 +27,6 @@
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
     <item quantity="one">Zeige %1$d Film</item>
-    <item quantity="few">Zeige %1$d Filme</item>
     <item quantity="other">Zeige %1$d Filme</item>
   </plurals>
   <string name="details_checked_label">Gesehen</string>
@@ -49,7 +48,6 @@
   <string name="display_filessizes_suffix">MB</string>
   <plurals name="details_disks">
     <item quantity="one">disc/file</item>
-    <item quantity="few">discs/files</item>
     <item quantity="other">discs/files</item>
   </plurals>
   <string name="display_files_separator">auf</string>
@@ -64,7 +62,7 @@
   <string name="menu_sort_number_desc">Nummer (Neueste zuerst)</string>
   <string name="menu_sort_number_asc">Nummer (Älteste zuerst)</string>
   <string name="welcome_title">Willkommen</string>
-  <string name="welcome_message">Beim ersten Start des Programms werden Sie umgeleitet zu \"%1$s\" wo Sie folgende Eingaben vornehmen sollen:\n\n- Pfad zu Ihrem XML Katalog in \"%2$s\" eingeben,\n- Änderen Sie \"%3$s\" damit Sie mit den Einstellungen in Ihrem PC übereinstimmen.\n\nNach dem Verlassen von \"%1$s\" wird das Programm Ihre Videos importieren.</string>
+  <string name="welcome_message">Beim ersten Start des Programms werden Sie umgeleitet zu \"%1$s\" wo Sie folgende Eingaben vornehmen sollen:\n\n- Ihren XML Katalog in \"%2$s\" auswählen,\n- Änderen Sie \"%3$s\" damit Sie mit den Einstellungen in Ihrem PC übereinstimmen.\n\nNach dem Verlassen von \"%1$s\" wird das Programm Ihre Videos importieren.</string>
   <string name="welcome_dialog_dismiss">Fortfahren</string>
   <string name="dialog_positive">OK</string>
   <string name="dialog_negative">Abbruch</string>
@@ -83,7 +81,7 @@
   <string name="filter_add_first_step">Feld auswählen</string>
   <string name="details_country_label">Land</string>
   <string name="details_category_label">Kategorie</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">ist nicht gleich</string>
   <string name="filter_type_contains_not">enthält nicht</string>
@@ -135,4 +133,91 @@
   <string name="pref_setting_multivalue_summary">Trennzeichen für Regisseure, Produzenten, Schauspieler auswählen. Sie können verschiedene Trennzeichen benutzen</string>
   <string name="details_img_description">Filmbild</string>
   <string name="input_filter_hint">Filterwert</string>
+  <string name="menu_sort_date_desc">Eingabedatum (Neueste zuerst)</string>
+  <string name="menu_sort_date_asc">Eingabedatum (Älteste zuerst)</string>
+  <string name="details_writer_label">Drehbuch</string>
+  <string name="details_composer_label">Komponist</string>
+  <string name="details_filepath_label">Dateipfad</string>
+  <string name="details_userrating_label">Meine Bewertung</string>
+  <string name="menu_sort_userrating_desc">Meine Bewertung (Beste zuerst)</string>
+  <string name="menu_sort_userrating_asc">Meine Bewertung (Schlechteste zuerst)</string>
+  <string name="details_datewatched_label">Gesehen am</string>
+  <string name="menu_sort_datewatched_desc">Gesehen am (Neueste zuerst)</string>
+  <string name="menu_sort_datewatched_asc">Gesehen am (Älteste zuerst)</string>
+  <string name="details_certification_label">Altersfreigabe</string>
+  <string name="menu_sort_certification_desc">Altersfreigabe (Z - A)</string>
+  <string name="menu_sort_certification_asc">Altersfreigabe (A - Z)</string>
+  <string name="pref_setting_fit_picture">Bild anpassen</string>
+  <string name="pref_setting_fit_picture_summary">Bildgröße an den Bildschirm anpassen</string>
+  <string name="details_etag_label">Schlagwort</string>
+  <string name="details_etitle_label">Titel</string>
+  <string name="details_ecategory_label">Kategorie</string>
+  <string name="details_eurl_label">URL</string>
+  <string name="details_edescription_label">Beschreibung</string>
+  <string name="details_ecomments_label">Kommentar</string>
+  <string name="details_ecreated_by_label">Erstellt von</string>
+  <string name="filter_remove">Filter löschen</string>
+  <string name="filter_remove_all">Alle Filter</string>
+  <string name="import_check_file">Suche nach Aktualisierungen…</string>
+  <string name="loading">Lade…</string>
+  <string name="details_picture_description">Filmplakat</string>
+  <string name="details_certification_label_short">Freig.</string>
+  <string name="details_section_media">Mediendetails</string>
+  <string name="details_section_technical">Technische Details</string>
+  <string name="pref_setting_list_lines">In der Liste angezeigte Felder</string>
+  <string name="pref_setting_list_lines_summary">Wählen Sie die in der Filmliste angezeigten Felder aus und legen Sie ihre Reihenfolge fest</string>
+  <string name="list_holder_row1">Felder hinzufügen (z. B. Titel)</string>
+  <string name="list_holder_row2">Felder hinzufügen (z. B. Nummer, Jahr, Länge, Bewertung)</string>
+  <string name="list_holder_row3">Felder hinzufügen (z. B. Kategorie)</string>
+  <string name="settings_cards_column1_title">Zeile 1</string>
+  <string name="settings_cards_column2_title">Zeile 2</string>
+  <string name="settings_cards_column3_title">Zeile 3</string>
+  <string name="settings_cards_column4_title">Verfügbare Felder</string>
+  <string name="card_click_hint">Zum Umsortieren gedrückt halten und ziehen</string>
+  <string name="pref_setting_remove_bad_chars">Ungültige Zeichen entfernen</string>
+  <string name="pref_setting_remove_bad_chars_summary">Ungültige Zeichen in der XML-Datei beim Import entfernen. Nur verwenden, wenn sich die ursprüngliche XML-Datei nicht laden lässt</string>
+  <string name="error_import2">Beim Import ist ein Problem aufgetreten. Das passiert meist, wenn der Katalog nicht standardkonforme Zeichen enthält. Zur Behebung können Sie Folgendes versuchen:\n\n- In den Einstellungen \"%1$s\" aktivieren\n- Die Einstellung \"%2$s\" ändern\n- Auf Ihrem PC das Ant Movie Catalog-Skript RemoveBadChars ausführen und den Import erneut versuchen\n\nWenn nichts davon hilft, wenden Sie sich bitte über die bei Google Play angezeigte Webseite an den Autor.</string>
+  <string name="details_section_custom">Benutzerdefinierte Felder</string>
+  <string name="menu_switch_view">Ansicht</string>
+  <string name="pref_setting_grid_title">Titel in der Rasteransicht anzeigen</string>
+  <string name="pref_setting_show_grid_title_summary">Filmtitel in der Rasteransicht anzeigen (ist kein Bild vorhanden, wird der Titel immer angezeigt)</string>
+  <string name="link_not_opened">Dieser Link kann nicht geöffnet werden</string>
+  <string name="link_not_opened_hint">Der Link konnte nicht geöffnet werden. Ist eine App installiert, die diesen Link verarbeiten kann?</string>
+  <string name="file_not_found">Datei nicht gefunden</string>
+  <string name="pref_setting_filepath_link">Dateipfad als Link</string>
+  <string name="pref_setting_filepath_link_summary">Dateipfad anklickbar machen und versuchen, die zugehörige App zu öffnen</string>
+  <string name="pref_category_application">Anwendung</string>
+  <string name="pref_setting_theme">Design</string>
+  <string name="pref_setting_theme_summary">Farbdesign der Anwendung</string>
+  <string-array name="pref_setting_theme_names">
+    <item>Blau</item>
+    <item>Rot</item>
+    <item>Grün</item>
+    <item>Indigo</item>
+    <item>Violett</item>
+    <item>Rosa</item>
+    <item>Dunkelorange</item>
+    <item>Braun</item>
+    <item>Grau</item>
+    <item>Schwarz</item>
+  </string-array>
+  <string name="pref_setting_color_tag">Farbmarkierung</string>
+  <string name="pref_setting_color_tag_summary">Farbmarkierung als farbigen Filmtitel anzeigen (sonst farbige Linien verwenden)</string>
+  <string name="import_check_finished">Lade…</string>
+  <string name="pref_catalog_pick_folder">Ordner mit Katalog und Bildern (empfohlen)</string>
+  <string name="pref_catalog_pick_file">Nur die XML-Katalogdatei (Bilder sind dann nicht verfügbar)</string>
+  <string name="pref_setting_catalog_legacy">Katalog erneut auswählen (Android erlaubt keinen direkten Dateizugriff mehr)</string>
+  <string name="catalog_picker_unavailable">Auf diesem Gerät ist keine Dateiauswahl verfügbar.</string>
+  <string name="catalog_picker_denied">Android hat keinen Zugriff auf den gewählten Ort gewährt. Bitte versuchen Sie es erneut oder wählen Sie einen anderen Ort.</string>
+  <string name="catalog_no_xml_found">Im gewählten Ordner wurde keine XML-Datei gefunden. Wählen Sie den Ordner, in den der Katalog exportiert wurde.</string>
+  <string name="catalog_choose_xml">Katalogdatei auswählen</string>
+  <string name="import_copy_pictures">Kopiere Bilder…</string>
+  <string name="import_notification_channel">Katalogimport</string>
+  <string name="import_notification_title">Katalog wird importiert</string>
+  <string name="import_storage_migration_title">Katalog erneut auswählen</string>
+  <string name="import_storage_migration_message">Android erlaubt Apps nicht mehr, Dateien von beliebigen Orten zu lesen. Bitte wählen Sie in den Einstellungen den Ordner mit Ihrem Katalog aus. Bisher importierte Filme bleiben verfügbar, Bilder werden aber erst angezeigt, wenn Sie das getan haben.</string>
+  <string name="import_access_lost_title">Katalog nicht erreichbar</string>
+  <string name="import_access_lost_message">Die App hat den Zugriff auf den Katalog verloren (die Datei wurde verschoben oder gelöscht, oder der Zugriff wurde entzogen). Bitte wählen Sie den Katalog in den Einstellungen erneut aus.</string>
+  <string name="dialog_open_settings">Einstellungen öffnen</string>
+  <string name="dialog_later">Später</string>
 </resources>

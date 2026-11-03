@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Catalog</string>
   <string name="pref_setting_catalog">Catalog</string>
   <string name="menu_settings">Settings</string>
-  <string name="pref_setting_catalog_summary">Pick your catalog from SD card</string>
+  <string name="pref_setting_catalog_summary">Pick the folder with your catalog</string>
   <string name="display_minutes_suffix">min.</string>
   <string name="pref_category_display">Details</string>
   <string name="pref_setting_encoding">Catalog encoding</string>
@@ -84,7 +84,7 @@
   <string name="filter_add_first_step">Select field</string>
   <string name="details_country_label">Country</string>
   <string name="details_category_label">Category</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">does not equal</string>
   <string name="filter_type_contains_not">does not contain</string>
@@ -180,7 +180,7 @@
   <string name="card_click_hint">Hold and drag to rearrange</string>
   <string name="pref_setting_remove_bad_chars">Remove bad characters</string>
   <string name="pref_setting_remove_bad_chars_summary">Remove bad characters in XML file during import. Use only when original XML fails to load</string>
-  <string name="error_import2">There is a problem with import. This usually happens when catalog contains some non standard characters. To fix it, you can try:\n\n- Go to settings and check \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nAlso make sure you have enough free space on your device (not the SD card). Twice the size of XML is required.\n\nIf none of this helps, please, contact the author via web page shown on Google Play.</string>
+  <string name="error_import2">There is a problem with import. This usually happens when catalog contains some non-standard characters. To fix it, you can try:\n\n- Go to settings and check \"%1$s\"\n- Try changing \"%2$s\" setting\n- Run on your PC Ant Movie Catalog script called RemoveBadChars and try import again\n\nIf none of this helps, please, contact the author via web page shown on Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Custom fields</string>
   <!--Version 2.2-->
@@ -211,4 +211,20 @@
   <string name="pref_setting_color_tag">Color tag</string>
   <string name="pref_setting_color_tag_summary">Show color tag as colored movie title (otherwise use color lines)</string>
   <string name="import_check_finished">Loading…</string>
+  <string name="pref_catalog_pick_folder">Folder with the catalog and its pictures (recommended)</string>
+  <string name="pref_catalog_pick_file">Catalog XML file only (pictures will not be available)</string>
+  <string name="pref_setting_catalog_legacy">Select the catalog again (Android no longer allows direct access to files)</string>
+  <string name="catalog_picker_unavailable">No file picker is available on this device.</string>
+  <string name="catalog_picker_denied">Android did not grant access to the selected location. Please try again or pick a different one.</string>
+  <string name="catalog_no_xml_found">No XML file was found in the selected folder. Pick the folder where the catalog was exported to.</string>
+  <string name="catalog_choose_xml">Choose the catalog file</string>
+  <string name="import_copy_pictures">Copying pictures…</string>
+  <string name="import_notification_channel">Catalog import</string>
+  <string name="import_notification_title">Importing catalog</string>
+  <string name="import_storage_migration_title">Select your catalog again</string>
+  <string name="import_storage_migration_message">Android no longer lets apps read files from arbitrary locations. Please select the folder with your catalog in settings. Movies imported so far stay available, but pictures will not be shown until you do.</string>
+  <string name="import_access_lost_title">Catalog is not accessible</string>
+  <string name="import_access_lost_message">The app lost access to the catalog (the file was moved or deleted, or access was revoked). Please select the catalog again in settings.</string>
+  <string name="dialog_open_settings">Open settings</string>
+  <string name="dialog_later">Later</string>
 </resources>

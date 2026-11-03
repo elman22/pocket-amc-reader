@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Katalog</string>
   <string name="pref_setting_catalog">Katalog</string>
   <string name="menu_settings">Ustawienia</string>
-  <string name="pref_setting_catalog_summary">Wybierz swój katalog z karty SD</string>
+  <string name="pref_setting_catalog_summary">Wybierz folder z katalogiem</string>
   <string name="display_minutes_suffix">min.</string>
   <string name="pref_category_display">Szczegóły</string>
   <string name="pref_setting_encoding">Kodowanie katalogu</string>
@@ -84,7 +84,7 @@
   <string name="filter_add_first_step">Wybierz pole</string>
   <string name="details_country_label">Kraj</string>
   <string name="details_category_label">Kategoria</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">nie równy</string>
   <string name="filter_type_contains_not">nie zawiera</string>
@@ -113,7 +113,7 @@
   <string name="menu_sort_borrower_asc">Pożyczający (od A do Z)</string>
   <string name="menu_sort_medialabel_desc">Okładka (od Z do A)</string>
   <string name="menu_sort_medialabel_asc">Okładka (od A do Z)</string>
-  <string name="import_add_indexes">Optymalizacja wydajności ...</string>
+  <string name="import_add_indexes">Optymalizacja wydajności…</string>
   <string name="filter_type_is_null">jest pusty</string>
   <string name="filter_type_is_null_not">nie jest pusty</string>
   <string name="pref_setting_list_saved">Ustawienia zapisane</string>
@@ -180,7 +180,7 @@
   <string name="card_click_hint">Przytrzymaj i przeciągnij, aby zmienić kolejność</string>
   <string name="pref_setting_remove_bad_chars">Usuń nieprawidłowe znaki</string>
   <string name="pref_setting_remove_bad_chars_summary">Usuń nieprawidłowe znaki w pliku XML podczas importu. Użyj tylko wtedy, gdy oryginalny plik XML nie załaduje się</string>
-  <string name="error_import2">Wystąpił problem z importowaniem. Zwykle dzieje się tak, gdy katalog zawiera jakieś niestandardowe znaki. Aby to naprawić, możesz spróbować:\n\n- Przejdź do ustawień i sprawdź \"%1$s\"\n- Spróbuj zmienić ustawieniia \"%2$s\"\n- Uruchom skrypt PC Ant Movie Catalog o nazwie RemoveBadChars i spróbuj ponownie zaimportować\n\nUpewnij się czy masz wystarczająco dużo wolnego miejsca na swoim urządzeniu (nie na karcie SD). Wymagany jest dwukrotnie większy rozmiar XML.\n\nJeśli nic z tego nie pomoże, skontaktuj się z autorem za pośrednictwem strony internetowej wyświetlanej w Google Play.</string>
+  <string name="error_import2">Wystąpił problem z importowaniem. Zwykle dzieje się tak, gdy katalog zawiera jakieś niestandardowe znaki. Aby to naprawić, możesz spróbować:\n\n- Przejdź do ustawień i sprawdź \"%1$s\"\n- Spróbuj zmienić ustawieniia \"%2$s\"\n- Uruchom skrypt PC Ant Movie Catalog o nazwie RemoveBadChars i spróbuj ponownie zaimportować\n\nJeśli nic z tego nie pomoże, skontaktuj się z autorem za pośrednictwem strony internetowej wyświetlanej w Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Pola niestandardowe</string>
   <!--Version 2.2-->
@@ -211,4 +211,20 @@
   <string name="pref_setting_color_tag">Kolor znacznika</string>
   <string name="pref_setting_color_tag_summary">Pokaż kolor znacznika jako kolorowy tytuł filmu (w przeciwnym razie użyj kolorowych linii)</string>
   <string name="import_check_finished">Ładowanie…</string>
+  <string name="pref_catalog_pick_folder">Folder z katalogiem i obrazami (zalecane)</string>
+  <string name="pref_catalog_pick_file">Tylko plik XML katalogu (obrazy nie będą dostępne)</string>
+  <string name="pref_setting_catalog_legacy">Wybierz katalog ponownie (Android nie pozwala już na bezpośredni dostęp do plików)</string>
+  <string name="catalog_picker_unavailable">Na tym urządzeniu nie jest dostępny wybór plików.</string>
+  <string name="catalog_picker_denied">Android nie przyznał dostępu do wybranej lokalizacji. Spróbuj ponownie lub wybierz inną.</string>
+  <string name="catalog_no_xml_found">W wybranym folderze nie znaleziono pliku XML. Wybierz folder, do którego wyeksportowano katalog.</string>
+  <string name="catalog_choose_xml">Wybierz plik katalogu</string>
+  <string name="import_copy_pictures">Kopiowanie obrazów…</string>
+  <string name="import_notification_channel">Import katalogu</string>
+  <string name="import_notification_title">Importowanie katalogu</string>
+  <string name="import_storage_migration_title">Wybierz katalog ponownie</string>
+  <string name="import_storage_migration_message">Android nie pozwala już aplikacjom odczytywać plików z dowolnych lokalizacji. Wybierz w ustawieniach folder z katalogiem. Dotychczas zaimportowane filmy pozostaną dostępne, ale obrazy nie będą wyświetlane, dopóki tego nie zrobisz.</string>
+  <string name="import_access_lost_title">Katalog jest niedostępny</string>
+  <string name="import_access_lost_message">Aplikacja utraciła dostęp do katalogu (plik został przeniesiony lub usunięty albo cofnięto dostęp). Wybierz katalog ponownie w ustawieniach.</string>
+  <string name="dialog_open_settings">Otwórz ustawienia</string>
+  <string name="dialog_later">Później</string>
 </resources>

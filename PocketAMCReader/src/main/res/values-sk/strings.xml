@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Katalóg</string>
   <string name="pref_setting_catalog">Katalóg</string>
   <string name="menu_settings">Nastavenia</string>
-  <string name="pref_setting_catalog_summary">Vyberte si katalóg z karty SD</string>
+  <string name="pref_setting_catalog_summary">Vyberte priečinok s katalógom</string>
   <string name="display_minutes_suffix">min.</string>
   <string name="pref_category_display">Podrobnosti</string>
   <string name="pref_setting_encoding">Kódovanie katalógu</string>
@@ -28,6 +28,7 @@
   <plurals name="list_showing">
     <item quantity="one">Zobrazujem %1$d film</item>
     <item quantity="few">Zobrazujem %1$d filmy</item>
+    <item quantity="many">Zobrazujem %1$d filmov</item>
     <item quantity="other">Zobrazujem %1$d filmov</item>
   </plurals>
   <string name="details_checked_label">Sledované</string>
@@ -50,6 +51,7 @@
   <plurals name="details_disks">
     <item quantity="one">disk / súbor</item>
     <item quantity="few">disky / súbory</item>
+    <item quantity="many">diskov / súborov</item>
     <item quantity="other">diskov / súborov</item>
   </plurals>
   <string name="display_files_separator">na</string>
@@ -73,6 +75,7 @@
   <plurals name="filter_label">
     <item quantity="one">Filter:</item>
     <item quantity="few">Filtre:</item>
+    <item quantity="many">Filtre:</item>
     <item quantity="other">Filtre:</item>
   </plurals>
   <string name="filter_none">žiadny</string>
@@ -84,7 +87,7 @@
   <string name="filter_add_first_step">Vyberte pole</string>
   <string name="details_country_label">Krajina</string>
   <string name="details_category_label">Kategória</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">sa nerovná</string>
   <string name="filter_type_contains_not">neobsahuje</string>
@@ -180,7 +183,7 @@
   <string name="card_click_hint">Podržte a ťahajte pre usporiadanie</string>
   <string name="pref_setting_remove_bad_chars">Odstráňte zlé znaky</string>
   <string name="pref_setting_remove_bad_chars_summary">Odstráňte chybné znaky v XML súbore počas importu. Používajte len vtedy, keď sa pôvodné XML nedarí načítať</string>
-  <string name="error_import2">Vyskytol sa problém s importom. Obvykle sa to stane, keď katalóg obsahuje niektoré neštandardné znaky. Ak to chcete vyriešiť, môžete vyskúšať:\n\n- Prejdite na nastavenia a skontrolujte \"%1$s\"\n- Skúste zmeniť nastavenie \"%2$s\"\n- Spustite vo svojom PC Ant Movie Catalog skript s názvom RemoveBadChars a skúste znova import\n\nTaktiež sa uistite, že máte vo svojom zariadení dostatok voľného miesta (nie na karte SD). Je potrebná dvojnásobná veľkosť XML.\n\nAk vám nič z toho nepomôže, kontaktujte autora prostredníctvom webovej stránky zobrazenej v službe Google Play.</string>
+  <string name="error_import2">Vyskytol sa problém s importom. Obvykle sa to stane, keď katalóg obsahuje niektoré neštandardné znaky. Ak to chcete vyriešiť, môžete vyskúšať:\n\n- Prejdite na nastavenia a skontrolujte \"%1$s\"\n- Skúste zmeniť nastavenie \"%2$s\"\n- Spustite vo svojom PC Ant Movie Catalog skript s názvom RemoveBadChars a skúste znova import\n\nAk vám nič z toho nepomôže, kontaktujte autora prostredníctvom webovej stránky zobrazenej v službe Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Vlastné polia</string>
   <!--Version 2.2-->
@@ -211,4 +214,20 @@
   <string name="pref_setting_color_tag">Farebná značka</string>
   <string name="pref_setting_color_tag_summary">Zobraziť farebnú značku ako vyfarbený názvu filmu (inak použiť farebné čiary)</string>
   <string name="import_check_finished">Načítavam…</string>
+  <string name="pref_catalog_pick_folder">Priečinok s katalógom a obrázkami (odporúčané)</string>
+  <string name="pref_catalog_pick_file">Iba súbor XML katalógu (obrázky nebudú k dispozícii)</string>
+  <string name="pref_setting_catalog_legacy">Vyberte katalóg znova (Android už nepovoľuje priamy prístup k súborom)</string>
+  <string name="catalog_picker_unavailable">Na tomto zariadení nie je dostupný výber súborov.</string>
+  <string name="catalog_picker_denied">Android neposkytol prístup k vybranému umiestneniu. Skúste to znova alebo vyberte iné.</string>
+  <string name="catalog_no_xml_found">Vo vybranom priečinku sa nenašiel žiadny súbor XML. Vyberte priečinok, do ktorého bol katalóg exportovaný.</string>
+  <string name="catalog_choose_xml">Vyberte súbor katalógu</string>
+  <string name="import_copy_pictures">Kopírovanie obrázkov…</string>
+  <string name="import_notification_channel">Import katalógu</string>
+  <string name="import_notification_title">Importovanie katalógu</string>
+  <string name="import_storage_migration_title">Vyberte katalóg znova</string>
+  <string name="import_storage_migration_message">Android už aplikáciám nedovoľuje čítať súbory z ľubovoľných miest. V nastaveniach vyberte priečinok so svojím katalógom. Doteraz importované filmy zostanú k dispozícii, ale obrázky sa nezobrazia, kým to neurobíte.</string>
+  <string name="import_access_lost_title">Katalóg nie je dostupný</string>
+  <string name="import_access_lost_message">Aplikácia stratila prístup ku katalógu (súbor bol presunutý alebo odstránený, alebo bol prístup odvolaný). Vyberte katalóg v nastaveniach znova.</string>
+  <string name="dialog_open_settings">Otvoriť nastavenia</string>
+  <string name="dialog_later">Neskôr</string>
 </resources>

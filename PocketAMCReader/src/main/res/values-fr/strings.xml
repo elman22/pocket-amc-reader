@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Catalogue</string>
   <string name="pref_setting_catalog">Catalogue source</string>
   <string name="menu_settings">Options</string>
-  <string name="pref_setting_catalog_summary">Sélectionner un catalogue sur la carte SD</string>
+  <string name="pref_setting_catalog_summary">Sélectionner le dossier contenant votre catalogue</string>
   <string name="display_minutes_suffix">min.</string>
   <string name="pref_category_display">Détails</string>
   <string name="pref_setting_encoding">Encodage du catalogue</string>
@@ -27,7 +27,6 @@
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
     <item quantity="one">Film affiché: %1$d</item>
-    <item quantity="few">Films affichés: %1$d</item>
     <item quantity="other">Films affichés: %1$d</item>
   </plurals>
   <string name="details_checked_label">Vu</string>
@@ -49,7 +48,6 @@
   <string name="display_filessizes_suffix">Mo</string>
   <plurals name="details_disks">
     <item quantity="one">disque/fichier</item>
-    <item quantity="few">disques/fichiers</item>
     <item quantity="other">disques/fichiers</item>
   </plurals>
   <string name="display_files_separator">sur</string>
@@ -72,7 +70,6 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Filtre:</item>
-    <item quantity="few">Filtres:</item>
     <item quantity="other">Filtres:</item>
   </plurals>
   <string name="filter_none">aucun</string>
@@ -84,7 +81,7 @@
   <string name="filter_add_first_step">Choix du premier champ</string>
   <string name="details_country_label">Pays</string>
   <string name="details_category_label">Catégorie</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">différent de</string>
   <string name="filter_type_contains_not">ne contient pas</string>
@@ -180,7 +177,7 @@
   <string name="card_click_hint">Saisir et tirer pour réorganiser</string>
   <string name="pref_setting_remove_bad_chars">Auto correction</string>
   <string name="pref_setting_remove_bad_chars_summary">Éradique les caractères incompatibles du fichier XML lors de l\'import. À n\'utiliser qu\'en cas d\'erreur de chargement du fichier XML d\'origine</string>
-  <string name="error_import2">Il y a un problème d\'import. C\'est ce qui arrive quand le catalogue contient des caractères non conformes. Pour corriger, essayer de:\n\n- Cocher \"%1$s\" dans les paramètres\n- De modifier \"%2$s\"\n- De lancer sur PC le script de Ant Movie Catalog (F6) intitulé RemoveBadChars.ifs et essayer de réimporter\n\nAssurez-vous également que vous avez suffisament d\'espace libre sur Android (pas sur la carte SD). Le double de la taille du fichier XML est nécessaire.\n\nEn cas d\'échec, veuillez contacter l\'auteur via la page web visible sur Google Play.</string>
+  <string name="error_import2">Il y a un problème d\'import. C\'est ce qui arrive quand le catalogue contient des caractères non conformes. Pour corriger, essayer de:\n\n- Cocher \"%1$s\" dans les paramètres\n- De modifier \"%2$s\"\n- De lancer sur PC le script de Ant Movie Catalog (F6) intitulé RemoveBadChars.ifs et essayer de réimporter\n\nEn cas d\'échec, veuillez contacter l\'auteur via la page web visible sur Google Play.</string>
   <!--Version 2.1-->
   <string name="details_section_custom">Champs personnalisée</string>
   <!--Version 2.2-->
@@ -211,4 +208,20 @@
   <string name="pref_setting_color_tag">Champ couleur</string>
   <string name="pref_setting_color_tag_summary">Utiliser le champ Couleur pour colorer le titre du film (sinon c\'est la ligne séparatrice qui sera colorée)</string>
   <string name="import_check_finished">Loading…</string>
+  <string name="pref_catalog_pick_folder">Dossier contenant le catalogue et ses images (recommandé)</string>
+  <string name="pref_catalog_pick_file">Fichier XML du catalogue uniquement (les images ne seront pas disponibles)</string>
+  <string name="pref_setting_catalog_legacy">Sélectionner à nouveau le catalogue (Android n\'autorise plus l\'accès direct aux fichiers)</string>
+  <string name="catalog_picker_unavailable">Aucun sélecteur de fichiers n\'est disponible sur cet appareil.</string>
+  <string name="catalog_picker_denied">Android n\'a pas accordé l\'accès à l\'emplacement sélectionné. Veuillez réessayer ou en choisir un autre.</string>
+  <string name="catalog_no_xml_found">Aucun fichier XML n\'a été trouvé dans le dossier sélectionné. Choisissez le dossier dans lequel le catalogue a été exporté.</string>
+  <string name="catalog_choose_xml">Choisir le fichier du catalogue</string>
+  <string name="import_copy_pictures">Copie des images…</string>
+  <string name="import_notification_channel">Import du catalogue</string>
+  <string name="import_notification_title">Import du catalogue en cours</string>
+  <string name="import_storage_migration_title">Sélectionner à nouveau le catalogue</string>
+  <string name="import_storage_migration_message">Android n\'autorise plus les applications à lire des fichiers à n\'importe quel emplacement. Veuillez sélectionner dans les paramètres le dossier contenant votre catalogue. Les films déjà importés restent disponibles, mais les images ne seront pas affichées tant que vous ne l\'aurez pas fait.</string>
+  <string name="import_access_lost_title">Catalogue inaccessible</string>
+  <string name="import_access_lost_message">L\'application a perdu l\'accès au catalogue (le fichier a été déplacé ou supprimé, ou l\'accès a été révoqué). Veuillez sélectionner à nouveau le catalogue dans les paramètres.</string>
+  <string name="dialog_open_settings">Ouvrir les paramètres</string>
+  <string name="dialog_later">Plus tard</string>
 </resources>

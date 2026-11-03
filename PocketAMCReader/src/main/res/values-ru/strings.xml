@@ -6,7 +6,7 @@
   <string name="pref_category_catalog">Каталог</string>
   <string name="pref_setting_catalog">Каталог</string>
   <string name="menu_settings">Настройки</string>
-  <string name="pref_setting_catalog_summary">Путь к каталогу и файлу XML  (например / SDCard / ant.xml)</string>
+  <string name="pref_setting_catalog_summary">Выберите папку с каталогом</string>
   <string name="display_minutes_suffix">мин.</string>
   <string name="pref_category_display">Подробности</string>
   <string name="pref_setting_encoding">Кодировка каталога</string>
@@ -61,10 +61,10 @@
   <string name="menu_sort_title">Сортировать</string>
   <string name="menu_sort_formattedtitle_desc">Оригинальное название по убыванию</string>
   <string name="menu_sort_formattedtitle_asc">Оригинальное название по возрастанию</string>
-  <string name="menu_sort_number_desc">Номер по возрастанию</string>
-  <string name="menu_sort_number_asc">Номер по убыванию</string>
+  <string name="menu_sort_number_desc">Номер по убыванию</string>
+  <string name="menu_sort_number_asc">Номер по возрастанию</string>
   <string name="welcome_title">Добро пожаловать</string>
-  <string name="welcome_message">Перед началом использования программы, вы будете перенаправлены в \"%1$s\". Где:\n\n- в \"%2$s\" yкажите путь к XML файлу базы фильмов AMC.\n- в \"%3$s\" измените кодировку в соответствии с настройками ПК.\n\nПриложение будет импортировать ваши фильмы после выхода из \"%1$s\"</string>
+  <string name="welcome_message">Перед началом использования программы, вы будете перенаправлены в \"%1$s\". Где:\n\n- в \"%2$s\" выберите XML файл базы фильмов AMC.\n- в \"%3$s\" измените кодировку в соответствии с настройками ПК.\n\nПриложение будет импортировать ваши фильмы после выхода из \"%1$s\"</string>
   <string name="welcome_dialog_dismiss">Продолжить</string>
   <string name="dialog_positive">Да</string>
   <string name="dialog_negative">Отменить</string>
@@ -84,7 +84,7 @@
   <string name="filter_add_first_step">Выберите поле</string>
   <string name="details_country_label">Страна</string>
   <string name="details_category_label">Категория</string>
-  <string name="filter_type_larger">></string>
+  <string name="filter_type_larger">&gt;</string>
   <string name="filter_type_smaller">&lt;</string>
   <string name="filter_type_equals_not">не равны</string>
   <string name="filter_type_contains_not">не содержит</string>
@@ -133,4 +133,94 @@
   <string name="menu_sort_color_tag_asc">Цветная метка по возрастанию</string>
   <string name="details_colortag_label">Цветная метка</string>
   <string name="details_composer_label">Композитор</string>
+  <string name="pref_setting_multivalue">Разделитель для нескольких значений</string>
+  <string name="pref_setting_multivalue_summary">Укажите разделитель, которым разделяются режиссеры, продюсеры, актеры и т.д. Можно использовать несколько разделителей одновременно</string>
+  <string name="details_img_description">Изображение фильма</string>
+  <string name="input_filter_hint">Значение фильтра</string>
+  <string name="menu_sort_date_desc">Добавлен (сначала новые)</string>
+  <string name="menu_sort_date_asc">Добавлен (сначала старые)</string>
+  <string name="details_writer_label">Сценарист</string>
+  <string name="details_filepath_label">Путь к файлу</string>
+  <string name="details_userrating_label">Моя оценка</string>
+  <string name="menu_sort_userrating_desc">Моя оценка (сначала лучшие)</string>
+  <string name="menu_sort_userrating_asc">Моя оценка (сначала худшие)</string>
+  <string name="details_datewatched_label">Дата просмотра</string>
+  <string name="menu_sort_datewatched_desc">Дата просмотра (сначала новые)</string>
+  <string name="menu_sort_datewatched_asc">Дата просмотра (сначала старые)</string>
+  <string name="details_certification_label">Возрастной рейтинг</string>
+  <string name="menu_sort_certification_desc">Возрастной рейтинг по убыванию</string>
+  <string name="menu_sort_certification_asc">Возрастной рейтинг по возрастанию</string>
+  <string name="pref_setting_fit_picture">Вписать изображение</string>
+  <string name="pref_setting_fit_picture_summary">Изменять размер изображения по размеру экрана</string>
+  <string name="details_etag_label">Тег</string>
+  <string name="details_etitle_label">Название</string>
+  <string name="details_ecategory_label">Категория</string>
+  <string name="details_eurl_label">URL</string>
+  <string name="details_edescription_label">Описание</string>
+  <string name="details_ecomments_label">Комментарии</string>
+  <string name="details_ecreated_by_label">Создал</string>
+  <string name="filter_remove">Очистить фильтры</string>
+  <string name="filter_remove_all">Все фильтры</string>
+  <string name="import_check_file">Проверка обновлений…</string>
+  <string name="loading">Загрузка…</string>
+  <string name="details_picture_description">Постер фильма</string>
+  <string name="details_certification_label_short">Возр.</string>
+  <string name="details_section_media">Сведения о носителе</string>
+  <string name="details_section_technical">Технические сведения</string>
+  <string name="pref_setting_list_lines">Поля в списке</string>
+  <string name="pref_setting_list_lines_summary">Выберите поля для списка фильмов и задайте их порядок</string>
+  <string name="list_holder_row1">Добавьте поля (например, название)</string>
+  <string name="list_holder_row2">Добавьте поля (например, номер, год, продолжительность, рейтинг)</string>
+  <string name="list_holder_row3">Добавьте поля (например, категория)</string>
+  <string name="settings_cards_column1_title">Строка 1</string>
+  <string name="settings_cards_column2_title">Строка 2</string>
+  <string name="settings_cards_column3_title">Строка 3</string>
+  <string name="settings_cards_column4_title">Доступные поля</string>
+  <string name="card_click_hint">Нажмите и перетащите, чтобы изменить порядок</string>
+  <string name="pref_setting_remove_bad_chars">Удалять недопустимые символы</string>
+  <string name="pref_setting_remove_bad_chars_summary">Удалять недопустимые символы в XML-файле при импорте. Используйте, только если исходный XML не загружается</string>
+  <string name="error_import2">Возникла проблема при импорте. Обычно это происходит, когда каталог содержит нестандартные символы. Чтобы исправить, попробуйте:\n\n- Включить в настройках \"%1$s\"\n- Изменить настройку \"%2$s\"\n- Запустить на ПК скрипт Ant Movie Catalog RemoveBadChars и повторить импорт\n\nЕсли ничего не помогает, свяжитесь с автором через веб-страницу, указанную в Google Play.</string>
+  <string name="details_section_custom">Пользовательские поля</string>
+  <string name="menu_switch_view">Вид</string>
+  <string name="pref_setting_grid_title">Показывать название в виде сетки</string>
+  <string name="pref_setting_show_grid_title_summary">Показывать название фильма в виде сетки (если изображение недоступно, название показывается всегда)</string>
+  <string name="link_not_opened">Не знаю, как открыть эту ссылку</string>
+  <string name="link_not_opened_hint">Не удалось открыть ссылку. Есть ли на устройстве приложение, способное ее обработать?</string>
+  <string name="file_not_found">Файл не найден</string>
+  <string name="pref_setting_filepath_link">Ссылка на путь к файлу</string>
+  <string name="pref_setting_filepath_link_summary">Сделать путь к файлу кликабельным и пытаться открыть подходящее приложение</string>
+  <string name="pref_category_application">Приложение</string>
+  <string name="pref_setting_theme">Тема</string>
+  <string name="pref_setting_theme_summary">Цветовая тема приложения</string>
+  <string-array name="pref_setting_theme_names">
+    <item>Синяя</item>
+    <item>Красная</item>
+    <item>Зеленая</item>
+    <item>Индиго</item>
+    <item>Фиолетовая</item>
+    <item>Розовая</item>
+    <item>Темно-оранжевая</item>
+    <item>Коричневая</item>
+    <item>Серая</item>
+    <item>Черная</item>
+  </string-array>
+  <string name="pref_setting_color_tag">Цветная метка</string>
+  <string name="pref_setting_color_tag_summary">Показывать цветную метку цветом названия фильма (иначе используются цветные линии)</string>
+  <string name="import_check_finished">Загрузка…</string>
+  <string name="pref_catalog_pick_folder">Папка с каталогом и изображениями (рекомендуется)</string>
+  <string name="pref_catalog_pick_file">Только XML-файл каталога (изображения будут недоступны)</string>
+  <string name="pref_setting_catalog_legacy">Выберите каталог снова (Android больше не разрешает прямой доступ к файлам)</string>
+  <string name="catalog_picker_unavailable">На этом устройстве нет средства выбора файлов.</string>
+  <string name="catalog_picker_denied">Android не предоставил доступ к выбранному расположению. Повторите попытку или выберите другое.</string>
+  <string name="catalog_no_xml_found">В выбранной папке не найден XML-файл. Выберите папку, в которую был экспортирован каталог.</string>
+  <string name="catalog_choose_xml">Выберите файл каталога</string>
+  <string name="import_copy_pictures">Копирование изображений…</string>
+  <string name="import_notification_channel">Импорт каталога</string>
+  <string name="import_notification_title">Импорт каталога</string>
+  <string name="import_storage_migration_title">Выберите каталог снова</string>
+  <string name="import_storage_migration_message">Android больше не позволяет приложениям читать файлы из произвольных мест. Выберите в настройках папку с каталогом. Уже импортированные фильмы останутся доступны, но изображения не будут показаны, пока вы этого не сделаете.</string>
+  <string name="import_access_lost_title">Каталог недоступен</string>
+  <string name="import_access_lost_message">Приложение потеряло доступ к каталогу (файл перемещен или удален либо доступ отозван). Выберите каталог в настройках еще раз.</string>
+  <string name="dialog_open_settings">Открыть настройки</string>
+  <string name="dialog_later">Позже</string>
 </resources>
