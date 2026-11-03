@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ public class Filters implements Serializable {
      * Return filter fields to SQL command
      */
     public String getFilterFields() {
-        if (mFilters.size() == 0)
+        if (mFilters.isEmpty())
             return null;
 
         ArrayList<String> conditions = new ArrayList<>();
@@ -84,7 +84,7 @@ public class Filters implements Serializable {
      * Return filter fields DB names in array
      */
     public HashSet<String> getFilterFieldsDB() {
-        if (mFilters.size() == 0)
+        if (mFilters.isEmpty())
             return null;
 
         HashSet<String> dbFields = new HashSet<>();
@@ -100,7 +100,7 @@ public class Filters implements Serializable {
      * Return filter values to SQL command
      */
     public String[] getFilterValues() {
-        if (mFilters.size() == 0)
+        if (mFilters.isEmpty())
             return null;
 
         ArrayList<String> values = new ArrayList<>();
@@ -122,7 +122,7 @@ public class Filters implements Serializable {
      * Return human info for all filters as string
      */
     public Spanned getFiltersHumanInfo() {
-        if (mFilters.size() == 0)
+        if (mFilters.isEmpty())
             return new SpannableString(mContext.getString(R.string.filter_none));
 
         String[] info = new String[this.getCount()];

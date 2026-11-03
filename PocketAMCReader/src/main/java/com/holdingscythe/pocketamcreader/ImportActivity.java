@@ -19,11 +19,9 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,6 +29,7 @@ import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SafHelper;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.EdgeToEdgeHelper;
 import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import java.util.UUID;
@@ -38,14 +37,11 @@ import java.util.UUID;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Shows the progress of the catalog import ({@link CatalogImportWorker}) and starts the movie list when it is done.
@@ -82,23 +78,18 @@ public class ImportActivity extends AppCompatActivity {
         }
 
         setTheme(new Theme(this).getTheme());
+        EdgeToEdgeHelper.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import);
+        EdgeToEdgeHelper.padContent(this);
 
         // Prepare Shared Objects
         SharedObjects.getInstance().preferences =
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        // Set default font
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath(S.DEFAULT_FONT)
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());
 
         Toolbar mToolbar = findViewById(R.id.toolbar);
+        EdgeToEdgeHelper.padToolbar(mToolbar);
         setSupportActionBar(mToolbar);
 
         // Initialize views
@@ -144,49 +135,32 @@ public class ImportActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    /**
-     * Wrap the Activity Context for Calligraphy
-     */
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
-
     private void onWorkInfo(WorkInfo info) {
         if (info == null || mFinished)
             return;
 
         switch (info.getState()) {
-            case RUNNING:
+            case RUNNING -> {
                 showProgress(info.getProgress().getInt(CatalogImportWorker.KEY_PHASE, 0),
                         info.getProgress().getInt(CatalogImportWorker.KEY_PERCENT, -1));
-                break;
-            case SUCCEEDED:
-            case CANCELLED:
-                onFinished(0);
-                break;
-            case FAILED:
-                onFinished(info.getOutputData().getInt(CatalogImportWorker.KEY_ERROR, S.IMPORT_ERROR_LOADING));
-                break;
-            default:
+            }
+            case SUCCEEDED, CANCELLED -> onFinished(0);
+            case FAILED ->
+                    onFinished(info.getOutputData().getInt(CatalogImportWorker.KEY_ERROR, S.IMPORT_ERROR_LOADING));
+            default -> {
                 // enqueued or blocked: waiting to start
-                break;
+            }
         }
     }
 
     private void showProgress(int phase, int percent) {
         switch (phase) {
-            case S.IMPORT_LOADING_START:
-                mTextView.setText(R.string.import_in_progress);
-                break;
-            case S.IMPORT_INDEXING_START:
-                mTextView.setText(R.string.import_add_indexes);
-                break;
-            case S.IMPORT_PICTURES_START:
-                mTextView.setText(R.string.import_copy_pictures);
-                break;
-            default:
-                break;
+            case S.IMPORT_LOADING_START -> mTextView.setText(R.string.import_in_progress);
+            case S.IMPORT_INDEXING_START -> mTextView.setText(R.string.import_add_indexes);
+            case S.IMPORT_PICTURES_START -> mTextView.setText(R.string.import_copy_pictures);
+            default -> {
+                // nothing to do
+            }
         }
 
         if (percent < 0) {
@@ -199,14 +173,14 @@ public class ImportActivity extends AppCompatActivity {
 
     private void onFinished(int error) {
         switch (error) {
-            case 0:
+            case 0 -> {
                 mFinished = true;
                 mTextView.setText(R.string.import_check_finished);
                 mProgressBar.setIndeterminate(true);
                 startMainActivity(false);
-                break;
+            }
 
-            case S.IMPORT_ERROR_NOT_CONFIGURED:
+            case S.IMPORT_ERROR_NOT_CONFIGURED -> {
                 String location = SharedObjects.getInstance().preferences
                         .getString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, "");
                 if (location.isEmpty() || SafHelper.isContentUri(location)) {
@@ -217,16 +191,13 @@ public class ImportActivity extends AppCompatActivity {
                     // Catalog selected by an older version as a plain path, it can't be read anymore
                     showDialog(R.string.import_storage_migration_title, R.string.import_storage_migration_message);
                 }
-                break;
+            }
 
-            case S.IMPORT_ERROR_ACCESS:
-                showDialog(R.string.import_access_lost_title, R.string.import_access_lost_message);
-                break;
+            case S.IMPORT_ERROR_ACCESS ->
+                    showDialog(R.string.import_access_lost_title, R.string.import_access_lost_message);
 
-            case S.IMPORT_ERROR_LOADING:
-            default:
-                showImportErrorDialog();
-                break;
+            // S.IMPORT_ERROR_LOADING and anything unexpected
+            default -> showImportErrorDialog();
         }
     }
 

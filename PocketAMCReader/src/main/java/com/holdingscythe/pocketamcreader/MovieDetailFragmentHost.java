@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ public class MovieDetailFragmentHost extends Fragment {
             // Set current item based on clicked item
             if (getArguments() != null && getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
                 String argumentMovieId = getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID);
-                if (argumentMovieId != null && !argumentMovieId.equals("")) {
+                if (argumentMovieId != null && !argumentMovieId.isEmpty()) {
                     int clickedPosition = Integer.parseInt(argumentMovieId);
                     viewPager.setCurrentItem(clickedPosition);
                 }

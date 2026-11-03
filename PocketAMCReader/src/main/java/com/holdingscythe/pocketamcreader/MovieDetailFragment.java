@@ -27,7 +27,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +61,9 @@ import java.util.regex.Pattern;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 /**
  * A fragment representing a single Movie detail screen.
@@ -109,7 +110,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         // Prepare custom font for the toolbar
-        final Typeface tf = Typeface.createFromAsset(Objects.requireNonNull(getContext()).getAssets(), S.DEFAULT_FONT);
+        final Typeface tf = ResourcesCompat.getFont(requireContext(), R.font.roboto_condensed);
 
         // Setup filters
         mFilters = new Filters();
@@ -281,7 +282,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.Picture:
+            case R.id.Picture -> {
                 try {
                     // prepare pictures array
                     Intent i = new Intent(getActivity(), PictureViewActivity.class);
@@ -295,98 +296,73 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     // TODO: fix exception
                     e.printStackTrace();
                 }
-                break;
-
-            case R.id.Certification:
+            }
+            case R.id.Certification -> {
                 filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Checked:
+            }
+            case R.id.Checked -> {
                 filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
-                break;
-            case R.id.UserRating:
+            }
+            case R.id.UserRating -> {
                 filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-
-            case R.id.Year:
+            }
+            case R.id.Year -> {
                 filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Length:
+            }
+            case R.id.Length -> {
                 filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Rating:
+            }
+            case R.id.Rating -> {
                 filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-
-            case R.id.Category:
-                chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
-                break;
-            case R.id.Director:
-                chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
-                break;
-            case R.id.Actors:
-                chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
-                break;
-            case R.id.Producer:
-                chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, view);
-                break;
-            case R.id.Writer:
-                chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
-                break;
-            case R.id.Composer:
-                chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
-                break;
-            case R.id.Country:
-                chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
-                break;
-
-            case R.id.MediaLabel:
+            }
+            case R.id.Category -> chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
+            case R.id.Director -> chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
+            case R.id.Actors -> chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
+            case R.id.Producer -> chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, view);
+            case R.id.Writer -> chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
+            case R.id.Composer -> chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
+            case R.id.Country -> chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
+            case R.id.MediaLabel -> {
                 filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.MediaType:
+            }
+            case R.id.MediaType -> {
                 filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Source:
+            }
+            case R.id.Source -> {
                 filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Borrower:
+            }
+            case R.id.Borrower -> {
                 filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-
-            case R.id.Languages:
-                chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
-                break;
-            case R.id.Subtitles:
-                chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
-                break;
-            case R.id.VideoFormat:
+            }
+            case R.id.Languages -> chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
+            case R.id.Subtitles -> chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
+            case R.id.VideoFormat -> {
                 filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.AudioFormat:
+            }
+            case R.id.AudioFormat -> {
                 filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Resolution:
+            }
+            case R.id.Resolution -> {
                 filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-            case R.id.Framerate:
+            }
+            case R.id.Framerate -> {
                 filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
                         ((TextView) view).getText().toString()));
-                break;
-
-            case R.id.URL:
-            case R.id.FilePath:
+            }
+            case R.id.URL, R.id.FilePath -> {
                 // If link points to IMDb, open IMDb app if available
                 String url = ((TextView) view).getText().toString();
                 Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,7})/?");
@@ -465,8 +441,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
-
-                break;
+            }
         }
     }
 
@@ -504,7 +479,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         multiValue = m.replaceAll("");
 
         for (String value : multiValue.split(regExpMultivaluedSeparator)) {
-            if (value.length() > 0)
+            if (!value.isEmpty())
                 availableValues.add(value);
         }
 
@@ -516,7 +491,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
      */
     private void filterClick(Filter filter) {
         String val = filter.getHumanValue();
-        if (SharedObjects.getInstance().movieListFragment != null && val != null && !val.equals("")) {
+        if (SharedObjects.getInstance().movieListFragment != null && val != null && !val.isEmpty()) {
             SharedObjects.getInstance().movieListFragment.addExternalFilter(filter);
             if (getActivity() instanceof MovieDetailActivity) {
                 getActivity().finish();

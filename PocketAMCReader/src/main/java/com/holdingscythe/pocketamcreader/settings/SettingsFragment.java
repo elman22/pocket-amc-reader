@@ -20,7 +20,6 @@ package com.holdingscythe.pocketamcreader.settings;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -29,59 +28,63 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
-import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.SafHelper;
+import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.TreeIndex;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 /**
  * Settings Fragment
  * Created by Elman on 5.7.2014.
  */
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences
         .OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-    // onActivityResult / onRequestPermissionsResult request codes
-    private static final int REQUEST_FOLDER = 9510;
-    private static final int REQUEST_FILE = 9511;
-    private static final int REQUEST_NOTIFICATIONS = 9512;
-    private static SharedPreferences mPrefs;
+    private SharedPreferences mPrefs;
     private Map<String, String> defaultTexts;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private final ActivityResultLauncher<Intent> mFolderLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> onPickerResult(result, true));
+    private final ActivityResultLauncher<Intent> mFileLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> onPickerResult(result, false));
+    // Import works without the permission, the notification is only informative
+    private final ActivityResultLauncher<String> mNotificationLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(), granted -> {
+            });
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
+        setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        // Attach onChange listener
-        mPrefs = SharedObjects.getInstance().preferences;
-        mPrefs.registerOnSharedPreferenceChangeListener(this);
+        mPrefs = getPreferenceManager().getSharedPreferences();
 
         // Attach onClick listeners
         Preference locationPref = findPreference(SettingsConstants.KEY_PREF_CATALOG_LOCATION);
-        locationPref.setOnPreferenceClickListener(this);
-        Preference linesPref = getPreferenceScreen().findPreference(SettingsConstants.KEY_PREF_LIST_FIELDS);
-        linesPref.setOnPreferenceClickListener(this);
+        if (locationPref != null)
+            locationPref.setOnPreferenceClickListener(this);
+        Preference linesPref = findPreference(SettingsConstants.KEY_PREF_LIST_FIELDS);
+        if (linesPref != null)
+            linesPref.setOnPreferenceClickListener(this);
 
         // Prefetch default text hints
         defaultTexts = new HashMap<>();
@@ -92,15 +95,27 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         defaultTexts.put(SettingsConstants.KEY_PREF_THEME, getString(R.string.pref_setting_theme_summary));
 
         // Update current values
-        updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_LOCATION);
-        updateSummary(mPrefs, SettingsConstants.KEY_PREF_CATALOG_ENCODING);
-        updateSummary(mPrefs, SettingsConstants.KEY_PREF_LIST_SEPARATOR);
-        updateSummary(mPrefs, SettingsConstants.KEY_PREF_DETAIL_SEPARATOR);
-        updateSummary(mPrefs, SettingsConstants.KEY_PREF_THEME);
+        for (String key : defaultTexts.keySet())
+            updateSummary(mPrefs, key);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPrefs.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        mPrefs.unregisterOnSharedPreferenceChangeListener(this);
+        super.onStop();
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key == null)
+            return;
+
         updateSummary(sharedPreferences, key);
 
         // Schedule app import. Have to set size to 0, otherwise import wouldn't start
@@ -133,18 +148,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
+    public boolean onPreferenceClick(@NonNull Preference preference) {
         String key = preference.getKey();
 
-        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION)) {
+        if (SettingsConstants.KEY_PREF_CATALOG_LOCATION.equals(key)) {
             showCatalogPicker();
             return true;
         }
 
-        if (key.equals(SettingsConstants.KEY_PREF_LIST_FIELDS)) {
-            Intent i = new Intent(getActivity().getBaseContext(), SettingsListFieldsActivity.class);
-
-            startActivity(i);
+        if (SettingsConstants.KEY_PREF_LIST_FIELDS.equals(key)) {
+            startActivity(new Intent(requireContext(), SettingsListFieldsActivity.class));
             return true;
         }
 
@@ -161,52 +174,51 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 getString(R.string.pref_catalog_pick_file)
         };
 
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.pref_setting_catalog)
                 .setItems(items, (dialog, which) -> {
-                    Intent i;
-                    int request;
+                    Intent intent;
 
                     if (which == 0) {
-                        i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                        request = REQUEST_FOLDER;
+                        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
                     } else {
-                        i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                        i.addCategory(Intent.CATEGORY_OPENABLE);
-                        i.setType("*/*");
-                        request = REQUEST_FILE;
+                        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.setType("*/*");
                     }
 
-                    i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
 
                     try {
-                        startActivityForResult(i, request);
+                        (which == 0 ? mFolderLauncher : mFileLauncher).launch(intent);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getActivity(), R.string.catalog_picker_unavailable, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), R.string.catalog_picker_unavailable, Toast.LENGTH_LONG)
+                                .show();
                     }
                 })
                 .setNegativeButton(R.string.dialog_negative, null)
                 .show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (resultCode != Activity.RESULT_OK || intent == null || intent.getData() == null || getActivity() == null)
+    private void onPickerResult(ActivityResult result, boolean folder) {
+        Intent data = result.getData();
+        if (result.getResultCode() != Activity.RESULT_OK || data == null || data.getData() == null)
             return;
 
-        Uri uri = intent.getData();
+        Uri uri = data.getData();
 
         if (S.INFO)
             Log.i(S.TAG, "Catalog Uri (" + uri + ")");
 
-        if (requestCode == REQUEST_FOLDER)
+        if (folder)
             onFolderPicked(uri);
-        else if (requestCode == REQUEST_FILE)
+        else
             onFilePicked(uri);
     }
 
     private void onFolderPicked(Uri treeUri) {
-        Context context = getActivity();
+        Context context = requireContext();
 
         if (!SafHelper.takeReadPermission(context, treeUri)) {
             Toast.makeText(context, R.string.catalog_picker_denied, Toast.LENGTH_LONG).show();
@@ -221,9 +233,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         } else if (xmlFiles.size() == 1) {
             applyFolder(treeUri, index, xmlFiles.get(0));
         } else {
-            String[] names = new String[xmlFiles.size()];
-            for (int i = 0; i < names.length; i++)
-                names[i] = xmlFiles.get(i).name;
+            String[] names = xmlFiles.stream().map(entry -> entry.name).toArray(String[]::new);
 
             new AlertDialog.Builder(context)
                     .setTitle(R.string.catalog_choose_xml)
@@ -234,7 +244,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     private void applyFolder(Uri treeUri, TreeIndex index, TreeIndex.Entry xml) {
-        DocumentFile folder = DocumentFile.fromTreeUri(getActivity(), treeUri);
+        DocumentFile folder = DocumentFile.fromTreeUri(requireContext(), treeUri);
         String folderName = folder == null ? null : folder.getName();
         String display = folderName == null || folderName.isEmpty() ? xml.name : folderName + "/" + xml.name;
 
@@ -242,7 +252,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     private void onFilePicked(Uri fileUri) {
-        Context context = getActivity();
+        Context context = requireContext();
 
         if (!SafHelper.takeReadPermission(context, fileUri)) {
             Toast.makeText(context, R.string.catalog_picker_denied, Toast.LENGTH_LONG).show();
@@ -259,7 +269,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
      * Remember the selected catalog (and the folder it comes from) and schedule import
      */
     private void storeCatalog(Uri catalogUri, Uri treeUri, String displayName) {
-        Context context = getActivity();
+        Context context = requireContext();
 
         String oldLocation = mPrefs.getString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, "");
         String oldTree = mPrefs.getString(SettingsConstants.KEY_PREF_CATALOG_TREE, "");
@@ -267,13 +277,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
         try {
             // Size 0 and pictures not synchronized: import everything again
-            SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putString(SettingsConstants.KEY_PREF_CATALOG_TREE, newTree);
-            editor.putString(SettingsConstants.KEY_PREF_CATALOG_NAME, displayName);
-            editor.putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0);
-            editor.putBoolean(SettingsConstants.KEY_PREF_PICTURES_SYNCED, false);
-            editor.putString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, catalogUri.toString());
-            editor.apply();
+            mPrefs.edit()
+                    .putString(SettingsConstants.KEY_PREF_CATALOG_TREE, newTree)
+                    .putString(SettingsConstants.KEY_PREF_CATALOG_NAME, displayName)
+                    .putLong(SettingsConstants.KEY_PREF_LAST_IMPORTED_SIZE, 0)
+                    .putBoolean(SettingsConstants.KEY_PREF_PICTURES_SYNCED, false)
+                    .putString(SettingsConstants.KEY_PREF_CATALOG_LOCATION, catalogUri.toString())
+                    .apply();
 
             // Don't keep access to locations we don't use anymore
             if (!oldTree.isEmpty() && !oldTree.equals(newTree))
@@ -298,41 +308,48 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
             return;
 
-        if (getActivity().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_GRANTED
                 || mPrefs.getBoolean(SettingsConstants.KEY_PREF_NOTIFICATIONS_ASKED, false))
             return;
 
         mPrefs.edit().putBoolean(SettingsConstants.KEY_PREF_NOTIFICATIONS_ASKED, true).apply();
-        requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_NOTIFICATIONS);
+        mNotificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
     }
 
     private void updateSummary(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
+        if (pref == null)
+            return;
+
         String defaultText = defaultTexts.get(key);
 
-        // Catalog is a content Uri now, show its name
-        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_LOCATION)) {
-            String location = sharedPreferences.getString(key, "");
-            if (location.isEmpty())
-                pref.setSummary(defaultText);
-            else if (!SafHelper.isContentUri(location))
-                pref.setSummary(R.string.pref_setting_catalog_legacy);
-            else
-                pref.setSummary(sharedPreferences.getString(SettingsConstants.KEY_PREF_CATALOG_NAME, location));
-        }
+        switch (key) {
+            // Catalog is a content Uri, show its name
+            case SettingsConstants.KEY_PREF_CATALOG_LOCATION -> {
+                String location = sharedPreferences.getString(key, "");
 
-        // String preferences
-        if (key.equals(SettingsConstants.KEY_PREF_LIST_SEPARATOR) ||
-                key.equals(SettingsConstants.KEY_PREF_DETAIL_SEPARATOR)) {
-            pref.setSummary(sharedPreferences.getString(key, defaultText));
-        }
+                if (location.isEmpty())
+                    pref.setSummary(defaultText);
+                else if (!SafHelper.isContentUri(location))
+                    pref.setSummary(R.string.pref_setting_catalog_legacy);
+                else
+                    pref.setSummary(sharedPreferences.getString(SettingsConstants.KEY_PREF_CATALOG_NAME, location));
+            }
 
-        // List preferences
-        if (key.equals(SettingsConstants.KEY_PREF_CATALOG_ENCODING) ||
-                key.equals(SettingsConstants.KEY_PREF_THEME)) {
-            ListPreference listPref = (ListPreference) pref;
-            pref.setSummary(listPref.getValue() == null ? defaultText : listPref.getEntry());
+            // String preferences
+            case SettingsConstants.KEY_PREF_LIST_SEPARATOR, SettingsConstants.KEY_PREF_DETAIL_SEPARATOR ->
+                    pref.setSummary(sharedPreferences.getString(key, defaultText));
+
+            // List preferences
+            case SettingsConstants.KEY_PREF_CATALOG_ENCODING, SettingsConstants.KEY_PREF_THEME -> {
+                ListPreference listPref = (ListPreference) pref;
+                pref.setSummary(listPref.getValue() == null ? defaultText : listPref.getEntry());
+            }
+
+            default -> {
+                // no summary to update
+            }
         }
     }
 }

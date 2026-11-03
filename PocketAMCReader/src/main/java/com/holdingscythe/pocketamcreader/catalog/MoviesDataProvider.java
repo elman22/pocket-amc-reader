@@ -30,7 +30,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +47,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 
 public class MoviesDataProvider extends ContentProvider implements FilterQueryProvider {
     private static final String DATABASE_NAME = "PocketAMCReader.db";
@@ -308,7 +308,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         String[] filterValues = null;
 
         switch (sURIMatcher.match(uri)) {
-            case GET_MOVIES:
+            case GET_MOVIES -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: movies");
 
@@ -329,26 +329,26 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 // Execute query
                 cursor = this.db.query(TABLE_NAME, projection, filterFields, filterValues, null, null, sortOrder);
                 return cursor;
-
-            case GET_MOVIE:
+            }
+            case GET_MOVIE -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: movie");
                 cursor = this.db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 return cursor;
-
-            case GET_MOVIE_CUSTOM_FIELDS:
+            }
+            case GET_MOVIE_CUSTOM_FIELDS -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: movie custom fields");
                 cursor = this.db.query(TABLE_NAME_CUSTOM, projection, selection, selectionArgs, null, null, sortOrder);
                 return cursor;
-
-            case GET_MOVIE_EXTRAS:
+            }
+            case GET_MOVIE_EXTRAS -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: movie extras");
                 cursor = this.db.query(TABLE_NAME_EXTRAS, projection, selection, selectionArgs, null, null, sortOrder);
                 return cursor;
-
-            case SEARCH_MOVIES:
+            }
+            case SEARCH_MOVIES -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "URI match: search");
 
@@ -376,9 +376,8 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 filterValues = filterValues == null ? likeArg : Utils.joinArrays(likeArg, filterValues);
                 cursor = this.db.query(TABLE_NAME, projection, filterFields, filterValues, null, null, sortOrder);
                 return cursor;
-
-            default:
-                throw new IllegalArgumentException("Unknown Uri: " + uri);
+            }
+            default -> throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
     }
 
@@ -536,7 +535,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
      * Helper for inserting data
      */
     private void bindHelper(SQLiteStatement st, int i, String s) {
-        if (s == null || s.equals("")) {
+        if (s == null || s.isEmpty()) {
             st.bindNull(i);
         } else {
             st.bindString(i, s);
@@ -659,20 +658,22 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     @Override
     public String getType(@NonNull Uri uri) {
         switch (sURIMatcher.match(uri)) {
-            case GET_MOVIES:
+            case GET_MOVIES -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "getType: Movies");
                 return S.MOVIES_MIME_TYPE;
-            case GET_MOVIE:
+            }
+            case GET_MOVIE -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "getType: Movie");
                 return S.MOVIE_MIME_TYPE;
-            case SEARCH_MOVIES:
+            }
+            case SEARCH_MOVIES -> {
                 if (S.DEBUG)
                     Log.d(S.TAG, "getType: Search");
                 return SearchManager.USER_QUERY;
-            default:
-                throw new IllegalArgumentException("Unknown Uri " + uri);
+            }
+            default -> throw new IllegalArgumentException("Unknown Uri " + uri);
         }
     }
 

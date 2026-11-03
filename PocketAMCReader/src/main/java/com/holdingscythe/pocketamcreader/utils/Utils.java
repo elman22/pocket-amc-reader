@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ public class Utils {
         if (str == null)
             return null;
         for (String s : str) {
-            if (s != null && s.length() > 0) {
+            if (s != null && !s.isEmpty()) {
                 if (sb.length() != 0)
                     sb.append(separator);
                 sb.append(s);
@@ -79,7 +79,7 @@ public class Utils {
      * Underline text
      */
     public static SpannableString markClickableText(String text) {
-        if (text == null || text.equals(""))
+        if (text == null || text.isEmpty())
             return null;
         SpannableString strSpan = new SpannableString(text);
         strSpan.setSpan(new UnderlineSpan(), 0, strSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -115,7 +115,7 @@ public class Utils {
         String mime =
                 MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url));
 
-        if (mime == null || mime.equals("")) {
+        if (mime == null || mime.isEmpty()) {
             mime = fallback;
         }
 
@@ -127,7 +127,7 @@ public class Utils {
      */
     public static boolean isCustomColorTagSet(String colorTag) {
         return colorTag != null &&
-                !colorTag.equals("") &&
+                !colorTag.isEmpty() &&
                 !colorTag.equals(S.COLOR_TAG_DEFAULT) &&
                 S.COLOR_TAGS.containsKey(colorTag);
     }

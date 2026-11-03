@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -254,7 +254,7 @@ public class Movie {
             valueExtensionId, int defaultValueId) {
 
         // If field has no value, either hide it or present default value
-        if (value == null || value.equals("")) {
+        if (value == null || value.isEmpty()) {
             if (defaultValueId == 0) {
                 hideEmptyView(columnName);
                 return;
@@ -266,57 +266,54 @@ public class Movie {
 
         // Process string extension
         switch (valueExtensionType) {
-            case EXT_STRING_NONE:
-                break;
-            case EXT_STRING_PREFIX:
-                value = mActivity.getString(valueExtensionId) + value;
-                break;
-            case EXT_STRING_SUFFIX:
-                value += mActivity.getString(valueExtensionId);
-                break;
-            case EXT_STRING_PREFIX_PADDED:
+            case EXT_STRING_NONE -> {
+                // nothing to do
+            }
+            case EXT_STRING_PREFIX -> value = mActivity.getString(valueExtensionId) + value;
+            case EXT_STRING_SUFFIX -> value += mActivity.getString(valueExtensionId);
+            case EXT_STRING_PREFIX_PADDED -> {
                 value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
                         .string_extension_separator) + value;
-                break;
-            case EXT_STRING_SUFFIX_PADDED:
+            }
+            case EXT_STRING_SUFFIX_PADDED -> {
                 value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
                         (valueExtensionId);
-                break;
-            case EXT_PLURALS_PREFIX_PADDED:
+            }
+            case EXT_PLURALS_PREFIX_PADDED -> {
                 value = mActivity.getResources().getQuantityString(valueExtensionId, Integer.parseInt(value)) +
                         mActivity.getString(R.string.string_extension_separator) + value;
-                break;
-            case EXT_PLURALS_SUFFIX_PADDED:
+            }
+            case EXT_PLURALS_SUFFIX_PADDED -> {
                 value += mActivity.getString(R.string.string_extension_separator) + mActivity.getResources()
                         .getQuantityString(valueExtensionId, Integer.parseInt(value));
-                break;
+            }
         }
 
         // Fill strings into views
         switch (dataType) {
-            case STRING_REGULAR:
+            case STRING_REGULAR -> {
                 // Fill regular string from database into view.
                 TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (tv != null) {
                     tv.setText(value);
                 }
-                break;
-            case STRING_EXPANDABLE:
+            }
+            case STRING_EXPANDABLE -> {
                 // Fill expandable string from database into view.
                 ExpandableTextView etv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (etv != null) {
                     etv.setText(value);
                 }
-                break;
-            case STRING_CLICKABLE:
+            }
+            case STRING_CLICKABLE -> {
                 // Fill clickable string from database into view.
                 TextView ctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (ctv != null) {
                     ctv.setText(Utils.markClickableText(value));
                     ctv.setOnClickListener(mClickListener);
                 }
-                break;
-            case BOOLEAN_REGULAR:
+            }
+            case BOOLEAN_REGULAR -> {
                 TextView btv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (btv != null) {
                     if (value.equals(S.CATALOG_TRUE))
@@ -324,8 +321,8 @@ public class Movie {
                     else
                         btv.setText(mActivity.getString(R.string.details_boolean_false));
                 }
-                break;
-            case BOOLEAN_CLICKABLE:
+            }
+            case BOOLEAN_CLICKABLE -> {
                 TextView bctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (bctv != null) {
                     if (value.equals(S.CATALOG_TRUE))
@@ -334,8 +331,8 @@ public class Movie {
                         bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_false)));
                     bctv.setOnClickListener(mClickListener);
                 }
-                break;
-            case DATE_REGULAR:
+            }
+            case DATE_REGULAR -> {
                 TextView dtv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
                 if (dtv != null) {
                     try {
@@ -347,7 +344,7 @@ public class Movie {
                     }
                     dtv.setText(value);
                 }
-                break;
+            }
         }
     }
 

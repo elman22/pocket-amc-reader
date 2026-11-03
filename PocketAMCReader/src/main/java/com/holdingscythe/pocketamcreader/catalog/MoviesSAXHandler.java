@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ public class MoviesSAXHandler extends DefaultHandler {
     @Override
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
         switch (localName) {
-            case "Movie":
+            case "Movie" -> {
                 try {
                     // read attributes
                     String Number = atts.getValue(Movies.NUMBER);
@@ -117,10 +117,8 @@ public class MoviesSAXHandler extends DefaultHandler {
                     if (S.ERROR)
                         Log.e(S.TAG, atts.getValue("FormattedTitle") + " -> " + e.toString());
                 }
-
-                break;
-
-            case "CustomFields":
+            }
+            case "CustomFields" -> {
                 try {
                     // read all attributes and save separately
                     for (int f = 0; f < atts.getLength(); f++) {
@@ -134,14 +132,9 @@ public class MoviesSAXHandler extends DefaultHandler {
                         }
 
                         switch (CType) {
-                            case CustomFieldsModel.CFT_TEXT:
-                                CValue = parseMultiline(CValue);
-                                break;
-                            case CustomFieldsModel.CFT_REAL:
-                            case CustomFieldsModel.CFT_REAL1:
-                            case CustomFieldsModel.CFT_REAL2:
-                                CValue = parseFloat(CValue);
-                                break;
+                            case CustomFieldsModel.CFT_TEXT -> CValue = parseMultiline(CValue);
+                            case CustomFieldsModel.CFT_REAL, CustomFieldsModel.CFT_REAL1,
+                                 CustomFieldsModel.CFT_REAL2 -> CValue = parseFloat(CValue);
                         }
 
                         if (!CType.equals(CustomFieldsModel.CFT_NULL)) {
@@ -157,10 +150,8 @@ public class MoviesSAXHandler extends DefaultHandler {
                     if (S.ERROR)
                         Log.e(S.TAG, lastInsertedRowId + " -> " + e.toString());
                 }
-
-                break;
-
-            case "Extra":
+            }
+            case "Extra" -> {
                 try {
                     // read attributes
                     String EPicture = parsePath(atts.getValue(Movies.E_PICTURE));
@@ -190,10 +181,8 @@ public class MoviesSAXHandler extends DefaultHandler {
                     if (S.ERROR)
                         Log.e(S.TAG, atts.getValue(Movies.E_TITLE) + " -> " + e.toString());
                 }
-
-                break;
-
-            case "CustomField":
+            }
+            case "CustomField" -> {
                 try {
                     String tag = atts.getValue(Movies.P_TAG);
                     customFieldsNames.put(tag, atts.getValue(Movies.P_NAME));
@@ -206,8 +195,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                     if (S.ERROR)
                         Log.e(S.TAG, atts.getValue(Movies.P_TAG) + " -> " + e.toString());
                 }
-
-                break;
+            }
         }
     }
 

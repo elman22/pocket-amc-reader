@@ -20,7 +20,6 @@ package com.holdingscythe.pocketamcreader;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -30,18 +29,13 @@ import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.EdgeToEdgeHelper;
 import com.holdingscythe.pocketamcreader.utils.Theme;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -85,19 +79,14 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
 
         setTheme(new Theme(this).getTheme());
 
+        EdgeToEdgeHelper.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+        EdgeToEdgeHelper.padContent(this);
 
-        // Set default font
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath(S.DEFAULT_FONT)
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());
 
         Toolbar mToolbar = findViewById(R.id.quick_return_toolbar);
+        EdgeToEdgeHelper.padToolbar(mToolbar);
         setSupportActionBar(mToolbar);
 
         if (savedInstanceState == null) {
@@ -119,22 +108,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                     .setActivateOnItemClick(true);
         }
 
-        // Create global configuration and initialize ImageLoader with this configuration
-        // (only once per process, init() on every onCreate re-initialises the loader e.g. on device rotation)
-        if (!ImageLoader.getInstance().isInited()) {
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                    .build();
-            ImageLoader.getInstance().init(config);
-        }
-
-    }
-
-    /**
-     * Wrap the Activity Context for Calligraphy
-     */
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     /**
@@ -147,7 +120,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
             // In two-pane mode, show the detail view in this activity by adding or replacing the detail fragment
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            if (!id.equals("")) {
+            if (!id.isEmpty()) {
                 arguments.putString(MovieDetailFragment.ARG_MOVIE_ID, id);
             }
             MovieDetailFragmentHost fragment = new MovieDetailFragmentHost();
@@ -171,10 +144,11 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
     public boolean onOptionsItemSelected(MenuItem item) {
         // Filters and Sorting are handled in MovieListFragment
         switch (item.getItemId()) {
-            case R.id.menu_settings:
+            case R.id.menu_settings -> {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
-            case R.id.menu_about:
+            }
+            case R.id.menu_about -> {
                 // Get version
                 String versionName = "";
                 try {
@@ -207,8 +181,10 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 return true;
-            default:
+            }
+            default -> {
                 return super.onOptionsItemSelected(item);
+            }
         }
     }
 

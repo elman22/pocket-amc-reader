@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,18 +18,14 @@
 
 package com.holdingscythe.pocketamcreader;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.EdgeToEdgeHelper;
 import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import androidx.appcompat.app.AppCompatActivity;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * An activity representing a single Movie detail screen. This
@@ -46,6 +42,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(new Theme(this).getTheme());
 
+        EdgeToEdgeHelper.enable(this);
         super.onCreate(savedInstanceState);
 
         // savedInstanceState is non-null when there is fragment state
@@ -58,15 +55,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         // http://developer.android.com/guide/components/fragments.html
         //
         setContentView(R.layout.activity_movie_detail);
+        EdgeToEdgeHelper.padContent(this);
 
-        // Set default font
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath(S.DEFAULT_FONT)
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity using a fragment transaction.
@@ -79,14 +69,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .add(R.id.movie_detail_container, fragment)
                     .commit();
         }
-    }
-
-    /**
-     * Wrap the Activity Context for Calligraphy
-     */
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

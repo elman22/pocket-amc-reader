@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -111,13 +111,13 @@ public class CustomFields {
      */
     private String FormatValue(String type, String value) {
         switch (type) {
-            case CustomFieldsModel.CFT_BOOLEAN:
+            case CustomFieldsModel.CFT_BOOLEAN -> {
                 if (value.equals(S.CATALOG_TRUE))
                     value = mActivity.getString(R.string.details_boolean_true);
                 else
                     value = mActivity.getString(R.string.details_boolean_false);
-                break;
-            case CustomFieldsModel.CFT_DATE:
+            }
+            case CustomFieldsModel.CFT_DATE -> {
                 try {
                     Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
                     if (parsedDate != null) {
@@ -128,13 +128,11 @@ public class CustomFields {
                 } catch (Exception e) {
                     // don't do anything, keep date as is
                 }
-                break;
-            case CustomFieldsModel.CFT_REAL:
-            case CustomFieldsModel.CFT_REAL1:
-            case CustomFieldsModel.CFT_REAL2:
+            }
+            case CustomFieldsModel.CFT_REAL, CustomFieldsModel.CFT_REAL1, CustomFieldsModel.CFT_REAL2 -> {
                 // Don't use locale unless rating, user rating and framerate use locale
                 // value = NumberFormat.getInstance().format(Float.valueOf(value));
-                break;
+            }
         }
 
         return value;

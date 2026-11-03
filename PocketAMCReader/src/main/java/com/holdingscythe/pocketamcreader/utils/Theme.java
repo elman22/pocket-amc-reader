@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,13 @@ package com.holdingscythe.pocketamcreader.utils;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
+
+import androidx.preference.PreferenceManager;
 
 public class Theme {
     private Activity activity;
@@ -35,8 +36,6 @@ public class Theme {
     }
 
     public int getTheme() {
-        int theme;
-
         // Get preferences
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects
@@ -49,39 +48,18 @@ public class Theme {
                 this.activity.getString(R.string.pref_setting_theme_default_value));
 
         assert settingTheme != null;
-        switch (settingTheme) {
-            case S.THEME_RED:
-                theme = R.style.AppThemeRed;
-                break;
-            case S.THEME_INDIGO:
-                theme = R.style.AppThemeIndigo;
-                break;
-            case S.THEME_GREEN:
-                theme = R.style.AppThemeGreen;
-                break;
-            case S.THEME_ORANGE:
-                theme = R.style.AppThemeOrange;
-                break;
-            case S.THEME_GREY:
-                theme = R.style.AppThemeGrey;
-                break;
-            case S.THEME_BROWN:
-                theme = R.style.AppThemeBrown;
-                break;
-            case S.THEME_PINK:
-                theme = R.style.AppThemePink;
-                break;
-            case S.THEME_PURPLE:
-                theme = R.style.AppThemePurple;
-                break;
-            case S.THEME_BLACK:
-                theme = R.style.AppThemeBlack;
-                break;
-            case S.THEME_BLUE:
-            default:
-                theme = R.style.AppThemeBlue;
-                break;
-        }
+        int theme = switch (settingTheme) {
+            case S.THEME_RED -> R.style.AppThemeRed;
+            case S.THEME_INDIGO -> R.style.AppThemeIndigo;
+            case S.THEME_GREEN -> R.style.AppThemeGreen;
+            case S.THEME_ORANGE -> R.style.AppThemeOrange;
+            case S.THEME_GREY -> R.style.AppThemeGrey;
+            case S.THEME_BROWN -> R.style.AppThemeBrown;
+            case S.THEME_PINK -> R.style.AppThemePink;
+            case S.THEME_PURPLE -> R.style.AppThemePurple;
+            case S.THEME_BLACK -> R.style.AppThemeBlack;
+            default -> R.style.AppThemeBlue; // S.THEME_BLUE
+        };
 
         if (S.DEBUG)
             Log.d(S.TAG, "Setting theme " + settingTheme + " for activity " + this.activity.getLocalClassName());

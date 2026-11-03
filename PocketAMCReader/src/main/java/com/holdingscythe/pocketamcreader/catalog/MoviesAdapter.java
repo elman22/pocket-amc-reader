@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,13 +28,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.io.File;
@@ -64,8 +64,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     private Boolean mSettingListForceSortField;
     private String mSettingMoviesListSeparator;
     private String mSettingMovieListOrderField;
-    private ImageLoader mImageLoader;
-    private DisplayImageOptions mImageOptions;
+    private RequestOptions mImageOptions;
     private Calendar mCalendar;
     private Boolean mColorTagTitle;
 
@@ -192,12 +191,12 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
             }
         }
 
-        if (holder.FormattedTitle_text != null && line1.size() > 0) {
+        if (holder.FormattedTitle_text != null && !line1.isEmpty()) {
             holder.FormattedTitle_text.setText(Utils.arrayToString(line1.toArray(new String[0]),
                     mSettingMoviesListSeparator));
         }
 
-        if (holder.movieShortDescription_text != null && line2.size() > 0) {
+        if (holder.movieShortDescription_text != null && !line2.isEmpty()) {
             holder.movieShortDescription_text.setText(Utils.arrayToString(line2.toArray(new String[0]),
                     mSettingMoviesListSeparator));
         }
@@ -205,39 +204,46 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         if (holder.movieShortDescription2_text != null) {
             if (mSettingListForceSortField && !sortedFieldDisplayed) {
                 holder.movieShortDescription2_text.setText(getDBValue(mSortedField, cursor));
-            } else if (line3.size() > 0) {
+            } else if (!line3.isEmpty()) {
                 holder.movieShortDescription2_text.setText(Utils.arrayToString(line3.toArray(new String[0]),
                         mSettingMoviesListSeparator));
             }
         }
 
-        // Display image with Image Loader
+        // Display thumbnail
         if (mShowThumbs) {
-            // Make full path or keep null if picture is not present
+            // Keep null if picture is not present
+            File pictureFile = null;
             String movieCatalogPicture = cursor.getString(cursor.getColumnIndex(Movies.PICTURE));
 
-            if (movieCatalogPicture != null && !movieCatalogPicture.equals("")) {
-                if (new File(mPicturesFolder + movieCatalogPicture).isFile()) {
-                    movieCatalogPicture =
-                            S.INTENT_SCHEME_FILE + mPicturesFolder + movieCatalogPicture;
+            if (movieCatalogPicture != null && !movieCatalogPicture.isEmpty()) {
+                File file = new File(mPicturesFolder + movieCatalogPicture);
+
+                if (file.isFile()) {
+                    pictureFile = file;
 
                     if (S.VERBOSE)
-                        Log.v(S.TAG, "Requesting picture: " + movieCatalogPicture);
-                } else {
-                    if (S.VERBOSE)
-                        Log.v(S.TAG, "Missing picture: " + mPicturesFolder + movieCatalogPicture);
-
-                    movieCatalogPicture = null;
+                        Log.v(S.TAG, "Requesting picture: " + file);
+                } else if (S.VERBOSE) {
+                    Log.v(S.TAG, "Missing picture: " + file);
                 }
             }
 
-            // Display image
-            mImageLoader.displayImage(movieCatalogPicture, holder.moviePictureView, mImageOptions);
+            // Display image (starting a new request for the view cancels the previous one of a recycled view)
+            if (pictureFile != null) {
+                Glide.with(holder.moviePictureView)
+                        .load(pictureFile)
+                        .apply(mImageOptions)
+                        .into(holder.moviePictureView);
+            } else {
+                Glide.with(holder.moviePictureView).clear(holder.moviePictureView);
+                holder.moviePictureView.setImageResource(R.drawable.movie_thumb_stub);
+            }
 
             // Hide view if preference is to hide title
             // But if image is not available, always show title
             if (!mShowTitle) {
-                if (movieCatalogPicture == null) {
+                if (pictureFile == null) {
                     if (holder.FormattedTitle_text.getVisibility() == View.GONE)
                         holder.FormattedTitle_text.setVisibility(View.VISIBLE);
                 } else {
@@ -298,14 +304,9 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
             value = "";
         } else {
             switch (mSettingMovieListOrderField) {
-                case Movies.FORMATTED_TITLE:
-                case Movies.BORROWER:
-                case Movies.ORIGINAL_TITLE:
-                case Movies.TRANSLATED_TITLE:
-                    value = value.substring(0, 1).toUpperCase();
-                    break;
-                case Movies.DATE:
-                case Movies.DATE_WATCHED:
+                case Movies.FORMATTED_TITLE, Movies.BORROWER, Movies.ORIGINAL_TITLE, Movies.TRANSLATED_TITLE ->
+                        value = value.substring(0, 1).toUpperCase();
+                case Movies.DATE, Movies.DATE_WATCHED -> {
                     try {
                         Date date = SharedObjects.getInstance().dateFormat.parse(value);
                         if (date != null) {
@@ -317,7 +318,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                     } catch (Exception e) {
                         // don't do anything, keep date as is
                     }
-                    break;
+                }
             }
         }
 
@@ -358,19 +359,11 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                 Movies.DEFAULT_SORT_FIELD);
         mColorTagTitle = preferences.getBoolean(SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, false);
 
-        // Start image loader if thumbs are displayed
-        if (mShowThumbs) {
-            // Prepare Image Loader
-            mImageLoader = ImageLoader.getInstance();
-            if (mImageOptions == null) {
-                mImageOptions = new DisplayImageOptions.Builder()
-                        .resetViewBeforeLoading(true)
-                        .showImageOnLoading(R.drawable.movie_thumb_stub)
-                        .showImageForEmptyUri(R.drawable.movie_thumb_stub)
-                        .cacheInMemory(true)
-                        .cacheOnDisk(false)
-                        .build();
-            }
+        // Prepare image options if thumbs are displayed
+        if (mShowThumbs && mImageOptions == null) {
+            mImageOptions = new RequestOptions()
+                    .placeholder(R.drawable.movie_thumb_stub)
+                    .error(R.drawable.movie_thumb_stub);
         }
 
         // Prepare date conversion for section name
@@ -388,27 +381,25 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         String value = c.getString(c.getColumnIndex(fld));
 
         switch (fld) {
-            case Movies.NUMBER:
+            case Movies.NUMBER -> {
                 if (value != null)
                     value = mContext.getString(R.string.number_prefix) + value;
-                break;
-            case Movies.LENGTH:
-                if (value != null && value.length() > 0)
+            }
+            case Movies.LENGTH -> {
+                if (value != null && !value.isEmpty())
                     value += " " + mContext.getString(R.string.display_minutes_suffix);
-                break;
-            case Movies.RATING:
-            case Movies.USER_RATING:
-                if (value != null && value.length() > 0)
+            }
+            case Movies.RATING, Movies.USER_RATING -> {
+                if (value != null && !value.isEmpty())
                     value += mContext.getString(R.string.rating_suffix_list);
-                break;
-            case Movies.CHECKED:
+            }
+            case Movies.CHECKED -> {
                 if (value != null && value.equals(S.CATALOG_TRUE))
                     value = mContext.getString(R.string.list_seen_true);
                 else
                     value = mContext.getString(R.string.list_seen_false);
-                break;
-            case Movies.DATE:
-            case Movies.DATE_WATCHED:
+            }
+            case Movies.DATE, Movies.DATE_WATCHED -> {
                 if (value != null) {
                     try {
                         Date date = SharedObjects.getInstance().dateAddedFormat.parse(value);
@@ -421,17 +412,9 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
                         // don't do anything, keep date as is
                     }
                 }
-                break;
+            }
         }
 
         return value;
-    }
-
-    /**
-     * Stop loading of images in background thread
-     */
-    public void stopImageLoader() {
-        if (mImageLoader != null)
-            mImageLoader.stop();
     }
 }

@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,24 +18,20 @@
 
 package com.holdingscythe.pocketamcreader;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import com.holdingscythe.pocketamcreader.images.TouchImageAdapter;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.EdgeToEdgeHelper;
 import com.holdingscythe.pocketamcreader.utils.Theme;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by Elman on 26. 7. 2015.
@@ -48,17 +44,11 @@ public class PictureViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(new Theme(this).getTheme());
 
+        EdgeToEdgeHelper.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_view);
+        EdgeToEdgeHelper.padContent(this);
 
-        // Set default font
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath(S.DEFAULT_FONT)
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());
 
         // Read preferences
         if (SharedObjects.getInstance().preferences == null) {
@@ -86,14 +76,6 @@ public class PictureViewActivity extends AppCompatActivity {
 
         // change title of the activity
         // setTitle(title);
-    }
-
-    /**
-     * Wrap the Activity Context for Calligraphy
-     */
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
 }
