@@ -1,5 +1,5 @@
 # This file is part of Pocket AMC Reader.
-# Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+# Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 #
 # Pocket AMC Reader is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,3 +33,16 @@
 #}
 
 -keep class com.woxthebox.draglistview.** { *; }
+
+# Glide (no custom modules are used, these keep the library's own reflection targets)
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
+}

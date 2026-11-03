@@ -1,5 +1,5 @@
 // This file is part of Pocket AMC Reader.
-// Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+// Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 //
 // Pocket AMC Reader is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ android {
         applicationId "com.holdingscythe.pocketamcreader"
         minSdk 24
         targetSdk((project.findProperty('amc.targetSdk') ?: 37) as int)
-        versionCode 108
+        versionCode 109
         versionName appVersionName
     }
 
@@ -95,10 +95,9 @@ dependencies {
     implementation libs.androidx.viewpager
     implementation libs.androidx.work.runtime
     implementation libs.androidx.documentfile
+    implementation libs.androidx.preference
     implementation libs.expandable.textview
-    implementation libs.universal.image.loader
-    implementation libs.calligraphy3
-    implementation libs.viewpump
+    implementation libs.glide
     implementation libs.draglistview
     implementation libs.recyclerview.fastscroll
 }
