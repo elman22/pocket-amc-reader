@@ -412,7 +412,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             if (fileUri == null) {
                                 errorResource = R.string.file_not_found;
                             } else {
-                                intent.setDataAndType(fileUri, Utils.getMimeFromUrl(url, S.MIME_VIDEO));
+                                // Players often don't declare every specific video type (e.g. video/x-matroska),
+                                // but all of them handle the generic one
+                                String mime = Utils.getMimeFromUrl(url, S.MIME_VIDEO);
+                                if (mime.startsWith("video/"))
+                                    mime = S.MIME_VIDEO;
+                                intent.setDataAndType(fileUri, mime);
                                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 isIntentValid = true;
                             }

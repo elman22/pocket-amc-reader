@@ -26,6 +26,7 @@ import android.webkit.MimeTypeMap;
 import com.holdingscythe.pocketamcreader.S;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Utils {
 
@@ -112,8 +113,13 @@ public class Utils {
      * Get MIME type from URL
      */
     public static String getMimeFromUrl(String url, String fallback) {
-        String mime =
-                MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url));
+        // MimeTypeMap.getFileExtensionFromUrl() returns nothing for names with backslashes or spaces, so find the
+        // extension of the file name manually
+        String name = url.substring(Math.max(url.lastIndexOf('/'), url.lastIndexOf('\\')) + 1);
+        int dot = name.lastIndexOf('.');
+
+        String mime = dot < 0 ? null :
+                MimeTypeMap.getSingleton().getMimeTypeFromExtension(name.substring(dot + 1).toLowerCase(Locale.ROOT));
 
         if (mime == null || mime.isEmpty()) {
             mime = fallback;
