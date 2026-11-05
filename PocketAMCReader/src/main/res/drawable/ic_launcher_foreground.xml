@@ -20,5 +20,5 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
 <!-- The existing artwork scaled into the safe zone (inner 66dp) of the 108dp adaptive icon layer -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@mipmap/ic_launcher"
+    android:drawable="@drawable/ic_launcher_art"
     android:inset="19%" />
