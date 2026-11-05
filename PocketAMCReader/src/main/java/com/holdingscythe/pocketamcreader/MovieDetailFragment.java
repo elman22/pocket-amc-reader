@@ -214,11 +214,11 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     adjustedHeight = mHeroImageHeight + mActionBarHeight;
                 }
 
-                // Set adjusted height to AppBarLayout
-                CoordinatorLayout.LayoutParams params =
-                        (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-                params.height = adjustedHeight;
-                appBarLayout.setLayoutParams(params);
+                // The picture and the spacer above the title block are as tall as the whole picture. When the app bar
+                // is fully expanded the title block is below the picture; otherwise (parallax scrolling) the picture
+                // moves under the title block, so the block overlays its bottom.
+                setViewHeight(getView().findViewById(R.id.Picture), adjustedHeight);
+                setViewHeight(getView().findViewById(R.id.detailsImageSpacer), adjustedHeight);
 
                 // Add listener to dynamically change toolbar title
                 appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -228,6 +228,20 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     @Override
                     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                         if (scrollRange == -1) {
+                            // CollapsingToolbarLayout moves children which are not drawn under the status bar
+                            // (fitsSystemWindows) down by its height, the picture is not moved. Shorten the spacer,
+                            // so the title block starts exactly where the picture ends. This lays out the app bar
+                            // again and the listener is called once more.
+                            View header = getView() == null ? null : getView().findViewById(R.id.detailsHeader);
+                            View spacer = getView() == null ? null : getView().findViewById(R.id.detailsImageSpacer);
+                            if (header != null && spacer != null) {
+                                int spacerHeight = Math.max(0, adjustedHeight - header.getTop());
+                                if (spacer.getLayoutParams().height != spacerHeight) {
+                                    setViewHeight(spacer, spacerHeight);
+                                    return;
+                                }
+                            }
+
                             scrollRange = appBarLayout.getTotalScrollRange();
 
                             // Scroll collapsing toolbar to default position
@@ -236,7 +250,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                             AppBarLayout.Behavior behavior =
                                     (AppBarLayout.Behavior) params.getBehavior();
                             if (behavior != null) {
-                                behavior.setTopAndBottomOffset(mHeroImageHeight - scrollRange);
+                                // Show the same part of the picture as before, plus the title block below it
+                                View titleBlock = getView() == null ? null :
+                                        getView().findViewById(R.id.detailsTitleBlock);
+                                int titleBlockHeight = titleBlock == null ? 0 : titleBlock.getHeight();
+                                behavior.setTopAndBottomOffset(
+                                        Math.min(0, mHeroImageHeight + titleBlockHeight - scrollRange));
                             }
                             appBarLayout.setLayoutParams(params);
                         }
@@ -264,6 +283,12 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         } else {
             Log.e(S.TAG, "Movie details called without ARG_MOVIE_ID");
         }
+    }
+
+    private static void setViewHeight(View view, int height) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.height = height;
+        view.setLayoutParams(params);
     }
 
     @Override

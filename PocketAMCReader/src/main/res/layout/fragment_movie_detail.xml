@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,14 +27,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_hero_img_height"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/color_action_bar_bg"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -42,37 +42,54 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             <ImageView
                 android:id="@+id/Picture"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/detail_hero_img_height"
+                android:layout_gravity="top"
                 android:background="@drawable/movie_detail_stub"
                 android:contentDescription="@string/details_picture_description"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
+            <!-- Not scrolled with parallax: the picture is drawn behind it. The spacer is as tall as the whole
+                 picture (height set in code), so the title block is below the picture when the app bar is fully
+                 expanded. Parallax scrolling of the picture moves it under the title block otherwise. -->
             <LinearLayout
+                android:id="@+id/detailsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/ColorTag"
+                <View
+                    android:id="@+id/detailsImageSpacer"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/colortag_height"
-                    android:background="@android:color/transparent" />
+                    android:layout_height="@dimen/detail_hero_img_height" />
 
-                <TextView
-                    android:id="@+id/FormattedTitle"
-                    style="@style/DetailsFragmentTitle"
+                <LinearLayout
+                    android:id="@+id/detailsTitleBlock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/wrapper_spacing_title"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/ph_text_short"
-                    tools:ignore="MissingPrefix" />
+                    android:orientation="vertical">
 
-                <include layout="@layout/fragment_movie_detail_title_box" />
+                    <TextView
+                        android:id="@+id/ColorTag"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/colortag_height"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/FormattedTitle"
+                        style="@style/DetailsFragmentTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/wrapper_spacing_title"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/ph_text_short"
+                        tools:ignore="MissingPrefix" />
+
+                    <include layout="@layout/fragment_movie_detail_title_box" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
