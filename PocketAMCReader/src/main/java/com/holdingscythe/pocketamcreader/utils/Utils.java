@@ -110,16 +110,22 @@ public class Utils {
     }
 
     /**
+     * Lower case extension of the file name in a path or URL (both / and \\ separators), empty if there is none
+     */
+    public static String getFileExtension(String path) {
+        // MimeTypeMap.getFileExtensionFromUrl() returns nothing for names with backslashes or spaces
+        String name = path.substring(Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\')) + 1);
+        int dot = name.lastIndexOf('.');
+
+        return dot < 0 ? "" : name.substring(dot + 1).toLowerCase(Locale.ROOT);
+    }
+
+    /**
      * Get MIME type from URL
      */
     public static String getMimeFromUrl(String url, String fallback) {
-        // MimeTypeMap.getFileExtensionFromUrl() returns nothing for names with backslashes or spaces, so find the
-        // extension of the file name manually
-        String name = url.substring(Math.max(url.lastIndexOf('/'), url.lastIndexOf('\\')) + 1);
-        int dot = name.lastIndexOf('.');
-
-        String mime = dot < 0 ? null :
-                MimeTypeMap.getSingleton().getMimeTypeFromExtension(name.substring(dot + 1).toLowerCase(Locale.ROOT));
+        String extension = getFileExtension(url);
+        String mime = extension.isEmpty() ? null : MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 
         if (mime == null || mime.isEmpty()) {
             mime = fallback;

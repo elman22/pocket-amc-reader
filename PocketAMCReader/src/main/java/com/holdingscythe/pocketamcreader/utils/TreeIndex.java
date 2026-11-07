@@ -80,20 +80,41 @@ public class TreeIndex {
             Document.COLUMN_LAST_MODIFIED
     };
 
+    /**
+     * Lists the children of a directory (the only part which needs a content provider)
+     */
+    interface DirectoryLister {
+        List<Entry> list(String dirDocId);
+    }
+
     private final ContentResolver mResolver;
     private final Uri mTreeUri;
+    private final String mRootDocId;
+    private final DirectoryLister mLister;
     private final Map<String, Directory> mCache = new HashMap<>();
 
     public TreeIndex(@NonNull ContentResolver resolver, @NonNull Uri treeUri) {
         mResolver = resolver;
         mTreeUri = treeUri;
+        mRootDocId = null;
+        mLister = this::query;
+    }
+
+    /**
+     * For tests: no content provider, directories come from the lister
+     */
+    TreeIndex(@NonNull String rootDocId, @NonNull DirectoryLister lister) {
+        mResolver = null;
+        mTreeUri = null;
+        mRootDocId = rootDocId;
+        mLister = lister;
     }
 
     /**
      * Document id of the granted folder
      */
     public String rootDocId() {
-        return DocumentsContract.getTreeDocumentId(mTreeUri);
+        return mRootDocId != null ? mRootDocId : DocumentsContract.getTreeDocumentId(mTreeUri);
     }
 
     /**
@@ -156,6 +177,28 @@ public class TreeIndex {
             return dir;
 
         dir = new Directory();
+
+        List<Entry> entries = mLister.list(dirDocId);
+        if (entries != null) {
+            for (Entry entry : entries) {
+                dir.all.add(entry);
+                if (!dir.exact.containsKey(entry.name))
+                    dir.exact.put(entry.name, entry);
+                String lowerName = entry.name.toLowerCase(Locale.ROOT);
+                if (!dir.lower.containsKey(lowerName))
+                    dir.lower.put(lowerName, entry);
+            }
+        }
+
+        mCache.put(dirDocId, dir);
+        return dir;
+    }
+
+    /**
+     * One query lists the whole directory
+     */
+    private List<Entry> query(String dirDocId) {
+        List<Entry> entries = new ArrayList<>();
         Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(mTreeUri, dirDocId);
 
         try (Cursor c = mResolver.query(childrenUri, COLUMNS, null, null, null)) {
@@ -165,19 +208,12 @@ public class TreeIndex {
                     if (name == null)
                         continue;
 
-                    Entry entry = new Entry(
+                    entries.add(new Entry(
                             c.getString(0),
                             name,
                             c.getString(2),
                             c.isNull(3) ? -1 : c.getLong(3),
-                            c.isNull(4) ? 0 : c.getLong(4));
-
-                    dir.all.add(entry);
-                    if (!dir.exact.containsKey(name))
-                        dir.exact.put(name, entry);
-                    String lowerName = name.toLowerCase(Locale.ROOT);
-                    if (!dir.lower.containsKey(lowerName))
-                        dir.lower.put(lowerName, entry);
+                            c.isNull(4) ? 0 : c.getLong(4)));
                 }
             }
         } catch (Exception e) {
@@ -185,7 +221,6 @@ public class TreeIndex {
                 Log.w(S.TAG, "Couldn't list folder " + dirDocId, e);
         }
 
-        mCache.put(dirDocId, dir);
-        return dir;
+        return entries;
     }
 }

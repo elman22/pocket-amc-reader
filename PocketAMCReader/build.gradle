@@ -57,6 +57,13 @@ android {
         abortOnError false
     }
 
+    testOptions {
+        unitTests {
+            // android.jar methods (Log, Uri...) used by tested code return defaults instead of throwing
+            returnDefaultValues = true
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -100,4 +107,6 @@ dependencies {
     implementation libs.glide
     implementation libs.draglistview
     implementation libs.recyclerview.fastscroll
+
+    testImplementation libs.junit
 }
