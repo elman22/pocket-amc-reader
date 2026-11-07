@@ -30,6 +30,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TreeIndexTest {
 
@@ -67,7 +68,7 @@ public class TreeIndexTest {
                 file("f-dup-upper", "Dup.jpg"),
                 file("f-dup-lower", "dup.jpg"),
                 dir("d-sub", "sub")));
-        tree.put("d-sub", Arrays.asList(file("f-deep", "deep.PNG")));
+        tree.put("d-sub", List.of(file("f-deep", "deep.PNG")));
 
         index = new TreeIndex("root", dirDocId -> {
             listed.add(dirDocId);
@@ -180,7 +181,7 @@ public class TreeIndexTest {
 
     @Test
     public void entryKnowsWhetherItIsADirectory() {
-        assertEquals(true, dir("x", "x").isDirectory());
+        assertTrue(dir("x", "x").isDirectory());
         assertEquals(false, file("y", "y").isDirectory());
     }
 

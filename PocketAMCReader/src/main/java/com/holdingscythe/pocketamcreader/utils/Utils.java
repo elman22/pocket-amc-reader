@@ -39,7 +39,7 @@ public class Utils {
             return null;
         for (String s : str) {
             if (s != null && !s.isEmpty()) {
-                if (sb.length() != 0)
+                if (!sb.isEmpty())
                     sb.append(separator);
                 sb.append(s);
             }

@@ -140,10 +140,8 @@ public class ImportActivity extends AppCompatActivity {
             return;
 
         switch (info.getState()) {
-            case RUNNING -> {
-                showProgress(info.getProgress().getInt(CatalogImportWorker.KEY_PHASE, 0),
-                        info.getProgress().getInt(CatalogImportWorker.KEY_PERCENT, -1));
-            }
+            case RUNNING -> showProgress(info.getProgress().getInt(CatalogImportWorker.KEY_PHASE, 0),
+                    info.getProgress().getInt(CatalogImportWorker.KEY_PERCENT, -1));
             case SUCCEEDED, CANCELLED -> onFinished(0);
             case FAILED ->
                     onFinished(info.getOutputData().getInt(CatalogImportWorker.KEY_ERROR, S.IMPORT_ERROR_LOADING));

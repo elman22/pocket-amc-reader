@@ -56,14 +56,10 @@ public class LocalizationTest {
     private static Map<String, Element> defaults;
     private static List<String> languages;
 
-    private static class Resource {
-        final String type;
-        final String text; // all texts of the resource (plurals and arrays have several)
-
-        Resource(String type, String text) {
-            this.type = type;
-            this.text = text;
-        }
+    /**
+     * @param text all texts of the resource (plurals and arrays have several)
+     */
+    private record Resource(String type, String text) {
     }
 
     @BeforeClass
@@ -94,8 +90,7 @@ public class LocalizationTest {
         Map<String, Element> result = new LinkedHashMap<>();
         NodeList nodes = document.getDocumentElement().getChildNodes();
         for (int i = 0; i < nodes.getLength(); i++) {
-            if (nodes.item(i) instanceof Element) {
-                Element element = (Element) nodes.item(i);
+            if (nodes.item(i) instanceof Element element) {
                 result.put(element.getAttribute("name"), element);
             }
         }

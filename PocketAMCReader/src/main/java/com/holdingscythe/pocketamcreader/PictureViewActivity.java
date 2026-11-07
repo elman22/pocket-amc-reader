@@ -36,7 +36,7 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * Created by Elman on 26. 7. 2015.
  * Implementation based on
- * http://www.androidhive.info/2013/09/android-fullscreen-image-slider-with-swipe-and-pinch-zoom-gestures/
+ * <a href="http://www.androidhive.info/2013/09/android-fullscreen-image-slider-with-swipe-and-pinch-zoom-gestures/">...</a>
  */
 public class PictureViewActivity extends AppCompatActivity {
 

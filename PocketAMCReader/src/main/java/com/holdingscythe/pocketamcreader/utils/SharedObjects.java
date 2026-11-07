@@ -44,8 +44,8 @@ public class SharedObjects {
     // Global variables
     public String[] moviesProjection = Movies.MOVIES_PROJECTION;
     public SharedPreferences preferences;
-    public SimpleDateFormat dateAddedFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-    public DateFormat dateFormat = DateFormat.getDateInstance();
+    public final SimpleDateFormat dateAddedFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    public final DateFormat dateFormat = DateFormat.getDateInstance();
     public int deviceWidthPixels = 0;
     public int actionBarHeight = 0;
     public int heroImageHeight = 0;

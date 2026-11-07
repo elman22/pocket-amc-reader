@@ -35,7 +35,7 @@ import java.util.ArrayList;
  * Created by Elman on 30. 12. 2015.
  */
 public class Extras {
-    private ArrayList<ExtraModel> mExtras;
+    private final ArrayList<ExtraModel> mExtras;
 
     public Extras(Cursor cursor) {
         mExtras = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Extras {
 
             } catch (Exception e) {
                 if (S.ERROR)
-                    Log.e(S.TAG, "Extras couldn't be loaded from DB: " + e.toString());
+                    Log.e(S.TAG, "Extras couldn't be loaded from DB: " + e);
             }
         }
     }

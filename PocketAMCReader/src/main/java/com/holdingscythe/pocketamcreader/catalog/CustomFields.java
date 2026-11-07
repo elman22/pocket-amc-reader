@@ -37,7 +37,7 @@ import java.util.Date;
  * Add custom fields to base movie detail layout
  */
 public class CustomFields {
-    private Activity mActivity;
+    private final Activity mActivity;
 
     /**
      * Instantiates a new Custom fields.
@@ -96,7 +96,7 @@ public class CustomFields {
 
             } catch (Exception e) {
                 if (S.ERROR)
-                    Log.e(S.TAG, "Custom fields couldn't be loaded from DB: " + e.toString());
+                    Log.e(S.TAG, "Custom fields couldn't be loaded from DB: " + e);
             }
         }
     }

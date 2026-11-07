@@ -21,9 +21,9 @@ package com.holdingscythe.pocketamcreader.filters;
 import java.io.Serializable;
 
 public class FilterField implements Serializable {
-    public FilterType type;
-    public String sql;
-    public int resId;
+    public final FilterType type;
+    public final String sql;
+    public final int resId;
 
     public FilterField(FilterType type, String sql, int resId) {
         this.type = type;

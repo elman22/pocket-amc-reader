@@ -52,13 +52,13 @@ import androidx.core.content.ContextCompat;
  */
 public class Movie {
     private MovieModel mMovieModel;
-    private View mView;
-    private View.OnClickListener mClickListener;
-    private Activity mActivity;
-    private Resources mResources;
-    private Context mContext;
+    private final View mView;
+    private final View.OnClickListener mClickListener;
+    private final Activity mActivity;
+    private final Resources mResources;
+    private final Context mContext;
     private String mPreferencePicturesDirectory;
-    private ArrayList<ImageView> mPictureViews;
+    private final ArrayList<ImageView> mPictureViews;
     private double mPictureAspectRatio = 0;
 
     // Logical data types
@@ -271,22 +271,14 @@ public class Movie {
             }
             case EXT_STRING_PREFIX -> value = mActivity.getString(valueExtensionId) + value;
             case EXT_STRING_SUFFIX -> value += mActivity.getString(valueExtensionId);
-            case EXT_STRING_PREFIX_PADDED -> {
-                value = mActivity.getString(valueExtensionId) + mActivity.getString(R.string
-                        .string_extension_separator) + value;
-            }
-            case EXT_STRING_SUFFIX_PADDED -> {
-                value += mActivity.getString(R.string.string_extension_separator) + mActivity.getString
-                        (valueExtensionId);
-            }
-            case EXT_PLURALS_PREFIX_PADDED -> {
-                value = mActivity.getResources().getQuantityString(valueExtensionId, Integer.parseInt(value)) +
-                        mActivity.getString(R.string.string_extension_separator) + value;
-            }
-            case EXT_PLURALS_SUFFIX_PADDED -> {
-                value += mActivity.getString(R.string.string_extension_separator) + mActivity.getResources()
-                        .getQuantityString(valueExtensionId, Integer.parseInt(value));
-            }
+            case EXT_STRING_PREFIX_PADDED -> value = mActivity.getString(valueExtensionId) +
+                    mActivity.getString(R.string.string_extension_separator) + value;
+            case EXT_STRING_SUFFIX_PADDED -> value += mActivity.getString(R.string.string_extension_separator) +
+                    mActivity.getString(valueExtensionId);
+            case EXT_PLURALS_PREFIX_PADDED -> value = mActivity.getResources().getQuantityString(valueExtensionId,
+                    Integer.parseInt(value)) + mActivity.getString(R.string.string_extension_separator) + value;
+            case EXT_PLURALS_SUFFIX_PADDED -> value += mActivity.getString(R.string.string_extension_separator) +
+                    mActivity.getResources().getQuantityString(valueExtensionId, Integer.parseInt(value));
         }
 
         // Fill strings into views
@@ -353,8 +345,7 @@ public class Movie {
      */
     private void fillPictureIntoView(String columnName, String pictureName) {
         String picturePath = mPreferencePicturesDirectory + pictureName;
-        ImageView iv = (ImageView) mView.findViewById(mResources.getIdentifier(columnName, "id",
-                mContext.getPackageName()));
+        ImageView iv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
 
         if (pictureName != null) {
             // picture in catalog is present

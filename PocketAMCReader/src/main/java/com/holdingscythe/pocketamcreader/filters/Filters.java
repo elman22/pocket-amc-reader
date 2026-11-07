@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Filters implements Serializable {
-    private ArrayList<Filter> mFilters = new ArrayList<>();
+    private final ArrayList<Filter> mFilters = new ArrayList<>();
     private transient Context mContext;
 
     public Filters() {

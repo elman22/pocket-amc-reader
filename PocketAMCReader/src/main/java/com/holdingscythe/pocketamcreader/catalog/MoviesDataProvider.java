@@ -80,12 +80,12 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             "" + Movies.E_COMMENTS + "," + Movies.E_CREATED_BY + ", " + Movies.E_PICTURE + ")" +
             " VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-    private SQLiteDatabase db;
-    private SQLiteStatement insertStatement;
-    private SQLiteStatement insertCustomStatement;
-    private SQLiteStatement insertExtraStatement;
+    private final SQLiteDatabase db;
+    private final SQLiteStatement insertStatement;
+    private final SQLiteStatement insertCustomStatement;
+    private final SQLiteStatement insertExtraStatement;
     private MoviesOpenHelper openHelper;
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
     private Filters filters;
 
     // UriMatcher stuff

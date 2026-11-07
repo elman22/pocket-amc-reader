@@ -80,11 +80,10 @@ public final class CatalogFiles {
      * Copy referenced pictures from the granted folder and remove pictures which are not referenced anymore.
      *
      * @param relativePaths picture paths exactly as stored in the catalog (relative to the catalog folder)
-     * @return number of pictures which couldn't be found or copied
      * @throws IOException when canceled by the progress callback
      */
-    public static int sync(@NonNull Context context, @NonNull Uri treeUri, @NonNull Collection<String> relativePaths,
-                           @Nullable Progress progress) throws IOException {
+    public static void sync(@NonNull Context context, @NonNull Uri treeUri, @NonNull Collection<String> relativePaths,
+                            @Nullable Progress progress) throws IOException {
 
         File root = root(context);
         if (!root.isDirectory() && !root.mkdirs())
@@ -143,7 +142,6 @@ public final class CatalogFiles {
         if (S.INFO)
             Log.i(S.TAG, "Pictures synchronized: " + total + " referenced, " + failed + " missing or failed.");
 
-        return failed;
     }
 
     /**
@@ -160,12 +158,12 @@ public final class CatalogFiles {
                 continue;
             if (part.equals(".."))
                 return null;
-            if (result.length() > 0)
+            if (!result.isEmpty())
                 result.append('/');
             result.append(part);
         }
 
-        return result.length() == 0 ? null : result.toString();
+        return result.isEmpty() ? null : result.toString();
     }
 
     private static boolean isUpToDate(File destination, TreeIndex.Entry source) {

@@ -36,13 +36,13 @@ import androidx.annotation.NonNull;
  * Created by elman on 28.4.2017.
  * <p>
  * Derived from Magnus Woxblom
- * https://github.com/woxblom/DragListView
+ * <a href="https://github.com/woxblom/DragListView">...</a>
  */
 class SettingsListFieldsAdapter extends DragItemAdapter<SettingsListField, SettingsListFieldsAdapter.ViewHolder> {
 
-    private int mLayoutId;
-    private int mGrabHandleId;
-    private boolean mDragOnLongPress;
+    private final int mLayoutId;
+    private final int mGrabHandleId;
+    private final boolean mDragOnLongPress;
 
     SettingsListFieldsAdapter(ArrayList<SettingsListField> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         mLayoutId = layoutId;
@@ -73,7 +73,7 @@ class SettingsListFieldsAdapter extends DragItemAdapter<SettingsListField, Setti
     }
 
     class ViewHolder extends DragItemAdapter.ViewHolder {
-        TextView mText;
+        final TextView mText;
 
         ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId, mDragOnLongPress);

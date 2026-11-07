@@ -41,7 +41,7 @@ import androidx.viewpager.widget.ViewPager;
 public class MovieDetailFragmentHost extends Fragment {
 
     public static class MovieDetailAdapter extends FragmentPagerAdapter {
-        private MoviesAdapter mMoviesAdapter;
+        private final MoviesAdapter mMoviesAdapter;
         private RecyclerView mRecyclerView;
 
         MovieDetailAdapter(FragmentManager fm) throws NullPointerException {

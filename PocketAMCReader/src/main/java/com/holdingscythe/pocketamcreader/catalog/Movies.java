@@ -97,7 +97,7 @@ public final class Movies implements BaseColumns {
     public static final String P_TYPE = "Type";
 
     // Default projection for Movies List
-    public static String[] MOVIES_PROJECTION = new String[]{BaseColumns._ID, Movies.NUMBER, Movies.FORMATTED_TITLE,
+    public static final String[] MOVIES_PROJECTION = new String[]{BaseColumns._ID, Movies.NUMBER, Movies.FORMATTED_TITLE,
             Movies.CATEGORY, Movies.LENGTH, Movies.YEAR, Movies.PICTURE, Movies.RATING, Movies.BORROWER,
             Movies.MEDIA_LABEL, Movies.MEDIA_TYPE, Movies.SOURCE, Movies.DIRECTOR, Movies.PRODUCER, Movies.COUNTRY,
             Movies.VIDEO_FORMAT, Movies.AUDIO_FORMAT, Movies.RESOLUTION, Movies.CHECKED, Movies.ORIGINAL_TITLE,

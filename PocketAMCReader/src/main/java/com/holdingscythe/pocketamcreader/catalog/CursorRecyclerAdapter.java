@@ -221,7 +221,6 @@ public abstract class CursorRecyclerAdapter<VH
      * @param constraint the constraint with which the query must be filtered
      * @return a Cursor representing the results of the new query
      * @see #getFilter()
-     * @see #getFilterQueryProvider()
      * @see #setFilterQueryProvider(android.widget.FilterQueryProvider)
      */
     public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
@@ -240,18 +239,6 @@ public abstract class CursorRecyclerAdapter<VH
     }
 
     /**
-     * Returns the query filter provider used for filtering. When the
-     * provider is null, no filtering occurs.
-     *
-     * @return the current filter query provider or null if it does not exist
-     * @see #setFilterQueryProvider(android.widget.FilterQueryProvider)
-     * @see #runQueryOnBackgroundThread(CharSequence)
-     */
-    public FilterQueryProvider getFilterQueryProvider() {
-        return mFilterQueryProvider;
-    }
-
-    /**
      * Sets the query filter provider used to filter the current Cursor.
      * The provider's
      * {@link android.widget.FilterQueryProvider#runQuery(CharSequence)}
@@ -259,7 +246,6 @@ public abstract class CursorRecyclerAdapter<VH
      * this adapter.
      *
      * @param filterQueryProvider the filter query provider or null to remove it
-     * @see #getFilterQueryProvider()
      * @see #runQueryOnBackgroundThread(CharSequence)
      */
     public void setFilterQueryProvider(FilterQueryProvider filterQueryProvider) {
@@ -268,13 +254,11 @@ public abstract class CursorRecyclerAdapter<VH
 
     /**
      * Called when the {@link ContentObserver} on the cursor receives a change notification.
-     * Can be implemented by sub-class.
+     * Can be implemented by subclass.
      *
      * @see ContentObserver#onChange(boolean)
      */
-    protected void onContentChanged() {
-
-    }
+    protected void onContentChanged() {}
 
     private class ChangeObserver extends ContentObserver {
         public ChangeObserver() {
@@ -302,7 +286,6 @@ public abstract class CursorRecyclerAdapter<VH
         @Override
         public void onInvalidated() {
             mDataValid = false;
-            // notifyDataSetInvalidated();
             notifyItemRangeRemoved(0, getItemCount());
         }
     }

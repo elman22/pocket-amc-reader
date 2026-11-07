@@ -29,7 +29,7 @@ import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import androidx.preference.PreferenceManager;
 
 public class Theme {
-    private Activity activity;
+    private final Activity activity;
 
     public Theme(Activity activity) {
         this.activity = activity;

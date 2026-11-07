@@ -25,6 +25,7 @@ import java.io.Reader;
 import java.io.StringReader;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class CatalogReaderTest {
 
@@ -89,8 +90,8 @@ public class CatalogReaderTest {
 
     @Test
     public void removesCharactersNotAllowedInXml() throws IOException {
-        // \u0000-\u0009, \u000B, \u000C, \u000E-\u001F and \u007F (the tab is removed too)
-        String text = "a\u0000b\u0009c\u000Bd\u000Ce\u000Ef\u001Fg\u007Fh";
+        // \u0000-	, \u000B, \u000C, \u000E-\u001F and \u007F (the tab is removed too)
+        String text = "a\u0000b\tc\u000Bd\u000Ce\u000Ef\u001Fg\u007Fh";
         assertEquals("abcdefgh", readAll(new CatalogReader(new StringReader(text), true)));
     }
 
@@ -102,7 +103,7 @@ public class CatalogReaderTest {
 
     @Test
     public void keepsNonAsciiTextAndSurrogatePairs() throws IOException {
-        String text = "P\u0159\u00edli\u0161 \u017elu\u0165ou\u010dk\u00fd \u041f\u0440\u0438\u0432\u0435\u0442 \uD83C\uDFAC";
+        String text = "Příliš žluťoučký Привет \uD83C\uDFAC";
         assertEquals(text, readAll(new CatalogReader(new StringReader(text), true)));
     }
 
@@ -147,6 +148,6 @@ public class CatalogReaderTest {
 
     @Test
     public void doesNotSupportMark() {
-        assertEquals(false, new CatalogReader(new StringReader("abc"), true).markSupported());
+        assertFalse(new CatalogReader(new StringReader("abc"), true).markSupported());
     }
 }

@@ -41,9 +41,9 @@ import androidx.viewpager.widget.PagerAdapter;
  */
 public class TouchImageAdapter extends PagerAdapter {
 
-    private Activity mActivity;
-    private ArrayList<String> mImagePaths;
-    private TouchImageView.ScaleType mScaleType;
+    private final Activity mActivity;
+    private final ArrayList<String> mImagePaths;
+    private final TouchImageView.ScaleType mScaleType;
 
     // constructor
     public TouchImageAdapter(Activity activity, ArrayList<String> imagePaths, Boolean settingFitPicture) {

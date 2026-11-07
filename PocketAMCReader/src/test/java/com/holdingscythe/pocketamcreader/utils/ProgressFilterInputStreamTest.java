@@ -57,7 +57,7 @@ public class ProgressFilterInputStreamTest {
         in.read();
         assertEquals(-1, in.read());
 
-        assertEquals(Arrays.asList(1L), reported);
+        assertEquals(List.of(1L), reported);
     }
 
     @Test

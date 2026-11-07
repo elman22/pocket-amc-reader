@@ -62,10 +62,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                     style="@style/DetailsFragmentTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_toEndOf="@id/Picture"
-                    android:layout_toRightOf="@id/Picture"
                     android:text="@string/ph_text_short"
                     tools:ignore="MissingPrefix" />
 
@@ -75,16 +73,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/FormattedTitle"
-                    android:layout_toEndOf="@id/Picture"
-                    android:layout_toRightOf="@id/Picture" />
+                    android:layout_toEndOf="@id/Picture" />
 
                 <include
                     layout="@layout/fragment_movie_detail_media"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/movieDetailTitleBoxInclude"
-                    android:layout_toEndOf="@id/Picture"
-                    android:layout_toRightOf="@id/Picture" />
+                    android:layout_toEndOf="@id/Picture" />
 
             </RelativeLayout>
 

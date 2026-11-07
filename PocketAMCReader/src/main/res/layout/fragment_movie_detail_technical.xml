@@ -124,7 +124,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/detail_basic_spacing"
-                    android:layout_marginRight="@dimen/detail_basic_spacing"
                     android:text="@string/ph_text_line" />
 
                 <TextView
@@ -160,7 +159,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/detail_basic_spacing"
-                    android:layout_marginRight="@dimen/detail_basic_spacing"
                     android:text="@string/ph_text_line" />
 
                 <TextView
@@ -236,14 +234,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/detail_basic_spacing"
-                    android:layout_marginRight="@dimen/detail_basic_spacing"
                     android:text="@string/ph_number_long" />
 
                 <TextView
                     style="@style/Label"
                     android:layout_width="wrap_content"
                     android:layout_marginEnd="@dimen/detail_basic_spacing"
-                    android:layout_marginRight="@dimen/detail_basic_spacing"
                     android:text="@string/display_files_separator" />
 
                 <TextView

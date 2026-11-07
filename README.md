@@ -84,6 +84,19 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 - FIXED Import progress calculation, leaked streams/temporary file after a failed import
 - FIXED Crash when opening IMDb link without IMDb app and without browser
 - REMOVED Conflicting, unused content provider declaration
+- NEW Catalog is selected through the Android file picker (Storage Access Framework): works with scoped storage on Android 11+, including SD cards and USB drives. Select the folder with the catalog and its pictures (recommended), or only the XML file
+- NEW Pictures are copied to app storage during import (only new and changed ones), so lists and details are fast and don't depend on the original location
+- NEW Import runs in the background (WorkManager, foreground service with progress notification) and survives screen rotation and minimizing the app; no wake lock and no temporary UTF-8 copy of the catalog
+- UPDATED Existing users have to select the catalog once again after the update
+- REMOVED Storage and wake lock permissions, NoNonsense-FilePicker library
+- NEW Edge-to-edge display (Android 15+ requirement), predictive back, adaptive launcher icon, per-app language (Android 13+)
+- UPDATED Settings screen uses AndroidX Preference and the Activity Result API
+- UPDATED Thumbnails are loaded with Glide instead of the abandoned Universal Image Loader
+- UPDATED Roboto Condensed is the app font through resources (Calligraphy removed)
+- FIXED Pink and purple themes used the brown fast scroll thumb color
+- NEW Czech translation (#33)
+- UPDATED German and Russian translations completed (about 75 missing texts each), new texts translated in French, Polish and Slovak
+- UPDATED Catalog setting summary and import error help no longer mention the SD card and the extra free space requirement
 
 #### 19.03.2021 Version 2.3.3
 - UPDATED Slovak translation

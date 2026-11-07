@@ -84,36 +84,21 @@ public final class S {
     public static final Map<String, Integer> SETTINGS_REQUESTING_IMPORT;
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put(SettingsConstants.KEY_PREF_CATALOG_LOCATION, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_CATALOG_ENCODING, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, 1);
-        SETTINGS_REQUESTING_IMPORT = Collections.unmodifiableMap(tmpMap);
+        SETTINGS_REQUESTING_IMPORT = Map.of(SettingsConstants.KEY_PREF_CATALOG_LOCATION, 1, SettingsConstants.KEY_PREF_CATALOG_ENCODING, 1, SettingsConstants.KEY_PREF_REMOVE_BAD_CHARS, 1);
     }
 
     // SettingsActivity requesting restart
     public static final Map<String, Integer> SETTINGS_REQUESTING_RESTART;
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put(SettingsConstants.KEY_PREF_SHOW_THUMBS, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_SHOW_GRID_TITLE, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_THEME, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, 1);
-        SETTINGS_REQUESTING_RESTART = Collections.unmodifiableMap(tmpMap);
+        SETTINGS_REQUESTING_RESTART = Map.of(SettingsConstants.KEY_PREF_SHOW_THUMBS, 1, SettingsConstants.KEY_PREF_SHOW_GRID_TITLE, 1, SettingsConstants.KEY_PREF_THEME, 1, SettingsConstants.KEY_PREF_COLOR_TAG_TITLE, 1);
     }
 
     // SettingsActivity requesting list refresh
     public static final Map<String, Integer> SETTINGS_REQUESTING_REFRESH;
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_FORCE_SORT_FIELD, 1);
-        tmpMap.put(SettingsConstants.KEY_PREF_LIST_SEPARATOR, 1);
-        SETTINGS_REQUESTING_REFRESH = Collections.unmodifiableMap(tmpMap);
+        SETTINGS_REQUESTING_REFRESH = Map.of(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1, 1, SettingsConstants.KEY_PREF_MOVIES_LIST_LINE2, 1, SettingsConstants.KEY_PREF_MOVIES_LIST_LINE3, 1, SettingsConstants.KEY_PREF_FORCE_SORT_FIELD, 1, SettingsConstants.KEY_PREF_LIST_SEPARATOR, 1);
     }
 
     // Color tags
@@ -121,21 +106,7 @@ public final class S {
     public static final String COLOR_TAG_DEFAULT = "0";
 
     static {
-        Map<String, Integer> tmpMap = new HashMap<>();
-        tmpMap.put("0", R.color.color_tag_0);
-        tmpMap.put("1", R.color.color_tag_1);
-        tmpMap.put("2", R.color.color_tag_2);
-        tmpMap.put("3", R.color.color_tag_3);
-        tmpMap.put("4", R.color.color_tag_4);
-        tmpMap.put("5", R.color.color_tag_5);
-        tmpMap.put("6", R.color.color_tag_6);
-        tmpMap.put("7", R.color.color_tag_7);
-        tmpMap.put("8", R.color.color_tag_8);
-        tmpMap.put("9", R.color.color_tag_9);
-        tmpMap.put("10", R.color.color_tag_10);
-        tmpMap.put("11", R.color.color_tag_11);
-        tmpMap.put("12", R.color.color_tag_12);
-        COLOR_TAGS = Collections.unmodifiableMap(tmpMap);
+        COLOR_TAGS = Map.ofEntries(Map.entry("0", R.color.color_tag_0), Map.entry("1", R.color.color_tag_1), Map.entry("2", R.color.color_tag_2), Map.entry("3", R.color.color_tag_3), Map.entry("4", R.color.color_tag_4), Map.entry("5", R.color.color_tag_5), Map.entry("6", R.color.color_tag_6), Map.entry("7", R.color.color_tag_7), Map.entry("8", R.color.color_tag_8), Map.entry("9", R.color.color_tag_9), Map.entry("10", R.color.color_tag_10), Map.entry("11", R.color.color_tag_11), Map.entry("12", R.color.color_tag_12));
     }
 
 }

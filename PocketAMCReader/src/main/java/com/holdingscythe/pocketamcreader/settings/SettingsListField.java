@@ -19,9 +19,9 @@
 package com.holdingscythe.pocketamcreader.settings;
 
 public class SettingsListField {
-    private Long id;
-    private String databaseField;
-    private Integer resource;
+    private final Long id;
+    private final String databaseField;
+    private final Integer resource;
     private String displayText;
 
     public SettingsListField(int id, String f, Integer r) {

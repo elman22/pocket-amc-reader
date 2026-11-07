@@ -54,11 +54,11 @@ public final class SafHelper {
     public static boolean takeReadPermission(@NonNull Context context, @NonNull Uri uri) {
         try {
             context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            return true;
+            return false;
         } catch (SecurityException | IllegalArgumentException e) {
             if (S.WARN)
                 Log.w(S.TAG, "Couldn't persist permission for " + uri, e);
-            return false;
+            return true;
         }
     }
 
@@ -88,7 +88,7 @@ public final class SafHelper {
                 continue;
 
             Uri granted = permission.getUri();
-            if (granted.equals(catalogUri) || (treeUri != null && granted.equals(treeUri)))
+            if (granted.equals(catalogUri) || (granted.equals(treeUri)))
                 return true;
         }
         return false;
@@ -106,7 +106,7 @@ public final class SafHelper {
                 result.add(entry);
         }
 
-        Collections.sort(result, (a, b) -> a.name.compareToIgnoreCase(b.name));
+        result.sort((a, b) -> a.name.compareToIgnoreCase(b.name));
         return result;
     }
 

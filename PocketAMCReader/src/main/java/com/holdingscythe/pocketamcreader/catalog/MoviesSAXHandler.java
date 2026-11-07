@@ -33,8 +33,8 @@ import java.util.HashMap;
 public class MoviesSAXHandler extends DefaultHandler {
     private long lastInsertedRowId;
     private final MoviesDataProvider moviesDataProvider;
-    private HashMap<String, String> customFieldsNames = new HashMap<>();
-    private HashMap<String, String> customFieldsTypes = new HashMap<>();
+    private final HashMap<String, String> customFieldsNames = new HashMap<>();
+    private final HashMap<String, String> customFieldsTypes = new HashMap<>();
 
     public MoviesSAXHandler(MoviesDataProvider m) {
         moviesDataProvider = m;
@@ -44,10 +44,6 @@ public class MoviesSAXHandler extends DefaultHandler {
     public void startDocument() throws SAXException {
         // Delete all data before import
         moviesDataProvider.deleteAll();
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
     }
 
     /**
@@ -115,7 +111,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                         Log.v(S.TAG, "Imported movie: " + FormattedTitle);
                 } catch (Exception e) {
                     if (S.ERROR)
-                        Log.e(S.TAG, atts.getValue("FormattedTitle") + " -> " + e.toString());
+                        Log.e(S.TAG, atts.getValue("FormattedTitle") + " -> " + e);
                 }
             }
             case "CustomFields" -> {
@@ -148,7 +144,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                     }
                 } catch (Exception e) {
                     if (S.ERROR)
-                        Log.e(S.TAG, lastInsertedRowId + " -> " + e.toString());
+                        Log.e(S.TAG, lastInsertedRowId + " -> " + e);
                 }
             }
             case "Extra" -> {
@@ -179,7 +175,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                     }
                 } catch (Exception e) {
                     if (S.ERROR)
-                        Log.e(S.TAG, atts.getValue(Movies.E_TITLE) + " -> " + e.toString());
+                        Log.e(S.TAG, atts.getValue(Movies.E_TITLE) + " -> " + e);
                 }
             }
             case "CustomField" -> {
@@ -193,7 +189,7 @@ public class MoviesSAXHandler extends DefaultHandler {
                         Log.v(S.TAG, "Custom field detected: " + tag);
                 } catch (Exception e) {
                     if (S.ERROR)
-                        Log.e(S.TAG, atts.getValue(Movies.P_TAG) + " -> " + e.toString());
+                        Log.e(S.TAG, atts.getValue(Movies.P_TAG) + " -> " + e);
                 }
             }
         }

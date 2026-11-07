@@ -35,10 +35,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:id="@+id/imageCover"
         android:layout_width="@dimen/list_item_width"
         android:layout_height="@dimen/list_item_height"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="@dimen/list_margin_horizontal"
-        android:layout_marginRight="@dimen/list_margin_horizontal"
         android:background="@android:color/black"
         android:contentDescription="@string/details_img_description"
         android:scaleType="centerCrop"
@@ -49,7 +47,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="match_parent"
         android:layout_height="@dimen/colortag_height"
         android:layout_toEndOf="@id/imageCover"
-        android:layout_toRightOf="@id/imageCover"
         android:orientation="vertical"/>
 
     <TextView
@@ -59,7 +56,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content"
         android:layout_below="@id/ListColorTag"
         android:layout_toEndOf="@id/imageCover"
-        android:layout_toRightOf="@id/imageCover"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row1"/>
@@ -71,7 +67,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="wrap_content"
         android:layout_below="@id/movieTitle"
         android:layout_toEndOf="@id/imageCover"
-        android:layout_toRightOf="@id/imageCover"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row2"/>
@@ -84,7 +79,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_below="@id/movieShortDescription"
         android:layout_marginBottom="2dip"
         android:layout_toEndOf="@id/imageCover"
-        android:layout_toRightOf="@id/imageCover"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/list_holder_row3"/>

@@ -82,7 +82,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                         android:id="@+id/filter_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/filter_label"
                         android:layout_toEndOf="@id/filter_label"
                         android:padding="6dip"
                         android:text="@string/loading"

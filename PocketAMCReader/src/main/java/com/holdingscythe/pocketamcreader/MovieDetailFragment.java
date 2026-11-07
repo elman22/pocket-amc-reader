@@ -50,8 +50,6 @@ import com.holdingscythe.pocketamcreader.utils.SafHelper;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -120,7 +118,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects
             SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                    (Objects.requireNonNull(getActivity()).getApplicationContext());
+                    (requireActivity().getApplicationContext());
         }
 
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
@@ -148,7 +146,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             Uri uri = Uri.withAppendedPath(S.CONTENT_URI, "_id/" + getArguments().getString(ARG_MOVIE_ID, "0"));
             Cursor cursor = moviesDataProvider.fetchMovie(uri);
             cursor.moveToFirst();
-            mMovie = new Movie(cursor, getView(), this, Objects.requireNonNull(getActivity()));
+            mMovie = new Movie(cursor, getView(), this, requireActivity());
             cursor.close();
 
             // Fetch custom fields
@@ -167,7 +165,8 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             moviesDataProvider.closeDatabase();
 
             // Set collapsing toolbar title
-            CollapsingToolbarLayout collapsingToolbar = Objects.requireNonNull(getView()).findViewById(R.id.collapsingToolbar);
+            CollapsingToolbarLayout collapsingToolbar = requireView().findViewById(R.id.collapsingToolbar);
+            assert getView() != null;
             AppBarLayout appBarLayout = getView().findViewById(R.id.appBarLayout);
 
             if (collapsingToolbar != null && appBarLayout != null) {
@@ -183,7 +182,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
                     // Set action bar height
                     final TypedArray styledAttributes =
-                            getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+                            Objects.requireNonNull(getContext()).getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
                     SharedObjects.getInstance().actionBarHeight =
                             (int) styledAttributes.getDimension(0, 0);
                     styledAttributes.recycle();
@@ -262,7 +261,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                         if (scrollRange + verticalOffset == 0) {
                             // when collapsingToolbar is collapsed, display actionbar title
                             int color = Utils.getColorFromColorTag(mMovie.getColorTag());
-                            collapsingToolbar.setCollapsedTitleTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), color));
+                            collapsingToolbar.setCollapsedTitleTextColor(
+                                    ContextCompat.getColor(requireContext(), color)
+                            );
                             collapsingToolbar.setTitle(mMovie.getTitle());
                             isShow = true;
                         } else if (isShow) {
@@ -322,30 +323,18 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     e.printStackTrace();
                 }
             }
-            case R.id.Certification -> {
-                filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Checked -> {
-                filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
-            }
-            case R.id.UserRating -> {
-                filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Year -> {
-                filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Length -> {
-                filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Rating -> {
-                filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
+            case R.id.Certification -> filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Checked -> filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
+            case R.id.UserRating -> filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Year -> filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Length -> filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Rating -> filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
             case R.id.Category -> chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
             case R.id.Director -> chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
             case R.id.Actors -> chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
@@ -353,40 +342,24 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.Writer -> chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
             case R.id.Composer -> chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
             case R.id.Country -> chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
-            case R.id.MediaLabel -> {
-                filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.MediaType -> {
-                filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Source -> {
-                filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Borrower -> {
-                filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
+            case R.id.MediaLabel -> filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.MediaType -> filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Source -> filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Borrower -> filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
             case R.id.Languages -> chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
             case R.id.Subtitles -> chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
-            case R.id.VideoFormat -> {
-                filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.AudioFormat -> {
-                filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Resolution -> {
-                filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
-            case R.id.Framerate -> {
-                filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
-                        ((TextView) view).getText().toString()));
-            }
+            case R.id.VideoFormat -> filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.AudioFormat -> filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Resolution -> filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
+            case R.id.Framerate -> filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
+                    ((TextView) view).getText().toString()));
             case R.id.URL, R.id.FilePath -> {
                 // If link points to IMDb, open IMDb app if available
                 String url = ((TextView) view).getText().toString();
@@ -454,7 +427,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
                     if (S.DEBUG)
                         Log.d(S.TAG,
-                                "Opening intent: (" + isIntentValid + ") " + intent.toString());
+                                "Opening intent: (" + isIntentValid + ") " + intent);
 
                     if (isIntentValid) {
                         try {

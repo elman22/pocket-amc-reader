@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -135,8 +134,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     }
 
     protected class FilterDatePickerListener implements DatePickerDialog.OnDateSetListener {
-        private FilterField mFilterField;
-        private FilterOperator mFilterOperator;
+        private final FilterField mFilterField;
+        private final FilterOperator mFilterOperator;
         private Boolean mIsFilterSet = false; // workaround because Android calls onDateSet twice
 
         FilterDatePickerListener(FilterField filterField, FilterOperator filterOperator) {
@@ -172,7 +171,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * A dummy implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
-    private static Callbacks sDummyCallbacks = id -> {
+    private static final Callbacks sDummyCallbacks = id -> {
     };
 
     /**
@@ -219,7 +218,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects
             SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                    (Objects.requireNonNull(getActivity()).getApplicationContext());
+                    (requireActivity().getApplicationContext());
         }
 
         // Setup filters from bundle if available
@@ -227,7 +226,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             try {
                 mFilters = (Filters) savedInstanceState.getSerializable(STATE_FILTERS);
             } catch (Exception ex) {
-                Log.w(S.TAG, "Error de-serializing mFilters: " + ex.toString());
+                Log.w(S.TAG, "Error de-serializing mFilters: " + ex);
                 mFilters = new Filters();
             }
         } else {
@@ -246,34 +245,32 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         mMoviesDataProvider.setFilters(mFilters);
 
         // Prepare recycler view
-        mRecyclerView = (FastScrollRecyclerView) Objects.requireNonNull(getView()).findViewById(R.id.movie_list_recycler);
+        mRecyclerView = requireView().findViewById(R.id.movie_list_recycler);
 
         // Define layout managers
-        mLinearLayoutManager = new LinearLayoutManager(Objects.requireNonNull(getActivity()).getApplicationContext());
-        int gridSpan = (getActivity().getResources().getConfiguration().orientation == Configuration
+        mLinearLayoutManager = new LinearLayoutManager(requireActivity().getApplicationContext());
+        int gridSpan = (requireActivity().getResources().getConfiguration().orientation == Configuration
                 .ORIENTATION_PORTRAIT ? GRID_SPAN : GRID_SPAN_LANDSCAPE);
-        mGridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), gridSpan);
+        mGridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), gridSpan);
 
         // Setting view preference or list as default view
         mViewType = SharedObjects.getInstance().preferences.getInt(SettingsConstants.KEY_PREF_MOVIE_LIST_VIEW_ID, LIST);
 
         // Add counter header
-        mHeaderListCountView = getActivity().findViewById(R.id.nowShowing);
-        LinearLayout headerView = getActivity().findViewById(R.id.showing_info_layout);
+        mHeaderListCountView = requireActivity().findViewById(R.id.nowShowing);
+        LinearLayout headerView = requireActivity().findViewById(R.id.showing_info_layout);
         headerView.setOnClickListener(this);
 
         // Add filter header
-        mFilterHeaderLabelText = getActivity().findViewById(R.id.filter_label);
-        mFilterHeaderText = getActivity().findViewById(R.id.filter_detail);
-        RelativeLayout headerViewFilter = getActivity().findViewById(R.id.filter_info_layout);
+        mFilterHeaderLabelText = requireActivity().findViewById(R.id.filter_label);
+        mFilterHeaderText = requireActivity().findViewById(R.id.filter_detail);
+        RelativeLayout headerViewFilter = requireActivity().findViewById(R.id.filter_info_layout);
         headerViewFilter.setOnClickListener(this);
 
         // Prepare adapter to list
         prepareMoviesAdapter();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mRecyclerView.setNestedScrollingEnabled(true);
-        }
+        mRecyclerView.setNestedScrollingEnabled(true);
 
         // Prepare recycler view
         if (mViewType == GRID) {
@@ -339,7 +336,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             try {
                 outState.putSerializable(STATE_FILTERS, mFilters);
             } catch (Exception ex) {
-                Log.w(S.TAG, "Error serializing mFilters: " + ex.toString());
+                Log.w(S.TAG, "Error serializing mFilters: " + ex);
             }
         }
 
@@ -380,11 +377,11 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         // If filter query was set via bundle, apply it
         if (!mFilterQuery.isEmpty() && mMoviesAdapter != null) {
             mSearchMenuItem.expandActionView();
-            searchView.setQuery(mFilterQuery, false);
+            Objects.requireNonNull(searchView).setQuery(mFilterQuery, false);
             mMoviesAdapter.getFilter().filter(mFilterQuery);
         }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        Objects.requireNonNull(searchView).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return true;
@@ -568,11 +565,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.filter_info_layout, R.id.showing_info_layout -> {
-                // Click on now showing info
+            case R.id.filter_info_layout, R.id.showing_info_layout -> // Click on now showing info
                 // Click on filters info
-                removeFilters();
-            }
+                    removeFilters();
         }
     }
 
@@ -644,7 +639,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
      */
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
+    public void  setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
         // TODO update when implementing TwoPane
@@ -697,7 +692,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         if (mMoviesDataProvider != null && mRecyclerView != null) {
             if (SharedObjects.getInstance().preferences == null) {
                 SharedObjects.getInstance().preferences = PreferenceManager.getDefaultSharedPreferences
-                        (Objects.requireNonNull(getActivity()).getApplicationContext());
+                        (requireActivity().getApplicationContext());
             }
 
             // Close search field
@@ -705,7 +700,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
                 mSearchMenuItem.collapseActionView();
 
             // Swap cursor
-            mMoviesAdapter.loadConfiguration(Objects.requireNonNull(getActivity()).getBaseContext());
+            mMoviesAdapter.loadConfiguration(requireActivity().getBaseContext());
             Cursor oldCursor = mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             if (oldCursor != null)
                 oldCursor.close();
@@ -773,7 +768,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         // Date picker is handled different way
         if (field.type == Movies.FILTER_TYPE_DATE) {
-            new DatePickerDialog(Objects.requireNonNull(getActivity()), new FilterDatePickerListener(field, operator),
+            new DatePickerDialog(requireActivity(), new FilterDatePickerListener(field, operator),
                     mDpYear, mDpMonth, mDpDay).show();
             return;
         }
@@ -792,7 +787,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             });
         } else {
             // Prepare view with text input
-            View filterView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.filter_input, null);
+            View filterView = requireActivity().getLayoutInflater().inflate(R.layout.filter_input, null);
             final EditText filterValueView = filterView.findViewById(R.id.filterValue);
             if (field.type == Movies.FILTER_TYPE_NUMBER) {
                 DigitsKeyListener digitsKeyListener = new DigitsKeyListener(false, true);
@@ -817,15 +812,15 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         alertDialog.setOnShowListener(dialog -> {
             if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
                 InputMethodManager imm =
-                        (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(INPUT_METHOD_SERVICE);
+                        (InputMethodManager) requireActivity().getSystemService(INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
         });
         alertDialog.setOnDismissListener(dialog -> {
             if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
                 InputMethodManager imm =
-                        (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                        (InputMethodManager) requireActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
         });
         alertDialog.show();
@@ -878,7 +873,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     private void prepareMoviesAdapter() {
         mMoviesAdapter = new MoviesAdapter(
-                Objects.requireNonNull(getActivity()).getBaseContext(),
+                requireActivity().getBaseContext(),
                 mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
                         null),
                 mViewType,

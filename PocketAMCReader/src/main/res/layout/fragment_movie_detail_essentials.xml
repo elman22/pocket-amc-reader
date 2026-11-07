@@ -62,7 +62,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_gravity="end|bottom"
             android:layout_marginTop="@dimen/arrow_pull_vertical"
             android:layout_marginEnd="@dimen/arrow_pull_horizontal"
-            android:layout_marginRight="@dimen/arrow_pull_horizontal"
             android:background="@android:color/transparent"
             android:contentDescription="@string/details_expandable_arrow_description" />
 
@@ -151,7 +150,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         style="@style/Label"
         android:text="@string/details_comments_label" />
 
-    <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.ms.square.android.expandabletextview.ExpandableTextView
         xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
         android:id="@+id/Comments"
         android:layout_width="match_parent"
@@ -179,7 +178,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_gravity="end|bottom"
             android:layout_marginTop="@dimen/arrow_pull_vertical"
             android:layout_marginEnd="@dimen/arrow_pull_horizontal"
-            android:layout_marginRight="@dimen/arrow_pull_horizontal"
             android:background="@android:color/transparent"
             android:contentDescription="@string/details_expandable_arrow_description" />
     </com.ms.square.android.expandabletextview.ExpandableTextView>

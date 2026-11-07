@@ -21,10 +21,10 @@ package com.holdingscythe.pocketamcreader.filters;
 import java.io.Serializable;
 
 public class FilterOperator implements Serializable {
-    public String sql;
-    public int resId;
-    public String valueWrapLeft;
-    public String valueWrapRight;
+    public final String sql;
+    public final int resId;
+    public final String valueWrapLeft;
+    public final String valueWrapRight;
 
     public FilterOperator(String sql, int resId, String valueWrapLeft, String valueWrapRight) {
         this.sql = sql;

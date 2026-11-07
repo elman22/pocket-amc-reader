@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -201,7 +202,7 @@ public class TreeIndex {
         List<Entry> entries = new ArrayList<>();
         Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(mTreeUri, dirDocId);
 
-        try (Cursor c = mResolver.query(childrenUri, COLUMNS, null, null, null)) {
+        try (Cursor c = Objects.requireNonNull(mResolver).query(childrenUri, COLUMNS, null, null, null)) {
             if (c != null) {
                 while (c.moveToNext()) {
                     String name = c.getString(1);

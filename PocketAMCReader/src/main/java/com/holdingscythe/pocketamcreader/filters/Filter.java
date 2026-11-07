@@ -26,9 +26,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Filter implements Serializable {
-    private FilterField mField;
-    private FilterOperator mOperator;
-    private String mValue;
+    private final FilterField mField;
+    private final FilterOperator mOperator;
+    private final String mValue;
     private String mBoolTrueValue;
 
     public Filter(FilterField field, FilterOperator operator) {

@@ -53,7 +53,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHolder> implements FastScrollRecyclerView
         .SectionedAdapter {
-    private Context mContext;
+    private final Context mContext;
     private Boolean mShowThumbs;
     private Boolean mShowTitle;
     private String mPicturesFolder;
@@ -71,18 +71,18 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     // Recycler views
     private final int GRID = 0;
     private final int LIST = 1;
-    private int mViewType;
-    private MoviesAdapterClickListener mListener;
+    private final int mViewType;
+    private final MoviesAdapterClickListener mListener;
 
     /**
      * Recycler view holder
      */
     class MovieHolder extends RecyclerView.ViewHolder {
-        TextView FormattedTitle_text;
-        TextView movieShortDescription_text;
-        TextView movieShortDescription2_text;
-        TextView movieColorTag;
-        ImageView moviePictureView;
+        final TextView FormattedTitle_text;
+        final TextView movieShortDescription_text;
+        final TextView movieShortDescription2_text;
+        final TextView movieColorTag;
+        final ImageView moviePictureView;
 
         /**
          * @param itemView itemView
