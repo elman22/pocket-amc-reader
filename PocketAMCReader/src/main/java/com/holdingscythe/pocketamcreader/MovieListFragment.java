@@ -53,7 +53,9 @@ import com.holdingscythe.pocketamcreader.filters.FilterOperator;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
+import com.holdingscythe.pocketamcreader.utils.FragmentUtils;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -303,6 +305,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Preparation which needs the views of the activity
+        FragmentUtils.runWhenActivityCreated(this, () -> onActivityReady(savedInstanceState));
+
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
@@ -310,10 +315,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     }
 
     @SuppressLint("StringFormatInvalid")
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    private void onActivityReady(Bundle savedInstanceState) {
         // Read preferences
         if (SharedObjects.getInstance().preferences == null) {
             // Prepare Shared Objects

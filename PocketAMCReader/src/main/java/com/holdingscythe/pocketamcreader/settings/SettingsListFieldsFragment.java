@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.catalog.Movies;
+import com.holdingscythe.pocketamcreader.utils.FragmentUtils;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.woxthebox.draglistview.BoardView;
@@ -112,9 +113,14 @@ public class SettingsListFieldsFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        // Preparation which needs the views of the activity
+        FragmentUtils.runWhenActivityCreated(this, this::onActivityReady);
+    }
+
+    private void onActivityReady() {
         SharedPreferences preferences = SharedObjects.getInstance().preferences;
         String mFieldsLine1 = preferences.getString(SettingsConstants.KEY_PREF_MOVIES_LIST_LINE1,
                 Movies.defaultListFieldsLine1);

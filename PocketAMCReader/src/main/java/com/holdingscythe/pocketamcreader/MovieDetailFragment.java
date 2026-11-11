@@ -46,6 +46,7 @@ import com.holdingscythe.pocketamcreader.filters.Filter;
 import com.holdingscythe.pocketamcreader.filters.FilterField;
 import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
+import com.holdingscythe.pocketamcreader.utils.FragmentUtils;
 import com.holdingscythe.pocketamcreader.utils.SafHelper;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
@@ -57,6 +58,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -104,9 +106,14 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        // Preparation which needs the views of the activity
+        FragmentUtils.runWhenActivityCreated(this, () -> onActivityReady(savedInstanceState));
+    }
+
+    private void onActivityReady(@Nullable Bundle savedInstanceState) {
         // Prepare custom font for the toolbar
         final Typeface tf = ResourcesCompat.getFont(requireContext(), R.font.roboto_condensed);
 
