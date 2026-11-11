@@ -65,9 +65,9 @@ public class CustomFields {
                 do {
                     // Fill model
                     CustomFieldsModel customField = new CustomFieldsModel(
-                            cursor.getString(cursor.getColumnIndex(Movies.C_TYPE)),
-                            cursor.getString(cursor.getColumnIndex(Movies.C_NAME)),
-                            cursor.getString(cursor.getColumnIndex(Movies.C_VALUE))
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.C_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.C_NAME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.C_VALUE))
                     );
 
                     // Inflate layout, because this is the only way to set correct theme

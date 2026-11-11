@@ -219,7 +219,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         if (mShowThumbs) {
             // Keep null if picture is not present
             File pictureFile = null;
-            String movieCatalogPicture = cursor.getString(cursor.getColumnIndex(Movies.PICTURE));
+            String movieCatalogPicture = cursor.getString(cursor.getColumnIndexOrThrow(Movies.PICTURE));
 
             if (movieCatalogPicture != null && !movieCatalogPicture.isEmpty()) {
                 File file = new File(mPicturesFolder + movieCatalogPicture);
@@ -383,7 +383,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
      * @return value
      */
     private String getDBValue(String fld, Cursor c) {
-        String value = c.getString(c.getColumnIndex(fld));
+        String value = c.getString(c.getColumnIndexOrThrow(fld));
 
         switch (fld) {
             case Movies.NUMBER -> {

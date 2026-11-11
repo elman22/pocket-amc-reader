@@ -51,22 +51,23 @@ public class Extras {
             try {
                 do {
                     // check if file exists, otherwise skip
-                    File extraFile = new File(preferencePicturesDirectory + cursor.getString(cursor.getColumnIndex
-                            (Movies.E_PICTURE)));
+                    File extraFile = new File(preferencePicturesDirectory + cursor.getString(
+                            cursor.getColumnIndexOrThrow(Movies.E_PICTURE)));
                     if (!extraFile.isFile()) {
                         continue;
                     }
 
                     mExtras.add(new ExtraModel(
-                            preferencePicturesDirectory + cursor.getString(cursor.getColumnIndex(Movies.E_PICTURE)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_CHECKED)).equals(S.CATALOG_TRUE),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_TAG)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_TITLE)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_CATEGORY)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_URL)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_DESCRIPTION)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_COMMENTS)),
-                            cursor.getString(cursor.getColumnIndex(Movies.E_CREATED_BY))
+                            preferencePicturesDirectory + cursor.getString(
+                                    cursor.getColumnIndexOrThrow(Movies.E_PICTURE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CHECKED)).equals(S.CATALOG_TRUE),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_TAG)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_TITLE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CATEGORY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_URL)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_DESCRIPTION)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_COMMENTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CREATED_BY))
                     ));
                 } while (cursor.moveToNext());
 
