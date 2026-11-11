@@ -782,7 +782,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             View filterView = requireActivity().getLayoutInflater().inflate(R.layout.filter_input, null);
             final EditText filterValueView = filterView.findViewById(R.id.filterValue);
             if (field.type == Movies.FILTER_TYPE_NUMBER) {
-                DigitsKeyListener digitsKeyListener = new DigitsKeyListener(false, true);
+                DigitsKeyListener digitsKeyListener = DigitsKeyListener.getInstance(false, true);
                 filterValueView.setKeyListener(digitsKeyListener);
             }
             builder.setView(filterView);
