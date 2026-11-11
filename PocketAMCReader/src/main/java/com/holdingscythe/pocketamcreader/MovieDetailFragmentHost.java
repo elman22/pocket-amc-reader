@@ -19,7 +19,6 @@
 package com.holdingscythe.pocketamcreader;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,82 +28,75 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 /**
- * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.
+ * This fragment hosts the pager which uses a FragmentStateAdapter to display the details of the movies as child
+ * fragments (only the fragments near the visible one are kept).
  * Created by Elman on 2. 11. 2014.
  */
 public class MovieDetailFragmentHost extends Fragment {
 
-    public static class MovieDetailAdapter extends FragmentPagerAdapter {
+    public static class MovieDetailAdapter extends FragmentStateAdapter {
         private final MoviesAdapter mMoviesAdapter;
-        private RecyclerView mRecyclerView;
 
-        MovieDetailAdapter(FragmentManager fm) throws NullPointerException {
-            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-            mMoviesAdapter = SharedObjects.getInstance().recyclerMovieAdapter;
-            View fragmentView = SharedObjects.getInstance().movieListFragment.getView();
-
-            if (fragmentView != null) {
-                mRecyclerView = fragmentView.findViewById(R.id.movie_list_recycler);
-            }
-
-            if (mMoviesAdapter == null || mRecyclerView == null) {
-                throw new NullPointerException();
-            }
-
+        MovieDetailAdapter(@NonNull Fragment host, @NonNull MoviesAdapter moviesAdapter) {
+            super(host);
+            mMoviesAdapter = moviesAdapter;
         }
 
         @Override
-        public int getCount() {
-            try {
-                return mMoviesAdapter.getItemCount();
-            } catch (NullPointerException e) {
-                if (S.DEBUG)
-                    Log.i(S.TAG, "MovieDetailAdapter is null");
-
-                return 0;
-            }
+        public int getItemCount() {
+            return mMoviesAdapter.getItemCount();
         }
 
         @NonNull
         @Override
-        public Fragment getItem(final int position) {
-            mRecyclerView.setSelected(true);
-            mRecyclerView.post(() -> mRecyclerView.smoothScrollToPosition(position));
-
+        public Fragment createFragment(int position) {
             Bundle args = new Bundle();
             args.putString(MovieDetailFragment.ARG_MOVIE_ID, String.valueOf(mMoviesAdapter.getItemId(position)));
             return MovieDetailFragment.newInstance(args);
         }
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_movie_detail_viewpager, container, false);
+        ViewPager2 viewPager = root.findViewById(R.id.movieDetailViewPager);
 
-        ViewPager viewPager = root.findViewById(R.id.movieDetailViewPager);
-        try {
-            // Important: Must use the child FragmentManager or you will see side effects.
-            viewPager.setAdapter(new MovieDetailAdapter(getChildFragmentManager()));
-
-            // Set current item based on clicked item
-            if (getArguments() != null && getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
-                String argumentMovieId = getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID);
-                if (argumentMovieId != null && !argumentMovieId.isEmpty()) {
-                    int clickedPosition = Integer.parseInt(argumentMovieId);
-                    viewPager.setCurrentItem(clickedPosition);
-                }
-            }
-
-        } catch (NullPointerException e) {
+        // The list is needed to follow the movie and to read the movies (it is gone e.g. after the process died)
+        MoviesAdapter moviesAdapter = SharedObjects.getInstance().recyclerMovieAdapter;
+        MovieListFragment listFragment = SharedObjects.getInstance().movieListFragment;
+        View listView = listFragment == null ? null : listFragment.getView();
+        final RecyclerView recyclerView = listView == null ? null : listView.findViewById(R.id.movie_list_recycler);
+        if (moviesAdapter == null || recyclerView == null) {
             if (getActivity() != null)
                 getActivity().finish();
+            return root;
+        }
+
+        // Important: Must use this fragment (its child FragmentManager) or you will see side effects.
+        viewPager.setAdapter(new MovieDetailAdapter(this, moviesAdapter));
+
+        // Show the movie which is displayed in the pager also in the list. This is not done when the fragment of the
+        // page is created: the neighbours are created in advance, but they are not displayed.
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                recyclerView.setSelected(true);
+                recyclerView.smoothScrollToPosition(position);
+            }
+        });
+
+        // Set current item based on clicked item. The pager restores the item displayed before a screen rotation
+        // after this (not clicked item again).
+        if (getArguments() != null && getArguments().containsKey(MovieDetailFragment.ARG_MOVIE_ID)) {
+            String argumentMovieId = getArguments().getString(MovieDetailFragment.ARG_MOVIE_ID);
+            if (argumentMovieId != null && !argumentMovieId.isEmpty()) {
+                viewPager.setCurrentItem(Integer.parseInt(argumentMovieId), false);
+            }
         }
 
         return root;
@@ -116,8 +108,8 @@ public class MovieDetailFragmentHost extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         if (SharedObjects.getInstance().recyclerMovieAdapter == null && getActivity() != null)
             getActivity().finish();
     }
-
 }
