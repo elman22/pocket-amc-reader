@@ -254,7 +254,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
         <item name="android:textSize">9sp</item>
     </style>
 
