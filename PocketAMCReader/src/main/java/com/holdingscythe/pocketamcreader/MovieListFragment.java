@@ -35,7 +35,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -67,7 +68,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * A list fragment representing a list of Movies. This fragment
@@ -801,20 +801,13 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         AlertDialog alertDialog = builder.create();
 
-        alertDialog.setOnShowListener(dialog -> {
-            if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
-                InputMethodManager imm =
-                        (InputMethodManager) requireActivity().getSystemService(INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
+            // The keyboard is shown with the dialog and hidden when it is dismissed
+            Window window = alertDialog.getWindow();
+            if (window != null) {
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             }
-        });
-        alertDialog.setOnDismissListener(dialog -> {
-            if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
-                InputMethodManager imm =
-                        (InputMethodManager) requireActivity().getSystemService(INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-            }
-        });
+        }
         alertDialog.show();
     }
 
