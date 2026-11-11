@@ -21,7 +21,6 @@ package com.holdingscythe.pocketamcreader;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -149,14 +148,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
             return true;
         } else if (itemId == R.id.menu_about) {
             // Get version
-            String versionName = "";
-            try {
-                versionName = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(),
-                        0).versionName;
-            } catch (PackageManager.NameNotFoundException e) {
-                if (S.ERROR)
-                    Log.e(S.TAG, "Could not extract Application Version");
-            }
+            String versionName = BuildConfig.VERSION_NAME;
 
             // Translators
             String t_ru = getString(R.string.locale_ru_local) + getString(R.string.locale_translation_separator)
