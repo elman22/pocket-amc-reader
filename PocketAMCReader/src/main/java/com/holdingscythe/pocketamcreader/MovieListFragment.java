@@ -53,7 +53,6 @@ import com.holdingscythe.pocketamcreader.filters.Filters;
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -127,10 +126,43 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         CursorAdapterObserver() {
         }
 
+        private boolean mUpdateScheduled = false;
+        private final Runnable mUpdate = () -> {
+            mUpdateScheduled = false;
+            if (isAdded()) {
+                updateHeaderInfo();
+                resetDetailPager();
+            }
+        };
+
+        /**
+         * A new cursor is reported by several range events, update the screen once
+         */
+        private void scheduleUpdate() {
+            if (!mUpdateScheduled && mRecyclerView != null) {
+                mUpdateScheduled = true;
+                mRecyclerView.post(mUpdate);
+            }
+        }
+
         @Override
         public void onChanged() {
-            updateHeaderInfo();
-            resetDetailPager();
+            scheduleUpdate();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            scheduleUpdate();
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            scheduleUpdate();
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            scheduleUpdate();
         }
     }
 
@@ -712,7 +744,6 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             Cursor oldCursor = mMoviesAdapter.swapCursor(mMoviesDataProvider.fetchMovies(S.CONTENT_URI));
             if (oldCursor != null)
                 oldCursor.close();
-            mMoviesAdapter.notifyDataSetChanged();
 
             // Scroll to top
             mRecyclerView.scrollToPosition(0);

@@ -56,6 +56,7 @@ public abstract class CursorRecyclerAdapter<VH
         extends androidx.recyclerview.widget.RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
         implements Filterable, CursorFilter.CursorFilterClient {
     private boolean mDataValid;
+    private int mReportedCount; // number of items RecyclerView knows about
     private int mRowIDColumn;
     private Cursor mCursor;
     private ChangeObserver mChangeObserver;
@@ -72,6 +73,7 @@ public abstract class CursorRecyclerAdapter<VH
         mCursor = c;
         mDataValid = cursorPresent;
         mRowIDColumn = cursorPresent ? c.getColumnIndexOrThrow("_id") : -1;
+        mReportedCount = cursorPresent ? c.getCount() : 0;
 
         mChangeObserver = new ChangeObserver();
         mDataSetObserver = new MyDataSetObserver();
@@ -176,16 +178,38 @@ public abstract class CursorRecyclerAdapter<VH
             if (mDataSetObserver != null) newCursor.registerDataSetObserver(mDataSetObserver);
             mRowIDColumn = newCursor.getColumnIndexOrThrow("_id");
             mDataValid = true;
-            // notify the observers about the new cursor
-            notifyDataSetChanged();
         } else {
             mRowIDColumn = -1;
             mDataValid = false;
-            // notify the observers about the lack of a data set
-            // notifyDataSetInvalidated();
-            notifyItemRangeRemoved(0, getItemCount());
         }
+        // notify the observers about the new cursor (or the lack of a data set)
+        notifyCursorChanged();
         return oldCursor;
+    }
+
+    /**
+     * Report the change of the data to RecyclerView with item range events instead of notifyDataSetChanged(), so
+     * it doesn't have to treat every item as changed and can use the item count. Rows are compared by position
+     * (all existing rows are rebound, the difference in rows is inserted or removed), which is enough here, because
+     * the cursor is always replaced as a whole.
+     * <p>
+     * The count RecyclerView knows has to be remembered: after a cursor is removed or invalidated
+     * {@link #getItemCount()} is already 0.
+     */
+    private void notifyCursorChanged() {
+        int oldCount = mReportedCount;
+        int newCount = getItemCount();
+        mReportedCount = newCount;
+
+        int common = Math.min(oldCount, newCount);
+        if (common > 0) {
+            notifyItemRangeChanged(0, common);
+        }
+        if (newCount > oldCount) {
+            notifyItemRangeInserted(oldCount, newCount - oldCount);
+        } else if (oldCount > newCount) {
+            notifyItemRangeRemoved(newCount, oldCount - newCount);
+        }
     }
 
     /**
@@ -280,13 +304,13 @@ public abstract class CursorRecyclerAdapter<VH
         @Override
         public void onChanged() {
             mDataValid = true;
-            notifyDataSetChanged();
+            notifyCursorChanged();
         }
 
         @Override
         public void onInvalidated() {
             mDataValid = false;
-            notifyItemRangeRemoved(0, getItemCount());
+            notifyCursorChanged();
         }
     }
 }
