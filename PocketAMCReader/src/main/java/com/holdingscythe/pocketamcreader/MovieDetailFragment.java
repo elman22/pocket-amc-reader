@@ -300,7 +300,9 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onDestroyView() {
-        mMovie.unbindData();
+        // Movie is not created when the fragment was started without movie id
+        if (mMovie != null)
+            mMovie.unbindData();
 
         super.onDestroyView();
     }
