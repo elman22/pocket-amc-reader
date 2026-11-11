@@ -21,7 +21,6 @@ package com.holdingscythe.pocketamcreader.catalog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,7 +42,10 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 /**
@@ -51,11 +53,86 @@ import androidx.core.content.ContextCompat;
  * Created by Elman on 11.10.2014.
  */
 public class Movie {
+
+    // Views of catalog columns. The ids are listed here (and not looked up by name with Resources.getIdentifier())
+    // so the compiler and the resource shrinker know the views are used.
+    private static final Map<String, Integer> COLUMN_VIEW_IDS = new HashMap<>();
+    private static final Map<String, Integer> COLUMN_LABEL_IDS = new HashMap<>();
+
+    static {
+        COLUMN_VIEW_IDS.put(Movies.NUMBER, R.id.Number);
+        COLUMN_VIEW_IDS.put(Movies.CHECKED, R.id.Checked);
+        COLUMN_VIEW_IDS.put(Movies.FORMATTED_TITLE, R.id.FormattedTitle);
+        COLUMN_VIEW_IDS.put(Movies.MEDIA_LABEL, R.id.MediaLabel);
+        COLUMN_VIEW_IDS.put(Movies.MEDIA_TYPE, R.id.MediaType);
+        COLUMN_VIEW_IDS.put(Movies.SOURCE, R.id.Source);
+        COLUMN_VIEW_IDS.put(Movies.DATE, R.id.Date);
+        COLUMN_VIEW_IDS.put(Movies.BORROWER, R.id.Borrower);
+        COLUMN_VIEW_IDS.put(Movies.RATING, R.id.Rating);
+        COLUMN_VIEW_IDS.put(Movies.ORIGINAL_TITLE, R.id.OriginalTitle);
+        COLUMN_VIEW_IDS.put(Movies.TRANSLATED_TITLE, R.id.TranslatedTitle);
+        COLUMN_VIEW_IDS.put(Movies.DIRECTOR, R.id.Director);
+        COLUMN_VIEW_IDS.put(Movies.PRODUCER, R.id.Producer);
+        COLUMN_VIEW_IDS.put(Movies.COUNTRY, R.id.Country);
+        COLUMN_VIEW_IDS.put(Movies.CATEGORY, R.id.Category);
+        COLUMN_VIEW_IDS.put(Movies.LENGTH, R.id.Length);
+        COLUMN_VIEW_IDS.put(Movies.YEAR, R.id.Year);
+        COLUMN_VIEW_IDS.put(Movies.ACTORS, R.id.Actors);
+        COLUMN_VIEW_IDS.put(Movies.URL, R.id.URL);
+        COLUMN_VIEW_IDS.put(Movies.DESCRIPTION, R.id.Description);
+        COLUMN_VIEW_IDS.put(Movies.COMMENTS, R.id.Comments);
+        COLUMN_VIEW_IDS.put(Movies.VIDEO_FORMAT, R.id.VideoFormat);
+        COLUMN_VIEW_IDS.put(Movies.VIDEO_BITRATE, R.id.VideoBitrate);
+        COLUMN_VIEW_IDS.put(Movies.AUDIO_FORMAT, R.id.AudioFormat);
+        COLUMN_VIEW_IDS.put(Movies.AUDIO_BITRATE, R.id.AudioBitrate);
+        COLUMN_VIEW_IDS.put(Movies.RESOLUTION, R.id.Resolution);
+        COLUMN_VIEW_IDS.put(Movies.FRAMERATE, R.id.Framerate);
+        COLUMN_VIEW_IDS.put(Movies.LANGUAGES, R.id.Languages);
+        COLUMN_VIEW_IDS.put(Movies.SUBTITLES, R.id.Subtitles);
+        COLUMN_VIEW_IDS.put(Movies.SIZE, R.id.Size);
+        COLUMN_VIEW_IDS.put(Movies.DISKS, R.id.Disks);
+        COLUMN_VIEW_IDS.put(Movies.PICTURE, R.id.Picture);
+        COLUMN_VIEW_IDS.put(Movies.COLOR_TAG, R.id.ColorTag);
+        COLUMN_VIEW_IDS.put(Movies.DATE_WATCHED, R.id.DateWatched);
+        COLUMN_VIEW_IDS.put(Movies.USER_RATING, R.id.UserRating);
+        COLUMN_VIEW_IDS.put(Movies.WRITER, R.id.Writer);
+        COLUMN_VIEW_IDS.put(Movies.COMPOSER, R.id.Composer);
+        COLUMN_VIEW_IDS.put(Movies.CERTIFICATION, R.id.Certification);
+        COLUMN_VIEW_IDS.put(Movies.FILE_PATH, R.id.FilePath);
+
+        COLUMN_LABEL_IDS.put(Movies.CHECKED, R.id.CheckedLabel);
+        COLUMN_LABEL_IDS.put(Movies.MEDIA_LABEL, R.id.MediaLabelLabel);
+        COLUMN_LABEL_IDS.put(Movies.MEDIA_TYPE, R.id.MediaTypeLabel);
+        COLUMN_LABEL_IDS.put(Movies.SOURCE, R.id.SourceLabel);
+        COLUMN_LABEL_IDS.put(Movies.DATE, R.id.DateLabel);
+        COLUMN_LABEL_IDS.put(Movies.BORROWER, R.id.BorrowerLabel);
+        COLUMN_LABEL_IDS.put(Movies.RATING, R.id.RatingLabel);
+        COLUMN_LABEL_IDS.put(Movies.ORIGINAL_TITLE, R.id.OriginalTitleLabel);
+        COLUMN_LABEL_IDS.put(Movies.TRANSLATED_TITLE, R.id.TranslatedTitleLabel);
+        COLUMN_LABEL_IDS.put(Movies.DIRECTOR, R.id.DirectorLabel);
+        COLUMN_LABEL_IDS.put(Movies.PRODUCER, R.id.ProducerLabel);
+        COLUMN_LABEL_IDS.put(Movies.COUNTRY, R.id.CountryLabel);
+        COLUMN_LABEL_IDS.put(Movies.ACTORS, R.id.ActorsLabel);
+        COLUMN_LABEL_IDS.put(Movies.URL, R.id.URLLabel);
+        COLUMN_LABEL_IDS.put(Movies.COMMENTS, R.id.CommentsLabel);
+        COLUMN_LABEL_IDS.put(Movies.VIDEO_FORMAT, R.id.VideoFormatLabel);
+        COLUMN_LABEL_IDS.put(Movies.AUDIO_FORMAT, R.id.AudioFormatLabel);
+        COLUMN_LABEL_IDS.put(Movies.RESOLUTION, R.id.ResolutionLabel);
+        COLUMN_LABEL_IDS.put(Movies.FRAMERATE, R.id.FramerateLabel);
+        COLUMN_LABEL_IDS.put(Movies.LANGUAGES, R.id.LanguagesLabel);
+        COLUMN_LABEL_IDS.put(Movies.SUBTITLES, R.id.SubtitlesLabel);
+        COLUMN_LABEL_IDS.put(Movies.SIZE, R.id.SizeLabel);
+        COLUMN_LABEL_IDS.put(Movies.DATE_WATCHED, R.id.DateWatchedLabel);
+        COLUMN_LABEL_IDS.put(Movies.USER_RATING, R.id.UserRatingLabel);
+        COLUMN_LABEL_IDS.put(Movies.WRITER, R.id.WriterLabel);
+        COLUMN_LABEL_IDS.put(Movies.COMPOSER, R.id.ComposerLabel);
+        COLUMN_LABEL_IDS.put(Movies.CERTIFICATION, R.id.CertificationLabel);
+        COLUMN_LABEL_IDS.put(Movies.FILE_PATH, R.id.FilePathLabel);
+    }
     private MovieModel mMovieModel;
     private final View mView;
     private final View.OnClickListener mClickListener;
     private final Activity mActivity;
-    private final Resources mResources;
     private final Context mContext;
     private String mPreferencePicturesDirectory;
     private final ArrayList<ImageView> mPictureViews;
@@ -82,7 +159,6 @@ public class Movie {
         mView = view;
         mClickListener = clickListener;
         mActivity = activity;
-        mResources = activity.getResources();
         mContext = activity.getBaseContext();
         mPictureViews = new ArrayList<>();
 
@@ -285,28 +361,28 @@ public class Movie {
         switch (dataType) {
             case STRING_REGULAR -> {
                 // Fill regular string from database into view.
-                TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                TextView tv = findColumnView(columnName);
                 if (tv != null) {
                     tv.setText(value);
                 }
             }
             case STRING_EXPANDABLE -> {
                 // Fill expandable string from database into view.
-                ExpandableTextView etv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                ExpandableTextView etv = findColumnView(columnName);
                 if (etv != null) {
                     etv.setText(value);
                 }
             }
             case STRING_CLICKABLE -> {
                 // Fill clickable string from database into view.
-                TextView ctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                TextView ctv = findColumnView(columnName);
                 if (ctv != null) {
                     ctv.setText(Utils.markClickableText(value));
                     ctv.setOnClickListener(mClickListener);
                 }
             }
             case BOOLEAN_REGULAR -> {
-                TextView btv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                TextView btv = findColumnView(columnName);
                 if (btv != null) {
                     if (value.equals(S.CATALOG_TRUE))
                         btv.setText(mActivity.getString(R.string.details_boolean_true));
@@ -315,7 +391,7 @@ public class Movie {
                 }
             }
             case BOOLEAN_CLICKABLE -> {
-                TextView bctv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                TextView bctv = findColumnView(columnName);
                 if (bctv != null) {
                     if (value.equals(S.CATALOG_TRUE))
                         bctv.setText(Utils.markClickableText(mActivity.getString(R.string.details_boolean_true)));
@@ -325,7 +401,7 @@ public class Movie {
                 }
             }
             case DATE_REGULAR -> {
-                TextView dtv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+                TextView dtv = findColumnView(columnName);
                 if (dtv != null) {
                     try {
                         Date parsedDate = SharedObjects.getInstance().dateAddedFormat.parse(value);
@@ -345,7 +421,7 @@ public class Movie {
      */
     private void fillPictureIntoView(String columnName, String pictureName) {
         String picturePath = mPreferencePicturesDirectory + pictureName;
-        ImageView iv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+        ImageView iv = findColumnView(columnName);
 
         if (pictureName != null) {
             // picture in catalog is present
@@ -381,7 +457,7 @@ public class Movie {
      * Fill view with selected color.
      */
     private void fillColorIntoView(String columnName, boolean isCustomColorTagSet, int color) {
-        TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+        TextView tv = findColumnView(columnName);
         if (tv != null) {
             if (isCustomColorTagSet) {
                 tv.setVisibility(View.VISIBLE);
@@ -396,24 +472,33 @@ public class Movie {
      * Set text color to a text view.
      */
     private void setTextColor(String columnName, int color) {
-        TextView tv = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+        TextView tv = findColumnView(columnName);
         if (tv != null) {
             tv.setTextColor(ContextCompat.getColor(mContext, color));
         }
     }
 
     /**
+     * Find the view of a catalog column, null if the layout doesn't have it
+     */
+    @Nullable
+    private <T extends View> T findColumnView(String columnName) {
+        Integer id = COLUMN_VIEW_IDS.get(columnName);
+        return id == null ? null : mView.findViewById(id);
+    }
+
+    /**
      * Hide label and view if empty
      */
     private void hideEmptyView(String columnName) {
-        View v = mView.findViewById(mResources.getIdentifier(columnName, "id", mContext.getPackageName()));
+        View v = findColumnView(columnName);
         if (v != null) {
             v.setVisibility(View.GONE);
         }
 
         // Also hide label, if shown
-        String labelId = columnName + "Label";
-        v = mView.findViewById(mResources.getIdentifier(labelId, "id", mContext.getPackageName()));
+        Integer labelId = COLUMN_LABEL_IDS.get(columnName);
+        v = labelId == null ? null : mView.findViewById(labelId);
         if (v != null) {
             v.setVisibility(View.GONE);
         }
