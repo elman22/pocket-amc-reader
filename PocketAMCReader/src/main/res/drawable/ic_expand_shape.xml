@@ -31,7 +31,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     </item>
     <item
         android:bottom="@dimen/arrow_margin_bottom"
-        android:drawable="@drawable/ic_expand_holo_light"
+        android:drawable="@drawable/ic_expand_arrow"
         android:left="@dimen/arrow_margin_left"
         android:right="@dimen/arrow_margin_right"
         android:top="@dimen/arrow_margin_top"/>
