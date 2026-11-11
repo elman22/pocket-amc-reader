@@ -363,7 +363,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             case R.id.URL, R.id.FilePath -> {
                 // If link points to IMDb, open IMDb app if available
                 String url = ((TextView) view).getText().toString();
-                Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,7})/?");
+                Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,9})/?");
                 Matcher m = regExpImdb.matcher(url);
 
                 if (m.find() && m.group(2) != null) {
