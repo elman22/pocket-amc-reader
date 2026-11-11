@@ -158,12 +158,12 @@ public final class CatalogFiles {
                 continue;
             if (part.equals(".."))
                 return null;
-            if (!result.isEmpty())
+            if (result.length() > 0)
                 result.append('/');
             result.append(part);
         }
 
-        return result.isEmpty() ? null : result.toString();
+        return result.length() == 0 ? null : result.toString();
     }
 
     private static boolean isUpToDate(File destination, TreeIndex.Entry source) {
