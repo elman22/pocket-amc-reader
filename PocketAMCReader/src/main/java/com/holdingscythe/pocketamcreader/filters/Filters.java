@@ -19,7 +19,6 @@
 package com.holdingscythe.pocketamcreader.filters;
 
 import android.content.Context;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -33,6 +32,8 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import androidx.core.text.HtmlCompat;
 
 public class Filters implements Serializable {
     private final ArrayList<Filter> mFilters = new ArrayList<>();
@@ -133,8 +134,8 @@ public class Filters implements Serializable {
             i++;
         }
 
-        return Html.fromHtml(Utils.arrayToString(info, "&nbsp;<i>" + mContext.getString(R.string.filter_join_and)
-                + "</i><br/>"));
+        return HtmlCompat.fromHtml(Utils.arrayToString(info, "&nbsp;<i>" + mContext.getString(R.string.filter_join_and)
+                + "</i><br/>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
     /**
