@@ -199,7 +199,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
             editor.apply();
         }
 
-        void createIndexes(SQLiteDatabase db) {
+        static void createIndexes(SQLiteDatabase db) {
             db.execSQL("CREATE INDEX [IDX_MOVIES_NUMBER] ON [" + TABLE_NAME + "] ([" + Movies.NUMBER + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_CHECKED] ON [" + TABLE_NAME + "] ([" + Movies.CHECKED + "])");
             db.execSQL("CREATE INDEX [IDX_MOVIES_FORMATTEDTITLE] ON [" + TABLE_NAME + "] ([" + Movies.FORMATTED_TITLE
@@ -223,7 +223,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                     "])");
         }
 
-        void dropIndexes(SQLiteDatabase db) {
+        static void dropIndexes(SQLiteDatabase db) {
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_NUMBER]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_CHECKED]");
             db.execSQL("DROP INDEX IF EXISTS [IDX_MOVIES_FORMATTEDTITLE]");
@@ -594,16 +594,16 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     }
 
     public void createIndexes() {
-        if (this.openHelper != null && this.db != null)
-            this.openHelper.createIndexes(this.db);
+        if (this.db != null)
+            MoviesOpenHelper.createIndexes(this.db);
     }
 
     /**
      * Drop indexes from database
      */
     public void dropIndexes() {
-        if (this.openHelper != null && this.db != null)
-            this.openHelper.dropIndexes(this.db);
+        if (this.db != null)
+            MoviesOpenHelper.dropIndexes(this.db);
     }
 
     /**
