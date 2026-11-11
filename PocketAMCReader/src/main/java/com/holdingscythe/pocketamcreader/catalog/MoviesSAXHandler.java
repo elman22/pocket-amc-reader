@@ -54,11 +54,14 @@ public class MoviesSAXHandler extends DefaultHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
         switch (localName) {
             case "Movie" -> {
+                // Custom fields and extras which follow belong to this movie, not to the previous one
+                this.lastInsertedRowId = -1;
+
                 try {
                     // read attributes
                     String Number = atts.getValue(Movies.NUMBER);
                     String Checked =
-                            (atts.getValue(Movies.CHECKED).equals(S.CATALOG_TRUE) ||
+                            (S.CATALOG_TRUE.equals(atts.getValue(Movies.CHECKED)) ||
                                     (atts.getValue(Movies.DATE_WATCHED) != null &&
                                             !atts.getValue(Movies.DATE_WATCHED).isEmpty())
                             ) ? S.CATALOG_TRUE : S.CATALOG_FALSE;
@@ -115,6 +118,10 @@ public class MoviesSAXHandler extends DefaultHandler {
                 }
             }
             case "CustomFields" -> {
+                // The movie was not imported
+                if (this.lastInsertedRowId < 0)
+                    return;
+
                 try {
                     // read all attributes and save separately
                     for (int f = 0; f < atts.getLength(); f++) {
@@ -148,6 +155,10 @@ public class MoviesSAXHandler extends DefaultHandler {
                 }
             }
             case "Extra" -> {
+                // The movie was not imported
+                if (this.lastInsertedRowId < 0)
+                    return;
+
                 try {
                     // read attributes
                     String EPicture = parsePath(atts.getValue(Movies.E_PICTURE));
