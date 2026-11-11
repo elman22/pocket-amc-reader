@@ -143,51 +143,48 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Filters and Sorting are handled in MovieListFragment
-        switch (item.getItemId()) {
-            case R.id.menu_settings -> {
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        } else if (itemId == R.id.menu_about) {
+            // Get version
+            String versionName = "";
+            try {
+                versionName = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(),
+                        0).versionName;
+            } catch (PackageManager.NameNotFoundException e) {
+                if (S.ERROR)
+                    Log.e(S.TAG, "Could not extract Application Version");
             }
-            case R.id.menu_about -> {
-                // Get version
-                String versionName = "";
-                try {
-                    versionName = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(),
-                            0).versionName;
-                } catch (PackageManager.NameNotFoundException e) {
-                    if (S.ERROR)
-                        Log.e(S.TAG, "Could not extract Application Version");
-                }
 
-                // Translators
-                String t_ru = getString(R.string.locale_ru_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_ru_translator);
-                String t_de = getString(R.string.locale_de_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_de_translator);
-                String t_fr = getString(R.string.locale_fr_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_fr_translator);
-                String t_sk = getString(R.string.locale_sk_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_sk_translator);
-                String t_pl = getString(R.string.locale_pl_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_pl_translator);
-                String t_cs = getString(R.string.locale_cs_local) + getString(R.string.locale_translation_separator)
-                        + getString(R.string.locale_cs_translator);
+            // Translators
+            String t_ru = getString(R.string.locale_ru_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_ru_translator);
+            String t_de = getString(R.string.locale_de_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_de_translator);
+            String t_fr = getString(R.string.locale_fr_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_fr_translator);
+            String t_sk = getString(R.string.locale_sk_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_sk_translator);
+            String t_pl = getString(R.string.locale_pl_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_pl_translator);
+            String t_cs = getString(R.string.locale_cs_local) + getString(R.string.locale_translation_separator)
+                    + getString(R.string.locale_cs_translator);
 
-                // Prepare alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(getString(R.string.app_name));
-                builder.setMessage(String.format(getString(R.string.about), getString(R.string.app_name), versionName,
-                        getString(R.string.copyright_year),
-                        t_ru + "\n" + t_de + "\n" + t_fr + "\n" + t_sk + "\n" + t_pl + "\n" + t_cs,
-                        getString(R.string.used_libraries)));
-                builder.setNeutralButton(getString(R.string.dialog_positive), (dialog, id) -> dialog.cancel());
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                return true;
-            }
-            default -> {
-                return super.onOptionsItemSelected(item);
-            }
+            // Prepare alert dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.app_name));
+            builder.setMessage(String.format(getString(R.string.about), getString(R.string.app_name), versionName,
+                    getString(R.string.copyright_year),
+                    t_ru + "\n" + t_de + "\n" + t_fr + "\n" + t_sk + "\n" + t_pl + "\n" + t_cs,
+                    getString(R.string.used_libraries)));
+            builder.setNeutralButton(getString(R.string.dialog_positive), (dialog, id) -> dialog.cancel());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

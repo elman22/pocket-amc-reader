@@ -309,142 +309,163 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.Picture -> {
-                try {
-                    // prepare pictures array
-                    Intent i = new Intent(getActivity(), PictureViewActivity.class);
-                    ArrayList<String> al = new ArrayList<>();
-                    al.addAll(mMovie.getPicturesList());
-                    al.addAll(mExtras.getPicturesList());
-                    i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, al);
-                    i.putExtra(MovieDetailFragment.ARG_MOVIE_TITLE, mMovie.getTitle());
-                    startActivity(i);
-                } catch (Exception e) {
-                    // TODO: fix exception
-                    e.printStackTrace();
-                }
+        int viewId = view.getId();
+        if (viewId == R.id.Picture) {
+            try {
+                // prepare pictures array
+                Intent i = new Intent(getActivity(), PictureViewActivity.class);
+                ArrayList<String> al = new ArrayList<>();
+                al.addAll(mMovie.getPicturesList());
+                al.addAll(mExtras.getPicturesList());
+                i.putExtra(MovieDetailFragment.ARG_MOVIE_PICTURES_LIST, al);
+                i.putExtra(MovieDetailFragment.ARG_MOVIE_TITLE, mMovie.getTitle());
+                startActivity(i);
+            } catch (Exception e) {
+                // TODO: fix exception
+                e.printStackTrace();
             }
-            case R.id.Certification -> filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Checked -> filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
-            case R.id.UserRating -> filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Year -> filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Length -> filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Rating -> filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Category -> chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
-            case R.id.Director -> chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
-            case R.id.Actors -> chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
-            case R.id.Producer -> chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, view);
-            case R.id.Writer -> chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
-            case R.id.Composer -> chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
-            case R.id.Country -> chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
-            case R.id.MediaLabel -> filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.MediaType -> filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Source -> filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Borrower -> filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Languages -> chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
-            case R.id.Subtitles -> chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
-            case R.id.VideoFormat -> filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.AudioFormat -> filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Resolution -> filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.Framerate -> filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
-                    ((TextView) view).getText().toString()));
-            case R.id.URL, R.id.FilePath -> {
-                // If link points to IMDb, open IMDb app if available
-                String url = ((TextView) view).getText().toString();
-                Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,9})/?");
-                Matcher m = regExpImdb.matcher(url);
+        } else if (viewId == R.id.Certification) {
+            filterClick(new Filter(Movies.FILTER_CERTIFICATION, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Checked) {
+            filterClick(new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString(), getString(R.string.details_boolean_true)));
+        } else if (viewId == R.id.UserRating) {
+            filterClick(new Filter(Movies.FILTER_USER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Year) {
+            filterClick(new Filter(Movies.FILTER_YEAR, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Length) {
+            filterClick(new Filter(Movies.FILTER_LENGTH, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Rating) {
+            filterClick(new Filter(Movies.FILTER_RATING, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Category) {
+            chooseMultivaluedFieldValue(Movies.FILTER_CATEGORY, view);
+        } else if (viewId == R.id.Director) {
+            chooseMultivaluedFieldValue(Movies.FILTER_DIRECTOR, view);
+        } else if (viewId == R.id.Actors) {
+            chooseMultivaluedFieldValue(Movies.FILTER_ACTORS, view);
+        } else if (viewId == R.id.Producer) {
+            chooseMultivaluedFieldValue(Movies.FILTER_PRODUCER, view);
+        } else if (viewId == R.id.Writer) {
+            chooseMultivaluedFieldValue(Movies.FILTER_WRITER, view);
+        } else if (viewId == R.id.Composer) {
+            chooseMultivaluedFieldValue(Movies.FILTER_COMPOSER, view);
+        } else if (viewId == R.id.Country) {
+            chooseMultivaluedFieldValue(Movies.FILTER_COUNTRY, view);
+        } else if (viewId == R.id.MediaLabel) {
+            filterClick(new Filter(Movies.FILTER_MEDIA_LABEL, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.MediaType) {
+            filterClick(new Filter(Movies.FILTER_MEDIA_TYPE, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Source) {
+            filterClick(new Filter(Movies.FILTER_SOURCE, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Borrower) {
+            filterClick(new Filter(Movies.FILTER_BORROWER, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Languages) {
+            chooseMultivaluedFieldValue(Movies.FILTER_LANGUAGES, view);
+        } else if (viewId == R.id.Subtitles) {
+            chooseMultivaluedFieldValue(Movies.FILTER_SUBTITLES, view);
+        } else if (viewId == R.id.VideoFormat) {
+            filterClick(new Filter(Movies.FILTER_VIDEO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.AudioFormat) {
+            filterClick(new Filter(Movies.FILTER_AUDIO_FORMAT, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Resolution) {
+            filterClick(new Filter(Movies.FILTER_RESOLUTION, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.Framerate) {
+            filterClick(new Filter(Movies.FILTER_FRAMERATE, Movies.FILTER_OPERATOR_EQUALS,
+                ((TextView) view).getText().toString()));
+        } else if (viewId == R.id.URL || viewId == R.id.FilePath) {
+            // If link points to IMDb, open IMDb app if available
+            String url = ((TextView) view).getText().toString();
+            Pattern regExpImdb = Pattern.compile("imdb\\.[\\w]+/(Title\\?|title/tt)(\\d{6,9})/?");
+            Matcher m = regExpImdb.matcher(url);
 
-                if (m.find() && m.group(2) != null) {
+            if (m.find() && m.group(2) != null) {
+                try {
+                    // prepare uri
+                    Uri uri = Uri.parse("imdb:///title/tt" + String.format(Locale.US, "%07d",
+                            Integer.parseInt(Objects.requireNonNull(m.group(2)))) + "/");
+
+                    // open intent
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(uri);
+                    startActivity(i);
+                } catch (ActivityNotFoundException e) {
+                    // IMDb app not installed, fall back to browser
                     try {
-                        // prepare uri
-                        Uri uri = Uri.parse("imdb:///title/tt" + String.format(Locale.US, "%07d",
-                                Integer.parseInt(Objects.requireNonNull(m.group(2)))) + "/");
+                        String webUrl = url.contains(S.INTENT_SCHEME_PORTION) ? url : S.INTENT_SCHEME_HTTPS + url;
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)));
+                    } catch (ActivityNotFoundException e2) {
+                        Toast.makeText(view.getContext(),
+                                view.getContext().getText(R.string.link_not_opened_hint),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            } else {
+                boolean isIntentValid = false;
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                int errorResource = R.string.link_not_opened;
 
-                        // open intent
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(uri);
-                        startActivity(i);
-                    } catch (ActivityNotFoundException e) {
-                        // IMDb app not installed, fall back to browser
-                        try {
-                            String webUrl = url.contains(S.INTENT_SCHEME_PORTION) ? url : S.INTENT_SCHEME_HTTPS + url;
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)));
-                        } catch (ActivityNotFoundException e2) {
-                            Toast.makeText(view.getContext(),
-                                    view.getContext().getText(R.string.link_not_opened_hint),
-                                    Toast.LENGTH_LONG).show();
+                if (url.startsWith(S.INTENT_SCHEME_HTTPS) || url.startsWith(S.INTENT_SCHEME_HTTP)) {
+                    // If link starts with http(s), handle it as web link
+                    intent.setData(Uri.parse(url));
+                    isIntentValid = true;
+                } else if (url.startsWith(S.INTENT_SCHEME_FILE) || !url.contains(S.INTENT_SCHEME_PORTION)) {
+                    // Local file: relative to the catalog folder (granted by the user), or absolute path
+                    if (url.startsWith(S.INTENT_SCHEME_FILE))
+                        url = url.replace(S.INTENT_SCHEME_FILE, "");
+
+                    try {
+                        String treeString = SharedObjects.getInstance().preferences
+                                .getString(SettingsConstants.KEY_PREF_CATALOG_TREE, "");
+                        Uri treeUri = SafHelper.isContentUri(treeString) ? Uri.parse(treeString) : null;
+                        Uri fileUri = SafHelper.resolveFileLink(view.getContext(), url, treeUri);
+
+                        if (fileUri == null) {
+                            errorResource = R.string.file_not_found;
+                        } else {
+                            // Players often don't declare every specific video type (e.g. video/x-matroska),
+                            // but all of them handle the generic one
+                            String mime = Utils.getMimeFromUrl(url, S.MIME_VIDEO);
+                            if (mime.startsWith("video/"))
+                                mime = S.MIME_VIDEO;
+                            intent.setDataAndType(fileUri, mime);
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            isIntentValid = true;
                         }
+                    } catch (Exception e) {
+                        if (S.WARN)
+                            Log.w(S.TAG, "Error opening file.", e);
+                    }
+                }
+
+                if (S.DEBUG)
+                    Log.d(S.TAG,
+                            "Opening intent: (" + isIntentValid + ") " + intent);
+
+                if (isIntentValid) {
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(view.getContext(),
+                                view.getContext().getText(R.string.link_not_opened_hint),
+                                Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Log.e(S.TAG, e.toString());
                     }
                 } else {
-                    boolean isIntentValid = false;
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    int errorResource = R.string.link_not_opened;
-
-                    if (url.startsWith(S.INTENT_SCHEME_HTTPS) || url.startsWith(S.INTENT_SCHEME_HTTP)) {
-                        // If link starts with http(s), handle it as web link
-                        intent.setData(Uri.parse(url));
-                        isIntentValid = true;
-                    } else if (url.startsWith(S.INTENT_SCHEME_FILE) || !url.contains(S.INTENT_SCHEME_PORTION)) {
-                        // Local file: relative to the catalog folder (granted by the user), or absolute path
-                        if (url.startsWith(S.INTENT_SCHEME_FILE))
-                            url = url.replace(S.INTENT_SCHEME_FILE, "");
-
-                        try {
-                            String treeString = SharedObjects.getInstance().preferences
-                                    .getString(SettingsConstants.KEY_PREF_CATALOG_TREE, "");
-                            Uri treeUri = SafHelper.isContentUri(treeString) ? Uri.parse(treeString) : null;
-                            Uri fileUri = SafHelper.resolveFileLink(view.getContext(), url, treeUri);
-
-                            if (fileUri == null) {
-                                errorResource = R.string.file_not_found;
-                            } else {
-                                // Players often don't declare every specific video type (e.g. video/x-matroska),
-                                // but all of them handle the generic one
-                                String mime = Utils.getMimeFromUrl(url, S.MIME_VIDEO);
-                                if (mime.startsWith("video/"))
-                                    mime = S.MIME_VIDEO;
-                                intent.setDataAndType(fileUri, mime);
-                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                isIntentValid = true;
-                            }
-                        } catch (Exception e) {
-                            if (S.WARN)
-                                Log.w(S.TAG, "Error opening file.", e);
-                        }
-                    }
-
-                    if (S.DEBUG)
-                        Log.d(S.TAG,
-                                "Opening intent: (" + isIntentValid + ") " + intent);
-
-                    if (isIntentValid) {
-                        try {
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-                            Toast.makeText(view.getContext(),
-                                    view.getContext().getText(R.string.link_not_opened_hint),
-                                    Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            Log.e(S.TAG, e.toString());
-                        }
-                    } else {
-                        Toast.makeText(view.getContext(), view.getContext().getText(errorResource),
-                                Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(view.getContext(), view.getContext().getText(errorResource),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         }

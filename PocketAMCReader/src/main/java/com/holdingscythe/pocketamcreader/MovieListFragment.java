@@ -56,6 +56,8 @@ import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -76,6 +78,70 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  * interface.
  */
 public class MovieListFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
+
+    /**
+     * Items of the sort menu: sort order and the field the list is sorted by. Resource ids are not constants, so
+     * they can't be used in a switch.
+     */
+    private static final class SortOption {
+        final String order;
+        final String field;
+
+        SortOption(String order, String field) {
+            this.order = order;
+            this.field = field;
+        }
+    }
+
+    private static final Map<Integer, SortOption> SORT_OPTIONS = new HashMap<>();
+
+    static {
+        SORT_OPTIONS.put(R.id.menu_sort_formattedtitle_asc,
+                new SortOption(Movies.SORT_ORDER_TITLE_ASC, Movies.FORMATTED_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_formattedtitle_desc,
+                new SortOption(Movies.SORT_ORDER_TITLE_DESC, Movies.FORMATTED_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_number_asc, new SortOption(Movies.SORT_ORDER_NUMBER_ASC, Movies.NUMBER));
+        SORT_OPTIONS.put(R.id.menu_sort_number_desc, new SortOption(Movies.SORT_ORDER_NUMBER_DESC, Movies.NUMBER));
+        SORT_OPTIONS.put(R.id.menu_sort_rating_asc, new SortOption(Movies.SORT_ORDER_RATING_ASC, Movies.RATING));
+        SORT_OPTIONS.put(R.id.menu_sort_rating_desc, new SortOption(Movies.SORT_ORDER_RATING_DESC, Movies.RATING));
+        SORT_OPTIONS.put(R.id.menu_sort_medialabel_asc,
+                new SortOption(Movies.SORT_ORDER_MEDIALABEL_ASC, Movies.MEDIA_LABEL));
+        SORT_OPTIONS.put(R.id.menu_sort_medialabel_desc,
+                new SortOption(Movies.SORT_ORDER_MEDIALABEL_DESC, Movies.MEDIA_LABEL));
+        SORT_OPTIONS.put(R.id.menu_sort_length_asc, new SortOption(Movies.SORT_ORDER_LENGTH_ASC, Movies.LENGTH));
+        SORT_OPTIONS.put(R.id.menu_sort_length_desc, new SortOption(Movies.SORT_ORDER_LENGTH_DESC, Movies.LENGTH));
+        SORT_OPTIONS.put(R.id.menu_sort_year_asc, new SortOption(Movies.SORT_ORDER_YEAR_ASC, Movies.YEAR));
+        SORT_OPTIONS.put(R.id.menu_sort_year_desc, new SortOption(Movies.SORT_ORDER_YEAR_DESC, Movies.YEAR));
+        SORT_OPTIONS.put(R.id.menu_sort_date_asc, new SortOption(Movies.SORT_ORDER_DATE_ASC, Movies.DATE));
+        SORT_OPTIONS.put(R.id.menu_sort_date_desc, new SortOption(Movies.SORT_ORDER_DATE_DESC, Movies.DATE));
+        SORT_OPTIONS.put(R.id.menu_sort_borrower_asc, new SortOption(Movies.SORT_ORDER_BORROWER_ASC, Movies.BORROWER));
+        SORT_OPTIONS.put(R.id.menu_sort_borrower_desc,
+                new SortOption(Movies.SORT_ORDER_BORROWER_DESC, Movies.BORROWER));
+        SORT_OPTIONS.put(R.id.menu_sort_color_tag_asc,
+                new SortOption(Movies.SORT_ORDER_COLOR_TAG_ASC, Movies.COLOR_TAG));
+        SORT_OPTIONS.put(R.id.menu_sort_color_tag_desc,
+                new SortOption(Movies.SORT_ORDER_COLOR_TAG_DESC, Movies.COLOR_TAG));
+        SORT_OPTIONS.put(R.id.menu_sort_originaltitle_asc,
+                new SortOption(Movies.SORT_ORDER_ORIGINAL_TITLE_ASC, Movies.ORIGINAL_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_originaltitle_desc,
+                new SortOption(Movies.SORT_ORDER_ORIGINAL_TITLE_DESC, Movies.ORIGINAL_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_translatedtitle_asc,
+                new SortOption(Movies.SORT_ORDER_TRANSLATED_TITLE_ASC, Movies.TRANSLATED_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_translatedtitle_desc,
+                new SortOption(Movies.SORT_ORDER_TRANSLATED_TITLE_DESC, Movies.TRANSLATED_TITLE));
+        SORT_OPTIONS.put(R.id.menu_sort_datewatched_asc,
+                new SortOption(Movies.SORT_ORDER_DATE_WATCHED_ASC, Movies.DATE_WATCHED));
+        SORT_OPTIONS.put(R.id.menu_sort_datewatched_desc,
+                new SortOption(Movies.SORT_ORDER_DATE_WATCHED_DESC, Movies.DATE_WATCHED));
+        SORT_OPTIONS.put(R.id.menu_sort_userrating_asc,
+                new SortOption(Movies.SORT_ORDER_USER_RATING_ASC, Movies.USER_RATING));
+        SORT_OPTIONS.put(R.id.menu_sort_userrating_desc,
+                new SortOption(Movies.SORT_ORDER_USER_RATING_DESC, Movies.USER_RATING));
+        SORT_OPTIONS.put(R.id.menu_sort_certification_asc,
+                new SortOption(Movies.SORT_ORDER_CERTIFICATION_ASC, Movies.CERTIFICATION));
+        SORT_OPTIONS.put(R.id.menu_sort_certification_desc,
+                new SortOption(Movies.SORT_ORDER_CERTIFICATION_DESC, Movies.CERTIFICATION));
+    }
 
     /**
      * The serialization (saved instance state) Bundle key representing the activated item position. Only used on
@@ -435,161 +501,49 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Settings and About items are handled in MovieListActivity
-        switch (item.getItemId()) {
-            case R.id.menu_add_filter -> {
-                addFilter();
-                return true;
-            }
-            case R.id.menu_switch_view -> {
-                if (mViewType == GRID) {
-                    // Change to list view
-                    mViewType = LIST;
-                    prepareMoviesAdapter();
-                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                } else {
-                    // Change to grid view
-                    mViewType = GRID;
-                    prepareMoviesAdapter();
-                    mRecyclerView.setLayoutManager(mGridLayoutManager);
-                }
-                mRecyclerView.setAdapter(mMoviesAdapter);
+        int itemId = item.getItemId();
 
-                // Set filter query from previous view
-                if (!mFilterQuery.isEmpty())
-                    mMoviesAdapter.getFilter().filter(mFilterQuery);
-
-                // Save preferences
-                SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
-                editor.putInt(SettingsConstants.KEY_PREF_MOVIE_LIST_VIEW_ID, mViewType);
-                editor.apply();
-
-                // Change menu icon
-                changeMenuLayoutIcon();
-
-                return true;
-            }
-            case R.id.menu_sort_formattedtitle_asc -> {
-                setSortOrder(R.id.menu_sort_formattedtitle_asc, Movies.SORT_ORDER_TITLE_ASC, Movies.FORMATTED_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_formattedtitle_desc -> {
-                setSortOrder(R.id.menu_sort_formattedtitle_desc, Movies.SORT_ORDER_TITLE_DESC, Movies.FORMATTED_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_number_asc -> {
-                setSortOrder(R.id.menu_sort_number_asc, Movies.SORT_ORDER_NUMBER_ASC, Movies.NUMBER);
-                return true;
-            }
-            case R.id.menu_sort_number_desc -> {
-                setSortOrder(R.id.menu_sort_number_desc, Movies.SORT_ORDER_NUMBER_DESC, Movies.NUMBER);
-                return true;
-            }
-            case R.id.menu_sort_rating_asc -> {
-                setSortOrder(R.id.menu_sort_rating_asc, Movies.SORT_ORDER_RATING_ASC, Movies.RATING);
-                return true;
-            }
-            case R.id.menu_sort_rating_desc -> {
-                setSortOrder(R.id.menu_sort_rating_desc, Movies.SORT_ORDER_RATING_DESC, Movies.RATING);
-                return true;
-            }
-            case R.id.menu_sort_medialabel_asc -> {
-                setSortOrder(R.id.menu_sort_medialabel_asc, Movies.SORT_ORDER_MEDIALABEL_ASC, Movies.MEDIA_LABEL);
-                return true;
-            }
-            case R.id.menu_sort_medialabel_desc -> {
-                setSortOrder(R.id.menu_sort_medialabel_desc, Movies.SORT_ORDER_MEDIALABEL_DESC, Movies.MEDIA_LABEL);
-                return true;
-            }
-            case R.id.menu_sort_length_asc -> {
-                setSortOrder(R.id.menu_sort_length_asc, Movies.SORT_ORDER_LENGTH_ASC, Movies.LENGTH);
-                return true;
-            }
-            case R.id.menu_sort_length_desc -> {
-                setSortOrder(R.id.menu_sort_length_desc, Movies.SORT_ORDER_LENGTH_DESC, Movies.LENGTH);
-                return true;
-            }
-            case R.id.menu_sort_year_asc -> {
-                setSortOrder(R.id.menu_sort_year_asc, Movies.SORT_ORDER_YEAR_ASC, Movies.YEAR);
-                return true;
-            }
-            case R.id.menu_sort_year_desc -> {
-                setSortOrder(R.id.menu_sort_year_desc, Movies.SORT_ORDER_YEAR_DESC, Movies.YEAR);
-                return true;
-            }
-            case R.id.menu_sort_date_asc -> {
-                setSortOrder(R.id.menu_sort_date_asc, Movies.SORT_ORDER_DATE_ASC, Movies.DATE);
-                return true;
-            }
-            case R.id.menu_sort_date_desc -> {
-                setSortOrder(R.id.menu_sort_date_desc, Movies.SORT_ORDER_DATE_DESC, Movies.DATE);
-                return true;
-            }
-            case R.id.menu_sort_borrower_asc -> {
-                setSortOrder(R.id.menu_sort_borrower_asc, Movies.SORT_ORDER_BORROWER_ASC, Movies.BORROWER);
-                return true;
-            }
-            case R.id.menu_sort_borrower_desc -> {
-                setSortOrder(R.id.menu_sort_borrower_desc, Movies.SORT_ORDER_BORROWER_DESC, Movies.BORROWER);
-                return true;
-            }
-            case R.id.menu_sort_color_tag_asc -> {
-                setSortOrder(R.id.menu_sort_color_tag_asc, Movies.SORT_ORDER_COLOR_TAG_ASC, Movies.COLOR_TAG);
-                return true;
-            }
-            case R.id.menu_sort_color_tag_desc -> {
-                setSortOrder(R.id.menu_sort_color_tag_desc, Movies.SORT_ORDER_COLOR_TAG_DESC, Movies.COLOR_TAG);
-                return true;
-            }
-            case R.id.menu_sort_originaltitle_asc -> {
-                setSortOrder(R.id.menu_sort_originaltitle_asc, Movies.SORT_ORDER_ORIGINAL_TITLE_ASC, Movies
-                        .ORIGINAL_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_originaltitle_desc -> {
-                setSortOrder(R.id.menu_sort_originaltitle_desc, Movies.SORT_ORDER_ORIGINAL_TITLE_DESC, Movies
-                        .ORIGINAL_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_translatedtitle_asc -> {
-                setSortOrder(R.id.menu_sort_translatedtitle_asc, Movies.SORT_ORDER_TRANSLATED_TITLE_ASC, Movies
-                        .TRANSLATED_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_translatedtitle_desc -> {
-                setSortOrder(R.id.menu_sort_translatedtitle_desc, Movies.SORT_ORDER_TRANSLATED_TITLE_DESC, Movies
-                        .TRANSLATED_TITLE);
-                return true;
-            }
-            case R.id.menu_sort_datewatched_asc -> {
-                setSortOrder(R.id.menu_sort_datewatched_asc, Movies.SORT_ORDER_DATE_WATCHED_ASC, Movies.DATE_WATCHED);
-                return true;
-            }
-            case R.id.menu_sort_datewatched_desc -> {
-                setSortOrder(R.id.menu_sort_datewatched_desc, Movies.SORT_ORDER_DATE_WATCHED_DESC, Movies.DATE_WATCHED);
-                return true;
-            }
-            case R.id.menu_sort_userrating_asc -> {
-                setSortOrder(R.id.menu_sort_userrating_asc, Movies.SORT_ORDER_USER_RATING_ASC, Movies.USER_RATING);
-                return true;
-            }
-            case R.id.menu_sort_userrating_desc -> {
-                setSortOrder(R.id.menu_sort_userrating_desc, Movies.SORT_ORDER_USER_RATING_DESC, Movies.USER_RATING);
-                return true;
-            }
-            case R.id.menu_sort_certification_asc -> {
-                setSortOrder(R.id.menu_sort_certification_asc, Movies.SORT_ORDER_CERTIFICATION_ASC, Movies
-                        .CERTIFICATION);
-                return true;
-            }
-            case R.id.menu_sort_certification_desc -> {
-                setSortOrder(R.id.menu_sort_certification_desc, Movies.SORT_ORDER_CERTIFICATION_DESC, Movies
-                        .CERTIFICATION);
-                return true;
-            }
-            default -> {
-                return super.onOptionsItemSelected(item);
-            }
+        if (itemId == R.id.menu_add_filter) {
+            addFilter();
+            return true;
         }
+
+        if (itemId == R.id.menu_switch_view) {
+            if (mViewType == GRID) {
+                // Change to list view
+                mViewType = LIST;
+                prepareMoviesAdapter();
+                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            } else {
+                // Change to grid view
+                mViewType = GRID;
+                prepareMoviesAdapter();
+                mRecyclerView.setLayoutManager(mGridLayoutManager);
+            }
+            mRecyclerView.setAdapter(mMoviesAdapter);
+
+            // Set filter query from previous view
+            if (!mFilterQuery.isEmpty())
+                mMoviesAdapter.getFilter().filter(mFilterQuery);
+
+            // Save preferences
+            SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
+            editor.putInt(SettingsConstants.KEY_PREF_MOVIE_LIST_VIEW_ID, mViewType);
+            editor.apply();
+
+            // Change menu icon
+            changeMenuLayoutIcon();
+
+            return true;
+        }
+
+        SortOption sortOption = SORT_OPTIONS.get(itemId);
+        if (sortOption != null) {
+            setSortOrder(itemId, sortOption.order, sortOption.field);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -597,10 +551,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.filter_info_layout, R.id.showing_info_layout -> // Click on now showing info
-                // Click on filters info
-                    removeFilters();
+        int viewId = v.getId();
+        if (viewId == R.id.filter_info_layout || viewId == R.id.showing_info_layout) {
+            removeFilters();
         }
     }
 
