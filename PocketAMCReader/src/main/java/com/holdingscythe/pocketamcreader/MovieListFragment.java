@@ -619,6 +619,13 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     @Override
     public void onDestroy() {
+        // Don't keep the destroyed fragment and its adapter (with closed cursor) for other screens
+        SharedObjects shared = SharedObjects.getInstance();
+        if (shared.movieListFragment == this)
+            shared.movieListFragment = null;
+        if (shared.recyclerMovieAdapter == mMoviesAdapter)
+            shared.recyclerMovieAdapter = null;
+
         if (mMoviesAdapter != null && mMoviesAdapter.getCursor() != null) {
             mMoviesAdapter.getCursor().close();
         }
