@@ -55,7 +55,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="list_seen_false" translatable="false">&#x2715;</string>
     <string name="string_extension_separator" translatable="false">\u0020</string>
     <string name="picture_counter" translatable="false">%1$d\u2215%2$d</string>
-    <string name="used_libraries" translatable="false">ExpandableTextView: Manabu Shimobe\nGlide: Bump Technologies\nDragListView: Magnus Woxblom\nRecyclerView-FastScroll: Tim Malseed</string>
+    <string name="used_libraries" translatable="false">Glide: Bump Technologies\nDragListView: Magnus Woxblom\nRecyclerView-FastScroll: Tim Malseed</string>
 
     <!--Version 2.0-->
     <string name="year_none" translatable="false">\?</string>

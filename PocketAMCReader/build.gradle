@@ -104,7 +104,6 @@ dependencies {
     implementation libs.androidx.work.runtime
     implementation libs.androidx.documentfile
     implementation libs.androidx.preference
-    implementation libs.expandable.textview
     implementation libs.glide
     implementation libs.draglistview
     implementation libs.recyclerview.fastscroll

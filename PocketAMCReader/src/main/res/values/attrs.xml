@@ -25,4 +25,13 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <attr name="color_basic_bg2" format="color" />
     <attr name="color_basic_bg3" format="color" />
     <attr name="color_fast_scroll_thumb_inactive" format="color" />
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="maxCollapsedLines" format="integer" />
+        <attr name="animDuration" format="integer" />
+        <attr name="animAlphaStart" format="float" />
+        <attr name="expandDrawable" format="reference" />
+        <attr name="collapseDrawable" format="reference" />
+        <attr name="expandToggleOnTextClick" format="boolean" />
+    </declare-styleable>
 </resources>

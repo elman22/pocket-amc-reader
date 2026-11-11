@@ -37,7 +37,7 @@ import com.holdingscythe.pocketamcreader.model.MovieModel;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.Utils;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
+import com.holdingscythe.pocketamcreader.views.ExpandableTextView;
 
 import java.io.File;
 import java.util.ArrayList;
