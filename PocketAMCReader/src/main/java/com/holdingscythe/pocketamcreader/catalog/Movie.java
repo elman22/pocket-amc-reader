@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -36,6 +35,7 @@ import com.holdingscythe.pocketamcreader.S;
 import com.holdingscythe.pocketamcreader.model.MovieModel;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
+import com.holdingscythe.pocketamcreader.utils.BitmapUtils;
 import com.holdingscythe.pocketamcreader.utils.Utils;
 import com.holdingscythe.pocketamcreader.views.ExpandableTextView;
 
@@ -53,6 +53,8 @@ import androidx.core.content.ContextCompat;
  * Created by Elman on 11.10.2014.
  */
 public class Movie {
+    // Longer side of the picture of the movie (bigger pictures are scaled down, the viewer shows the original)
+    private static final int MAX_HERO_PICTURE_SIDE = 2048;
 
     // Views of catalog columns. The ids are listed here (and not looked up by name with Resources.getIdentifier())
     // so the compiler and the resource shrinker know the views are used.
@@ -432,7 +434,7 @@ public class Movie {
 
             if (pictureFile.canRead()) {
                 try {
-                    Bitmap picture = BitmapFactory.decodeFile(picturePath);
+                    Bitmap picture = BitmapUtils.decodeFile(picturePath, MAX_HERO_PICTURE_SIDE);
                     iv.setImageBitmap(picture);
                     iv.setOnClickListener(mClickListener);
 

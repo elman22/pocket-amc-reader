@@ -21,7 +21,6 @@ package com.holdingscythe.pocketamcreader.images;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.holdingscythe.pocketamcreader.R;
+import com.holdingscythe.pocketamcreader.utils.BitmapUtils;
 
 import java.util.ArrayList;
 
@@ -40,6 +40,9 @@ import androidx.viewpager.widget.PagerAdapter;
  * Created by Elman on 26. 7. 2015.
  */
 public class TouchImageAdapter extends PagerAdapter {
+    // Longer side of the decoded picture (pictures which are bigger are scaled down, the viewer can still zoom)
+    private static final int MAX_PICTURE_SIDE = 4096;
+
 
     private final Activity mActivity;
     private final ArrayList<String> mImagePaths;
@@ -77,9 +80,7 @@ public class TouchImageAdapter extends PagerAdapter {
         if (mScaleType == TouchImageView.ScaleType.CENTER)
             imgDisplay.setScaleType(TouchImageView.ScaleType.CENTER);
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = BitmapFactory.decodeFile(mImagePaths.get(position), options);
+        Bitmap bitmap = BitmapUtils.decodeFile(mImagePaths.get(position), MAX_PICTURE_SIDE);
         imgDisplay.setImageBitmap(bitmap);
 
         // display image counter, but only if at least one extra exists
