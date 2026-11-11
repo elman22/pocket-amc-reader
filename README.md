@@ -97,6 +97,19 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 - NEW Czech translation (#33)
 - UPDATED German and Russian translations completed (about 75 missing texts each), new texts translated in French, Polish and Slovak
 - UPDATED Catalog setting summary and import error help no longer mention the SD card and the extra free space requirement
+- UPDATED Build with Gradle 9.9 and Android Gradle plugin 9.5; the legacy flags nonFinalResIds, nonTransitiveRClass 
+  and Jetifier are not needed anymore
+- UPDATED Deprecated APIs replaced: menu provider, ViewPager2 for the movie details, lifecycle based fragment preparation, HtmlCompat, BundleCompat and others
+- UPDATED The list is updated with item range events instead of reloading everything
+- UPDATED ExpandableTextView library replaced by a view in the app
+- UPDATED Plural forms of the texts follow the rules of the languages (many in Polish, Russian and French)
+- FIXED Filters (e.g. "is not null", Yes/No) changed their meaning after a screen rotation
+- FIXED IMDb links of movies with 8 digit ids opened a different movie
+- FIXED Movies without the Checked attribute got their custom fields and extras attached to the previous movie
+- FIXED Extras or custom fields without a value made the following ones disappear
+- FIXED Big pictures could crash the app (out of memory)
+- FIXED Crash of the fast scroll for empty titles, clicks on items without position, detail screens used after the list was destroyed
+- FIXED Leaked cursor after switching between list and grid view, list changing from two pane to single pane layout
 
 #### 19.03.2021 Version 2.3.3
 - UPDATED Slovak translation
