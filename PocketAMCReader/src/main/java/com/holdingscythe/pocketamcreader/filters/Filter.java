@@ -67,7 +67,7 @@ public class Filter implements Serializable {
     }
 
     public String getSQLValue() {
-        if (mField.type == Movies.FILTER_TYPE_BOOLEAN) {
+        if (mField.type == Movies.FILTER_TYPE_BOOLEAN && mValue != null) {
             return mValue.equals(String.valueOf(mBoolTrueValue)) ? S.CATALOG_TRUE : S.CATALOG_FALSE;
         } else {
             return mValue;

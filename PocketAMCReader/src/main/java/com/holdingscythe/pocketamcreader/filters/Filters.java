@@ -22,6 +22,7 @@ import android.content.Context;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.holdingscythe.pocketamcreader.R;
@@ -128,7 +129,7 @@ public class Filters implements Serializable {
         String[] info = new String[this.getCount()];
         int i = 0;
         for (Filter f : mFilters) {
-            info[i] = this.getFilterHumanInfo(f);
+            info[i] = this.getFilterHumanInfo(f, true);
             i++;
         }
 
@@ -143,7 +144,7 @@ public class Filters implements Serializable {
         ArrayList<String> info = new ArrayList<>();
 
         for (Filter f : mFilters) {
-            info.add(this.getFilterHumanInfo(f));
+            info.add(this.getFilterHumanInfo(f, false));
         }
 
         return info;
@@ -151,30 +152,37 @@ public class Filters implements Serializable {
 
     /**
      * Return human info for single filter
+     *
+     * @param html texts are used in HTML (value typed by the user and labels are escaped)
      */
-    private String getFilterHumanInfo(Filter f) {
+    private String getFilterHumanInfo(Filter f, boolean html) {
         String info;
         String value = f.getHumanValue();
-        String fieldLabel = getFilterFieldHumanName(f.getHumanFieldResourceId());
+        String fieldLabel = escape(getFilterFieldHumanName(f.getHumanFieldResourceId()), html);
+        String operatorLabel = escape(mContext.getString(f.getHumanOperatorResourceId()), html);
         FilterType type = f.getFilterType();
         FilterOperator operator = f.getFilterOperator();
 
         if (value == null) {
             if (operator == Movies.FILTER_OPERATOR_IS_NULL || operator == Movies.FILTER_OPERATOR_IS_NULL_NOT) {
-                info = fieldLabel + " " + mContext.getString(f.getHumanOperatorResourceId());
+                info = fieldLabel + " " + operatorLabel;
             } else {
-                info = fieldLabel + " " + mContext.getString(R.string.filter_value_null_operator) + " " +
-                        mContext.getString(R.string.filter_value_null);
+                info = fieldLabel + " " + escape(mContext.getString(R.string.filter_value_null_operator), html) + " "
+                        + escape(mContext.getString(R.string.filter_value_null), html);
             }
         } else if (type == Movies.FILTER_TYPE_BOOLEAN || type == Movies.FILTER_TYPE_NUMBER ||
                 type == Movies.FILTER_TYPE_DATE) {
-            info = fieldLabel + " " + mContext.getString(f.getHumanOperatorResourceId()) + " " + value;
+            info = fieldLabel + " " + operatorLabel + " " + escape(value, html);
         } else {
-            info = fieldLabel + " " + mContext.getString(f.getHumanOperatorResourceId()) + " " +
-                    mContext.getString(R.string.filter_value_enclosing) + value +
-                    mContext.getString(R.string.filter_value_enclosing);
+            String enclosing = escape(mContext.getString(R.string.filter_value_enclosing), html);
+            info = fieldLabel + " " + operatorLabel + " " + enclosing + escape(value, html) + enclosing;
         }
+
         return info;
+    }
+
+    private static String escape(String text, boolean html) {
+        return html ? TextUtils.htmlEncode(text) : text;
     }
 
     /**
