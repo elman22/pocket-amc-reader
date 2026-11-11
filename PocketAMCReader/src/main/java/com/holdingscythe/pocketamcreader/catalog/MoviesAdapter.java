@@ -141,8 +141,12 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
         final MovieHolder mMovieHolder = new MovieHolder(itemView, viewType);
 
-        itemView.setOnClickListener(v -> mListener.onItemClick(v,
-                mMovieHolder.getAdapterPosition()));
+        itemView.setOnClickListener(v -> {
+            // The item can be without position while the list is changing
+            int position = mMovieHolder.getBindingAdapterPosition();
+            if (position != RecyclerView.NO_POSITION)
+                mListener.onItemClick(v, position);
+        });
         return mMovieHolder;
     }
 
