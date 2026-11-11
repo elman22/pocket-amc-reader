@@ -121,6 +121,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private final int GRID_SPAN = 3;
     private final int GRID_SPAN_LANDSCAPE = 6;
     private int mViewType;
+    private CursorAdapterObserver mAdapterObserver;
 
     protected class CursorAdapterObserver extends RecyclerView.AdapterDataObserver {
         CursorAdapterObserver() {
@@ -872,6 +873,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      * Create or update movies adapter
      */
     private void prepareMoviesAdapter() {
+        MoviesAdapter previousAdapter = mMoviesAdapter;
+        CursorAdapterObserver previousObserver = mAdapterObserver;
+
         mMoviesAdapter = new MoviesAdapter(
                 requireActivity().getBaseContext(),
                 mMoviesDataProvider.query(S.CONTENT_URI, SharedObjects.getInstance().moviesProjection, null, null,
@@ -890,11 +894,20 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         mMoviesAdapter.setFilterQueryProvider(mMoviesDataProvider);
 
         // Data change observer
-        CursorAdapterObserver cursorAdapterObserver = new CursorAdapterObserver();
-        mMoviesAdapter.registerAdapterDataObserver(cursorAdapterObserver);
+        mAdapterObserver = new CursorAdapterObserver();
+        mMoviesAdapter.registerAdapterDataObserver(mAdapterObserver);
 
         // Store references
         SharedObjects.getInstance().recyclerMovieAdapter = mMoviesAdapter;
+
+        // The previous adapter (view type changed) is not used anymore, don't leave its cursor open. The caller sets
+        // the new adapter to the RecyclerView right away, before the previous one could bind a closed cursor.
+        if (previousAdapter != null) {
+            if (previousObserver != null)
+                previousAdapter.unregisterAdapterDataObserver(previousObserver);
+            if (previousAdapter.getCursor() != null)
+                previousAdapter.getCursor().close();
+        }
     }
 
     /**
