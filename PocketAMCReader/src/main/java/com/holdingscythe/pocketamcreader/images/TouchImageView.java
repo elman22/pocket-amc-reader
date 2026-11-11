@@ -366,7 +366,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     /**
      * Set zoom to the specified scale. Image will be centered by default.
      *
-     * @param scale
+     * @param scale the zoom multiplier, 1 shows the whole image and bigger values zoom in
      */
     public void setZoom(float scale) {
         setZoom(scale, 0.5f, 0.5f);
@@ -378,9 +378,9 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      * as a fraction from the left and top of the view. For example, the top left
      * corner of the image would be (0, 0). And the bottom right corner would be (1, 1).
      *
-     * @param scale
-     * @param focusX
-     * @param focusY
+     * @param scale the zoom multiplier, 1 shows the whole image and bigger values zoom in
+     * @param focusX horizontal focus point as a fraction (0 to 1) from the left of the view
+     * @param focusY vertical focus point as a fraction (0 to 1) from the top of the view
      */
     public void setZoom(float scale, float focusX, float focusY) {
         setZoom(scale, focusX, focusY, mScaleType);
@@ -392,10 +392,10 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      * as a fraction from the left and top of the view. For example, the top left
      * corner of the image would be (0, 0). And the bottom right corner would be (1, 1).
      *
-     * @param scale
-     * @param focusX
-     * @param focusY
-     * @param scaleType
+     * @param scale the zoom multiplier, 1 shows the whole image and bigger values zoom in
+     * @param focusX horizontal focus point as a fraction (0 to 1) from the left of the view
+     * @param focusY vertical focus point as a fraction (0 to 1) from the top of the view
+     * @param scaleType the scale type to use for the zoom
      */
     public void setZoom(float scale, float focusX, float focusY, ScaleType scaleType) {
         //
@@ -425,7 +425,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      * Set zoom parameters equal to another TouchImageView. Including scale, position,
      * and ScaleType.
      *
-     * @param img
+     * @param img the view to copy the zoom, scroll position and scale type from
      */
     public void setZoom(TouchImageView img) {
         PointF center = img.getScrollPosition();
@@ -458,8 +458,8 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      * Set the focus point of the zoomed image. The focus points are denoted as a fraction from the
      * left and top of the view. The focus points can range in value between 0 and 1.
      *
-     * @param focusX
-     * @param focusY
+     * @param focusX horizontal focus point as a fraction (0 to 1) from the left of the view
+     * @param focusY vertical focus point as a fraction (0 to 1) from the top of the view
      */
     public void setScrollPosition(float focusX, float focusY) {
         setZoom(normalizedScale, focusX, focusY);
@@ -679,9 +679,9 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     /**
      * Set view dimensions based on layout params
      *
-     * @param mode
-     * @param size
-     * @param drawableWidth
+     * @param mode the measure mode of the view size (AT_MOST, UNSPECIFIED or EXACTLY)
+     * @param size the size from the measure spec
+     * @param drawableWidth the size of the drawable in the same direction
      */
     private int setViewSize(int mode, int size, int drawableWidth) {
         return switch (mode) {
@@ -1027,7 +1027,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
          * the image so that the point that is touched is what ends up centered at the end
          * of the zoom.
          *
-         * @param t
+         * @param t progress of the animation, from 0 (start) to 1 (end)
          */
         private void translateImageToCenterTouchPosition(float t) {
             float targetX = startTouch.x + t * (endTouch.x - startTouch.x);
@@ -1050,8 +1050,8 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
          * Interpolate the current targeted zoom and get the delta
          * from the current zoom.
          *
-         * @param t
-         * @return
+         * @param t progress of the animation, from 0 (start) to 1 (end)
+         * @return the factor to multiply the current zoom with
          */
         private double calculateDeltaScale(float t) {
             double zoom = startZoom + t * (targetZoom - startZoom);
