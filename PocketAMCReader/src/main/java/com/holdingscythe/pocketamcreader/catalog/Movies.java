@@ -217,6 +217,13 @@ public final class Movies implements BaseColumns {
     public static final FilterOperator FILTER_OPERATOR_IS_NULL_NOT =
             new FilterOperator("is not null", R.string.filter_type_is_null_not, "", "");
 
+    // All operators, used to restore the shared instances when filters are deserialized (see FilterOperator)
+    public static final FilterOperator[] availableFilterOperators = {Movies.FILTER_OPERATOR_EQUALS,
+            Movies.FILTER_OPERATOR_EQUALS_NOT, Movies.FILTER_OPERATOR_IS, Movies.FILTER_OPERATOR_LARGER,
+            Movies.FILTER_OPERATOR_SMALLER, Movies.FILTER_OPERATOR_CONTAINS, Movies.FILTER_OPERATOR_CONTAINS_NOT,
+            Movies.FILTER_OPERATOR_BEGINS_WITH, Movies.FILTER_OPERATOR_ENDS_WITH, Movies.FILTER_OPERATOR_IS_NULL,
+            Movies.FILTER_OPERATOR_IS_NULL_NOT};
+
     // Filter types
     public static final FilterType FILTER_TYPE_TEXT = new FilterType(new FilterOperator[]{Movies.FILTER_OPERATOR_IS,
             Movies.FILTER_OPERATOR_CONTAINS, Movies.FILTER_OPERATOR_CONTAINS_NOT, Movies.FILTER_OPERATOR_BEGINS_WITH,

@@ -18,6 +18,9 @@
 
 package com.holdingscythe.pocketamcreader.filters;
 
+import com.holdingscythe.pocketamcreader.catalog.Movies;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 public class FilterOperator implements Serializable {
@@ -31,5 +34,19 @@ public class FilterOperator implements Serializable {
         this.resId = resId;
         this.valueWrapLeft = valueWrapLeft;
         this.valueWrapRight = valueWrapRight;
+    }
+
+    /**
+     * Filters are compared with the operators defined in {@link Movies} by identity. A deserialized copy (filters
+     * survive a screen rotation in saved instance state) has to be replaced by the shared instance.
+     */
+    @Serial
+    private Object readResolve() {
+        for (FilterOperator operator : Movies.availableFilterOperators) {
+            if (operator.resId == resId && operator.sql.equals(sql)) {
+                return operator;
+            }
+        }
+        return this;
     }
 }

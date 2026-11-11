@@ -23,10 +23,16 @@ import com.holdingscythe.pocketamcreader.catalog.Movies;
 
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Set;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -136,5 +142,43 @@ public class FiltersTest {
         assertEquals(2, fields.size());
         assertTrue(fields.contains(Movies.NUMBER));
         assertTrue(fields.contains(Movies.SOURCE));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T serializeAndRestore(T object) throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        try (ObjectOutputStream out = new ObjectOutputStream(bytes)) {
+            out.writeObject(object);
+        }
+        try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()))) {
+            return (T) in.readObject();
+        }
+    }
+
+    @Test
+    public void filtersKeepTheSharedOperatorsAndFieldsAfterSerialization() throws Exception {
+        // Filters are kept in saved instance state, which serializes them (screen rotation)
+        Filter notNull = serializeAndRestore(new Filter(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_IS_NULL_NOT));
+        Filter checked = serializeAndRestore(
+                new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS, "yes", "yes"));
+
+        assertSame(Movies.FILTER_OPERATOR_IS_NULL_NOT, notNull.getFilterOperator());
+        assertSame(Movies.FILTER_DIRECTOR.type, notNull.getFilterType());
+        assertSame(Movies.FILTER_TYPE_BOOLEAN, checked.getFilterType());
+    }
+
+    @Test
+    public void restoredFiltersBuildTheSameSelection() throws Exception {
+        Filters original = filters(
+                new Filter(Movies.FILTER_DIRECTOR, Movies.FILTER_OPERATOR_IS_NULL_NOT),
+                new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS, "yes", "yes"),
+                new Filter(Movies.FILTER_FORMATTED_TITLE, Movies.FILTER_OPERATOR_CONTAINS, "ring"));
+
+        Filters restored = serializeAndRestore(original);
+
+        assertEquals(original.getFilterFields(), restored.getFilterFields());
+        assertArrayEquals(original.getFilterValues(), restored.getFilterValues());
+        assertEquals(Movies.DIRECTOR + " is not null and " + Movies.CHECKED + " = ? and "
+                + Movies.FORMATTED_TITLE + " like ?", restored.getFilterFields());
     }
 }

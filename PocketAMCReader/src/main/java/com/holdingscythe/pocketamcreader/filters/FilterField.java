@@ -18,6 +18,9 @@
 
 package com.holdingscythe.pocketamcreader.filters;
 
+import com.holdingscythe.pocketamcreader.catalog.Movies;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 public class FilterField implements Serializable {
@@ -29,5 +32,19 @@ public class FilterField implements Serializable {
         this.type = type;
         this.sql = sql;
         this.resId = resId;
+    }
+
+    /**
+     * Filter types are compared by identity too. Replace a deserialized copy (including its type) by the shared
+     * instance defined in {@link Movies}.
+     */
+    @Serial
+    private Object readResolve() {
+        for (FilterField field : Movies.availableFilterFields) {
+            if (field.resId == resId && field.sql.equals(sql)) {
+                return field;
+            }
+        }
+        return this;
     }
 }
