@@ -63,7 +63,7 @@ Define your separators in multi value fields (such as Country, Category, Actors,
 **Fit picture**  
 Show pictures in details either resized to full screen or with their original size.  
 **File path link**  
-If checked, file path will be clickable and Pocket AMC Reader will try to open corresponding application. However be aware that some links can't be opened on mobile device and you will be notified about that. If this features doesn't work for you and you believe it should, please, report a bug on GitHub.
+If checked, file path will be clickable and Pocket AMC Reader will try to open corresponding application. However, be aware that some links can't be opened on mobile device, and you will be notified about that. If this features doesn't work for you and you believe it should, please, report a bug on GitHub.
 
 ## Known bugs
 See https://github.com/elman22/pocket-amc-reader/issues. This is also the place to report any found bugs.
@@ -77,7 +77,7 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 - UPDATED Declared `android:exported`, backup and data extraction rules
 - FIXED Catalog import is much faster (single database transaction)
 - FIXED Failed import no longer wipes the previously imported catalog
-- FIXED Characters corrupted at buffer boundaries in multi-byte catalog encodings (e.g. CP932, GBK, UTF-16)
+- FIXED Characters corrupted at buffer boundaries in multibyte catalog encodings (e.g. CP932, GBK, UTF-16)
 - FIXED Catalog change detection now also uses modification time and re-imports when the database is empty
 - FIXED Image loader re-initialized on every screen rotation
 - FIXED Search treated % and _ as wildcards
@@ -104,7 +104,7 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 - UPDATED ExpandableTextView library replaced by a view in the app
 - UPDATED Plural forms of the texts follow the rules of the languages (many in Polish, Russian and French)
 - FIXED Filters (e.g. "is not null", Yes/No) changed their meaning after a screen rotation
-- FIXED IMDb links of movies with 8 digit ids opened a different movie
+- FIXED IMDb links of movies with 8-digit ids opened a different movie
 - FIXED Movies without the Checked attribute got their custom fields and extras attached to the previous movie
 - FIXED Extras or custom fields without a value made the following ones disappear
 - FIXED Big pictures could crash the app (out of memory)
@@ -276,15 +276,15 @@ See https://github.com/elman22/pocket-amc-reader/issues. This is also the place 
 
 #### 09.01.2011 Version 1.3.1
 - ADDED More code pages (catalog encodings) to choose from
-- FIXED Crashing with some non standard characters in catalog. However import is canceled, so catalog needs to be fixed manually in Ant Movie Catalog. Read error message for more information
+- FIXED Crashing with some non-standard characters in catalog. However, import is canceled, so catalog needs to be fixed manually in Ant Movie Catalog. Read error message for more information
 
 #### 31.12.2010 Version 1.3
 - ADDED Filtering for movie lists which can be done either from menu by  wizard or from details view by clicking on underlined text
 - ADDED Possibility to redirect IMDb links to English mobile version
-- ADDED Information on how much movies have been imported so far during import
+- ADDED Information on how many movies have been imported so far during import
 - ADDED Welcome info for users who have troubles setting up catalog
 - ADDED Several indexes to database which result in faster list loading but somewhat slower import
-- FIXED Sorting of movies is now case insensitive
+- FIXED Sorting of movies is now case-insensitive
 - FIXED Correct new lines display on Android 1.6
 - FIXED Better compatibility with Android 1.6
 

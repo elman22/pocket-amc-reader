@@ -84,7 +84,6 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     private final SQLiteStatement insertStatement;
     private final SQLiteStatement insertCustomStatement;
     private final SQLiteStatement insertExtraStatement;
-    private MoviesOpenHelper openHelper;
     private final SharedPreferences preferences;
     private Filters filters;
 
@@ -254,7 +253,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 this.insertExtraStatement = SharedObjects.getInstance().dbInsertExtraStatement;
             } else {
                 // Cache objects as this class gets initiated on every page
-                this.openHelper = new MoviesOpenHelper(context);
+                MoviesOpenHelper openHelper = new MoviesOpenHelper(context);
 
                 this.db = openHelper.getWritableDatabase();
                 SharedObjects.getInstance().db = this.db;

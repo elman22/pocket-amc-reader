@@ -83,6 +83,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class MovieListFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
 
     /**

@@ -189,7 +189,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
                     // Set action bar height
                     final TypedArray styledAttributes =
-                            Objects.requireNonNull(getContext()).getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+                            requireContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
                     SharedObjects.getInstance().actionBarHeight =
                             (int) styledAttributes.getDimension(0, 0);
                     styledAttributes.recycle();

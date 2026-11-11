@@ -22,6 +22,7 @@ package com.holdingscythe.pocketamcreader.model;
  * Data Model for Extra
  * Created by Elman on 30. 12. 2015.
  */
+@SuppressWarnings("unused")
 public class ExtraModel {
     private String EPicture;
     private boolean EChecked;
@@ -34,15 +35,15 @@ public class ExtraModel {
     private String ECreatedBy;
 
     /**
-     * @param EPicture     Extra picture picture
-     * @param EChecked     Extra picture checked
-     * @param ETag         Extra picture tag
-     * @param ETitle       Extra picture title
-     * @param ECategory    Extra picture category
-     * @param EURL         Extra picture URL
-     * @param EDescription Extra picture description
-     * @param EComments    Extra picture comments
-     * @param ECreatedBy   Extra picture created by
+     * @param EPicture     Extra picture
+     * @param EChecked     Extra checked
+     * @param ETag         Extra tag
+     * @param ETitle       Extra title
+     * @param ECategory    Extra category
+     * @param EURL         Extra URL
+     * @param EDescription Extra description
+     * @param EComments    Extra comments
+     * @param ECreatedBy   Extra created by
      */
     public ExtraModel(String EPicture, boolean EChecked, String ETag, String ETitle, String ECategory, String EURL,
                       String EDescription, String EComments, String ECreatedBy) {

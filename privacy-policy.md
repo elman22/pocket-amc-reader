@@ -16,7 +16,7 @@ Since the Application does not collect any information, no data is shared with t
 
 **What are my opt-out rights?**
 
-You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
+You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstallation processes as may be available as part of your mobile device or via the mobile application marketplace or network.
 
 **Children**
 

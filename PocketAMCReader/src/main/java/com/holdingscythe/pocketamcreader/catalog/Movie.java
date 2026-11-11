@@ -52,6 +52,7 @@ import androidx.core.content.ContextCompat;
  * Movie model
  * Created by Elman on 11.10.2014.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class Movie {
     // Longer side of the picture of the movie (bigger pictures are scaled down, the viewer shows the original)
     private static final int MAX_HERO_PICTURE_SIDE = 2048;

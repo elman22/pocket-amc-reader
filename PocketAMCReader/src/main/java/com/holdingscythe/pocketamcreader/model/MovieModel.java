@@ -22,6 +22,7 @@ package com.holdingscythe.pocketamcreader.model;
  * Data Model for Movie
  * Created by Elman on 2. 1. 2016.
  */
+@SuppressWarnings("unused")
 public class MovieModel {
     private String Number;
     private String Checked;

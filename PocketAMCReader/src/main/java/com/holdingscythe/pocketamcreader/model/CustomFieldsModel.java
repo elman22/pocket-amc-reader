@@ -22,6 +22,7 @@ package com.holdingscythe.pocketamcreader.model;
  * Data Model for CustomFields
  * Created by Elman on 26. 07. 2017.
  */
+@SuppressWarnings("unused")
 public class CustomFieldsModel {
     private String CType;
     private String CName;
