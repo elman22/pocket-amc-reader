@@ -33,26 +33,18 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:icon="@drawable/ic_search_white_48dp"
         android:title="@string/menu_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView|withText"
-        tools:ignore="AppCompatResource"/>
-    <item
-        android:id="@+id/menu_switch_view"
-        android:icon="@drawable/ic_grid_on_white_48dp"
-        android:title="@string/menu_switch_view"
-        app:showAsAction="ifRoom|withText"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="always|collapseActionView|withText"
+        tools:ignore="AlwaysShowAction,AppCompatResource"/>
     <item
         android:id="@+id/menu_add_filter"
         android:icon="@drawable/ic_filter_list_white_48dp"
         android:title="@string/menu_add_filter"
-        app:showAsAction="ifRoom|withText"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="always|withText" />
     <item
         android:id="@+id/submenu_sort"
         android:icon="@drawable/ic_sort_white_48dp"
         android:title="@string/menu_sort_title"
-        app:showAsAction="ifRoom|withText"
-        tools:ignore="AppCompatResource">
+        app:showAsAction="always|withText">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -142,6 +134,12 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/menu_switch_view"
+        android:icon="@drawable/ic_grid_on_white_48dp"
+        android:title="@string/menu_switch_view"
+        app:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource"/>
     <item
         android:id="@+id/menu_settings"
         android:showAsAction="never"
