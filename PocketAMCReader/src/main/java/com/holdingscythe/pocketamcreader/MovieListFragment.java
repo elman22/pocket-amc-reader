@@ -63,6 +63,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.os.BundleCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -323,7 +324,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         // Setup filters from bundle if available
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_FILTERS)) {
             try {
-                mFilters = (Filters) savedInstanceState.getSerializable(STATE_FILTERS);
+                mFilters = BundleCompat.getSerializable(savedInstanceState, STATE_FILTERS, Filters.class);
             } catch (Exception ex) {
                 Log.w(S.TAG, "Error de-serializing mFilters: " + ex);
                 mFilters = new Filters();
