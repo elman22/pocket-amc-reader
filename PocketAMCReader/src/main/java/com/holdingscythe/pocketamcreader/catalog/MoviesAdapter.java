@@ -41,6 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -305,7 +306,7 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         } else {
             switch (mSettingMovieListOrderField) {
                 case Movies.FORMATTED_TITLE, Movies.BORROWER, Movies.ORIGINAL_TITLE, Movies.TRANSLATED_TITLE ->
-                        value = value.substring(0, 1).toUpperCase();
+                        value = value.isEmpty() ? "" : value.substring(0, 1).toUpperCase(Locale.getDefault());
                 case Movies.DATE, Movies.DATE_WATCHED -> {
                     try {
                         Date date = SharedObjects.getInstance().dateFormat.parse(value);
