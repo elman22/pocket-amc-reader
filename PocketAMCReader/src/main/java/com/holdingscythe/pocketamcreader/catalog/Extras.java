@@ -50,17 +50,15 @@ public class Extras {
             // add all extras from DB to the array list
             try {
                 do {
-                    // check if file exists, otherwise skip
-                    File extraFile = new File(preferencePicturesDirectory + cursor.getString(
-                            cursor.getColumnIndexOrThrow(Movies.E_PICTURE)));
-                    if (!extraFile.isFile()) {
+                    // extra without picture or with a missing file is skipped
+                    String extraPicture = cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_PICTURE));
+                    if (extraPicture == null || !new File(preferencePicturesDirectory + extraPicture).isFile()) {
                         continue;
                     }
 
                     mExtras.add(new ExtraModel(
-                            preferencePicturesDirectory + cursor.getString(
-                                    cursor.getColumnIndexOrThrow(Movies.E_PICTURE)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CHECKED)).equals(S.CATALOG_TRUE),
+                            preferencePicturesDirectory + extraPicture,
+                            S.CATALOG_TRUE.equals(cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CHECKED))),
                             cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_TAG)),
                             cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_TITLE)),
                             cursor.getString(cursor.getColumnIndexOrThrow(Movies.E_CATEGORY)),
