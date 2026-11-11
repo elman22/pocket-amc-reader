@@ -66,6 +66,9 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.os.BundleCompat;
+import androidx.core.view.MenuHost;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -287,7 +290,6 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
 
         // Prepare date picker
         final Calendar c = Calendar.getInstance();
@@ -304,6 +306,19 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Menu of the list. It is shown while the view is resumed.
+        ((MenuHost) requireActivity()).addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                createMenu(menu, menuInflater);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                return handleMenuItem(menuItem);
+            }
+        }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         // Preparation which needs the views of the activity
         FragmentUtils.runWhenActivityCreated(this, () -> onActivityReady(savedInstanceState));
@@ -451,8 +466,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     /**
      * Create menu for main activity
      */
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+    private void createMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         // Store reference for future use
         mMenu = menu;
 
@@ -501,8 +515,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     /**
      * Catch menu clicked actions
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    private boolean handleMenuItem(@NonNull MenuItem item) {
         // Settings and About items are handled in MovieListActivity
         int itemId = item.getItemId();
 
@@ -546,7 +559,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     /**
