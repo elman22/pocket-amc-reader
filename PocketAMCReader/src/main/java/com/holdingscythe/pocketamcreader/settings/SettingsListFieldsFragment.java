@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
@@ -223,7 +224,8 @@ public class SettingsListFieldsFragment extends Fragment {
             dragCard.setMaxCardElevation(40);
             dragCard.setCardElevation(clickedCard.getCardElevation());
             // I know the dragView is a FrameLayout and that is why I can use setForeground below api level 23
-            dragCard.setForeground(clickedView.getResources().getDrawable(R.drawable.card_view_drag_foreground));
+            dragCard.setForeground(ResourcesCompat.getDrawable(clickedView.getResources(),
+                    R.drawable.card_view_drag_foreground, clickedView.getContext().getTheme()));
         }
 
         @Override
