@@ -27,8 +27,9 @@
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
     <item quantity="one">Показан %1$d фильм</item>
-    <item quantity="few">Показано %1$d фильмов</item>
-    <item quantity="other">Показано %1$d фильмов</item>
+    <item quantity="few">Показано %1$d фильма</item>
+    <item quantity="many">Показано %1$d фильмов</item>
+    <item quantity="other">Показано %1$d фильма</item>
   </plurals>
   <string name="details_checked_label">Просмотрено</string>
   <string name="details_boolean_true">Да</string>
@@ -49,8 +50,9 @@
   <string name="display_filessizes_suffix">MB</string>
   <plurals name="details_disks">
     <item quantity="one">диск/файл</item>
-    <item quantity="few">диски/файлы</item>
-    <item quantity="other">диски/файлы</item>
+    <item quantity="few">диска/файла</item>
+    <item quantity="many">дисков/файлов</item>
+    <item quantity="other">диска/файла</item>
   </plurals>
   <string name="display_files_separator">на</string>
   <string name="details_comments_label">Комментарии</string>
@@ -72,8 +74,9 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Фильтр:</item>
-    <item quantity="few">Фильтры:</item>
-    <item quantity="other">Фильтры:</item>
+    <item quantity="few">Фильтра:</item>
+    <item quantity="many">Фильтров:</item>
+    <item quantity="other">Фильтра:</item>
   </plurals>
   <string name="filter_none">нет</string>
   <string name="filter_type_contains">содержит</string>

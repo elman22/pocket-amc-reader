@@ -27,6 +27,7 @@
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
     <item quantity="one">Film affiché: %1$d</item>
+    <item quantity="many">Films affichés: %1$d</item>
     <item quantity="other">Films affichés: %1$d</item>
   </plurals>
   <string name="details_checked_label">Vu</string>
@@ -48,6 +49,7 @@
   <string name="display_filessizes_suffix">Mo</string>
   <plurals name="details_disks">
     <item quantity="one">disque/fichier</item>
+    <item quantity="many">disques/fichiers</item>
     <item quantity="other">disques/fichiers</item>
   </plurals>
   <string name="display_files_separator">sur</string>
@@ -70,6 +72,7 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Filtre:</item>
+    <item quantity="many">Filtres:</item>
     <item quantity="other">Filtres:</item>
   </plurals>
   <string name="filter_none">aucun</string>

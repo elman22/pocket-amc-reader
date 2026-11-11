@@ -26,9 +26,10 @@
   <string name="details_producer_label">Producent</string>
   <string name="number_prefix">#</string>
   <plurals name="list_showing">
-    <item quantity="one">Wyświetlone %1$d filmy</item>
+    <item quantity="one">Wyświetlony %1$d film</item>
     <item quantity="few">Wyświetlone %1$d filmy</item>
-    <item quantity="other">Wyświetlone %1$d filmy</item>
+    <item quantity="many">Wyświetlone %1$d filmów</item>
+    <item quantity="other">Wyświetlone %1$d filmu</item>
   </plurals>
   <string name="details_checked_label">Oglądane</string>
   <string name="details_boolean_true">Tak</string>
@@ -50,7 +51,8 @@
   <plurals name="details_disks">
     <item quantity="one">dysk/plik</item>
     <item quantity="few">dyski/pliki</item>
-    <item quantity="other">dyski/pliki</item>
+    <item quantity="many">dysków/plików</item>
+    <item quantity="other">dysku/pliku</item>
   </plurals>
   <string name="display_files_separator">na</string>
   <string name="details_comments_label">Komentarze</string>
@@ -72,8 +74,9 @@
   <string name="filter_type_equals">=</string>
   <plurals name="filter_label">
     <item quantity="one">Filtr:</item>
-    <item quantity="few">Filtr:</item>
-    <item quantity="other">Filtry:</item>
+    <item quantity="few">Filtry:</item>
+    <item quantity="many">Filtrów:</item>
+    <item quantity="other">Filtra:</item>
   </plurals>
   <string name="filter_none">brak</string>
   <string name="filter_type_contains">zawiera</string>

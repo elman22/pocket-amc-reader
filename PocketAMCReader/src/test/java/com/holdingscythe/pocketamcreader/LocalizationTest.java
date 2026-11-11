@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -222,6 +223,54 @@ public class LocalizationTest {
                     problems.add("strings_all_locales.xml: missing " + key);
             }
         }
+        if (!problems.isEmpty())
+            fail(String.join("\n", problems));
+    }
+
+    /**
+     * Plural categories of the languages (CLDR). Android lint reports a missing quantity (e.g. "many" in Polish,
+     * Russian, Czech, Slovak and French) and a quantity which is not used by the language.
+     */
+    private static final Map<String, List<String>> QUANTITIES = new LinkedHashMap<>();
+
+    static {
+        QUANTITIES.put("en", Arrays.asList("one", "other"));
+        QUANTITIES.put("de", Arrays.asList("one", "other"));
+        QUANTITIES.put("fr", Arrays.asList("one", "many", "other"));
+        for (String language : new String[]{"cs", "sk", "pl", "ru"})
+            QUANTITIES.put(language, Arrays.asList("one", "few", "many", "other"));
+    }
+
+    private static void collectPluralProblems(String language, Map<String, Element> resources, List<String> problems) {
+        List<String> expected = QUANTITIES.get(language);
+        if (expected == null) {
+            problems.add(language + ": add the plural quantities of the language to this test");
+            return;
+        }
+
+        for (Element element : resources.values()) {
+            if (!element.getTagName().equals("plurals"))
+                continue;
+
+            Set<String> actual = new TreeSet<>();
+            NodeList items = element.getElementsByTagName("item");
+            for (int i = 0; i < items.getLength(); i++)
+                actual.add(((Element) items.item(i)).getAttribute("quantity"));
+
+            if (!actual.equals(new TreeSet<>(expected)))
+                problems.add(language + ": " + element.getAttribute("name") + " has quantities " + actual
+                        + " instead of " + new TreeSet<>(expected));
+        }
+    }
+
+    @Test
+    public void pluralsHaveExactlyTheQuantitiesOfTheLanguage() throws Exception {
+        List<String> problems = new ArrayList<>();
+
+        collectPluralProblems("en", parse(new File(res, "values/strings.xml")), problems);
+        for (String language : languages)
+            collectPluralProblems(language, translation(language), problems);
+
         if (!problems.isEmpty())
             fail(String.join("\n", problems));
     }
