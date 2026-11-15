@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Импортировано</string>
   <string name="import_read_file">Чтение каталога…</string>
@@ -48,7 +48,8 @@
   <string name="details_resolution_label">Разрешение</string>
   <string name="details_framerate_label">Частота кадров</string>
   <string name="display_filessizes_suffix">MB</string>
-  <plurals name="details_disks">
+  <!-- the number is displayed by the app before the text, so the form for "one" does not need a format argument -->
+  <plurals name="details_disks" tools:ignore="ImpliedQuantity">
     <item quantity="one">диск/файл</item>
     <item quantity="few">диска/файла</item>
     <item quantity="many">дисков/файлов</item>
@@ -72,7 +73,8 @@
   <string name="dialog_negative">Отменить</string>
   <string name="filter_type_is">Полное соответствие</string>
   <string name="filter_type_equals">=</string>
-  <plurals name="filter_label">
+  <!-- the text is a label, the number of filters is not part of it, so the form for "one" does not need a format argument -->
+  <plurals name="filter_label" tools:ignore="ImpliedQuantity">
     <item quantity="one">Фильтр:</item>
     <item quantity="few">Фильтра:</item>
     <item quantity="many">Фильтров:</item>
