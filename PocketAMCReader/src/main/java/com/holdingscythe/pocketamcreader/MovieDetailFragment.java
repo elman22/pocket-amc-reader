@@ -59,7 +59,6 @@ import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -220,52 +219,21 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                     adjustedHeight = mHeroImageHeight + mActionBarHeight;
                 }
 
-                // The picture and the spacer above the title block are as tall as the whole picture. When the app bar
-                // is fully expanded the title block is below the picture; otherwise (parallax scrolling) the picture
-                // moves under the title block, so the block overlays its bottom.
+                // The picture is as tall as the whole picture, the header keeps the title block below it and the app
+                // bar in the default position (see DetailHeader)
                 setViewHeight(getView().findViewById(R.id.Picture), adjustedHeight);
-                setViewHeight(getView().findViewById(R.id.detailsImageSpacer), adjustedHeight);
+                new DetailHeader(appBarLayout, getView().findViewById(R.id.detailsHeader),
+                        getView().findViewById(R.id.detailsImageSpacer), getView().findViewById(R.id.ColorTag),
+                        adjustedHeight, mHeroImageHeight, mActionBarHeight,
+                        getResources().getDimensionPixelSize(R.dimen.colortag_height));
 
                 // Add listener to dynamically change toolbar title
                 appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
                     boolean isShow = false;
-                    int scrollRange = -1;
 
                     @Override
                     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                        if (scrollRange == -1) {
-                            // CollapsingToolbarLayout moves children which are not drawn under the status bar
-                            // (fitsSystemWindows) down by its height, the picture is not moved. Shorten the spacer,
-                            // so the title block starts exactly where the picture ends. This lays out the app bar
-                            // again and the listener is called once more.
-                            View header = getView() == null ? null : getView().findViewById(R.id.detailsHeader);
-                            View spacer = getView() == null ? null : getView().findViewById(R.id.detailsImageSpacer);
-                            if (header != null && spacer != null) {
-                                int spacerHeight = Math.max(0, adjustedHeight - header.getTop());
-                                if (spacer.getLayoutParams().height != spacerHeight) {
-                                    setViewHeight(spacer, spacerHeight);
-                                    return;
-                                }
-                            }
-
-                            scrollRange = appBarLayout.getTotalScrollRange();
-
-                            // Scroll collapsing toolbar to default position
-                            CoordinatorLayout.LayoutParams params =
-                                    (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-                            AppBarLayout.Behavior behavior =
-                                    (AppBarLayout.Behavior) params.getBehavior();
-                            if (behavior != null) {
-                                // Show the same part of the picture as before, plus the title block below it
-                                View titleBlock = getView() == null ? null :
-                                        getView().findViewById(R.id.detailsTitleBlock);
-                                int titleBlockHeight = titleBlock == null ? 0 : titleBlock.getHeight();
-                                behavior.setTopAndBottomOffset(
-                                        Math.min(0, mHeroImageHeight + titleBlockHeight - scrollRange));
-                            }
-                            appBarLayout.setLayoutParams(params);
-                        }
-                        if (scrollRange + verticalOffset == 0) {
+                        if (appBarLayout.getTotalScrollRange() + verticalOffset == 0) {
                             // when collapsingToolbar is collapsed, display actionbar title
                             int color = Utils.getColorFromColorTag(mMovie.getColorTag());
                             collapsingToolbar.setCollapsedTitleTextColor(
