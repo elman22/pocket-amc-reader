@@ -74,7 +74,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     private Movie mMovie;
     private Extras mExtras;
     private Filters mFilters;
-    private int mHeroImageHeight;
 
     private Pattern regExpMultivaluedCleaner;
     private String regExpMultivaluedSeparator;
@@ -200,7 +199,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
 
                 int mDeviceWidthPixels = SharedObjects.getInstance().deviceWidthPixels;
                 int mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
-                mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
+                int mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
 
                 // Set custom font to the toolbar
                 collapsingToolbar.setCollapsedTitleTypeface(tf);
@@ -457,7 +456,7 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
             filterClick(new Filter(field, Movies.FILTER_OPERATOR_CONTAINS, availableValues[0]));
         } else if (availableValues.length > 1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(mFilters.getFilterFieldHumanName(field.resId) + " " + getString(Movies.FILTER_OPERATOR_CONTAINS.resId));
+            builder.setTitle(mFilters.getFilterFieldHumanName(field.resId()) + " " + getString(Movies.FILTER_OPERATOR_CONTAINS.resId()));
             builder.setItems(availableValues, (dialog, item) -> filterClick(new Filter(field,
                     Movies.FILTER_OPERATOR_CONTAINS, availableValues[item])));
             builder.setNegativeButton(getString(R.string.dialog_negative),

@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,12 +18,15 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!-- The translucent background is drawn over the picture of the movie, it does not repeat the window background -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/titleBoxTable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentStart="true"
     android:background="@color/detail_title_background"
+    tools:ignore="Overdraw"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/wrapper_spacing_title">

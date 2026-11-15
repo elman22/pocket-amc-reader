@@ -55,7 +55,6 @@ import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 import com.holdingscythe.pocketamcreader.utils.FragmentUtils;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -87,17 +86,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MovieListFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
 
     /**
-     * Items of the sort menu: sort order and the field the list is sorted by. Resource ids are not constants, so
-     * they can't be used in a switch.
-     */
-    private static final class SortOption {
-        final String order;
-        final String field;
-
-        SortOption(String order, String field) {
-            this.order = order;
-            this.field = field;
-        }
+         * Items of the sort menu: sort order and the field the list is sorted by. Resource ids are not constants, so
+         * they can't be used in a switch.
+         */
+        private record SortOption(String order, String field) {
     }
 
     private static final Map<Integer, SortOption> SORT_OPTIONS = new HashMap<>();
@@ -738,7 +730,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         builder.setTitle(getString(R.string.filter_add_first_step));
         builder.setItems(mFilters.getAvailableFilters(), (dialog, item) -> {
             // Shortcut for boolean type
-            if (Movies.availableFilterFields[item].type == Movies.FILTER_TYPE_BOOLEAN) {
+            if (Movies.availableFilterFields[item].type() == Movies.FILTER_TYPE_BOOLEAN) {
                 addFilterThirdStep(Movies.availableFilterFields[item], Movies.FILTER_OPERATOR_EQUALS);
             } else {
                 addFilterSecondStep(Movies.availableFilterFields[item]);
@@ -755,9 +747,9 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     private void addFilterSecondStep(final FilterField field) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(mFilters.getFilterFieldHumanName(field.resId));
+        builder.setTitle(mFilters.getFilterFieldHumanName(field.resId()));
         builder.setItems(mFilters.getAvailableOperators(field),
-                (dialog, item) -> addFilterThirdStep(field, field.type.operators[item]));
+                (dialog, item) -> addFilterThirdStep(field, field.type().operators()[item]));
         builder.setNegativeButton(getString(R.string.dialog_negative), (dialog, whichButton) -> {
         });
         AlertDialog alertDialog = builder.create();
@@ -776,16 +768,16 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         }
 
         // Date picker is handled different way
-        if (field.type == Movies.FILTER_TYPE_DATE) {
+        if (field.type() == Movies.FILTER_TYPE_DATE) {
             new DatePickerDialog(requireActivity(), new FilterDatePickerListener(field, operator),
                     mDpYear, mDpMonth, mDpDay).show();
             return;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(mFilters.getFilterFieldHumanName(field.resId) + " " + getString(operator.resId));
+        builder.setTitle(mFilters.getFilterFieldHumanName(field.resId()) + " " + getString(operator.resId()));
 
-        if (field.type == Movies.FILTER_TYPE_BOOLEAN) {
+        if (field.type() == Movies.FILTER_TYPE_BOOLEAN) {
             // If filter type boolean show list yes/no
             final String[] booleanValues = new String[]{getString(R.string.details_boolean_true),
                     getString(R.string.details_boolean_false)};
@@ -798,7 +790,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             // Prepare view with text input
             View filterView = requireActivity().getLayoutInflater().inflate(R.layout.filter_input, null);
             final EditText filterValueView = filterView.findViewById(R.id.filterValue);
-            if (field.type == Movies.FILTER_TYPE_NUMBER) {
+            if (field.type() == Movies.FILTER_TYPE_NUMBER) {
                 DigitsKeyListener digitsKeyListener = DigitsKeyListener.getInstance(false, true);
                 filterValueView.setKeyListener(digitsKeyListener);
             }
@@ -818,7 +810,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         AlertDialog alertDialog = builder.create();
 
-        if (field.type == Movies.FILTER_TYPE_TEXT || field.type == Movies.FILTER_TYPE_NUMBER) {
+        if (field.type() == Movies.FILTER_TYPE_TEXT || field.type() == Movies.FILTER_TYPE_NUMBER) {
             // The keyboard is shown with the dialog and hidden when it is dismissed
             Window window = alertDialog.getWindow();
             if (window != null) {

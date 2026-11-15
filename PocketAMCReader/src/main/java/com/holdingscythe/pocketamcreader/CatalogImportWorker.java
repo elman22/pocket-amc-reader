@@ -247,7 +247,7 @@ public class CatalogImportWorker extends Worker {
     /**
      * Copy pictures referenced by the catalog to app storage.
      *
-     * @return false when cancelled
+     * @return false when canceled
      */
     private boolean syncPictures(Context context, SharedPreferences preferences,
                                  MoviesDataProvider moviesDataProvider, Uri treeUri) {

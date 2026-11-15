@@ -28,7 +28,6 @@ import com.holdingscythe.pocketamcreader.S;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,6 +50,7 @@ public final class SafHelper {
     /**
      * Keep read access to the Uri after the app restarts
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean takeReadPermission(@NonNull Context context, @NonNull Uri uri) {
         try {
             context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);

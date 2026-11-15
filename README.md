@@ -24,7 +24,7 @@ Install the application via [Google Play](https://play.google.com/store/apps/det
 If you keep your database in AMC format, you will have to export it to XML to be able to use this application. You can easily do that in 5 steps:
 
 1. Open your AMC database in Ant Movie Catalog
-2. Select File -> Save as...
+2. Select File → Save as...
 3. Select type XML and click Save
 4. When asked about pictures answer OK
 5. Copy XML and all pictures to your Android device and start Pocket AMC Reader
@@ -310,5 +310,5 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Pocket AMC Reader for Android (c) 2010-2017 Holding Scythe.  
+Pocket AMC Reader for Android © 2010-2017 Holding Scythe.  
 Ant Movie Catalog was created by Antoine Potten and Mickaël Vanneufville.

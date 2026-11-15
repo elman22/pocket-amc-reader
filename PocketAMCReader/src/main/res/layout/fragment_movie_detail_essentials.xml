@@ -19,6 +19,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/essentialsDataGrid"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -33,7 +34,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/wrapper_spacing_block"
-        android:text="@string/ph_text_line" />
+        android:text="@string/ph_text_line"
+        tools:ignore="InconsistentLayout" />
 
     <com.holdingscythe.pocketamcreader.views.ExpandableTextView xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
         android:id="@+id/Description"

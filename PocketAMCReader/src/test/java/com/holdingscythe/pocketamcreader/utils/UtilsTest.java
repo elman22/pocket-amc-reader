@@ -87,6 +87,7 @@ public class UtilsTest {
     public void coalesceReturnsFirstNonNullValue() {
         assertEquals("one", Utils.coalesce("one", "two"));
         assertEquals("two", Utils.coalesce(null, "two"));
+        //noinspection ConstantValue
         assertNull(Utils.coalesce(null, null));
         String same = "same";
         assertSame(same, Utils.coalesce(same, "other"));

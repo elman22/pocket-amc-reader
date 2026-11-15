@@ -29,7 +29,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="InconsistentLayout">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
@@ -37,7 +38,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/color_action_bar_bg"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            tools:ignore="InconsistentLayout">
 
             <ImageView
                 android:id="@+id/Picture"
@@ -57,12 +59,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 android:id="@+id/detailsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="InconsistentLayout">
 
                 <View
                     android:id="@+id/detailsImageSpacer"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/detail_hero_img_height" />
+                    android:layout_height="@dimen/detail_hero_img_height"
+                    tools:ignore="InconsistentLayout" />
 
                 <LinearLayout
                     android:id="@+id/detailsTitleBlock"

@@ -85,7 +85,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         <item name="color_fast_scroll_thumb_inactive">@color/orange_color_fast_scroll_thumb_inactive</item>
     </style>
 
-    <!-- Base application theme - grey -->
+    <!-- Base application theme - gray -->
     <style name="AppThemeGrey" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/app_bg</item>
         <item name="android:fontFamily">@font/roboto_condensed</item>

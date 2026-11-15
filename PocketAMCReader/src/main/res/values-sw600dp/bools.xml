@@ -2,8 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
-Copyright 2014 Magnus Woxblom
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,16 +18,6 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<inset
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetBottom="21dp"
-    android:insetLeft="14dp"
-    android:insetRight="14dp"
-    android:insetTop="21dp">
-    <shape>
-        <stroke
-            android:width="2dp"
-            android:color="?attr/color_basic_bg2"/>
-        <corners android:radius="3dp"/>
-    </shape>
-</inset>
+<resources>
+    <bool name="two_pane">true</bool>
+</resources>

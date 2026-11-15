@@ -55,7 +55,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
  */
 class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
 
-    private final AppBarLayout mAppBarLayout;
     private final View mHeader;
     private final View mSpacer;
     private final View mColorTag;
@@ -76,7 +75,6 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
     DetailHeader(@NonNull AppBarLayout appBarLayout, @NonNull View header, @NonNull View spacer,
                  @NonNull View colorTag, int pictureHeight, int heroHeight, int actionBarHeight,
                  int colorTagHeight) {
-        mAppBarLayout = appBarLayout;
         mHeader = header;
         mSpacer = spacer;
         mColorTag = colorTag;
@@ -88,7 +86,7 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
         setHeight(mSpacer, Math.max(0, pictureHeight - visibleColorTagHeight()));
 
         // Called when the layout of the app bar is finished (also when it was laid out because of the window insets)
-        mAppBarLayout.addOnOffsetChangedListener(this);
+        appBarLayout.addOnOffsetChangedListener(this);
     }
 
     @Override
@@ -107,10 +105,9 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
         }
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-        if (!(params.getBehavior() instanceof AppBarLayout.Behavior)) {
+        if (!(params.getBehavior() instanceof AppBarLayout.Behavior behavior)) {
             return;
         }
-        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
 
         // The visible part of the app bar is the hero height, the toolbar and the title block. A picture which is
         // taller than the hero part and the toolbar is scrolled, the placeholder (as tall as these) is not.

@@ -23,8 +23,6 @@ import android.net.Uri;
 
 import com.holdingscythe.pocketamcreader.settings.SettingsConstants;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

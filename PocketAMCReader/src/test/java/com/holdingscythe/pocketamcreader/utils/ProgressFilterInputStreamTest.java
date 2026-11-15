@@ -54,6 +54,7 @@ public class ProgressFilterInputStreamTest {
     public void endOfStreamIsNotReported() throws IOException {
         ProgressFilterInputStream in = stream("a");
 
+        //noinspection ResultOfMethodCallIgnored
         in.read();
         assertEquals(-1, in.read());
 

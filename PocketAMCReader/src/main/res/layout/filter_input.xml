@@ -25,8 +25,9 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <EditText
         android:id="@+id/filterValue"
         android:hint="@string/input_filter_hint"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dip"
-        android:singleLine="true" />
+        android:layout_margin="6dp"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions" />
 </LinearLayout>

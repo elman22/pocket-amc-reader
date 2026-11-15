@@ -59,25 +59,25 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
     private static final String INSERT = "INSERT INTO " +
             TABLE_NAME +
             " (" + Movies.NUMBER + ", " + Movies.CHECKED + ", " + Movies.FORMATTED_TITLE + ", " +
-            "" + Movies.MEDIA_LABEL + ", " + Movies.MEDIA_TYPE + ", " + Movies.SOURCE + ", " + Movies.DATE + "," +
-            "" + Movies.BORROWER + ", " + Movies.RATING + ", " + Movies.ORIGINAL_TITLE + "," +
-            "" + Movies.TRANSLATED_TITLE + ", " + Movies.DIRECTOR + ", " + Movies.PRODUCER + ", " +
-            "" + Movies.COUNTRY + ", " + Movies.CATEGORY + ", " + Movies.YEAR + ", " + Movies.LENGTH + ", " +
-            "" + Movies.ACTORS + ", " + Movies.URL + ", " + Movies.DESCRIPTION + "," + " " + Movies.COMMENTS + ", " +
-            "" + Movies.VIDEO_FORMAT + ", " + Movies.VIDEO_BITRATE + ", " + Movies.AUDIO_FORMAT + ", " +
-            "" + Movies.AUDIO_BITRATE + ", " + Movies.RESOLUTION + ", " + Movies.FRAMERATE + ", " +
-            "" + Movies.LANGUAGES + "," + Movies.SUBTITLES + ", " + Movies.SIZE + ", " + Movies.DISKS + ", " +
-            "" + Movies.PICTURE + ", " + Movies.COLOR_TAG + ", " + Movies.DATE_WATCHED + ", " +
-            "" + Movies.USER_RATING + ", " + Movies.WRITER + ", " + Movies.COMPOSER + ", " +
-            "" + Movies.CERTIFICATION + "," + Movies.FILE_PATH + ") " +
+            Movies.MEDIA_LABEL + ", " + Movies.MEDIA_TYPE + ", " + Movies.SOURCE + ", " + Movies.DATE + "," +
+            Movies.BORROWER + ", " + Movies.RATING + ", " + Movies.ORIGINAL_TITLE + "," +
+            Movies.TRANSLATED_TITLE + ", " + Movies.DIRECTOR + ", " + Movies.PRODUCER + ", " +
+            Movies.COUNTRY + ", " + Movies.CATEGORY + ", " + Movies.YEAR + ", " + Movies.LENGTH + ", " +
+            Movies.ACTORS + ", " + Movies.URL + ", " + Movies.DESCRIPTION + "," + " " + Movies.COMMENTS + ", " +
+            Movies.VIDEO_FORMAT + ", " + Movies.VIDEO_BITRATE + ", " + Movies.AUDIO_FORMAT + ", " +
+            Movies.AUDIO_BITRATE + ", " + Movies.RESOLUTION + ", " + Movies.FRAMERATE + ", " +
+            Movies.LANGUAGES + "," + Movies.SUBTITLES + ", " + Movies.SIZE + ", " + Movies.DISKS + ", " +
+            Movies.PICTURE + ", " + Movies.COLOR_TAG + ", " + Movies.DATE_WATCHED + ", " +
+            Movies.USER_RATING + ", " + Movies.WRITER + ", " + Movies.COMPOSER + ", " +
+            Movies.CERTIFICATION + "," + Movies.FILE_PATH + ") " +
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERT_CUSTOM = "INSERT INTO " + TABLE_NAME_CUSTOM +
             " (" + Movies.MOVIES_ID + ", " + Movies.C_TYPE + ", " + Movies.C_NAME + ", " + Movies.C_VALUE + ")" +
             " VALUES (?,?,?,?)";
     private static final String INSERT_EXTRA = "INSERT INTO " + TABLE_NAME_EXTRAS +
             " (" + Movies.MOVIES_ID + ", " + Movies.E_CHECKED + ", " + Movies.E_TAG + ", " + Movies.E_TITLE + ", " +
-            "" + Movies.E_CATEGORY + ", " + Movies.E_URL + ", " + Movies.E_DESCRIPTION + ", " +
-            "" + Movies.E_COMMENTS + "," + Movies.E_CREATED_BY + ", " + Movies.E_PICTURE + ")" +
+            Movies.E_CATEGORY + ", " + Movies.E_URL + ", " + Movies.E_DESCRIPTION + ", " +
+            Movies.E_COMMENTS + "," + Movies.E_CREATED_BY + ", " + Movies.E_PICTURE + ")" +
             " VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     private final SQLiteDatabase db;
@@ -293,7 +293,7 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
 
     /**
      * Handles all the movies searches and suggestion queries from the Search Manager. When requesting a specific
-     * movie, the uri alone is required. When searching all of the movie catalog for matches,
+     * movie, the uri alone is required. When searching all the movie catalog for matches,
      * the selectionArgs argument must carry the search query as the first element. All other arguments are ignored.
      */
     @Override

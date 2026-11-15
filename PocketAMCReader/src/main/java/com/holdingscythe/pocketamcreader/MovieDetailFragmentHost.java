@@ -81,7 +81,7 @@ public class MovieDetailFragmentHost extends Fragment {
         viewPager.setAdapter(new MovieDetailAdapter(this, moviesAdapter));
 
         // Show the movie which is displayed in the pager also in the list. This is not done when the fragment of the
-        // page is created: the neighbours are created in advance, but they are not displayed.
+        // page is created: the neighbors are created in advance, but they are not displayed.
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

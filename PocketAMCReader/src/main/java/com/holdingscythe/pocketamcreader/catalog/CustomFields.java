@@ -81,7 +81,7 @@ public class CustomFields {
 
                     // If custom field is of type URL, make it clickable
                     if (customField.getCType().equals(CustomFieldsModel.CFT_URL)) {
-                        customValue.setAutoLinkMask(Linkify.ALL);
+                        customValue.setAutoLinkMask(Linkify.WEB_URLS);
                     }
 
                     customValue.setText(FormatValue(customField.getCType(), customField.getCValue()));

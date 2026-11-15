@@ -112,7 +112,7 @@ public final class CatalogFiles {
             File destination = new File(root, normalized);
             String destinationCanonical = destination.getCanonicalPath();
             if (!destinationCanonical.startsWith(rootCanonical)) {
-                // never write outside of our folder
+                // never write outside our folder
                 failed++;
                 continue;
             }
@@ -145,7 +145,7 @@ public final class CatalogFiles {
     }
 
     /**
-     * Backslashes to slashes, no empty or "." segments, null for paths with ".."
+     * Backslashes to slashes, no empty or "." segments, null for paths with "../"
      */
     @Nullable
     static String normalize(@Nullable String path) {

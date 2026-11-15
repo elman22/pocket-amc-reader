@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
     Copyright © 2017 Michael Ortiz
     Copyright © 2017 Patrick Lackemacher
     Copyright © 2017 Babay88
@@ -681,12 +681,12 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      *
      * @param mode the measure mode of the view size (AT_MOST, UNSPECIFIED or EXACTLY)
      * @param size the size from the measure spec
-     * @param drawableWidth the size of the drawable in the same direction
+     * @param drawableSize the size of the drawable in the same direction
      */
-    private int setViewSize(int mode, int size, int drawableWidth) {
+    private int setViewSize(int mode, int size, int drawableSize) {
         return switch (mode) {
-            case MeasureSpec.AT_MOST -> Math.min(drawableWidth, size);
-            case MeasureSpec.UNSPECIFIED -> drawableWidth;
+            case MeasureSpec.AT_MOST -> Math.min(drawableSize, size);
+            case MeasureSpec.UNSPECIFIED -> drawableSize;
             default -> size;
         };
     }
@@ -1224,18 +1224,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         postOnAnimation(runnable);
     }
 
-    private static class ZoomVariables {
-        public final float scale;
-        public final float focusX;
-        public final float focusY;
-        public final ScaleType scaleType;
-
-        public ZoomVariables(float scale, float focusX, float focusY, ScaleType scaleType) {
-            this.scale = scale;
-            this.focusX = focusX;
-            this.focusY = focusY;
-            this.scaleType = scaleType;
-        }
+    private record ZoomVariables(float scale, float focusX, float focusY, ScaleType scaleType) {
     }
 
     private void printMatrixInfo() {

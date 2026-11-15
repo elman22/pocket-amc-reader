@@ -163,7 +163,7 @@ public class FiltersTest {
                 new Filter(Movies.FILTER_CHECKED, Movies.FILTER_OPERATOR_EQUALS, "yes", "yes"));
 
         assertSame(Movies.FILTER_OPERATOR_IS_NULL_NOT, notNull.getFilterOperator());
-        assertSame(Movies.FILTER_DIRECTOR.type, notNull.getFilterType());
+        assertSame(Movies.FILTER_DIRECTOR.type(), notNull.getFilterType());
         assertSame(Movies.FILTER_TYPE_BOOLEAN, checked.getFilterType());
     }
 

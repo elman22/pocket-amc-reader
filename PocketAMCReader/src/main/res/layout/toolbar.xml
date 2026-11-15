@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,11 +18,14 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!-- The toolbar has the color of the action bar, which is not the color of the window: it is not overdraw -->
 <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/color_action_bar_bg"
     android:minHeight="?android:attr/actionBarSize"
-    android:title="@string/app_name"/>
+    android:title="@string/app_name"
+    tools:ignore="Overdraw" />

@@ -1,6 +1,6 @@
 /*
     This file is part of Pocket AMC Reader.
-    Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+    Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
     Pocket AMC Reader is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,23 +51,23 @@ public class Filter implements Serializable {
     }
 
     public String getSQLField() {
-        return mField.sql;
+        return mField.sql();
     }
 
     public int getHumanFieldResourceId() {
-        return mField.resId;
+        return mField.resId();
     }
 
     public String getSQLOperator() {
-        return mOperator.sql;
+        return mOperator.sql();
     }
 
     public int getHumanOperatorResourceId() {
-        return mOperator.resId;
+        return mOperator.resId();
     }
 
     public String getSQLValue() {
-        if (mField.type == Movies.FILTER_TYPE_BOOLEAN && mValue != null) {
+        if (mField.type() == Movies.FILTER_TYPE_BOOLEAN && mValue != null) {
             return mValue.equals(String.valueOf(mBoolTrueValue)) ? S.CATALOG_TRUE : S.CATALOG_FALSE;
         } else {
             return mValue;
@@ -75,8 +75,9 @@ public class Filter implements Serializable {
     }
 
     public String getHumanValue() {
-        if (mField.type == Movies.FILTER_TYPE_DATE) {
+        if (mField.type() == Movies.FILTER_TYPE_DATE) {
             try {
+                assert mValue != null;
                 Date date = SharedObjects.getInstance().dateAddedFormat.parse(mValue);
                 if (date != null) {
                     return SharedObjects.getInstance().dateFormat.format(date);
@@ -91,15 +92,15 @@ public class Filter implements Serializable {
     }
 
     public String getValueWrapLeft() {
-        return mOperator.valueWrapLeft;
+        return mOperator.valueWrapLeft();
     }
 
     public String getValueWrapRight() {
-        return mOperator.valueWrapRight;
+        return mOperator.valueWrapRight();
     }
 
     public FilterType getFilterType() {
-        return mField.type;
+        return mField.type();
     }
 
     public FilterOperator getFilterOperator() {

@@ -25,7 +25,7 @@ import java.io.InputStream;
 import androidx.annotation.NonNull;
 
 /**
- * Reports bytes actually read. The listener may throw an IOException to abort reading (e.g. when cancelled).
+ * Reports bytes actually read. The listener may throw an IOException to abort reading (e.g. when canceled).
  */
 public class ProgressFilterInputStream extends FilterInputStream {
 

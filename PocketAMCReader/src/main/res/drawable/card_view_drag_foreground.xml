@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 Copyright 2014 Magnus Woxblom
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
@@ -21,11 +21,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
 <inset
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetBottom="30dp"
-    android:insetLeft="20dp"
-    android:insetRight="20dp"
-    android:insetTop="30dp">
+    android:insetBottom="21dp"
+    android:insetLeft="14dp"
+    android:insetRight="14dp"
+    android:insetTop="21dp">
     <shape>
+        <stroke
+            android:width="2dp"
+            android:color="?attr/color_basic_bg2"/>
         <corners android:radius="3dp"/>
     </shape>
 </inset>

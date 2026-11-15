@@ -32,6 +32,7 @@ import com.holdingscythe.pocketamcreader.utils.Utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 import androidx.core.text.HtmlCompat;
 
@@ -134,8 +135,9 @@ public class Filters implements Serializable {
             i++;
         }
 
-        return HtmlCompat.fromHtml(Utils.arrayToString(info, "&nbsp;<i>" + mContext.getString(R.string.filter_join_and)
-                + "</i><br/>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
+        return HtmlCompat.fromHtml(Objects.requireNonNull(Utils.arrayToString(
+                info, "&nbsp;<i>" + mContext.getString(R.string.filter_join_and) + "</i><br/>"
+        )), HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
     /**
@@ -214,7 +216,7 @@ public class Filters implements Serializable {
     public String[] getAvailableFilters() {
         ArrayList<String> availableFilters = new ArrayList<>();
         for (FilterField f : Movies.availableFilterFields) {
-            availableFilters.add(getFilterFieldHumanName(f.resId));
+            availableFilters.add(getFilterFieldHumanName(f.resId()));
         }
         return availableFilters.toArray(new String[0]);
     }
@@ -224,8 +226,8 @@ public class Filters implements Serializable {
      */
     public String[] getAvailableOperators(FilterField field) {
         ArrayList<String> availableOperators = new ArrayList<>();
-        for (FilterOperator o : field.type.operators) {
-            availableOperators.add(mContext.getString(o.resId));
+        for (FilterOperator o : field.type().operators()) {
+            availableOperators.add(mContext.getString(o.resId()));
         }
         return availableOperators.toArray(new String[0]);
     }

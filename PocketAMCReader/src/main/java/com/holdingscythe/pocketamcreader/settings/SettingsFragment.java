@@ -177,18 +177,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.pref_setting_catalog)
                 .setItems(items, (dialog, which) -> {
-                    Intent intent;
-
-                    if (which == 0) {
-                        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                    } else {
-                        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                        intent.addCategory(Intent.CATEGORY_OPENABLE);
-                        intent.setType("*/*");
-                    }
-
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                    Intent intent = getIntent(which);
 
                     try {
                         (which == 0 ? mFolderLauncher : mFileLauncher).launch(intent);
@@ -199,6 +188,23 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 })
                 .setNegativeButton(R.string.dialog_negative, null)
                 .show();
+    }
+
+    @NonNull
+    private static Intent getIntent(int which) {
+        Intent intent;
+
+        if (which == 0) {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("*/*");
+        }
+
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        return intent;
     }
 
     private void onPickerResult(ActivityResult result, boolean folder) {
