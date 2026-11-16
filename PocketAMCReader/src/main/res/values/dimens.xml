@@ -40,6 +40,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <dimen name="fast_scroll_popup_background">56dip</dimen>
     <!-- Details -->
     <dimen name="detail_hero_img_height">240dip</dimen>
+    <dimen name="detail_title_collapsed_text_size">20sp</dimen>
     <dimen name="detail_hero_img_land_width">180dip</dimen>
     <dimen name="detail_basic_height">48dip</dimen>
     <dimen name="detail_basic_spacing">3dip</dimen>

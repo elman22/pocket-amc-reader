@@ -22,13 +22,18 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:saveEnabled="false">
 
+    <!-- The state of the scrolling is not saved (the coordinator layout, the app bar and the content): every page
+         is displayed in the default position (see DetailHeader). A page which was recreated by the pager had the
+         content scrolled to the saved position, while the app bar was moved to the default position. -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        android:saveEnabled="false"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         tools:ignore="InconsistentLayout">
 
@@ -38,6 +43,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/color_action_bar_bg"
+            app:titleEnabled="false"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             tools:ignore="InconsistentLayout">
 
@@ -105,6 +111,18 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+            <!-- Draws the title which flows from the title block into the toolbar (see DetailTitleAnimator). It is
+                 after the toolbar to be drawn over it. -->
+            <TextView
+                android:id="@+id/animatedTitle"
+                style="@style/DetailsFragmentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ellipsize="end"
+                android:importantForAccessibility="no"
+                tools:ignore="MissingPrefix" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -115,6 +133,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:background="?attr/color_app_bg"
+        android:saveEnabled="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MovieDetailActivity">
 

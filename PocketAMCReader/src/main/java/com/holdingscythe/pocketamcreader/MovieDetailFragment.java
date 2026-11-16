@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,7 +59,6 @@ import java.util.regex.Pattern;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
@@ -112,9 +110,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
     }
 
     private void onActivityReady(@Nullable Bundle savedInstanceState) {
-        // Prepare custom font for the toolbar
-        final Typeface tf = ResourcesCompat.getFont(requireContext(), R.font.roboto_condensed);
-
         // Setup filters
         mFilters = new Filters();
         mFilters.setContext(getContext());
@@ -201,13 +196,6 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 int mActionBarHeight = SharedObjects.getInstance().actionBarHeight;
                 int mHeroImageHeight = SharedObjects.getInstance().heroImageHeight;
 
-                // Set custom font to the toolbar
-                collapsingToolbar.setCollapsedTitleTypeface(tf);
-                collapsingToolbar.setExpandedTitleTypeface(tf);
-
-                // Title must be space or else application name will be used
-                collapsingToolbar.setTitle(" ");
-
                 // Get adjusted height for AppBarLayout
                 int adjustedHeight;
 
@@ -221,32 +209,20 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 // The picture is as tall as the whole picture, the header keeps the title block below it and the app
                 // bar in the default position (see DetailHeader)
                 setViewHeight(getView().findViewById(R.id.Picture), adjustedHeight);
-                new DetailHeader(appBarLayout, getView().findViewById(R.id.detailsHeader),
-                        getView().findViewById(R.id.detailsImageSpacer), getView().findViewById(R.id.ColorTag),
+                DetailHeader detailHeader = new DetailHeader(appBarLayout, getView().findViewById(R.id.detailsHeader),
+                        getView().findViewById(R.id.detailsImageSpacer),
+                        getView().findViewById(R.id.detailsScrollView), getView().findViewById(R.id.ColorTag),
                         adjustedHeight, mHeroImageHeight, mActionBarHeight,
                         getResources().getDimensionPixelSize(R.dimen.colortag_height));
 
-                // Add listener to dynamically change toolbar title
-                appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-                    boolean isShow = false;
-
-                    @Override
-                    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                        if (appBarLayout.getTotalScrollRange() + verticalOffset == 0) {
-                            // when collapsingToolbar is collapsed, display actionbar title
-                            int color = Utils.getColorFromColorTag(mMovie.getColorTag());
-                            collapsingToolbar.setCollapsedTitleTextColor(
-                                    ContextCompat.getColor(requireContext(), color)
-                            );
-                            collapsingToolbar.setTitle(mMovie.getTitle());
-                            isShow = true;
-                        } else if (isShow) {
-                            // there must a space between double quote otherwise it won't work
-                            collapsingToolbar.setTitle(" ");
-                            isShow = false;
-                        }
-                    }
-                });
+                // The title flows from the title block into the toolbar while the app bar collapses
+                new DetailTitleAnimator(appBarLayout, detailHeader.getRestOffset(),
+                        getView().findViewById(R.id.animatedToolbar),
+                        getView().findViewById(R.id.FormattedTitle),
+                        getView().findViewById(R.id.animatedTitle),
+                        ContextCompat.getColor(requireContext(),
+                                Utils.getColorFromColorTag(mMovie.getColorTag())),
+                        getResources().getDimension(R.dimen.detail_title_collapsed_text_size));
             }
 
             // Benchmark end
