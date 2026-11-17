@@ -40,7 +40,6 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -160,7 +159,12 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     /**
      * The current activated item position. Only used on tablets.
      */
-    private int mActivatedPosition = ListView.INVALID_POSITION;
+    private int mActivatedPosition = RecyclerView.NO_POSITION;
+
+    /**
+     * Is the movie displayed in the detail pane highlighted in the list? Only in the two-pane layout.
+     */
+    private boolean mActivateOnItemClick = false;
 
     private MoviesDataProvider mMoviesDataProvider;
     private MoviesAdapter mMoviesAdapter;
@@ -436,7 +440,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
+        if (mActivatedPosition != RecyclerView.NO_POSITION) {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
@@ -638,27 +642,33 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     }
 
     /**
-     * Turns on activate-on-click mode. When this mode is on, list items will be
-     * given the 'activated' state when touched.
+     * Turns on activate-on-click mode. When this mode is on, the item of the movie which is displayed in the detail
+     * pane (two-pane layout) is highlighted ('activated' state of the item).
+     *
+     * @param activateOnItemClick true to highlight the movie displayed in the detail pane
      */
-    public void  setActivateOnItemClick(boolean activateOnItemClick) {
-        // When setting CHOICE_MODE_SINGLE, ListView will automatically
-        // give items the 'activated' state when touched.
-        // TODO update when implementing TwoPane
-//        mListView.setChoiceMode(activateOnItemClick
-//                ? ListView.CHOICE_MODE_SINGLE
-//                : ListView.CHOICE_MODE_NONE);
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        mActivateOnItemClick = activateOnItemClick;
+        applyActivatedPosition();
     }
 
-    private void setActivatedPosition(int position) {
-        // TODO update when implementing TwoPane
-//        if (position == ListView.INVALID_POSITION) {
-//            mListView.setItemChecked(mActivatedPosition, false);
-//        } else {
-//            mListView.setItemChecked(position, true);
-//        }
-
+    /**
+     * Remembers the position of the movie displayed in the detail pane and highlights it in the list when the
+     * activate-on-click mode is on.
+     *
+     * @param position position of the movie in the list or {@link RecyclerView#NO_POSITION} for none
+     */
+    public void setActivatedPosition(int position) {
         mActivatedPosition = position;
+        applyActivatedPosition();
+    }
+
+    /**
+     * Highlights the remembered position in the adapter (or nothing when the activate-on-click mode is off).
+     */
+    private void applyActivatedPosition() {
+        if (mMoviesAdapter != null)
+            mMoviesAdapter.setActivatedPosition(mActivateOnItemClick ? mActivatedPosition : RecyclerView.NO_POSITION);
     }
 
     /**
@@ -718,6 +728,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     private void resetDetailPager() {
         if (SharedObjects.getInstance().twoPane && mMoviesAdapter.getItemCount() > 0) {
             mMoviesAdapter.getCursor().moveToFirst();
+            setActivatedPosition(0);
             mCallbacks.onItemSelected("");
         }
     }
@@ -879,9 +890,13 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
                     if (S.INFO)
                         Log.i(S.TAG, "List clicked position: " + position);
 
+                    setActivatedPosition(position);
                     mCallbacks.onItemSelected(String.valueOf(position));
                 }
         );
+
+        // Highlight the movie displayed in the detail pane
+        applyActivatedPosition();
 
         // Set filter query provider
         mMoviesAdapter.setFilterQueryProvider(mMoviesDataProvider);

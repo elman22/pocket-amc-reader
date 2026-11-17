@@ -86,6 +86,7 @@ public class MovieDetailFragmentHost extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 recyclerView.setSelected(true);
+                listFragment.setActivatedPosition(position);
                 recyclerView.smoothScrollToPosition(position);
             }
         });

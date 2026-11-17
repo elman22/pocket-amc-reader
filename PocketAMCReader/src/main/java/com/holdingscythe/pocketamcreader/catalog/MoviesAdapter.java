@@ -43,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -69,6 +70,10 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     private Calendar mCalendar;
     private Boolean mColorTagTitle;
 
+    // Position of the movie which is displayed in the detail pane (two-pane layout), NO_POSITION when there is none
+    private int mActivatedPosition = RecyclerView.NO_POSITION;
+    private static final Object PAYLOAD_ACTIVATED = new Object();
+
     // Recycler views
     private final int GRID = 0;
     private final int LIST = 1;
@@ -76,9 +81,10 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
     private final MoviesAdapterClickListener mListener;
 
     /**
-     * Recycler view holder
+     * Recycler view holder of a movie in the list or in the grid. The class is public, because it is the type of the
+     * public methods of the adapter. Its fields are used only in this package.
      */
-    class MovieHolder extends RecyclerView.ViewHolder {
+    public class MovieHolder extends RecyclerView.ViewHolder {
         final TextView FormattedTitle_text;
         final TextView movieShortDescription_text;
         final TextView movieShortDescription2_text;
@@ -150,6 +156,42 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
         return mMovieHolder;
     }
 
+    /**
+     * Marks the movie which is displayed in the detail pane. The item gets the activated state (it is highlighted by
+     * the foreground of the item), only the state of the two items is updated, they are not bound again.
+     *
+     * @param position position of the movie in the list or {@link RecyclerView#NO_POSITION} for none
+     */
+    public void setActivatedPosition(int position) {
+        if (position == mActivatedPosition)
+            return;
+
+        int previous = mActivatedPosition;
+        mActivatedPosition = position;
+
+        int count = getItemCount();
+        if (previous >= 0 && previous < count)
+            notifyItemChanged(previous, PAYLOAD_ACTIVATED);
+        if (position >= 0 && position < count)
+            notifyItemChanged(position, PAYLOAD_ACTIVATED);
+    }
+
+    /**
+     * Updates only the activated state of the item when it is the only change, otherwise binds the item.
+     *
+     * @param holder   view holder of the item
+     * @param position position of the item
+     * @param payloads changes of the item
+     */
+    @Override
+    public void onBindViewHolder(@NonNull MovieHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.contains(PAYLOAD_ACTIVATED)) {
+            holder.itemView.setActivated(position == mActivatedPosition);
+        } else {
+            super.onBindViewHolder(holder, position, payloads);
+        }
+    }
+
     // Using the variable "mViewType" to check which layout is to be displayed
     @Override
     public int getItemViewType(int position) {
@@ -162,6 +204,8 @@ public class MoviesAdapter extends CursorRecyclerAdapter<MoviesAdapter.MovieHold
 
     @Override
     public void onBindViewHolderCursor(@NonNull MovieHolder holder, Cursor cursor) {
+        holder.itemView.setActivated(cursor.getPosition() == mActivatedPosition);
+
         boolean sortedFieldDisplayed = false;
 
         ArrayList<String> line1 = new ArrayList<>();

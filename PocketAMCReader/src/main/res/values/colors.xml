@@ -123,4 +123,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <color name="color_tag_11">#cda989</color>
     <color name="color_tag_12">#ffffff</color>
     <color name="ic_launcher_background">#000000</color>
+
+    <!-- Highlight of the movie displayed in the detail pane (two-pane layout) -->
+    <color name="list_item_activated">#33ffffff</color>
 </resources>
