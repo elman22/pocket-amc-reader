@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Pocket AMC Reader.
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
+
+Pocket AMC Reader is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Pocket AMC Reader is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!-- Monochrome layer of the adaptive icon (themed icons of Android 13): a film strip with the holes of the film and
+     three frames. The system colors it, so only the shape matters. It fits the safe zone of the 108dp icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#000000"
+        android:fillType="evenOdd"
+        android:pathData="M32,24H76A8,8 0 0 1 84,32V76A8,8 0 0 1 76,84H32A8,8 0 0 1 24,76V32A8,8 0 0 1 32,24Z M28,29h5v5h-5z M75,29h5v5h-5z M28,38h5v5h-5z M75,38h5v5h-5z M28,47h5v5h-5z M75,47h5v5h-5z M28,56h5v5h-5z M75,56h5v5h-5z M28,65h5v5h-5z M75,65h5v5h-5z M28,74h5v5h-5z M75,74h5v5h-5z M37,28h34v11h-34z M37,42h34v24h-34z M37,69h34v11h-34z" />
+</vector>
