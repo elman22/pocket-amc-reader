@@ -283,7 +283,9 @@ public abstract class CursorRecyclerAdapter<VH
      *
      * @see ContentObserver#onChange(boolean)
      */
-    protected void onContentChanged() {}
+    protected void onContentChanged() {
+        // Intentionally empty: extension point for subclasses, none of the current adapters needs to react
+    }
 
     private class ChangeObserver extends ContentObserver {
         public ChangeObserver() {

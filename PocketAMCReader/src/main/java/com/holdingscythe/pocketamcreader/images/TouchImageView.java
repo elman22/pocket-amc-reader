@@ -24,6 +24,7 @@
 
 package com.holdingscythe.pocketamcreader.images;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -127,6 +128,17 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         sharedConstructing(context);
     }
 
+    /**
+     * Common part of all constructors: prepares the view for zooming and panning.
+     * <p>
+     * The internal touch listener is set to the superclass on purpose, because {@link #setOnTouchListener} only
+     * stores the listener of the user. Lint reports this call, because it checks the superclass for
+     * {@code performClick}, but the click is handled by this class: {@link #performClick()} is overridden and the
+     * gesture detector calls it for a confirmed single tap.
+     *
+     * @param context context of the view
+     */
+    @SuppressLint("ClickableViewAccessibility")
     private void sharedConstructing(Context context) {
         super.setClickable(true);
         this.context = context;
@@ -150,9 +162,29 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         super.setOnTouchListener(new PrivateOnTouchListener());
     }
 
+    /**
+     * The touch listener of this view is used internally for zooming and panning, so the listener is not set to the
+     * view. It is called from there with every touch event, after the event was handled by the view.
+     *
+     * @param l listener which gets the touch events
+     */
     @Override
     public void setOnTouchListener(View.OnTouchListener l) {
         userTouchListener = l;
+    }
+
+    /**
+     * Click is detected by the gesture detector (a single tap which is not a start of a double tap), see
+     * {@link GestureListener#onSingleTapConfirmed(MotionEvent)}. The override is here, because this view handles
+     * touch events by a touch listener, and a click must go through this method for the accessibility services and
+     * for the click listener.
+     *
+     * @return true when a click listener was called
+     */
+    @SuppressWarnings("EmptyMethod")
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 
     public void setOnTouchImageViewListener(OnTouchImageViewListener l) {
@@ -825,6 +857,17 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         //
         private final PointF last = new PointF();
 
+        /**
+         * Handles dragging and passes the events to the scale and gesture detectors. A click is not performed here
+         * for the end of the touch: the gesture detector performs it for a confirmed single tap
+         * ({@link GestureListener#onSingleTapConfirmed(MotionEvent)}), so it is not performed for dragging or for a
+         * double tap.
+         *
+         * @param v     view which received the event
+         * @param event the touch event
+         * @return always true, the event is handled
+         */
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             mScaleDetector.onTouchEvent(event);

@@ -48,17 +48,21 @@ public final class SafHelper {
     }
 
     /**
-     * Keep read access to the Uri after the app restarts
+     * Keep read access to the Uri after the app restarts.
+     *
+     * @param context application or activity context
+     * @param uri     Uri of the folder or of the file returned by the picker
+     * @return true when the permission was persisted, false when Android did not grant it
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean takeReadPermission(@NonNull Context context, @NonNull Uri uri) {
         try {
             context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            return false;
+            return true;
         } catch (SecurityException | IllegalArgumentException e) {
             if (S.WARN)
                 Log.w(S.TAG, "Couldn't persist permission for " + uri, e);
-            return true;
+            return false;
         }
     }
 

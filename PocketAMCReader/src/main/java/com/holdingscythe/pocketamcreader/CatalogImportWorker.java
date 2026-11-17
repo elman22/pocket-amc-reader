@@ -313,6 +313,13 @@ public class CatalogImportWorker extends Worker {
         }
     }
 
+    /**
+     * Creates the notification of the import and the information for promoting the worker to a foreground service.
+     * The foreground service type is passed from Android 10 (API 29), where it was introduced. Before that, the
+     * service has no type (the type declared in the manifest is used from Android 10 only).
+     *
+     * @return information about the foreground service of the import
+     */
     private ForegroundInfo createForegroundInfo() {
         Context context = getApplicationContext();
 
@@ -339,6 +346,9 @@ public class CatalogImportWorker extends Worker {
                 .setProgress(100, Math.max(mPercent, 0), mPercent < 0)
                 .build();
 
-        return new ForegroundInfo(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return new ForegroundInfo(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
+        }
+        return new ForegroundInfo(NOTIFICATION_ID, notification);
     }
 }

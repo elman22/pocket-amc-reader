@@ -71,8 +71,8 @@ public class CustomFields {
                     );
 
                     // Inflate layout, because this is the only way to set correct theme
-                    LinearLayout customLayout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout
-                            .details_custom_field, null);
+                    LinearLayout customLayout = (LinearLayout) activity.getLayoutInflater()
+                            .inflate(R.layout.details_custom_field, wrapperLayout, false);
 
                     TextView customLabel = customLayout.findViewById(R.id.customLabel);
                     customLabel.setText(customField.getCName());
