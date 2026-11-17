@@ -283,6 +283,7 @@ public abstract class CursorRecyclerAdapter<VH
      *
      * @see ContentObserver#onChange(boolean)
      */
+    @SuppressWarnings("EmptyMethod")
     protected void onContentChanged() {
         // Intentionally empty: extension point for subclasses, none of the current adapters needs to react
     }
