@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,7 +25,9 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+
+    The bool two_pane (res/values-sw600dp-land/bools.xml) is used by MovieDetailActivity and must be true exactly
+    where this alias is active. MovieListActivity decides by the presence of the detail container.
     -->
-    <!-- TODO: enable two pane activity -->
-    <!--<item type="layout" name="activity_movie_list">@layout/activity_movie_twopane</item>-->
+    <item type="layout" name="activity_movie_list">@layout/activity_movie_twopane</item>
 </resources>

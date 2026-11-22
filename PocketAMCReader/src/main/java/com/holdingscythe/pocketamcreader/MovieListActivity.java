@@ -24,15 +24,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.holdingscythe.pocketamcreader.settings.SettingsActivity;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.EdgeToEdgeHelper;
 import com.holdingscythe.pocketamcreader.utils.Theme;
 
-import java.util.Objects;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 /**
@@ -87,24 +89,38 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
         EdgeToEdgeHelper.padToolbar(mToolbar);
         setSupportActionBar(mToolbar);
 
+        // The list fragment is not found by its container right after it was added (the transaction is not executed
+        // yet), so the reference is kept
+        MovieListFragment listFragment;
         if (savedInstanceState == null) {
             // Create the list fragment and add it to the activity using a fragment transaction.
-            MovieListFragment fragment = new MovieListFragment();
+            listFragment = new MovieListFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.movie_list_container, fragment)
+                    .add(R.id.movie_list_container, listFragment)
                     .commit();
+        } else {
+            listFragment = (MovieListFragment) getSupportFragmentManager().findFragmentById(R.id.movie_list_container);
         }
 
-        // The detail container view will be present only in the large-screen layouts (res/values-large and
-        // res/values-sw600dp). If this view is present, then the activity should be in two-pane mode.
-        // The flag is always updated: layouts change e.g. when a foldable is folded or the screen is rotated.
-        mTwoPane = getResources().getBoolean(R.bool.two_pane);
+        // The detail container view is present only in the two-pane layout (the layout alias in res/values-sw600dp-land).
+        // If this view is present, then the activity is in two-pane mode. The flag is always updated: layouts change
+        // e.g. when a foldable is folded or unfolded, or the window is resized.
+        mTwoPane = findViewById(R.id.movie_detail_container) != null;
         SharedObjects.getInstance().twoPane = mTwoPane;
-        if (mTwoPane) {
+        if (savedInstanceState == null) {
+            // Started again, nothing is displayed in the detail yet
+            SharedObjects.getInstance().selectedPosition = RecyclerView.NO_POSITION;
+        } else if (!mTwoPane) {
+            // The detail of the previous two-pane layout was restored, but its container does not exist anymore
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment detail = fragmentManager.findFragmentById(R.id.movie_detail_container);
+            if (detail != null) {
+                fragmentManager.beginTransaction().remove(detail).commitNow();
+            }
+        }
+        if (mTwoPane && listFragment != null) {
             // In two-pane mode, list items should be given the 'activated' state when touched.
-            ((MovieListFragment) Objects.requireNonNull(getSupportFragmentManager()
-                    .findFragmentById(R.id.movie_list_container)))
-                    .setActivateOnItemClick(true);
+            listFragment.setActivateOnItemClick(true);
         }
     }
 
@@ -126,11 +142,28 @@ public class MovieListActivity extends AppCompatActivity implements MovieListFra
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.movie_detail_container, fragment)
                     .commit();
+            findViewById(R.id.movie_detail_placeholder).setVisibility(View.GONE);
         } else {
             // In single-pane mode, simply start the detail activity for the selected item ID.
             Intent detailIntent = new Intent(this, MovieDetailActivity.class);
             detailIntent.putExtra(MovieDetailFragment.ARG_MOVIE_ID, id);
             startActivity(detailIntent);
+        }
+    }
+
+    /**
+     * Callback method from {@link MovieListFragment.Callbacks}: there is no movie to show, the detail pane shows the
+     * placeholder.
+     */
+    @Override
+    public void onSelectionCleared() {
+        if (mTwoPane) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment detail = fragmentManager.findFragmentById(R.id.movie_detail_container);
+            if (detail != null) {
+                fragmentManager.beginTransaction().remove(detail).commit();
+            }
+            findViewById(R.id.movie_detail_placeholder).setVisibility(View.VISIBLE);
         }
     }
 

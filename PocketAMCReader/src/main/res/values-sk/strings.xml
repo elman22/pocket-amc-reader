@@ -230,4 +230,5 @@
   <string name="import_access_lost_message">Aplikácia stratila prístup ku katalógu (súbor bol presunutý alebo odstránený, alebo bol prístup odvolaný). Vyberte katalóg v nastaveniach znova.</string>
   <string name="dialog_open_settings">Otvoriť nastavenia</string>
   <string name="dialog_later">Neskôr</string>
+  <string name="detail_placeholder">Žiadny film na zobrazenie</string>
 </resources>

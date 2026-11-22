@@ -224,4 +224,5 @@
   <string name="import_access_lost_message">The app lost access to the catalog (the file was moved or deleted, or access was revoked). Please select the catalog again in settings.</string>
   <string name="dialog_open_settings">Open settings</string>
   <string name="dialog_later">Later</string>
+  <string name="detail_placeholder">No movie to show</string>
 </resources>

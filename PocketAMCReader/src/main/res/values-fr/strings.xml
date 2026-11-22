@@ -229,4 +229,5 @@
   <string name="import_access_lost_message">L\'application a perdu l\'accès au catalogue (le fichier a été déplacé ou supprimé, ou l\'accès a été révoqué). Veuillez sélectionner à nouveau le catalogue dans les paramètres.</string>
   <string name="dialog_open_settings">Ouvrir les paramètres</string>
   <string name="dialog_later">Plus tard</string>
+  <string name="detail_placeholder">Aucun film à afficher</string>
 </resources>

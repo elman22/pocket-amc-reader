@@ -220,4 +220,5 @@
   <string name="import_access_lost_message">Die App hat den Zugriff auf den Katalog verloren (die Datei wurde verschoben oder gelöscht, oder der Zugriff wurde entzogen). Bitte wählen Sie den Katalog in den Einstellungen erneut aus.</string>
   <string name="dialog_open_settings">Einstellungen öffnen</string>
   <string name="dialog_later">Später</string>
+  <string name="detail_placeholder">Kein Film zum Anzeigen</string>
 </resources>

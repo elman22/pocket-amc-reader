@@ -166,6 +166,11 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     private boolean mActivateOnItemClick = false;
 
+    /**
+     * The cursor of the movies which are displayed in the detail pane (two-pane layout).
+     */
+    private Cursor mDetailCursor;
+
     private MoviesDataProvider mMoviesDataProvider;
     private MoviesAdapter mMoviesAdapter;
     private Filters mFilters;
@@ -200,7 +205,11 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             mUpdateScheduled = false;
             if (isAdded()) {
                 updateHeaderInfo();
-                resetDetailPager();
+                // Other movies than the displayed ones (a new cursor): show the first one. Changes of the items, e.g.
+                // of the highlighted one, are no reason to change the movie in the detail pane.
+                if (mMoviesAdapter.getCursor() != mDetailCursor) {
+                    resetDetailPager(false);
+                }
             }
         };
 
@@ -267,6 +276,12 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
          * Callback for when an item has been selected.
          */
         void onItemSelected(String id);
+
+        /**
+         * Callback for when there is no movie to be displayed in the detail pane (the list is empty).
+         */
+        default void onSelectionCleared() {
+        }
     }
 
     /**
@@ -322,7 +337,8 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+            // Only remembered here: the position which is shared by the screens is newer (see resetDetailPager)
+            mActivatedPosition = savedInstanceState.getInt(STATE_ACTIVATED_POSITION);
         }
     }
 
@@ -414,7 +430,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
             alertDialog.show();
         }
 
-        resetDetailPager();
+        resetDetailPager(true);
     }
 
     @Override
@@ -660,6 +676,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
      */
     public void setActivatedPosition(int position) {
         mActivatedPosition = position;
+        SharedObjects.getInstance().selectedPosition = position;
         applyActivatedPosition();
     }
 
@@ -723,14 +740,41 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     }
 
     /**
-     * Display first movie in details pager to if two pane display
+     * Fills the detail pane in the two-pane layout: shows a movie in the detail pager and highlights it in the list,
+     * or clears the pane when there are no movies.
+     *
+     * @param keepSelection true when the screen is created (again): the movie which was displayed (see
+     *                      {@link SharedObjects#selectedPosition}) is displayed again, when it still exists;
+     *                      false when there are other movies (e.g. a filter was set): the first movie is displayed
      */
-    private void resetDetailPager() {
-        if (SharedObjects.getInstance().twoPane && mMoviesAdapter.getItemCount() > 0) {
-            mMoviesAdapter.getCursor().moveToFirst();
-            setActivatedPosition(0);
-            mCallbacks.onItemSelected("");
+    private void resetDetailPager(boolean keepSelection) {
+        if (!SharedObjects.getInstance().twoPane) {
+            return;
         }
+
+        mDetailCursor = mMoviesAdapter.getCursor();
+        int count = mMoviesAdapter.getItemCount();
+        if (count == 0) {
+            setActivatedPosition(RecyclerView.NO_POSITION);
+            mCallbacks.onSelectionCleared();
+            return;
+        }
+
+        int position = 0;
+        if (keepSelection) {
+            int selected = SharedObjects.getInstance().selectedPosition;
+            if (selected < 0) {
+                selected = mActivatedPosition;
+            }
+            if (selected > 0 && selected < count) {
+                position = selected;
+                mRecyclerView.scrollToPosition(position);
+            }
+        }
+
+        mMoviesAdapter.getCursor().moveToPosition(position);
+        setActivatedPosition(position);
+        mCallbacks.onItemSelected(position > 0 ? String.valueOf(position) : "");
     }
 
     /**

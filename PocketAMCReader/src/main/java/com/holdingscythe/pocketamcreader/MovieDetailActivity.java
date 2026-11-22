@@ -45,6 +45,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         EdgeToEdgeHelper.enable(this);
         super.onCreate(savedInstanceState);
 
+        // The window became wide and low (e.g. a tablet was rotated to landscape or a foldable was unfolded): the list
+        // shows the detail side by side, go back to it. It displays the movie which is selected here (see SharedObjects#selectedPosition).
+        if (getResources().getBoolean(R.bool.two_pane)) {
+            finish();
+            return;
+        }
+
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).

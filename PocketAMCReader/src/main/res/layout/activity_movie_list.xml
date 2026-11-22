@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,87 +18,13 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!-- Single-pane layout: only the list. The detail is a separate screen (MovieDetailActivity). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MergeRootFrame">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/color_action_bar_bg">
+    <include layout="@layout/movie_list_pane" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/quick_return_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <LinearLayout
-                android:id="@+id/showing_info_layout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/color_basic_bg1">
-
-                <TextView
-                    android:id="@+id/nowShowing"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:maxLines="1"
-                    android:padding="6dip"
-                    android:text="@string/loading"
-                    android:textColor="@color/primary_text_dark_nostates"/>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/filter_info_layout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/showing_info_layout"
-                android:background="?attr/color_basic_bg2">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/filter_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="6dip"
-                        android:text="@string/menu_add_filter"
-                        android:textColor="@color/primary_text_dark_nostates"/>
-
-                    <TextView
-                        android:id="@+id/filter_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/filter_label"
-                        android:padding="6dip"
-                        android:text="@string/loading"
-                        android:textColor="@color/primary_text_dark_nostates"/>
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/movie_list_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

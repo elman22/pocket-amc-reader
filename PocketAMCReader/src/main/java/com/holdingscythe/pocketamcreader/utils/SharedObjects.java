@@ -52,6 +52,12 @@ public class SharedObjects {
 
     // References between intents
     public boolean twoPane = false;
+
+    /**
+     * Position in the list of the movie which is displayed in the detail (NO_POSITION: none). It survives a change of
+     * the layout (e.g. a foldable is folded or unfolded), when the list or the detail screen is created again.
+     */
+    public int selectedPosition = -1;
     public MoviesAdapter recyclerMovieAdapter;
     public MovieListFragment movieListFragment;
     public boolean moviesListActivityRefreshRequested = false;

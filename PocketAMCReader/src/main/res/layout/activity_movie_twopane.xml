@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,37 +18,58 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!--
+This layout is a two-pane layout for the Movies master/detail flow: the list with its app bar on the left and the
+detail of the movie on the right. It replaces activity_movie_list on wide screens in landscape by the layout alias in
+res/values-sw600dp-land/refs.xml. The detail pane has the placeholder which is visible when there is no movie to show.
+List pane: fixed width (360dp), the detail pane takes the rest.
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:baselineAligned="false"
-              android:divider="?android:attr/dividerHorizontal"
-              android:orientation="horizontal"
-              android:showDividers="middle"
-              tools:context="com.holdingscythe.pocketamcreader.MovieListActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context="com.holdingscythe.pocketamcreader.MovieListActivity">
 
-    <!--
-    This layout is a two-pane layout for the Movies
-    master/detail flow. See res/values-large/refs.xml and
-    res/values-sw600dp/refs.xml for an example of layout aliases
-    that replace the single-pane version of the layout with
-    this two-pane version.
-
-    For more on layout aliases, see:
-    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
-    -->
-
-    <FrameLayout
-        android:id="@+id/movie_list_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+    <!-- The list container (movie_list_container) is inside of the pane, under the app bar -->
+    <include
+        layout="@layout/movie_list_pane"
+        android:layout_width="360dp"
+        android:layout_height="match_parent" />
 
     <FrameLayout
         android:id="@+id/movie_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"/>
+        android:layout_weight="1"
+        android:background="?attr/color_app_bg">
+
+        <LinearLayout
+            android:id="@+id/movie_detail_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:alpha="0.5"
+                android:importantForAccessibility="no"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_placeholder"
+                android:textColor="?android:attr/textColorSecondary" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

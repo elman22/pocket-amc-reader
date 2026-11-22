@@ -230,4 +230,5 @@
   <string name="import_access_lost_message">Aplikacja utraciła dostęp do katalogu (plik został przeniesiony lub usunięty albo cofnięto dostęp). Wybierz katalog ponownie w ustawieniach.</string>
   <string name="dialog_open_settings">Otwórz ustawienia</string>
   <string name="dialog_later">Później</string>
+  <string name="detail_placeholder">Brak filmu do wyświetlenia</string>
 </resources>
