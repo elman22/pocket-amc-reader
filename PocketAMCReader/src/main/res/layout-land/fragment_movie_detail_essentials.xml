@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,6 +40,13 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         expandableTextView:expandDrawable="@drawable/ic_expand_shape"
         expandableTextView:maxCollapsedLines="5">
 
+        <TextView
+            android:id="@id/expandable_text"
+            style="@style/RegularText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_long" />
+
         <ImageButton
             android:id="@id/expand_collapse"
             style="@style/ExpandableArrow"
@@ -50,13 +57,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_marginTop="@dimen/arrow_pull_vertical"
             android:background="@android:color/transparent"
             android:contentDescription="@string/details_expandable_arrow_description" />
-
-        <TextView
-            android:id="@id/expandable_text"
-            style="@style/RegularText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ph_text_long" />
 
     </com.holdingscythe.pocketamcreader.views.ExpandableTextView>
 
@@ -155,6 +155,13 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         expandableTextView:expandDrawable="@drawable/ic_expand_shape"
         expandableTextView:maxCollapsedLines="5">
 
+        <TextView
+            android:id="@id/expandable_text"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_text_long" />
+
         <ImageButton
             android:id="@id/expand_collapse"
             style="@style/ExpandableArrow"
@@ -165,13 +172,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_marginTop="@dimen/arrow_pull_vertical"
             android:background="@android:color/transparent"
             android:contentDescription="@string/details_expandable_arrow_description" />
-
-        <TextView
-            android:id="@id/expandable_text"
-            style="@style/RegularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ph_text_long" />
     </com.holdingscythe.pocketamcreader.views.ExpandableTextView>
 
     <TextView
