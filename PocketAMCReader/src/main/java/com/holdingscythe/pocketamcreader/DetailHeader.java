@@ -18,10 +18,15 @@
 
 package com.holdingscythe.pocketamcreader;
 
+import android.os.Build;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -53,6 +58,11 @@ import androidx.core.widget.NestedScrollView;
  * with a picture is scrolled so its title block ends at the same place. The position does not depend on the
  * window insets.
  * <p>
+ * The row under the title (year, length, rating...) is always at the same distance from the top of the screen in
+ * the default position, whatever the number of lines of the title is. The title block is at the bottom of the
+ * visible app bar, so for a title of more lines the default position scrolls the app bar further by the height of
+ * the additional lines: the title grows to the top, over the picture.
+ * <p>
  * The app bar reports its offset when its layout is finished; everything is done then. Moving the app bar while
  * the toolbar is still being laid out is overwritten by the layout of the app bar.
  */
@@ -61,6 +71,7 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
     private final View mHeader;
     private final View mSpacer;
     private final View mColorTag;
+    private final TextView mTitle;
     private final View mContent;
     private final AppBarLayout mAppBarLayout;
     private final int mPictureHeight;
@@ -74,16 +85,18 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
      * @param pictureHeight   height of the whole picture
      * @param heroHeight      height of the part of the picture which is displayed when the movie is opened
      * @param actionBarHeight height of the toolbar
+     * @param title           the title of the movie (it can have more lines)
      * @param content         the scrolling content under the app bar
      * @param colorTag        the line of the color tag (it is visible only when the movie has a color tag)
      * @param colorTagHeight  height of the line when it is visible
      */
     DetailHeader(@NonNull AppBarLayout appBarLayout, @NonNull View header, @NonNull View spacer,
-                 @NonNull View content, @NonNull View colorTag, int pictureHeight, int heroHeight, int actionBarHeight,
+                 @NonNull TextView title, @NonNull View content, @NonNull View colorTag, int pictureHeight, int heroHeight, int actionBarHeight,
                  int colorTagHeight) {
         mHeader = header;
         mSpacer = spacer;
         mColorTag = colorTag;
+        mTitle = title;
         mContent = content;
         mAppBarLayout = appBarLayout;
         mPictureHeight = pictureHeight;
@@ -157,8 +170,8 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
             return;
         }
 
-        // Default position of the app bar, set once
-        if (mRestPositionSet) {
+        // Default position of the app bar, set once. The title must be laid out, the position depends on its lines.
+        if (mRestPositionSet || mTitle.getLayout() == null) {
             return;
         }
 
@@ -176,10 +189,44 @@ class DetailHeader implements AppBarLayout.OnOffsetChangedListener {
     }
 
     /**
-     * Offset of the app bar in its default position (0 or negative).
+     * Offset of the app bar in its default position (0 or negative). The visible part of the app bar has the same
+     * height for any title: the app bar is scrolled further by the height of the lines of the title after the first
+     * one.
+     *
+     * @return the offset, it is not known before the title is laid out (the title is taken as one line then)
      */
     int getRestOffset() {
-        return Math.min(0, mHeroHeight + mActionBarHeight - mPictureHeight);
+        int offset = Math.min(0, mHeroHeight + mActionBarHeight - mPictureHeight) - additionalTitleHeight();
+        int range = mAppBarLayout.getTotalScrollRange();
+        return range > 0 ? Math.max(-range, offset) : offset;
+    }
+
+    /**
+     * Height which the title has more than it would have with one line. It is the difference of the height of the
+     * layout of the title and the height of the same text laid out as one line, with the same font, font padding and
+     * line spacing, so it is exact to the pixel. Taking the heights of the lines from the layout is not: the first
+     * and the last line of a layout contain the font padding, the lines between them do not.
+     *
+     * @return the height in pixels, 0 for a title of one line or when the title is not laid out yet
+     */
+    private int additionalTitleHeight() {
+        Layout layout = mTitle.getLayout();
+        if (layout == null || layout.getLineCount() < 2) {
+            return 0;
+        }
+        CharSequence text = layout.getText();
+        StaticLayout.Builder builder = StaticLayout.Builder
+                .obtain(text, 0, text.length(), mTitle.getPaint(), layout.getWidth())
+                .setIncludePad(mTitle.getIncludeFontPadding())
+                .setLineSpacing(mTitle.getLineSpacingExtra(), mTitle.getLineSpacingMultiplier())
+                // The maximum of lines is applied only together with an ellipsize, otherwise all lines are laid out
+                .setEllipsize(TextUtils.TruncateAt.END)
+                .setEllipsizedWidth(layout.getWidth())
+                .setMaxLines(1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            builder.setUseLineSpacingFromFallbacks(mTitle.isFallbackLineSpacing());
+        }
+        return Math.max(0, layout.getHeight() - builder.build().getHeight());
     }
 
     private int visibleColorTagHeight() {

@@ -88,6 +88,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 
                     <TextView
                         android:id="@+id/FormattedTitle"
+                        android:fallbackLineSpacing="false"
+                        tools:targetApi="33"
                         style="@style/DetailsFragmentTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -115,6 +117,8 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
                  after the toolbar to be drawn over it. -->
             <TextView
                 android:id="@+id/animatedTitle"
+                android:fallbackLineSpacing="false"
+                tools:targetApi="33"
                 style="@style/DetailsFragmentTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

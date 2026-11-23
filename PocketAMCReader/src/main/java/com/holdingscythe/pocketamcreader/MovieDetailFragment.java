@@ -210,13 +210,13 @@ public class MovieDetailFragment extends Fragment implements OnClickListener {
                 // bar in the default position (see DetailHeader)
                 setViewHeight(getView().findViewById(R.id.Picture), adjustedHeight);
                 DetailHeader detailHeader = new DetailHeader(appBarLayout, getView().findViewById(R.id.detailsHeader),
-                        getView().findViewById(R.id.detailsImageSpacer),
+                        getView().findViewById(R.id.detailsImageSpacer), getView().findViewById(R.id.FormattedTitle),
                         getView().findViewById(R.id.detailsScrollView), getView().findViewById(R.id.ColorTag),
                         adjustedHeight, mHeroImageHeight, mActionBarHeight,
                         getResources().getDimensionPixelSize(R.dimen.colortag_height));
 
                 // The title flows from the title block into the toolbar while the app bar collapses
-                new DetailTitleAnimator(appBarLayout, detailHeader.getRestOffset(),
+                new DetailTitleAnimator(appBarLayout, detailHeader::getRestOffset,
                         getView().findViewById(R.id.animatedToolbar),
                         getView().findViewById(R.id.FormattedTitle),
                         getView().findViewById(R.id.animatedTitle),

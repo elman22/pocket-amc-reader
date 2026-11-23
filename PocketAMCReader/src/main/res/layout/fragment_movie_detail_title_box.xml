@@ -18,7 +18,10 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!-- The translucent background is drawn over the picture of the movie, it does not repeat the window background -->
+<!-- The translucent background is drawn over the picture of the movie, it does not repeat the window background.
+     The line height of the texts does not include the height of the fonts used for the symbols which the main font
+     does not have (e.g. the star, fallbackLineSpacing): the height of the row, which decides where the row is on
+     the screen (see DetailHeader), must not depend on the shown symbols. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/titleBoxTable"
@@ -27,11 +30,13 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     android:layout_alignParentStart="true"
     android:background="@color/detail_title_background"
     tools:ignore="Overdraw"
+    tools:targetApi="33"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/wrapper_spacing_title">
 
     <TextView
+        android:fallbackLineSpacing="false"
         android:id="@+id/Number"
         style="@style/RegularText.Basic"
         android:layout_width="wrap_content"
@@ -39,6 +44,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:text="@string/ph_number_long" />
 
     <TextView
+        android:fallbackLineSpacing="false"
         android:id="@+id/CertificationLabel"
         style="@style/BasicExtra.Label"
         android:layout_width="wrap_content"
@@ -46,6 +52,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:text="@string/details_certification_label_short" />
 
     <TextView
+        android:fallbackLineSpacing="false"
         android:id="@+id/Certification"
         style="@style/RegularText.Basic"
         android:layout_width="wrap_content"
@@ -53,6 +60,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:text="@string/ph_text_data" />
 
     <TextView
+        android:fallbackLineSpacing="false"
         android:id="@+id/CheckedLabel"
         style="@style/BasicExtra.Label"
         android:layout_width="wrap_content"
@@ -60,6 +68,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:text="@string/details_checked_label" />
 
     <TextView
+        android:fallbackLineSpacing="false"
         android:id="@+id/Checked"
         style="@style/RegularText.Basic"
         android:layout_width="wrap_content"
@@ -73,12 +82,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
         android:orientation="horizontal">
 
         <TextView
+            android:fallbackLineSpacing="false"
             style="@style/RegularText.Basic.Suffix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/userrating_star" />
 
         <TextView
+            android:fallbackLineSpacing="false"
             android:id="@+id/UserRating"
             style="@style/RegularText.Basic.Suffix"
             android:layout_width="wrap_content"
@@ -86,6 +97,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:text="@string/ph_number" />
 
         <TextView
+            android:fallbackLineSpacing="false"
             android:id="@+id/UserRatingSuffix"
             style="@style/BasicExtra.Label"
             android:layout_width="wrap_content"

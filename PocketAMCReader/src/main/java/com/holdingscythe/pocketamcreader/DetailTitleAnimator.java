@@ -31,6 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.ColorUtils;
 
+import java.util.function.IntSupplier;
+
 /**
  * Flows the title of the movie from the title block into the toolbar while the app bar collapses.
  * <p>
@@ -69,7 +71,7 @@ class DetailTitleAnimator implements ViewTreeObserver.OnPreDrawListener {
     private final View mToolbar;
     private final TextView mTitle;
     private final TextView mOverlay;
-    private final int mRestOffset;
+    private final IntSupplier mRestOffset;
     private final int mCollapsedColor;
     private final float mExpandedTextSize;
     private final float mCollapsedTextSize;
@@ -79,14 +81,15 @@ class DetailTitleAnimator implements ViewTreeObserver.OnPreDrawListener {
 
 
     /**
-     * @param restOffset        offset of the app bar in its default position (0 or negative)
+     * @param restOffset        offset of the app bar in its default position (0 or negative), it can change until
+     *                          the title is laid out
      * @param toolbar           pinned toolbar, the title stops at its start edge, centered vertically
      * @param title             title in the title block (it is made transparent)
      * @param overlay           view which draws the animated title
      * @param collapsedColor    color of the title in the collapsed toolbar
      * @param collapsedTextSize size of the text in the collapsed toolbar, in pixels
      */
-    DetailTitleAnimator(@NonNull AppBarLayout appBarLayout, int restOffset,
+    DetailTitleAnimator(@NonNull AppBarLayout appBarLayout, @NonNull IntSupplier restOffset,
                         @NonNull View toolbar, @NonNull TextView title, @NonNull TextView overlay,
                         int collapsedColor, float collapsedTextSize) {
         mAppBarLayout = appBarLayout;
@@ -164,7 +167,7 @@ class DetailTitleAnimator implements ViewTreeObserver.OnPreDrawListener {
 
         // Scroll position of the app bar and the part of it which is collapsed from the default position
         float scroll = Math.min(range, Math.max(0, -currentOffset()));
-        float restScroll = Math.min(range, Math.max(0, -mRestOffset));
+        float restScroll = Math.min(range, Math.max(0, -mRestOffset.getAsInt()));
         float span = range - restScroll;
 
         // Resting place of the text of the title in the window
