@@ -18,7 +18,7 @@ jobs:
       # The `gradle-version` is only a fallback for a repository without the wrapper.
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '9.9.1'
+          gradle-version: '9.9.2'
       - name: Unit tests, debug APK and lint
         run: |
           if [ -f ./gradlew ]; then
