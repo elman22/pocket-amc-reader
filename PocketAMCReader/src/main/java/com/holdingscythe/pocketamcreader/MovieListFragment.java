@@ -25,6 +25,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
@@ -191,8 +192,6 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
     // Recycler views
     private final int GRID = 0;
     private final int LIST = 1;
-    private final int GRID_SPAN = 3;
-    private final int GRID_SPAN_LANDSCAPE = 6;
     private int mViewType;
     private CursorAdapterObserver mAdapterObserver;
 
@@ -379,8 +378,10 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
 
         // Define layout managers
         mLinearLayoutManager = new LinearLayoutManager(requireActivity().getApplicationContext());
-        int gridSpan = (requireActivity().getResources().getConfiguration().orientation == Configuration
-                .ORIENTATION_PORTRAIT ? GRID_SPAN : GRID_SPAN_LANDSCAPE);
+        // The number of columns depends on the screen (res/values*/integers.xml)
+        Resources resources = requireActivity().getResources();
+        int gridSpan = resources.getInteger(resources.getConfiguration().orientation == Configuration
+                .ORIENTATION_PORTRAIT ? R.integer.grid_span : R.integer.grid_span_landscape);
         mGridLayoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), gridSpan);
 
         // Setting view preference or list as default view
