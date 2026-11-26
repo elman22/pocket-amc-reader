@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:orderingFromXml="true"
         android:title="@string/pref_category_catalog">
@@ -41,6 +42,14 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <PreferenceCategory
         android:orderingFromXml="true"
         android:title="@string/pref_category_application">
+        <ListPreference
+            android:dialogTitle="@string/pref_setting_language"
+            android:entries="@array/pref_setting_language_names"
+            android:entryValues="@array/pref_setting_language_values"
+            android:key="settingLanguage"
+            android:persistent="false"
+            android:title="@string/pref_setting_language"
+            app:useSimpleSummaryProvider="true" />
         <ListPreference
             android:dialogTitle="@string/pref_setting_theme"
             android:entries="@array/pref_setting_theme_names"

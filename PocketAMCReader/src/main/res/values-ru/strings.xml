@@ -195,6 +195,8 @@
   <string name="pref_setting_filepath_link">Ссылка на путь к файлу</string>
   <string name="pref_setting_filepath_link_summary">Сделать путь к файлу кликабельным и пытаться открыть подходящее приложение</string>
   <string name="pref_category_application">Приложение</string>
+  <string name="pref_setting_language">Язык</string>
+  <string name="pref_setting_language_system">Системный по умолчанию</string>
   <string name="pref_setting_theme">Тема</string>
   <string name="pref_setting_theme_summary">Цветовая тема приложения</string>
   <string-array name="pref_setting_theme_names">

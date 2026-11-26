@@ -105,6 +105,16 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="dataSync"
             tools:node="merge"/>
+
+        <!-- Lets AppCompat remember the application language on Android 12 and older -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true"/>
+        </service>
     </application>
 
 </manifest>

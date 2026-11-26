@@ -213,6 +213,23 @@ public class LocalizationTest {
     }
 
     @Test
+    public void languagePickerOffersSystemAndAllLanguages() throws Exception {
+        Map<String, Element> resources = parse(new File(res, "values/strings_all_locales.xml"));
+        NodeList items = resources.get("pref_setting_language_values").getElementsByTagName("item");
+        List<String> values = new ArrayList<>();
+        for (int i = 0; i < items.getLength(); i++)
+            values.add(items.item(i).getTextContent().trim());
+
+        int names = resources.get("pref_setting_language_names").getElementsByTagName("item").getLength();
+        assertEquals("language names and values differ in size", values.size(), names);
+        assertEquals("system", values.get(0));
+
+        Set<String> expected = new HashSet<>(languages);
+        expected.add("en");
+        assertEquals(expected, new HashSet<>(values.subList(1, values.size())));
+    }
+
+    @Test
     public void languagesAreListedInTheAboutDialog() throws Exception {
         Map<String, Element> names = parse(new File(res, "values/strings_all_locales.xml"));
         List<String> problems = new ArrayList<>();

@@ -26,6 +26,7 @@ public final class SettingsConstants {
     public static final String KEY_PREF_FILE_PATH_LINK = "settingFilePathLink";
     public static final String KEY_PREF_FIT_PICTURE = "settingFitPicture";
     public static final String KEY_PREF_FORCE_SORT_FIELD = "settingListForceSortField";
+    public static final String KEY_PREF_LANGUAGE = "settingLanguage";
     public static final String KEY_PREF_LAST_IMPORTED_DATE = "settingLastImportedDate";
     public static final String KEY_PREF_LAST_IMPORTED_SIZE = "settingLastImportedSize";
     public static final String KEY_PREF_LAST_IMPORTED_MODIFIED = "settingLastImportedModified";

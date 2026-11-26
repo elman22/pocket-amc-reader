@@ -197,6 +197,8 @@
   <string name="pref_setting_filepath_link">Linka z cesty k súboru</string>
   <string name="pref_setting_filepath_link_summary">Vytvoriť klikateľnú linku z cesty k súboru a pokúsiť sa ju otvoriť v príslušnej aplikácii</string>
   <string name="pref_category_application">Aplikácia</string>
+  <string name="pref_setting_language">Jazyk</string>
+  <string name="pref_setting_language_system">Predvolený systémový</string>
   <string name="pref_setting_theme">Téma</string>
   <string name="pref_setting_theme_summary">Farebná téma aplikácie</string>
   <string-array name="pref_setting_theme_names">

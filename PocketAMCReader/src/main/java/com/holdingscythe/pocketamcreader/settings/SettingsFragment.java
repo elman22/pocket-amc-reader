@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.holdingscythe.pocketamcreader.R;
 import com.holdingscythe.pocketamcreader.S;
+import com.holdingscythe.pocketamcreader.utils.LanguageManager;
 import com.holdingscythe.pocketamcreader.utils.SafHelper;
 import com.holdingscythe.pocketamcreader.utils.SharedObjects;
 import com.holdingscythe.pocketamcreader.utils.TreeIndex;
@@ -53,7 +54,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 /**
- * Settings Fragment
+ * Settings Fragment.
+ * <p>
+ * Besides the shared preferences it manages the application language, which is not stored in the preferences: the
+ * language is owned by {@link LanguageManager}, so it stays in sync with the Android per-app language settings.
  * Created by Elman on 5.7.2014.
  */
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences
@@ -86,6 +90,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if (linesPref != null)
             linesPref.setOnPreferenceClickListener(this);
 
+        setupLanguagePreference();
+
         // Prefetch default text hints
         defaultTexts = new HashMap<>();
         defaultTexts.put(SettingsConstants.KEY_PREF_CATALOG_LOCATION, getString(R.string.pref_setting_catalog_summary));
@@ -97,6 +103,26 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         // Update current values
         for (String key : defaultTexts.keySet())
             updateSummary(mPrefs, key);
+    }
+
+    /**
+     * Shows the current application language and applies a new one when selected. The preference is not persistent;
+     * activities are recreated by {@link LanguageManager#apply(String)}, so no restart is needed.
+     */
+    private void setupLanguagePreference() {
+        ListPreference languagePref = findPreference(SettingsConstants.KEY_PREF_LANGUAGE);
+        if (languagePref == null)
+            return;
+
+        languagePref.setValue(LanguageManager.getCurrent());
+        languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            LanguageManager.apply((String) newValue);
+
+            if (S.INFO)
+                Log.i(S.TAG, "Language changed (" + newValue + ")");
+
+            return true;
+        });
     }
 
     @Override
