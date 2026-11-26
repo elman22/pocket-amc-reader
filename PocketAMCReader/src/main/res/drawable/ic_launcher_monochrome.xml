@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!-- Monochrome layer of the adaptive icon (themed icons of Android 13): a film strip with the holes of the film and
+<!-- Monochrome layer of the adaptive icon (themed icons of Android 13): a filmstrip with the holes of the film and
      three frames. The system colors it, so only the shape matters. It fits the safe zone of the 108dp icon. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"

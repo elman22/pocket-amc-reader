@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2020 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ List pane and detail pane have the weights 1:2 (smallest width of 720dp or more)
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,28 +50,17 @@ List pane and detail pane have the weights 1:2 (smallest width of 720dp or more)
         android:layout_weight="2"
         android:background="?attr/color_app_bg">
 
-        <LinearLayout
+        <TextView
             android:id="@+id/movie_detail_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:alpha="0.5"
+            android:drawablePadding="16dp"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:alpha="0.5"
-                android:importantForAccessibility="no"
-                android:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/detail_placeholder"
-                android:textColor="?android:attr/textColorSecondary" />
-        </LinearLayout>
+            android:text="@string/detail_placeholder"
+            android:textColor="?android:attr/textColorPrimary"
+            app:drawableTopCompat="@drawable/detail_placeholder_icon" />
     </FrameLayout>
 
 </LinearLayout>

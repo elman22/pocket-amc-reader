@@ -2,7 +2,6 @@
 <resources>
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importuji filmy…</string>
-  <string name="import_read_file">Čtení katalogu…</string>
   <string name="pref_category_catalog">Katalog</string>
   <string name="pref_setting_catalog">Katalog</string>
   <string name="menu_settings">Nastavení</string>
@@ -155,13 +154,6 @@
   <string name="menu_sort_certification_asc">Přístupnost (od A do Z)</string>
   <string name="pref_setting_fit_picture">Přizpůsobit obrázek</string>
   <string name="pref_setting_fit_picture_summary">Změnit velikost obrázku, aby se vešel na obrazovku</string>
-  <string name="details_etag_label">Značka</string>
-  <string name="details_etitle_label">Název</string>
-  <string name="details_ecategory_label">Kategorie</string>
-  <string name="details_eurl_label">URL</string>
-  <string name="details_edescription_label">Popis</string>
-  <string name="details_ecomments_label">Komentáře</string>
-  <string name="details_ecreated_by_label">Vytvořil</string>
   <string name="filter_remove">Zrušit filtry</string>
   <string name="filter_remove_all">Všechny filtry</string>
   <string name="import_check_file">Kontrola aktualizací…</string>

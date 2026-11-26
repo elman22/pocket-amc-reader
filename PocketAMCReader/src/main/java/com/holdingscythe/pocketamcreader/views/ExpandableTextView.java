@@ -74,6 +74,18 @@ public class ExpandableTextView extends LinearLayout {
         this(context, attrs, 0);
     }
 
+    /**
+     * Reads the view attributes.
+     * <p>
+     * The {@link TypedArray} is released by {@link TypedArray#recycle()} in the {@code finally} block. It is not
+     * opened with try-with-resources on purpose: {@code TypedArray} implements {@code AutoCloseable} only since
+     * Android 12 (API 31), while the minimum supported version is lower.
+     *
+     * @param context      the context of the view
+     * @param attrs        attributes from the layout, may be {@code null}
+     * @param defStyleAttr attribute with the default style of the view
+     */
+    @SuppressWarnings("resource")
     public ExpandableTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setOrientation(VERTICAL);

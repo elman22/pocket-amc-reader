@@ -2,7 +2,6 @@
 <resources>
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importiert</string>
-  <string name="import_read_file">Lese Katalog…</string>
   <string name="pref_category_catalog">Katalog</string>
   <string name="pref_setting_catalog">Katalog</string>
   <string name="menu_settings">Einstellungen</string>
@@ -149,13 +148,6 @@
   <string name="menu_sort_certification_asc">Altersfreigabe (A - Z)</string>
   <string name="pref_setting_fit_picture">Bild anpassen</string>
   <string name="pref_setting_fit_picture_summary">Bildgröße an den Bildschirm anpassen</string>
-  <string name="details_etag_label">Schlagwort</string>
-  <string name="details_etitle_label">Titel</string>
-  <string name="details_ecategory_label">Kategorie</string>
-  <string name="details_eurl_label">URL</string>
-  <string name="details_edescription_label">Beschreibung</string>
-  <string name="details_ecomments_label">Kommentar</string>
-  <string name="details_ecreated_by_label">Erstellt von</string>
   <string name="filter_remove">Filter löschen</string>
   <string name="filter_remove_all">Alle Filter</string>
   <string name="import_check_file">Suche nach Aktualisierungen…</string>

@@ -2,7 +2,7 @@
 
 <!--
 This file is part of Pocket AMC Reader.
-Copyright © 2010-2017 Elman <holdingscythe@zoznam.sk>
+Copyright © 2010-2026 Elman <holdingscythe@zoznam.sk>
 
 Pocket AMC Reader is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,13 +18,14 @@ You should have received a copy of the GNU General Public License
 along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
-    <gradient
-        android:angle="0"
-        android:centerColor="@color/color_action_bar_semi_end_bg"
-        android:centerX="15%"
-        android:endColor="@color/color_action_bar_semi_end_bg"
-        android:startColor="@color/color_action_bar_semi_start_bg"
-        android:type="linear"/>
-</shape>
+<!--
+Application icon in a fixed size (96dp) for the compound drawable of the "no movie to show" placeholder in the
+two-pane layout.
+-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="96dp"
+        android:height="96dp"
+        android:drawable="@mipmap/ic_launcher" />
+</layer-list>

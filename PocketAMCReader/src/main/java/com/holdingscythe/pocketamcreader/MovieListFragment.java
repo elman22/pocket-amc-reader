@@ -65,7 +65,6 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.os.BundleCompat;
-import androidx.core.view.MenuHost;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceManager;
@@ -82,7 +81,6 @@ import androidx.recyclerview.widget.RecyclerView;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-@SuppressWarnings("FieldCanBeLocal")
 public class MovieListFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
 
     /**
@@ -319,7 +317,7 @@ public class MovieListFragment extends androidx.fragment.app.Fragment implements
         super.onViewCreated(view, savedInstanceState);
 
         // Menu of the list. It is shown while the view is resumed.
-        ((MenuHost) requireActivity()).addMenuProvider(new MenuProvider() {
+        requireActivity().addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
                 createMenu(menu, menuInflater);

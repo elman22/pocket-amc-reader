@@ -188,12 +188,16 @@ public class SettingsListFieldsFragment extends Fragment {
         }
     }
 
+    /**
+     * Saves the fields of the first three columns (the lines of the movies list) to the preferences. The last column
+     * holds the unused fields and is not saved.
+     */
     private void saveSettings() {
         SharedPreferences.Editor editor = SharedObjects.getInstance().preferences.edit();
 
         // find all columns and save them to the settings
         for (int f = 0; f < mBoardView.getColumnCount() - 1; f++) {
-            DragItemAdapter adapter = mBoardView.getAdapter(f);
+            DragItemAdapter<?, ?> adapter = mBoardView.getAdapter(f);
 
             ArrayList<String> prefsArrayList = new ArrayList<>();
 

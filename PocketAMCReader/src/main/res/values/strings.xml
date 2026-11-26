@@ -2,7 +2,6 @@
 <resources>
   <string name="app_name">Pocket AMC Reader</string>
   <string name="import_in_progress">Importing movies…</string>
-  <string name="import_read_file">Reading catalog…</string>
   <string name="pref_category_catalog">Catalog</string>
   <string name="pref_setting_catalog">Catalog</string>
   <string name="menu_settings">Settings</string>
@@ -149,13 +148,6 @@
   <string name="menu_sort_certification_asc">Certification (A to Z)</string>
   <string name="pref_setting_fit_picture">Fit picture</string>
   <string name="pref_setting_fit_picture_summary">Resize picture to fit on screen</string>
-  <string name="details_etag_label">Tag</string>
-  <string name="details_etitle_label">Title</string>
-  <string name="details_ecategory_label">Category</string>
-  <string name="details_eurl_label">URL</string>
-  <string name="details_edescription_label">Description</string>
-  <string name="details_ecomments_label">Comments</string>
-  <string name="details_ecreated_by_label">Created by</string>
   <string name="filter_remove">Clear filters</string>
   <string name="filter_remove_all">All filters</string>
   <!--Version 2.0-->

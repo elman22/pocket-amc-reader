@@ -242,6 +242,12 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
         }
     }
 
+    /**
+     * Creates the provider on top of the shared (cached) database, which is opened when it is the first one in use.
+     * The database is released by {@link #closeDatabase()} when the last user is done.
+     *
+     * @param context any context, used to open the database and to read the preferences
+     */
     public MoviesDataProvider(Context context) {
 
         // The worker thread and the UI may open the database at the same time
@@ -253,6 +259,9 @@ public class MoviesDataProvider extends ContentProvider implements FilterQueryPr
                 this.insertExtraStatement = SharedObjects.getInstance().dbInsertExtraStatement;
             } else {
                 // Cache objects as this class gets initiated on every page
+                // Not closed here: closing the helper would close the database, which is shared by all instances
+                // and is closed when the last reference is released
+                @SuppressWarnings("resource")
                 MoviesOpenHelper openHelper = new MoviesOpenHelper(context);
 
                 this.db = openHelper.getWritableDatabase();

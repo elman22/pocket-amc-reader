@@ -21,7 +21,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 <resources>
     <!-- Default screen margins, per the Android Design guidelines -->
     <dimen name="activity_horizontal_margin">16dip</dimen>
-    <dimen name="activity_vertical_margin">16dip</dimen>
     <!-- Elements spacing -->
     <dimen name="wrapper_spacing_block">16dip</dimen>
     <dimen name="wrapper_spacing_title">8dip</dimen>
@@ -42,7 +41,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <dimen name="detail_hero_img_height">240dip</dimen>
     <dimen name="detail_title_collapsed_text_size">20sp</dimen>
     <dimen name="detail_hero_img_land_width">180dip</dimen>
-    <dimen name="detail_basic_height">48dip</dimen>
     <dimen name="detail_basic_spacing">3dip</dimen>
     <dimen name="detail_arrow_spacing">4dip</dimen>
     <!-- ColorTag -->

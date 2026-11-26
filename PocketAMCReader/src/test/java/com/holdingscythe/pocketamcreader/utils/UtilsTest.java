@@ -85,6 +85,7 @@ public class UtilsTest {
 
     @Test
     public void coalesceReturnsFirstNonNullValue() {
+        //noinspection ObviousNullCheck
         assertEquals("one", Utils.coalesce("one", "two"));
         assertEquals("two", Utils.coalesce(null, "two"));
         //noinspection ConstantValue

@@ -19,16 +19,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <resources>
-    <string name="provider_authority" translatable="false">com.holdingscythe.provider.MovieCatalog</string>
     <string name="locale_translation_separator" translatable="false">:\u0020</string>
-
-    <string name="locale_en_independent" translatable="false">English</string>
-    <string name="locale_ru_independent" translatable="false">Russian</string>
-    <string name="locale_de_independent" translatable="false">German</string>
-    <string name="locale_fr_independent" translatable="false">French</string>
-    <string name="locale_sk_independent" translatable="false">Slovak</string>
-    <string name="locale_pl_independent" translatable="false">Polish</string>
-    <string name="locale_cs_independent" translatable="false">Czech</string>
 
     <string name="locale_en_local" translatable="false">English</string>
     <string name="locale_ru_local" translatable="false">Русский</string>
@@ -38,7 +29,6 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <string name="locale_pl_local" translatable="false">Polski</string>
     <string name="locale_cs_local" translatable="false">Česky</string>
 
-    <string name="locale_en_translator" translatable="false">Elman</string>
     <string name="locale_ru_translator" translatable="false">migver</string>
     <string name="locale_de_translator" translatable="false">Klaus Oed</string>
     <string name="locale_fr_translator" translatable="false">Xavier Muller</string>

@@ -23,10 +23,7 @@ along with Pocket AMC Reader.  If not, see <http://www.gnu.org/licenses/>.
     <!-- Universal colors -->
     <color name="app_bg">#000</color>
     <color name="detail_title_background">#BB000000</color>
-    <color name="color_action_bar_semi_start_bg">#B000</color>
-    <color name="color_action_bar_semi_end_bg">#0000</color>
     <color name="primary_text_dark_nostates">#f2f2f2</color>
-    <color name="color_action_text">#fff</color>
 
     <!-- Themed colors - blue -->
     <!-- https://colorswall.com/palette/8/ -->
